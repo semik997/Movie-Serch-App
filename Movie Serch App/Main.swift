@@ -32,8 +32,16 @@ class Main: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
+   
+    //MARK: Table View Delegate
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 85
+    }
     
 }
+
+
 
 
 
