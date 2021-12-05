@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
+//  LoadViewController.swift
 //  Movie Serch App
 //
-//  Created by Семен Колесников on 04.12.2021.
+//  Created by Семен Колесников on 05.12.2021.
 //
 
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var progress: UIProgressView!
     
     override func viewDidLoad() {
@@ -25,10 +25,5 @@ class ViewController: UIViewController {
 //                self.present(vc!, animated: true, completion: nil)
             }
         }
-
-        
     }
-
-
 }
-
