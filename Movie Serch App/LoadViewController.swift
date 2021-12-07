@@ -16,13 +16,13 @@ class ViewController: UIViewController {
 
         progress.setProgress(0, animated: true)
 
-        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
             if self.progress.progress != 1 {
-                self.progress.progress += 0.1
+                self.progress.progress += 0.05
             } else {
                     self.performSegue(withIdentifier: "SegueName", sender: self)
-//                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
-//                self.present(vc!, animated: true, completion: nil)
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
+                self.present(vc!, animated: true, completion: nil)
             }
         }
     }

@@ -14,12 +14,10 @@ struct Film{
     var status: String
 //    var image: String
     
-    init?(currentShowData: CurrentShowData){
-        self.name = currentShowData.show.name
-        self.premiered = currentShowData.show.premiered
-        self.status = currentShowData.show.status
-//        self.image = currentShowData.show.image.medium
-    }
-    
+//    init?(currentShowData: CurrentShowData){
+//        self.name = currentShowData.show.name
+//        self.premiered = currentShowData.show.premiered
+//        self.status = currentShowData.show.status
+////        self.image = currentShowData.show.image.medium
+//    }
 }
-

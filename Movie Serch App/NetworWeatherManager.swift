@@ -11,15 +11,16 @@ import Foundation
 
 struct NetworWeatherManager {
     
-    func fetchCurrentWeather(request querty: String, completionHandler: @escaping (Film) -> Void){
+    var onCompletion: ((Film) -> Void)?
     
+    func fetchCurrentWeather(request querty: String){
     let urlString = "https://api.tvmaze.com/search/shows?q=\(querty)"
     guard let url = URL(string: urlString) else { return }
     let session = URLSession(configuration: .default)
     let task = session.dataTask(with: url) {data, response, error in
         if let data = data {
             if let currentShow = self.parseJACON(withData: data){
-            completionHandler(currentShow)
+                self.onCompletion?(currentShow)
         }
         }
     }
@@ -29,11 +30,10 @@ struct NetworWeatherManager {
     func parseJACON(withData data: Data) -> Film?{
         let decoder = JSONDecoder()
         do {
-            let currentShowData = try decoder.decode(CurrentShowData.self, from: data)
-            guard let currentShow = Film(currentShowData: currentShowData) else {
-                return nil
-            }
-            return currentShow
+            let currentShowData = try decoder.decode([CurrentShowData].self, from: data)
+            _ = currentShowData[0].show.name
+            _ = currentShowData[1].show.premiered
+            _ = currentShowData[2].show.status
         }catch let error as NSError{
             print(error)
         }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DqV-8w-57i">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MiM-gJ-68S">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Load View Controller-->
+        <!--View Controller-->
         <scene sceneID="l82-Pd-d5D">
             <objects>
-                <viewController id="DqV-8w-57i" customClass="LoadViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoadVC" id="DqV-8w-57i" customClass="ViewController" customModule="Movie_Serch_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WDP-AZ-o4e">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,7 +22,7 @@
                                 <color key="trackTintColor" systemColor="systemGray5Color"/>
                             </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKx-g5-4Jg">
-                                <rect key="frame" x="55" y="374" width="304" height="148"/>
+                                <rect key="frame" x="86" y="374" width="242" height="148"/>
                                 <fontDescription key="fontDescription" name="PartyLetPlain" family="Party LET" pointSize="86"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -31,18 +31,19 @@
                         <viewLayoutGuide key="safeArea" id="0Cn-R6-Our"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
                         <constraints>
-                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="centerY" secondItem="WDP-AZ-o4e" secondAttribute="centerY" id="2jP-b4-OoG"/>
-                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="centerX" secondItem="7rH-yO-28X" secondAttribute="centerX" id="8Mw-9j-ZWH"/>
-                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="top" secondItem="0Cn-R6-Our" secondAttribute="top" constant="330" id="BKI-NF-ikB"/>
-                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="centerX" secondItem="WDP-AZ-o4e" secondAttribute="centerX" id="UEY-rW-UIF"/>
-                            <constraint firstItem="7rH-yO-28X" firstAttribute="top" secondItem="rKx-g5-4Jg" secondAttribute="bottom" constant="5" id="YvY-OL-JgM"/>
-                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="leading" secondItem="0Cn-R6-Our" secondAttribute="leading" constant="55" id="cr1-lg-HQd"/>
+                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="centerX" secondItem="WDP-AZ-o4e" secondAttribute="centerX" id="06S-Ho-Cqj"/>
+                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="centerY" secondItem="WDP-AZ-o4e" secondAttribute="centerY" id="0CF-Cs-NND"/>
+                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="leading" secondItem="0Cn-R6-Our" secondAttribute="leading" constant="86" id="OaO-dm-yWu"/>
+                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="centerX" secondItem="7rH-yO-28X" secondAttribute="centerX" id="Vf4-xu-Tca"/>
+                            <constraint firstItem="7rH-yO-28X" firstAttribute="top" secondItem="rKx-g5-4Jg" secondAttribute="bottom" constant="5" id="WSl-Rn-EvY"/>
+                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="top" secondItem="0Cn-R6-Our" secondAttribute="top" constant="330" id="fu0-GI-C7a"/>
                             <constraint firstItem="0Cn-R6-Our" firstAttribute="bottom" secondItem="7rH-yO-28X" secondAttribute="bottom" constant="326" id="inr-Zs-uBo"/>
                             <constraint firstItem="7rH-yO-28X" firstAttribute="leading" secondItem="WDP-AZ-o4e" secondAttribute="leadingMargin" id="vCu-y5-wff"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="progress" destination="7rH-yO-28X" id="02W-ST-cSF"/>
+                        <outlet property="progress" destination="7rH-yO-28X" id="cxe-dt-n1K"/>
+                        <segue destination="MiM-gJ-68S" kind="presentation" identifier="SegueName" modalPresentationStyle="fullScreen" id="pwt-RX-NtO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="inv-G2-XN5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -52,7 +53,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="7j2-wx-qJb">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="MiM-gJ-68S" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainVC" automaticallyAdjustsScrollViewInsets="NO" id="MiM-gJ-68S" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="k19-fX-lJs"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8E3-YF-pV7">
@@ -201,7 +202,7 @@
         <!--Main-->
         <scene sceneID="T5i-lI-GeM">
             <objects>
-                <viewController storyboardIdentifier="MainVC" title="Main" id="M70-75-ECW" customClass="Main" customModule="Movie_Serch_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Main" id="M70-75-ECW" customClass="Main" customModule="Movie_Serch_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="MainVC" id="Dej-Io-BsL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -337,10 +338,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Main" image="magnifyingglass" catalog="system" id="rXQ-zW-dTh"/>
                     <connections>
-                        <outlet property="countryLabel" destination="pEz-0P-KVj" id="QCo-cr-KPM"/>
-                        <outlet property="imageFilm" destination="H2e-Zc-X6g" id="n4o-tD-XEr"/>
-                        <outlet property="nameLabel" destination="Skt-2T-RdX" id="eHU-hx-PbV"/>
-                        <outlet property="premieredLabel" destination="AaI-gA-wmQ" id="1ES-jy-ToJ"/>
                         <outlet property="searchOutlet" destination="fe7-2k-hG6" id="mEP-n7-Voa"/>
                     </connections>
                 </viewController>
