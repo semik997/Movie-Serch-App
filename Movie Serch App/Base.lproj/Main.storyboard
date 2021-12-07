@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MiM-gJ-68S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DqV-8w-57i">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
@@ -218,7 +218,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="fe7-2k-hG6">
-                                <rect key="frame" x="0.0" y="75" width="345" height="51"/>
+                                <rect key="frame" x="0.0" y="75" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8g0-YE-zcV">
@@ -305,34 +305,19 @@
                                     <outlet property="dataSource" destination="M70-75-ECW" id="brM-ej-aAd"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Glk-UX-UFJ">
-                                <rect key="frame" x="345" y="75" width="71" height="51"/>
-                                <color key="backgroundColor" red="0.96470588450000005" green="0.98039215800000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="magnifyingglass" catalog="system">
-                                    <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="searchButton:" destination="M70-75-ECW" eventType="touchUpInside" id="9p5-AC-rU7"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Lq4-BD-Ebc"/>
                         <color key="backgroundColor" systemColor="tintColor"/>
                         <constraints>
                             <constraint firstItem="7jS-ba-pMg" firstAttribute="top" secondItem="Lq4-BD-Ebc" secondAttribute="top" id="2Ar-UP-DCB"/>
                             <constraint firstItem="Lq4-BD-Ebc" firstAttribute="bottom" secondItem="8g0-YE-zcV" secondAttribute="bottom" id="GoZ-MN-29v"/>
-                            <constraint firstItem="Glk-UX-UFJ" firstAttribute="bottom" secondItem="fe7-2k-hG6" secondAttribute="bottom" id="KKi-1l-CEP"/>
                             <constraint firstItem="8g0-YE-zcV" firstAttribute="leading" secondItem="Lq4-BD-Ebc" secondAttribute="leading" id="Kcd-V5-do4"/>
-                            <constraint firstItem="Glk-UX-UFJ" firstAttribute="top" secondItem="fe7-2k-hG6" secondAttribute="top" id="NRB-LS-0Uy"/>
-                            <constraint firstItem="Glk-UX-UFJ" firstAttribute="leading" secondItem="fe7-2k-hG6" secondAttribute="trailing" id="Pn5-R9-N5E"/>
                             <constraint firstItem="7jS-ba-pMg" firstAttribute="leading" secondItem="fe7-2k-hG6" secondAttribute="leading" id="R4o-VF-7Zi"/>
                             <constraint firstItem="8g0-YE-zcV" firstAttribute="top" secondItem="Lq4-BD-Ebc" secondAttribute="top" constant="81" id="ULP-ez-k9i"/>
-                            <constraint firstItem="fe7-2k-hG6" firstAttribute="centerX" secondItem="7jS-ba-pMg" secondAttribute="centerX" constant="-34.5" id="asa-yw-qky"/>
+                            <constraint firstItem="fe7-2k-hG6" firstAttribute="centerX" secondItem="7jS-ba-pMg" secondAttribute="centerX" id="asa-yw-qky"/>
                             <constraint firstItem="fe7-2k-hG6" firstAttribute="bottom" secondItem="8g0-YE-zcV" secondAttribute="top" constant="1" id="clN-SZ-9SK"/>
                             <constraint firstItem="8g0-YE-zcV" firstAttribute="trailing" secondItem="Lq4-BD-Ebc" secondAttribute="trailing" constant="11" id="eKR-76-zZg"/>
                             <constraint firstItem="fe7-2k-hG6" firstAttribute="top" secondItem="7jS-ba-pMg" secondAttribute="bottom" constant="1" id="fet-Vo-M90"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Glk-UX-UFJ" secondAttribute="trailing" constant="-22" id="iIS-gm-Fu9"/>
                             <constraint firstItem="fe7-2k-hG6" firstAttribute="leading" secondItem="8g0-YE-zcV" secondAttribute="leading" id="uIL-Ga-BSF"/>
                         </constraints>
                     </view>

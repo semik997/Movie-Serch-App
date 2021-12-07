@@ -7,12 +7,12 @@
 
 import UIKit
 
+//Initialization of UI fields
+
 class MainTableViewCell: UITableViewCell {
 
-//    @IBOutlet weak var imageFilm: UIImageView!
+    @IBOutlet weak var imageFilm: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var premieredLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
-    
-
 }

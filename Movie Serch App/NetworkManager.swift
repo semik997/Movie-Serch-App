@@ -9,25 +9,18 @@ import Foundation
 
 // api request
 
-struct NetworWeatherManager {
-    
-    var onCompletion: ((Film) -> Void)?
+struct NetworkManager {
     
     func fetchCurrentWeather(request querty: String){
-    let urlString = "https://api.tvmaze.com/search/shows?q=\(querty)"
+    let urlString = "https://api.tvmaze.com/search/shows?q=badbaby"
     guard let url = URL(string: urlString) else { return }
     let session = URLSession(configuration: .default)
     let task = session.dataTask(with: url) {data, response, error in
-        if let data = data {
-            if let currentShow = self.parseJACON(withData: data){
-                self.onCompletion?(currentShow)
-        }
-        }
     }
     task.resume()
 }
     
-    func parseJACON(withData data: Data) -> Film?{
+    func parseJACON(withData data: Data){
         let decoder = JSONDecoder()
         do {
             let currentShowData = try decoder.decode([CurrentShowData].self, from: data)
@@ -37,6 +30,5 @@ struct NetworWeatherManager {
         }catch let error as NSError{
             print(error)
         }
-        return nil
     }
 }

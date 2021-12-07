@@ -9,6 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // Customization loading screen 
+    
     @IBOutlet weak var progress: UIProgressView!
     
     override func viewDidLoad() {
