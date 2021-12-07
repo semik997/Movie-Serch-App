@@ -16,9 +16,9 @@ struct Show: Codable {
     let name: String
     let premiered: String
     let status: String
-    let image: Image
+//    let image: Image
 }
-
-struct Image: Codable {
-    let medium: String
-}
+//
+//struct Image: Codable {
+//    let medium: String
+//}

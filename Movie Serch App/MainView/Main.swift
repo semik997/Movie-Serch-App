@@ -19,7 +19,16 @@ class Main: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     let networWeatherManager = NetworWeatherManager()
-    var films = Film(currentShowData: )
+   
+    func film(current: Film){
+        _ = current.name
+        _ = current.premiered
+        _ = current.status
+    }
+    
+    let films = [Film(currentShowData: film)]
+    
+    
     
    
     override func viewDidLoad() {
@@ -35,14 +44,13 @@ class Main: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return films.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as! MainTableViewCell
        
         cell.nameLabel?.text = films[indexPath.row].name
         cell.premieredLabel.text = films[indexPath.row].premiered
-        cell.countryLabel.text = films[indexPath.row].country
-        cell.imageFilm?.image = UIImage(named: films[indexPath.row].image)
+        cell.countryLabel.text = films[indexPath.row].status
+//        cell.imageFilm?.image = UIImage(named: films[indexPath.row].image)
         
         return cell
     }

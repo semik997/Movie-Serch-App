@@ -16,22 +16,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKx-g5-4Jg">
-                                <rect key="frame" x="90" y="374" width="235.5" height="149"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="7rH-yO-28X">
+                                <rect key="frame" x="20" y="527" width="374" height="9"/>
+                                <color key="progressTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="trackTintColor" systemColor="systemGray5Color"/>
+                            </progressView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKx-g5-4Jg">
+                                <rect key="frame" x="55" y="374" width="304" height="148"/>
                                 <fontDescription key="fontDescription" name="PartyLetPlain" family="Party LET" pointSize="86"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="7rH-yO-28X">
-                                <rect key="frame" x="20" y="531" width="374" height="5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="progressTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="trackTintColor" systemColor="systemGray5Color"/>
-                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0Cn-R6-Our"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
+                        <constraints>
+                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="centerY" secondItem="WDP-AZ-o4e" secondAttribute="centerY" id="2jP-b4-OoG"/>
+                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="centerX" secondItem="7rH-yO-28X" secondAttribute="centerX" id="8Mw-9j-ZWH"/>
+                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="top" secondItem="0Cn-R6-Our" secondAttribute="top" constant="330" id="BKI-NF-ikB"/>
+                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="centerX" secondItem="WDP-AZ-o4e" secondAttribute="centerX" id="UEY-rW-UIF"/>
+                            <constraint firstItem="7rH-yO-28X" firstAttribute="top" secondItem="rKx-g5-4Jg" secondAttribute="bottom" constant="5" id="YvY-OL-JgM"/>
+                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="leading" secondItem="0Cn-R6-Our" secondAttribute="leading" constant="55" id="cr1-lg-HQd"/>
+                            <constraint firstItem="0Cn-R6-Our" firstAttribute="bottom" secondItem="7rH-yO-28X" secondAttribute="bottom" constant="326" id="inr-Zs-uBo"/>
+                            <constraint firstItem="7rH-yO-28X" firstAttribute="leading" secondItem="WDP-AZ-o4e" secondAttribute="leadingMargin" id="vCu-y5-wff"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="progress" destination="7rH-yO-28X" id="02W-ST-cSF"/>
@@ -294,7 +302,6 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="M70-75-ECW" id="brM-ej-aAd"/>
-                                    <outlet property="delegate" destination="M70-75-ECW" id="zhT-EW-Scf"/>
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Glk-UX-UFJ">
@@ -330,6 +337,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Main" image="magnifyingglass" catalog="system" id="rXQ-zW-dTh"/>
                     <connections>
+                        <outlet property="countryLabel" destination="pEz-0P-KVj" id="QCo-cr-KPM"/>
+                        <outlet property="imageFilm" destination="H2e-Zc-X6g" id="n4o-tD-XEr"/>
+                        <outlet property="nameLabel" destination="Skt-2T-RdX" id="eHU-hx-PbV"/>
+                        <outlet property="premieredLabel" destination="AaI-gA-wmQ" id="1ES-jy-ToJ"/>
                         <outlet property="searchOutlet" destination="fe7-2k-hG6" id="mEP-n7-Voa"/>
                     </connections>
                 </viewController>
