@@ -17,8 +17,8 @@ struct NetworkManager {
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: url) {data, response, error in
         }
-    task.resume()
-}
+        task.resume()
+    }
     
     func parseJACON(withData data: Data){
         let decoder = JSONDecoder()

@@ -11,17 +11,17 @@ class Main: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var searchOutlet: UISearchBar!
     
     
-//Screen identification for segway
+    //Screen identification for segway
     
     func instantiateViewController(withIdentifier identifier: String) -> UIView{
-    return instantiateViewController(withIdentifier: "MainVC")
+        return instantiateViewController(withIdentifier: "MainVC")
     }
     
     //Creating and filling the array for Display
     
     var films = [Film(name: "Bad Boys", premiered: "20.01.21", status: "Ended", image: "BadBoys")]
     
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         films.append(Film(name: "Bad girls", premiered: "19.02.2021", status: "Ended", image: "Badgirls"))

@@ -10,7 +10,7 @@ import UIKit
 //Initialization of UI fields
 
 class FavoritesTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var imageFav: UIImageView!
     @IBOutlet weak var nameLabelFav: UILabel!
     @IBOutlet weak var premLabelFav: UILabel!
