@@ -17,7 +17,7 @@ class Main: UIViewController, UITableViewDataSource, UITableViewDelegate {
     return instantiateViewController(withIdentifier: "MainVC")
     }
     
-    //Creating and Populating an Array for Display
+    //Creating and filling the array for Display
     
     var films = [Film(name: "Bad Boys", premiered: "20.01.21", status: "Ended", image: "BadBoys")]
     
