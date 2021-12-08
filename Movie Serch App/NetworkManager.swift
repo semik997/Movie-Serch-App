@@ -12,11 +12,11 @@ import Foundation
 struct NetworkManager {
     
     func fetchCurrentWeather(request querty: String){
-    let urlString = "https://api.tvmaze.com/search/shows?q=badbaby"
-    guard let url = URL(string: urlString) else { return }
-    let session = URLSession(configuration: .default)
-    let task = session.dataTask(with: url) {data, response, error in
-    }
+        let urlString = "https://api.tvmaze.com/search/shows?q=badbaby"
+        guard let url = URL(string: urlString) else { return }
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: url) {data, response, error in
+        }
     task.resume()
 }
     
