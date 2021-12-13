@@ -19,18 +19,25 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //Creating and filling the array for Display
     
-    var films = [Film(name: "Bad Boys", premiered: "20.01.21", status: "Ended", image: "BadBoys")]
+//    var films = [Film(name: "Bad Boys", premiered: "20.01.21", status: "Ended", image: "BadBoys")]
     
+    var networkManager = NetworkManager()
+    var films: [Film] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        films.append(Film(name: "Bad girls", premiered: "19.02.2021", status: "Ended", image: "Badgirls"))
+//        films.append(Film(name: "Bad girls", premiered: "19.02.2021", status: "Ended", image: "Badgirls"))
+        
+        networkManager.onCompletion = {
+            currentShow in print(currentShow.name)
+            self.films = [currentShow]
+            
+        }
+//         networking load data
+//         completion block self.files = data
+//         tableView reload data
     }
     
-    // view will appear
-    // networking load data
-    // completion block self.files = data
-    // tableView reload data
     
     // displaying data in a cell
 
@@ -42,11 +49,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as! MainTableViewCell
 
-        //cell.loadData(films[indexPath.row])
-        
-        //        cell.nameLabel?.text = films[indexPath.row].name
-//        cell.premieredLabel.text = films[indexPath.row].premiered
-//        cell.countryLabel.text = films[indexPath.row].status
+        cell.loadData(films[indexPath.row])
+        cell.nameLabel?.text = films[indexPath.row].name
+        cell.premieredLabel.text = films[indexPath.row].premiered
+        cell.countryLabel.text = films[indexPath.row].status
 //        cell.imageFilm.image = UIImage(named: films[indexPath.row].image)
         return cell
     }

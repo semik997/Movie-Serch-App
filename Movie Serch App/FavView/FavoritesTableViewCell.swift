@@ -2,7 +2,7 @@
 //  FavoritesTableViewCell.swift
 //  Movie Serch App
 //
-//  Created by Семен Колесников on 05.12.2021.
+//  Created by Sem Koliesnikov on 05.12.2021.
 //
 
 import UIKit
