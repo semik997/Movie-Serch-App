@@ -31,13 +31,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         networkManager.onCompletion = {
             currentShow in print(currentShow.name)
             self.films = [currentShow]
-            
         }
-//         networking load data
-//         completion block self.files = data
-//         tableView reload data
     }
     
+    //         networking load data
+    //         completion block self.files = data
+    //         tableView reload data
     
     // displaying data in a cell
 
@@ -49,7 +48,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as! MainTableViewCell
 
-        cell.loadData(films[indexPath.row])
+//        cell.loadData(films[indexPath.row])
         cell.nameLabel?.text = films[indexPath.row].name
         cell.premieredLabel.text = films[indexPath.row].premiered
         cell.countryLabel.text = films[indexPath.row].status
