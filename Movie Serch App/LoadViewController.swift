@@ -25,9 +25,8 @@ class LoadViewController: UIViewController {
                 
                 timer.invalidate()
                 
-                self.performSegue(withIdentifier: "SegueName", sender: self)
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC") as! UITabBarController
-                    self.present(vc, animated: true, completion: nil)
+                
+               self.performSegue(withIdentifier: "LoadSegue", sender: self)
             }
         }
     }

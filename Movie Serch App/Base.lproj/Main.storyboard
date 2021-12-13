@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DqV-8w-57i">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MiM-gJ-68S">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
@@ -26,9 +26,6 @@
                             </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKx-g5-4Jg">
                                 <rect key="frame" x="86" y="398" width="242" height="100.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="242" id="AC3-mG-GqO"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="PartyLetPlain" family="Party LET" pointSize="86"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -48,7 +45,7 @@
                     </view>
                     <connections>
                         <outlet property="progress" destination="7rH-yO-28X" id="Hph-Mz-OlH"/>
-                        <segue destination="MiM-gJ-68S" kind="presentation" identifier="SegueName" modalPresentationStyle="fullScreen" id="pwt-RX-NtO"/>
+                        <segue destination="MiM-gJ-68S" kind="presentation" identifier="LoadSegue" modalPresentationStyle="fullScreen" id="pwt-RX-NtO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="inv-G2-XN5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

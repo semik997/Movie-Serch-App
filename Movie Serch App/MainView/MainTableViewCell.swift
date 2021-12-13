@@ -16,3 +16,15 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var premieredLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
 }
+
+extension MainTableViewCell{
+    
+    func loadData(films: Film) {
+
+       nameLabel?.text = films.name
+       premieredLabel.text = films.premiered
+       countryLabel.text = films.status
+      
+    }
+    
+}
