@@ -2,7 +2,7 @@
 //  NetworWeatherManager.swift
 //  Movie Serch App
 //
-//  Created by Семен Колесников on 04.12.2021.
+//  Created by Sem Koliesnikov on 04.12.2021.
 //
 
 import Foundation

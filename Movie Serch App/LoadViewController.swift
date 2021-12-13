@@ -2,7 +2,7 @@
 //  LoadViewController.swift
 //  Movie Serch App
 //
-//  Created by Семен Колесников on 05.12.2021.
+//  Created by Sem Koliesnikov on 05.12.2021.
 //
 
 import UIKit
@@ -26,8 +26,8 @@ class LoadViewController: UIViewController {
                 timer.invalidate()
                 
                 self.performSegue(withIdentifier: "SegueName", sender: self)
-                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
-                self.present(vc!, animated: true, completion: nil)
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC") as! UITabBarController
+                    self.present(vc, animated: true, completion: nil)
             }
         }
     }

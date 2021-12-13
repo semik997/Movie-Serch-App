@@ -42,7 +42,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="progress" destination="7rH-yO-28X" id="cxe-dt-n1K"/>
+                        <outlet property="progress" destination="7rH-yO-28X" id="Hph-Mz-OlH"/>
                         <segue destination="MiM-gJ-68S" kind="presentation" identifier="SegueName" modalPresentationStyle="fullScreen" id="pwt-RX-NtO"/>
                     </connections>
                 </viewController>
