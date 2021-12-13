@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Favorites: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class FavoritesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     //Creating and Populating an Array for Display
     

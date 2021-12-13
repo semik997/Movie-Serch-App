@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Main: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var searchOutlet: UISearchBar!
     
     
@@ -27,7 +27,13 @@ class Main: UIViewController, UITableViewDataSource, UITableViewDelegate {
         films.append(Film(name: "Bad girls", premiered: "19.02.2021", status: "Ended", image: "Badgirls"))
     }
     
+    // view will appear
+    // networking load data
+    // completion block self.files = data
+    // tableView reload data
+    
     // displaying data in a cell
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return films.count
@@ -35,10 +41,13 @@ class Main: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as! MainTableViewCell
-        cell.nameLabel?.text = films[indexPath.row].name
-        cell.premieredLabel.text = films[indexPath.row].premiered
-        cell.countryLabel.text = films[indexPath.row].status
-        cell.imageFilm.image = UIImage(named: films[indexPath.row].image)
+
+        //cell.loadData(films[indexPath.row])
+        
+        //        cell.nameLabel?.text = films[indexPath.row].name
+//        cell.premieredLabel.text = films[indexPath.row].premiered
+//        cell.countryLabel.text = films[indexPath.row].status
+//        cell.imageFilm.image = UIImage(named: films[indexPath.row].image)
         return cell
     }
 }

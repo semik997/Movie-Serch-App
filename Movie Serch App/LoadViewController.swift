@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoadViewController: UIViewController {
     
     // Customization loading screen 
     
@@ -18,10 +18,13 @@ class ViewController: UIViewController {
         
         progress.setProgress(0, animated: true)
         
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in  // initialization of a timer to fill the download field
             if self.progress.progress != 1 {
                 self.progress.progress += 0.05
-            } else {
+            } else { // switching to another screen after filling in the loading field
+                
+                timer.invalidate()
+                
                 self.performSegue(withIdentifier: "SegueName", sender: self)
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "MainVC")
                 self.present(vc!, animated: true, completion: nil)
