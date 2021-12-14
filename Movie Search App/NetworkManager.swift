@@ -11,9 +11,9 @@ import Foundation
 
 struct NetworkManager {
     
-    var onCompletion: ((Film) -> Void)?
+    var onCompletion: (([Film]) -> Void)?
     
-    func fetchCurrentWeather(onCompletion: ((Film) -> Void)?){
+    func fetchCurrentWeather(onCompletion: (([Film]) -> Void)?){
         let urlString = "https://api.tvmaze.com/search/shows?q=Birdgirlll"
         guard let url = URL(string: urlString) else { return }
         let session = URLSession(configuration: .default)
@@ -23,24 +23,23 @@ struct NetworkManager {
                     onCompletion?(currentShow)
             }
         }
-            // data into json
-            
+        
             //call completion block with json
             
         }
         task.resume()
     }
     
-    func parseJSON(withData data: Data) -> Film?{
+    func parseJSON(withData data: Data) -> [Film]?{
         let decoder = JSONDecoder()
         do {
             let currentShowData = try decoder.decode([CurrentShowData].self, from: data)
-            var array: [Film] = []
-            array.append(currentShowData)
-//            guard let currentShow = Film(currentShowData: currentShowData) else {
+//            guard let currentShow = [Film](currentShowData: [currentShowData]) else {
 //                return nil
 //            }
-            return array
+            var currentShow: [Film] = []
+            currentShow = currentShowData
+            return currentShow
         }catch let error as NSError{
             print(error)
         }

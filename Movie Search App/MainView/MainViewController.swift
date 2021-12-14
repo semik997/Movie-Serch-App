@@ -26,8 +26,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
 
         networkManager.fetchCurrentWeather { Film in
-            //currentShow in print(currentShow.name)
-            //self.films = [currentShow]
+            self.films = Film
         }
     }
     

@@ -11,7 +11,7 @@
         <!--Load View Controller-->
         <scene sceneID="l82-Pd-d5D">
             <objects>
-                <viewController storyboardIdentifier="LoadVC" id="DqV-8w-57i" customClass="LoadViewController" customModule="Movie_Serch_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoadVC" id="DqV-8w-57i" customClass="LoadViewController" customModule="Movie_Search_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WDP-AZ-o4e">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -76,7 +76,7 @@
         <!--Favorites-->
         <scene sceneID="ycV-jK-dFE">
             <objects>
-                <viewController storyboardIdentifier="FavoritesVC" title="Favorites" id="prT-Ru-tT8" customClass="FavoritesViewController" customModule="Movie_Serch_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FavoritesVC" title="Favorites" id="prT-Ru-tT8" customClass="FavoritesViewController" customModule="Movie_Search_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HVC-7d-vmQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -100,7 +100,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FavCell" id="pAW-95-IMD" customClass="FavoritesTableViewCell" customModule="Movie_Serch_App" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FavCell" id="pAW-95-IMD" customClass="FavoritesTableViewCell" customModule="Movie_Search_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pAW-95-IMD" id="sgJ-sy-BVE">
@@ -204,7 +204,7 @@
         <!--Main-->
         <scene sceneID="T5i-lI-GeM">
             <objects>
-                <viewController title="Main" id="M70-75-ECW" customClass="MainViewController" customModule="Movie_Serch_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Main" id="M70-75-ECW" customClass="MainViewController" customModule="Movie_Search_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="MainVC" id="Dej-Io-BsL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -227,7 +227,7 @@
                                 <rect key="frame" x="0.0" y="125" width="425" height="688"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MainCell" id="Gzf-Bz-JZZ" customClass="MainTableViewCell" customModule="Movie_Serch_App" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="MainCell" id="Gzf-Bz-JZZ" customClass="MainTableViewCell" customModule="Movie_Search_App" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="425" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gzf-Bz-JZZ" id="CyD-7N-9hy">
