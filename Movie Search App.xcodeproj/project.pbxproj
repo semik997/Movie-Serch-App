@@ -9,10 +9,10 @@
 /* Begin PBXBuildFile section */
 		30595240275CED40003A7049 /* CurrentShowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059523F275CED40003A7049 /* CurrentShowData.swift */; };
 		30595242275D5078003A7049 /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30595241275D5078003A7049 /* LoadViewController.swift */; };
+		30C87F1427689B5E002C7242 /* Movie_Search_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30C87F1227689B5E002C7242 /* Movie_Search_App.xcdatamodeld */; };
 		30CA0C64275B8559009468D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C63275B8559009468D2 /* AppDelegate.swift */; };
 		30CA0C66275B8559009468D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C65275B8559009468D2 /* SceneDelegate.swift */; };
 		30CA0C6B275B8559009468D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30CA0C69275B8559009468D2 /* Main.storyboard */; };
-		30CA0C6E275B8559009468D2 /* Movie_Serch_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C6C275B8559009468D2 /* Movie_Serch_App.xcdatamodeld */; };
 		30CA0C70275B855B009468D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30CA0C6F275B855B009468D2 /* Assets.xcassets */; };
 		30CA0C73275B855B009468D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30CA0C71275B855B009468D2 /* LaunchScreen.storyboard */; };
 		30CA0C7B275B8951009468D2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C7A275B8951009468D2 /* MainViewController.swift */; };
@@ -26,11 +26,11 @@
 /* Begin PBXFileReference section */
 		3059523F275CED40003A7049 /* CurrentShowData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentShowData.swift; sourceTree = "<group>"; };
 		30595241275D5078003A7049 /* LoadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadViewController.swift; sourceTree = "<group>"; };
-		30CA0C60275B8559009468D2 /* Movie Serch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Serch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		30C87F1327689B5E002C7242 /* Movie_Serch_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movie_Serch_App.xcdatamodel; sourceTree = "<group>"; };
+		30CA0C60275B8559009468D2 /* Movie Search App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Search App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30CA0C63275B8559009468D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30CA0C65275B8559009468D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		30CA0C6A275B8559009468D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		30CA0C6D275B8559009468D2 /* Movie_Serch_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movie_Serch_App.xcdatamodel; sourceTree = "<group>"; };
 		30CA0C6F275B855B009468D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30CA0C72275B855B009468D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30CA0C74275B855B009468D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 		30CA0C57275B8559009468D2 = {
 			isa = PBXGroup;
 			children = (
-				30CA0C62275B8559009468D2 /* Movie Serch App */,
+				30CA0C62275B8559009468D2 /* Movie Search App */,
 				30CA0C61275B8559009468D2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,12 +91,12 @@
 		30CA0C61275B8559009468D2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				30CA0C60275B8559009468D2 /* Movie Serch App.app */,
+				30CA0C60275B8559009468D2 /* Movie Search App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		30CA0C62275B8559009468D2 /* Movie Serch App */ = {
+		30CA0C62275B8559009468D2 /* Movie Search App */ = {
 			isa = PBXGroup;
 			children = (
 				3059523B275CEC33003A7049 /* Delegate */,
@@ -110,17 +110,17 @@
 				30CA0C6F275B855B009468D2 /* Assets.xcassets */,
 				30CA0C71275B855B009468D2 /* LaunchScreen.storyboard */,
 				30CA0C74275B855B009468D2 /* Info.plist */,
-				30CA0C6C275B8559009468D2 /* Movie_Serch_App.xcdatamodeld */,
+				30C87F1227689B5E002C7242 /* Movie_Search_App.xcdatamodeld */,
 			);
-			path = "Movie Serch App";
+			path = "Movie Search App";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		30CA0C5F275B8559009468D2 /* Movie Serch App */ = {
+		30CA0C5F275B8559009468D2 /* Movie Search App */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 30CA0C77275B855B009468D2 /* Build configuration list for PBXNativeTarget "Movie Serch App" */;
+			buildConfigurationList = 30CA0C77275B855B009468D2 /* Build configuration list for PBXNativeTarget "Movie Search App" */;
 			buildPhases = (
 				30CA0C5C275B8559009468D2 /* Sources */,
 				30CA0C5D275B8559009468D2 /* Frameworks */,
@@ -130,9 +130,9 @@
 			);
 			dependencies = (
 			);
-			name = "Movie Serch App";
+			name = "Movie Search App";
 			productName = "Movie Serch App";
-			productReference = 30CA0C60275B8559009468D2 /* Movie Serch App.app */;
+			productReference = 30CA0C60275B8559009468D2 /* Movie Search App.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -150,7 +150,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 30CA0C5B275B8559009468D2 /* Build configuration list for PBXProject "Movie Serch App" */;
+			buildConfigurationList = 30CA0C5B275B8559009468D2 /* Build configuration list for PBXProject "Movie Search App" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -163,7 +163,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				30CA0C5F275B8559009468D2 /* Movie Serch App */,
+				30CA0C5F275B8559009468D2 /* Movie Search App */,
 			);
 		};
 /* End PBXProject section */
@@ -186,8 +186,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30C87F1427689B5E002C7242 /* Movie_Search_App.xcdatamodeld in Sources */,
 				30CA0C7B275B8951009468D2 /* MainViewController.swift in Sources */,
-				30CA0C6E275B8559009468D2 /* Movie_Serch_App.xcdatamodeld in Sources */,
 				30CA0C81275C04AA009468D2 /* MainTableViewCell.swift in Sources */,
 				30595240275CED40003A7049 /* CurrentShowData.swift in Sources */,
 				30CA0C7F275BE43B009468D2 /* NetworkManager.swift in Sources */,
@@ -341,13 +341,13 @@
 		30CA0C78275B855B009468D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V3345MULYZ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Movie Serch App/Info.plist";
+				INFOPLIST_FILE = "Movie Search App/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Movie-Search-App";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -358,7 +358,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "none.Movie-Serch-App";
+				PRODUCT_BUNDLE_IDENTIFIER = "none.Movie-Search-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -369,13 +369,13 @@
 		30CA0C79275B855B009468D2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = V3345MULYZ;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Movie Serch App/Info.plist";
+				INFOPLIST_FILE = "Movie Search App/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Movie-Search-App";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -386,7 +386,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "none.Movie-Serch-App";
+				PRODUCT_BUNDLE_IDENTIFIER = "none.Movie-Search-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -397,7 +397,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		30CA0C5B275B8559009468D2 /* Build configuration list for PBXProject "Movie Serch App" */ = {
+		30CA0C5B275B8559009468D2 /* Build configuration list for PBXProject "Movie Search App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30CA0C75275B855B009468D2 /* Debug */,
@@ -406,7 +406,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		30CA0C77275B855B009468D2 /* Build configuration list for PBXNativeTarget "Movie Serch App" */ = {
+		30CA0C77275B855B009468D2 /* Build configuration list for PBXNativeTarget "Movie Search App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				30CA0C78275B855B009468D2 /* Debug */,
@@ -418,13 +418,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		30CA0C6C275B8559009468D2 /* Movie_Serch_App.xcdatamodeld */ = {
+		30C87F1227689B5E002C7242 /* Movie_Search_App.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				30CA0C6D275B8559009468D2 /* Movie_Serch_App.xcdatamodel */,
+				30C87F1327689B5E002C7242 /* Movie_Serch_App.xcdatamodel */,
 			);
-			currentVersion = 30CA0C6D275B8559009468D2 /* Movie_Serch_App.xcdatamodel */;
-			path = Movie_Serch_App.xcdatamodeld;
+			currentVersion = 30C87F1327689B5E002C7242 /* Movie_Serch_App.xcdatamodel */;
+			path = Movie_Search_App.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
