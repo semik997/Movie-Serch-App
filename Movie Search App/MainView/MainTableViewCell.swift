@@ -13,18 +13,40 @@ class MainTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imageFilm: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var premieredLabel: UILabel!
+    @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
 }
 
 extension MainTableViewCell{
     
     func loadData(films: Film) {
-
-       nameLabel?.text = films.name
-       premieredLabel.text = films.premiered
-       countryLabel.text = films.status
-      
+        nameLabel?.text = films.show?.name
+        languageLabel.text = films.show?.language
+        countryLabel.text = films.show?.status
+        imageFilm.image = getImage(from: films.show?.image?.medium ?? "Not found")
+    }
+    
+    func getImage(from string: String) -> UIImage? {
+        //2. Get valid URL
+        guard let url = URL(string: string)
+        else {
+            print("Unable to create URL")
+            return nil
+        }
+        
+        var image: UIImage? = nil
+        do {
+            //3. Get valid data
+            let data = try Data(contentsOf: url, options: [])
+            
+            //4. Make image
+            image = UIImage(data: data)
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+        
+        return image
     }
     
 }

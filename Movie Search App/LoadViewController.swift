@@ -26,7 +26,7 @@ class LoadViewController: UIViewController {
                 timer.invalidate()
                 
                 
-               self.performSegue(withIdentifier: "LoadSegue", sender: self)
+                self.performSegue(withIdentifier: "LoadSegue", sender: self)
             }
         }
     }

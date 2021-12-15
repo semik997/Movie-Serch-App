@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MiM-gJ-68S">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MiM-gJ-68S">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -91,7 +91,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <searchBar contentMode="redraw" text="" translatesAutoresizingMaskIntoConstraints="NO" id="3bI-Dp-XyX">
+                            <searchBar contentMode="redraw" text="" placeholder="Enter the name of the show to search" translatesAutoresizingMaskIntoConstraints="NO" id="3bI-Dp-XyX">
                                 <rect key="frame" x="0.0" y="75" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -196,6 +196,9 @@
                         <color key="badgeColor" systemColor="labelColor"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="DKx-o1-jzj"/>
+                    <connections>
+                        <outlet property="tableViewFav" destination="qye-Xa-HqK" id="gXo-8I-Gne"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NUc-in-pS1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -219,7 +222,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="fe7-2k-hG6">
+                            <searchBar contentMode="redraw" placeholder="Enter the name of the show to search" translatesAutoresizingMaskIntoConstraints="NO" id="fe7-2k-hG6">
                                 <rect key="frame" x="0.0" y="75" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -259,47 +262,47 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEz-0P-KVj">
-                                                    <rect key="frame" x="95" y="54" width="45.5" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="gSy-l5-sKS"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ify-EE-gWc">
-                                                    <rect key="frame" x="361" y="0.0" width="44" height="74"/>
+                                                    <rect key="frame" x="359.5" y="0.0" width="45.5" height="74"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system">
                                                         <color key="baseForegroundColor" systemColor="systemPinkColor"/>
                                                     </buttonConfiguration>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEz-0P-KVj">
+                                                    <rect key="frame" x="95" y="54" width="255" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="255" id="VAp-gb-ke2"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="pEz-0P-KVj" secondAttribute="bottom" constant="10" id="7Hu-Dp-mGu"/>
-                                                <constraint firstItem="ify-EE-gWc" firstAttribute="leading" secondItem="pEz-0P-KVj" secondAttribute="trailing" constant="220.5" id="A6P-dP-N2k"/>
-                                                <constraint firstItem="pEz-0P-KVj" firstAttribute="top" secondItem="AaI-gA-wmQ" secondAttribute="bottom" constant="1" id="CeM-xl-QBp"/>
-                                                <constraint firstItem="pEz-0P-KVj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2e-Zc-X6g" secondAttribute="trailing" constant="8" symbolic="YES" id="EG0-0m-1c1"/>
+                                                <constraint firstItem="ify-EE-gWc" firstAttribute="leading" secondItem="pEz-0P-KVj" secondAttribute="trailing" constant="9.5" id="9pm-7g-zio"/>
                                                 <constraint firstItem="AaI-gA-wmQ" firstAttribute="trailing" secondItem="CyD-7N-9hy" secondAttribute="trailingMargin" constant="-55" id="K4X-lx-qhK"/>
                                                 <constraint firstItem="ify-EE-gWc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Skt-2T-RdX" secondAttribute="trailing" constant="8" symbolic="YES" id="Pjb-rz-98P"/>
                                                 <constraint firstItem="ify-EE-gWc" firstAttribute="bottom" secondItem="CyD-7N-9hy" secondAttribute="bottomMargin" id="Tof-VV-3EM"/>
                                                 <constraint firstItem="AaI-gA-wmQ" firstAttribute="leading" secondItem="H2e-Zc-X6g" secondAttribute="trailing" constant="15" id="Tr5-rV-ayj"/>
                                                 <constraint firstItem="ify-EE-gWc" firstAttribute="top" secondItem="CyD-7N-9hy" secondAttribute="top" id="Utd-JT-NKh"/>
+                                                <constraint firstItem="pEz-0P-KVj" firstAttribute="bottom" secondItem="H2e-Zc-X6g" secondAttribute="bottom" id="bz4-av-bDF"/>
                                                 <constraint firstItem="Skt-2T-RdX" firstAttribute="top" secondItem="CyD-7N-9hy" secondAttribute="topMargin" id="cez-8r-sea"/>
+                                                <constraint firstItem="pEz-0P-KVj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AaI-gA-wmQ" secondAttribute="leading" id="esh-gW-UnH"/>
                                                 <constraint firstItem="Skt-2T-RdX" firstAttribute="trailing" secondItem="CyD-7N-9hy" secondAttribute="trailingMargin" constant="-55" id="lNw-ux-WYb"/>
                                                 <constraint firstItem="ify-EE-gWc" firstAttribute="trailing" secondItem="CyD-7N-9hy" secondAttribute="trailingMargin" id="n0a-Sy-t6O"/>
                                                 <constraint firstItem="Skt-2T-RdX" firstAttribute="leading" secondItem="H2e-Zc-X6g" secondAttribute="trailing" constant="15" id="nKg-Mt-ErP"/>
                                                 <constraint firstItem="H2e-Zc-X6g" firstAttribute="centerY" secondItem="CyD-7N-9hy" secondAttribute="centerY" id="p77-ns-YIp"/>
                                                 <constraint firstItem="AaI-gA-wmQ" firstAttribute="top" secondItem="Skt-2T-RdX" secondAttribute="bottom" constant="3" id="pQF-gE-mhW"/>
+                                                <constraint firstItem="pEz-0P-KVj" firstAttribute="top" secondItem="AaI-gA-wmQ" secondAttribute="bottom" constant="1" id="t34-PL-uFN"/>
                                                 <constraint firstItem="H2e-Zc-X6g" firstAttribute="leading" secondItem="CyD-7N-9hy" secondAttribute="leading" constant="15" id="tTG-GQ-t0Y"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="countryLabel" destination="pEz-0P-KVj" id="Gp4-zg-dFB"/>
                                             <outlet property="imageFilm" destination="H2e-Zc-X6g" id="Gp7-sI-eMU"/>
+                                            <outlet property="languageLabel" destination="AaI-gA-wmQ" id="cRS-Q3-MwP"/>
                                             <outlet property="nameLabel" destination="Skt-2T-RdX" id="Udq-98-Ooz"/>
-                                            <outlet property="premieredLabel" destination="AaI-gA-wmQ" id="ozV-ph-SZy"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -325,7 +328,8 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Main" image="magnifyingglass" catalog="system" id="rXQ-zW-dTh"/>
                     <connections>
-                        <outlet property="searchOutlet" destination="fe7-2k-hG6" id="mEP-n7-Voa"/>
+                        <outlet property="searchOutlet" destination="fe7-2k-hG6" id="4Iv-Am-13U"/>
+                        <outlet property="tableView" destination="8g0-YE-zcV" id="xDj-88-0XT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r3t-W9-MX9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

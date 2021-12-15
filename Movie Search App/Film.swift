@@ -1,27 +1,27 @@
 //
-//  PlaceModel.swift
+//  CurrentShowData.swift
 //  Movie Serch App
 //
-//  Created by Sem Koliesnikov on 04.12.2021.
+//  Created by Sem Koliesnikov on 05.12.2021.
 //
 
 import Foundation
+import UIKit
 
-// Array structure
+// data request structure via API from https://www.tvmaze.com/api
 
-struct Film {
+struct Film: Codable {
+    let show: Show?
     
-    var name: String
-    var premiered: String
-    var status: String
-//    var image: String
-    
-    init?(currentShowData: [CurrentShowData]){
-        self.name = currentShowData[0].show.name
-        self.premiered = currentShowData[1].show.premiered
-        self.status = currentShowData[2].show.status
-//        self.image = currentShowData.show.image.medium
-    }
 }
 
+struct Show: Codable {
+    let name: String?
+    let language: String?
+    let status: String?
+    let image: Image?
+}
 
+struct Image: Codable {
+    let medium: String
+}
