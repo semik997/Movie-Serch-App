@@ -15,7 +15,23 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
+    @IBOutlet weak var fillButton: UIButton!
+    
+    var isLiked = false
+    
+    @IBAction func likeButton(_ sender: UIButton) {
+        isLiked = !isLiked
+        
+        if isLiked {
+            //for like
+            fillButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            //for not like
+            fillButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+    }
 }
+
 
 extension MainTableViewCell{
     

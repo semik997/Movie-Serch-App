@@ -29,7 +29,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         searchOutlet.delegate = self
         networkManager.fetchCurrentWeather(onCompletion: { currentShowData in self.films = currentShowData }, forShow: "")
     }
@@ -44,8 +43,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as! MainTableViewCell
-        
-        cell.loadData(films: self.films[indexPath.row])
+                cell.loadData(films: self.films[indexPath.row])
         return cell
     }
     

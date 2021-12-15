@@ -268,6 +268,9 @@
                                                     <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system">
                                                         <color key="baseForegroundColor" systemColor="systemPinkColor"/>
                                                     </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="likeButton:" destination="Gzf-Bz-JZZ" eventType="touchUpInside" id="nnD-QP-lev"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pEz-0P-KVj">
                                                     <rect key="frame" x="95" y="54" width="255" height="21"/>
@@ -300,6 +303,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="countryLabel" destination="pEz-0P-KVj" id="Gp4-zg-dFB"/>
+                                            <outlet property="fillButton" destination="ify-EE-gWc" id="uCz-TM-EdT"/>
                                             <outlet property="imageFilm" destination="H2e-Zc-X6g" id="Gp7-sI-eMU"/>
                                             <outlet property="languageLabel" destination="AaI-gA-wmQ" id="cRS-Q3-MwP"/>
                                             <outlet property="nameLabel" destination="Skt-2T-RdX" id="Udq-98-Ooz"/>
