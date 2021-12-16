@@ -149,6 +149,9 @@
                                                     <buttonConfiguration key="configuration" style="plain" image="heart.fill" catalog="system">
                                                         <color key="baseForegroundColor" systemColor="systemPinkColor"/>
                                                     </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="isFavorites:" destination="pAW-95-IMD" eventType="touchUpInside" id="GOt-Z9-9XW"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -172,6 +175,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="countryLabelFav" destination="GRe-Ml-qRm" id="nAl-Uw-jhZ"/>
+                                            <outlet property="favoritesControl" destination="kFg-3m-mQS" id="34s-5M-9DO"/>
                                             <outlet property="imageFav" destination="vi9-JS-c6p" id="QZb-3f-yGM"/>
                                             <outlet property="nameLabelFav" destination="Jbc-tC-Dx6" id="pWQ-gf-OBv"/>
                                             <outlet property="premLabelFav" destination="lPl-VX-MdH" id="qxj-0D-ngK"/>

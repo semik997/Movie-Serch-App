@@ -15,6 +15,7 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
+    
     @IBOutlet weak var fillButton: UIButton!
     
     var isLiked = false
@@ -25,6 +26,7 @@ class MainTableViewCell: UITableViewCell {
         if isLiked {
             //for like
             fillButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+//            ManagerFilmsDefaults.filmName = name
         } else {
             //for not like
             fillButton.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -33,13 +35,13 @@ class MainTableViewCell: UITableViewCell {
 }
 
 
-extension MainTableViewCell{
+extension MainTableViewCell {
     
-    func loadData(films: Film) {
-        nameLabel?.text = films.show?.name
-        languageLabel.text = films.show?.language
-        countryLabel.text = films.show?.status
-        imageFilm.image = getImage(from: films.show?.image?.medium ?? "Not found")
+    func loadData(film: Film) {
+        nameLabel?.text = film.show?.name
+        languageLabel.text = film.show?.language
+        countryLabel.text = film.show?.status
+        imageFilm.image = getImage(from: film.show?.image?.medium ?? "Not found")
     }
     
     func getImage(from string: String) -> UIImage? {

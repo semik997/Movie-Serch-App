@@ -15,9 +15,25 @@ class FavoritesTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabelFav: UILabel!
     @IBOutlet weak var premLabelFav: UILabel!
     @IBOutlet weak var countryLabelFav: UILabel!
-}
+    @IBOutlet weak var favoritesControl: UIButton!
+    
+    var isLiked = false
+    
+    @IBAction func isFavorites(_ sender: UIButton) {
+        isLiked = !isLiked
+        
+        if isLiked {
+            //for not like
+            favoritesControl.setImage(UIImage(systemName: "heart"), for: .normal)
+        } else {
+            //for like
+            favoritesControl.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        }
+    }
 
-extension FavoritesTableViewCell{
+//}
+//
+//extension FavoritesTableViewCell{
     
     func loadDataFav(films: Film) {
         DispatchQueue.main.async { [self] in
@@ -29,7 +45,7 @@ extension FavoritesTableViewCell{
     }
     
     func getImage(from string: String) -> UIImage? {
-        //2. Get valid URL
+        //Get valid URL
         guard let url = URL(string: string)
         else {
             print("Unable to create URL")
@@ -38,10 +54,10 @@ extension FavoritesTableViewCell{
         
         var image: UIImage? = nil
         do {
-            //3. Get valid data
+            //Get valid data
             let data = try Data(contentsOf: url, options: [])
             
-            //4. Make image
+            //Make image
             image = UIImage(data: data)
         }
         catch {

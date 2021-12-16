@@ -23,16 +23,16 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     //Screen identification for segway
-    func instantiateViewController(withIdentifier identifier: String) -> UIView{
+    func instantiateViewController(withIdentifier identifier: String) -> UIView {
         return instantiateViewController(withIdentifier: "MainVC")
     }
     
     //Passing data to the search bar and sending a request
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
-        if searchText != ""{
-            if searchText.count >= 3{
-            self.networkManager.fetchCurrent(onCompletion: { currentShowData in self.films = currentShowData }, forShow: searchText)
-        }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText != "" {
+            if searchText.count >= 3 {
+                self.networkManager.fetchCurrent(onCompletion: { currentShowData in self.films = currentShowData }, forShow: searchText)
+            }
         }
     }
     
@@ -50,10 +50,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as! MainTableViewCell
-        if indexPath.count != 0 {
-            cell.loadData(films: self.films[indexPath.row])
-        }else{
-            print("Array zero")
+        if films.count != 0 {
+            cell.loadData(film: self.films[indexPath.row])
+        } else {
+            cell.nameLabel.text = "Not found"
         }
         return cell
     }
