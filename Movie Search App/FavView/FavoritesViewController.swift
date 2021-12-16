@@ -24,7 +24,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        networkManager.fetchCurrentWeather(onCompletion: { CurrentShowData in
+        networkManager.fetchCurrent(onCompletion: { CurrentShowData in
             self.filmsFav = CurrentShowData
         }, forShow: "girl")
     }

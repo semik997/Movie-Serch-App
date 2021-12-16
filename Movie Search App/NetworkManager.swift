@@ -14,7 +14,7 @@ struct NetworkManager {
     
     var onCompletion: (([Film]) -> Void)?
     
-    func fetchCurrentWeather(onCompletion: (([Film]) -> Void)?, forShow show: String){
+    func fetchCurrent(onCompletion: (([Film]) -> Void)?, forShow show: String){
         let urlString = "https://api.tvmaze.com/search/shows?q=\(show)"
         guard let url = URL(string: urlString) else { return }
         let session = URLSession(configuration: .default)

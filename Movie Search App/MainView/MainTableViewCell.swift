@@ -43,7 +43,7 @@ extension MainTableViewCell{
     }
     
     func getImage(from string: String) -> UIImage? {
-        //2. Get valid URL
+        //Get valid URL
         guard let url = URL(string: string)
         else {
             print("Unable to create URL")
@@ -52,17 +52,14 @@ extension MainTableViewCell{
         
         var image: UIImage? = nil
         do {
-            //3. Get valid data
+            //Get valid data
             let data = try Data(contentsOf: url, options: [])
             
-            //4. Make image
+            //Make image
             image = UIImage(data: data)
-        }
-        catch {
+        }catch {
             print(error.localizedDescription)
         }
-        
         return image
     }
-    
 }

@@ -16,7 +16,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
             endingLineNumber = "21"
-            landmarkName = "fetchCurrentWeather(onCompletion:forShow:)"
+            landmarkName = "fetchCurrent(onCompletion:forShow:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -32,15 +32,15 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "23"
             endingLineNumber = "23"
-            landmarkName = "fetchCurrentWeather(onCompletion:forShow:)"
+            landmarkName = "fetchCurrent(onCompletion:forShow:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "AEC7C9DB-5CDF-48A2-A28F-97E7C6213D28 - 1d2de5221cb53f41"
+                  uuid = "AEC7C9DB-5CDF-48A2-A28F-97E7C6213D28 - dc0f144522fe88b5"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrentWeather(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Film&gt;) -&gt; ()&gt;) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrent(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Film&gt;) -&gt; ()&gt;, forShow: Swift.String) -&gt; ()"
                   moduleName = "Movie Search App"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/semenkolesnikov/Desktop/Movie-Search-App/Movie%20Search%20App/NetworkManager.swift"
@@ -51,11 +51,11 @@
                   offsetFromSymbolStart = "196">
                </Location>
                <Location
-                  uuid = "AEC7C9DB-5CDF-48A2-A28F-97E7C6213D28 - 1d2de5221cb53f41"
+                  uuid = "AEC7C9DB-5CDF-48A2-A28F-97E7C6213D28 - dc0f144522fe88b5"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrentWeather(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Film&gt;) -&gt; ()&gt;) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrent(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Film&gt;) -&gt; ()&gt;, forShow: Swift.String) -&gt; ()"
                   moduleName = "Movie Search App"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/semenkolesnikov/Desktop/Movie-Search-App/Movie%20Search%20App/NetworkManager.swift"
@@ -71,22 +71,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6FFA6AE8-6504-4D88-AA9D-E843252E7EF7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Movie Search App/MainView/MainViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "2AA42C63-F4AA-46FB-A4D5-922305C3BB23"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -96,15 +80,15 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "22"
             endingLineNumber = "22"
-            landmarkName = "fetchCurrentWeather(onCompletion:forShow:)"
+            landmarkName = "fetchCurrent(onCompletion:forShow:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "2AA42C63-F4AA-46FB-A4D5-922305C3BB23 - 1d2de5221cb53ca0"
+                  uuid = "2AA42C63-F4AA-46FB-A4D5-922305C3BB23 - dc0f144522fe8b54"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrentWeather(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Film&gt;) -&gt; ()&gt;) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrent(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Film&gt;) -&gt; ()&gt;, forShow: Swift.String) -&gt; ()"
                   moduleName = "Movie Search App"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/semenkolesnikov/Desktop/Movie-Search-App/Movie%20Search%20App/NetworkManager.swift"
@@ -115,11 +99,11 @@
                   offsetFromSymbolStart = "116">
                </Location>
                <Location
-                  uuid = "2AA42C63-F4AA-46FB-A4D5-922305C3BB23 - 1d2de5221cb53ca0"
+                  uuid = "2AA42C63-F4AA-46FB-A4D5-922305C3BB23 - dc0f144522fe8b54"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrentWeather(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Film&gt;) -&gt; ()&gt;) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrent(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Film&gt;) -&gt; ()&gt;, forShow: Swift.String) -&gt; ()"
                   moduleName = "Movie Search App"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/semenkolesnikov/Desktop/Movie-Search-App/Movie%20Search%20App/NetworkManager.swift"
