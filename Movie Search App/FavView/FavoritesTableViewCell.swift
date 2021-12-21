@@ -16,6 +16,7 @@ class FavoritesTableViewCell: UITableViewCell {
     @IBOutlet weak var languageLabelFav: UILabel!
     @IBOutlet weak var countryLabelFav: UILabel!
     @IBOutlet weak var favoritesControl: UIButton!
+    var idFilm: Int?
     var name: String?
     var language: String?
     var status: String?
@@ -29,11 +30,13 @@ class FavoritesTableViewCell: UITableViewCell {
         if isLiked {
             //for not like
             favoritesControl.setImage(UIImage(systemName: "heart"), for: .normal)
-            Films.shared.deleteFilm(name: name, language: language,
+            Films.shared.deleteFilm(idFilm: idFilm, name: name, language: language,
                                     status: status, image: image)
+            
         } else {
             //for like
             favoritesControl.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            Films.shared.saveFilms(idFilm: idFilm, name: name, language: language, status: status, image: image)
         }
     }
     
@@ -44,6 +47,7 @@ class FavoritesTableViewCell: UITableViewCell {
         languageLabelFav.text = film.show?.language
         countryLabelFav.text = film.show?.status
         imageFav.image = getImage(from: film.show?.image?.medium ?? "Not Found")
+        idFilm = film.show?.id
         name = film.show?.name
         language = film.show?.language
         status = film.show?.status

@@ -16,6 +16,7 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var fillButton: UIButton!
+    var idFilm: Int?
     var name: String?
     var language: String?
     var status: String?
@@ -30,7 +31,7 @@ class MainTableViewCell: UITableViewCell {
         if isLiked {
             //for like
             fillButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            Films.shared.saveFilms(name: name, language: language, status: status, image: image)
+            Films.shared.saveFilms(idFilm: idFilm, name: name, language: language, status: status, image: image)
         } else {
             //for not like
             fillButton.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -46,6 +47,7 @@ extension MainTableViewCell {
         languageLabel.text = film.show?.language
         countryLabel.text = film.show?.status
         imageFilm.image = getImage(from: film.show?.image?.medium ?? "Not found")
+        idFilm = film.show?.id
         name = film.show?.name
         language = film.show?.language
         status = film.show?.status

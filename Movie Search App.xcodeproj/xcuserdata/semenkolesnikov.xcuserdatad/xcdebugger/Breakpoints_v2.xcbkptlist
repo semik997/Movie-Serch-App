@@ -8,7 +8,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "521CF524-D141-4FE3-A0CE-209BAA012E18"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Movie Search App/NetworkManager.swift"
@@ -24,7 +24,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "AEC7C9DB-5CDF-48A2-A28F-97E7C6213D28"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Movie Search App/NetworkManager.swift"
@@ -36,11 +36,11 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "AEC7C9DB-5CDF-48A2-A28F-97E7C6213D28 - dc0f144522fe88b5"
+                  uuid = "AEC7C9DB-5CDF-48A2-A28F-97E7C6213D28 - 9987140ad2736442"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrent(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Film&gt;) -&gt; ()&gt;, forShow: Swift.String) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrent(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Films.Film&gt;) -&gt; ()&gt;, forShow: Swift.String) -&gt; ()"
                   moduleName = "Movie Search App"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/semenkolesnikov/Desktop/Movie-Search-App/Movie%20Search%20App/NetworkManager.swift"
@@ -51,11 +51,11 @@
                   offsetFromSymbolStart = "196">
                </Location>
                <Location
-                  uuid = "AEC7C9DB-5CDF-48A2-A28F-97E7C6213D28 - dc0f144522fe88b5"
+                  uuid = "AEC7C9DB-5CDF-48A2-A28F-97E7C6213D28 - 9987140ad2736442"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrent(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Film&gt;) -&gt; ()&gt;, forShow: Swift.String) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrent(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Films.Film&gt;) -&gt; ()&gt;, forShow: Swift.String) -&gt; ()"
                   moduleName = "Movie Search App"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/semenkolesnikov/Desktop/Movie-Search-App/Movie%20Search%20App/NetworkManager.swift"
@@ -72,7 +72,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "2AA42C63-F4AA-46FB-A4D5-922305C3BB23"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Movie Search App/NetworkManager.swift"
@@ -84,11 +84,11 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "2AA42C63-F4AA-46FB-A4D5-922305C3BB23 - dc0f144522fe8b54"
+                  uuid = "2AA42C63-F4AA-46FB-A4D5-922305C3BB23 - 9987140ad27367a3"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrent(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Film&gt;) -&gt; ()&gt;, forShow: Swift.String) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrent(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Films.Film&gt;) -&gt; ()&gt;, forShow: Swift.String) -&gt; ()"
                   moduleName = "Movie Search App"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/semenkolesnikov/Desktop/Movie-Search-App/Movie%20Search%20App/NetworkManager.swift"
@@ -99,11 +99,11 @@
                   offsetFromSymbolStart = "116">
                </Location>
                <Location
-                  uuid = "2AA42C63-F4AA-46FB-A4D5-922305C3BB23 - dc0f144522fe8b54"
+                  uuid = "2AA42C63-F4AA-46FB-A4D5-922305C3BB23 - 9987140ad27367a3"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrent(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Film&gt;) -&gt; ()&gt;, forShow: Swift.String) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.NetworkManager.fetchCurrent(onCompletion: Swift.Optional&lt;(Swift.Array&lt;Movie_Search_App.Films.Film&gt;) -&gt; ()&gt;, forShow: Swift.String) -&gt; ()"
                   moduleName = "Movie Search App"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/semenkolesnikov/Desktop/Movie-Search-App/Movie%20Search%20App/NetworkManager.swift"
@@ -174,8 +174,8 @@
             filePath = "Movie Search App/FavView/FavoritesTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "loadDataFav(film:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -190,8 +190,8 @@
             filePath = "Movie Search App/FavView/FavoritesTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "loadDataFav(film:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -206,8 +206,8 @@
             filePath = "Movie Search App/FavView/FavoritesTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "loadDataFav(film:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -216,22 +216,6 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "147CC5A5-45C5-4B0E-A632-AEDFA116ABB7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Movie Search App/MainView/MainTableViewCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "loadData(film:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EBCAF109-A4D3-40CD-ACF0-B6C7F8600831"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -247,6 +231,22 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "EBCAF109-A4D3-40CD-ACF0-B6C7F8600831"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movie Search App/MainView/MainTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "loadData(film:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             uuid = "13775C2B-FDE0-4DA6-B5F9-ACA6268FB3E8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -254,8 +254,8 @@
             filePath = "Movie Search App/MainView/MainTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "loadData(film:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -270,8 +270,8 @@
             filePath = "Movie Search App/MainView/MainTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "loadData(film:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -288,7 +288,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
             endingLineNumber = "52"
-            landmarkName = "saveFilms(name:language:status:image:)"
+            landmarkName = "saveFilms(idFilm:name:language:status:image:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -304,7 +304,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
             endingLineNumber = "54"
-            landmarkName = "saveFilms(name:language:status:image:)"
+            landmarkName = "saveFilms(idFilm:name:language:status:image:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -318,9 +318,57 @@
             filePath = "Movie Search App/MainView/MainTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "likeButton(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "45170BDB-B88E-4306-A352-A1F955C66866"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movie Search App/Film.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "deleteFilm(idFilm:name:language:status:image:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C049E00F-4675-47F6-BAA4-2C1A7A7FF937"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movie Search App/Film.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "deleteFilm(idFilm:name:language:status:image:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E525ED1D-6479-42F1-B23D-489398A424C0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movie Search App/Film.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "deleteFilm(idFilm:name:language:status:image:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

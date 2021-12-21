@@ -19,7 +19,7 @@ class Films {
     }
     
     struct Show: Codable {
-        let idFilm: Int
+        let id: Int?
         let name: String?
         let language: String?
         let status: String?
@@ -47,15 +47,15 @@ class Films {
         }
     }
     
-    func saveFilms(name: String?, language: String?, status: String?, image: String?) {
+    func saveFilms(idFilm: Int?, name: String?, language: String?, status: String?, image: String?) {
         
         let favoriteFilms = Film(show: Show(id: idFilm, name: name, language: language, status: status, image: Image(medium: image ?? " ")))
                                  
         favoriteFilm.insert(favoriteFilms, at: 0)
     }
     
-    func deleteFilm(name: String?, language: String?, status: String?, image: String?) {
-//        favoriteFilm.removeAll(where: {  == false })
+    func deleteFilm(idFilm: Int?, name: String?, language: String?, status: String?, image: String?) {
+        favoriteFilm.removeAll(where: {$0.show?.id == idFilm})
         favoriteFilm = favoriteFilm
     }
 }
