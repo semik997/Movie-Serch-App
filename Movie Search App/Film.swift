@@ -11,7 +11,7 @@ import UIKit
 // data request structure via API from https://www.tvmaze.com/api
 class Films {
     
-    let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
     static let shared = Films()
     
     struct Film: Codable {
@@ -24,6 +24,7 @@ class Films {
         let language: String?
         let status: String?
         let image: Image?
+        var isFavorite: Bool?
     }
     
     struct Image: Codable {
@@ -47,14 +48,14 @@ class Films {
         }
     }
     
-    func saveFilms(idFilm: Int?, name: String?, language: String?, status: String?, image: String?) {
+    func saveFilms(idFilm: Int?, name: String?, language: String?, status: String?, image: String?, isFavorite: Bool) {
         
-        let favoriteFilms = Film(show: Show(id: idFilm, name: name, language: language, status: status, image: Image(medium: image ?? " ")))
+        let favoriteFilms = Film(show: Show(id: idFilm, name: name, language: language, status: status, image: Image(medium: image ?? " "), isFavorite: true))
                                  
         favoriteFilm.insert(favoriteFilms, at: 0)
     }
     
-    func deleteFilm(idFilm: Int?, name: String?, language: String?, status: String?, image: String?) {
+    func deleteFilm(idFilm: Int?, name: String?, language: String?, status: String?, image: String?, isFavorite: Bool) {
         favoriteFilm.removeAll(where: {$0.show?.id == idFilm})
         favoriteFilm = favoriteFilm
     }

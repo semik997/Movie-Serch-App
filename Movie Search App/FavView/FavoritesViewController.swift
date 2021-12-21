@@ -10,12 +10,14 @@ import UIKit
 class FavoritesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
+
     @IBOutlet weak var tableViewFav: UITableView!
     //Creating and Populating an Array for Display
     
     var networkManager = NetworkManager()
     var mainViewController = MainViewController()
-    
+    var delegate: FavoritesViewControllerDelegate?
+    var isLiked = false
     var filmsFav: [Films.Film] = Films.shared.favoriteFilm
     
     override func viewDidLoad() {
@@ -25,22 +27,20 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         filmsFav = Films.shared.favoriteFilm
-        self.tableViewFav.reloadData()
+        tableViewFav.reloadData()
     }
     
     // displaying data in a cell
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filmsFav.count
     }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: FavoritesTableViewCell
-        
-        if let dCell = tableView.dequeueReusableCell(withIdentifier: "dCell") {
-            cell = dCell as! FavoritesTableViewCell
-        } else {
-            cell = FavoritesTableViewCell()
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FavCell",
+                                                       for: indexPath) as? FavoritesTableViewCell else {
+            return UITableViewCell()
         }
-        cell.loadDataFav(film: self.filmsFav[indexPath.row])
+        cell.loadDataFav(film: filmsFav[indexPath.row])
         return cell
     }
 }

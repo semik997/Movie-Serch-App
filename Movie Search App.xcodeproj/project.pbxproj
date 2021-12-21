@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		302F97E5277073E50000B975 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F97E4277073E50000B975 /* Links.swift */; };
+		302F97E72771E7B90000B975 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F97E62771E7B90000B975 /* AlertController.swift */; };
 		30595240275CED40003A7049 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059523F275CED40003A7049 /* Film.swift */; };
 		30595242275D5078003A7049 /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30595241275D5078003A7049 /* LoadViewController.swift */; };
 		30C87F1427689B5E002C7242 /* Movie_Search_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30C87F1227689B5E002C7242 /* Movie_Search_App.xcdatamodeld */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		302F97E4277073E50000B975 /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
+		302F97E62771E7B90000B975 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		3059523F275CED40003A7049 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		30595241275D5078003A7049 /* LoadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadViewController.swift; sourceTree = "<group>"; };
 		30C87F1327689B5E002C7242 /* Movie_Serch_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movie_Serch_App.xcdatamodel; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			children = (
 				3059523B275CEC33003A7049 /* Delegate */,
 				30595241275D5078003A7049 /* LoadViewController.swift */,
+				302F97E62771E7B90000B975 /* AlertController.swift */,
 				3059523F275CED40003A7049 /* Film.swift */,
 				30CA0C7E275BE43B009468D2 /* NetworkManager.swift */,
 				3059523D275CEC8C003A7049 /* MainView */,
@@ -190,6 +193,7 @@
 				30CA0C7B275B8951009468D2 /* MainViewController.swift in Sources */,
 				30CA0C81275C04AA009468D2 /* MainTableViewCell.swift in Sources */,
 				30595240275CED40003A7049 /* Film.swift in Sources */,
+				302F97E72771E7B90000B975 /* AlertController.swift in Sources */,
 				30CA0C7F275BE43B009468D2 /* NetworkManager.swift in Sources */,
 				30595242275D5078003A7049 /* LoadViewController.swift in Sources */,
 				302F97E5277073E50000B975 /* Links.swift in Sources */,

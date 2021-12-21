@@ -15,30 +15,11 @@ class FavoritesTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabelFav: UILabel!
     @IBOutlet weak var languageLabelFav: UILabel!
     @IBOutlet weak var countryLabelFav: UILabel!
-    @IBOutlet weak var favoritesControl: UIButton!
-    var idFilm: Int?
-    var name: String?
-    var language: String?
-    var status: String?
-    var image: String?
-    
-    var isLiked = false
-    
-    @IBAction func isFavorites(_ sender: UIButton) {
-        isLiked = !isLiked
-        
-        if isLiked {
-            //for not like
-            favoritesControl.setImage(UIImage(systemName: "heart"), for: .normal)
-            Films.shared.deleteFilm(idFilm: idFilm, name: name, language: language,
-                                    status: status, image: image)
-            
-        } else {
-            //for like
-            favoritesControl.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            Films.shared.saveFilms(idFilm: idFilm, name: name, language: language, status: status, image: image)
-        }
-    }
+    var oneFilm: Films.Show?
+//    var name: String?
+//    var language: String?
+//    var status: String?
+//    var image: String?
     
     //extension FavoritesTableViewCell{
     
@@ -47,11 +28,14 @@ class FavoritesTableViewCell: UITableViewCell {
         languageLabelFav.text = film.show?.language
         countryLabelFav.text = film.show?.status
         imageFav.image = getImage(from: film.show?.image?.medium ?? "Not Found")
-        idFilm = film.show?.id
-        name = film.show?.name
-        language = film.show?.language
-        status = film.show?.status
-        image = film.show?.image?.medium
+        oneFilm = film.show
+    }
+//
+//        idFilm = film.show?.id
+//        name = film.show?.name
+//        language = film.show?.language
+//        status = film.show?.status
+//        image = film.show?.image?.medium
     }
     
     func getImage(from string: String) -> UIImage? {
@@ -76,4 +60,4 @@ class FavoritesTableViewCell: UITableViewCell {
         return image
     }
     
-}
+

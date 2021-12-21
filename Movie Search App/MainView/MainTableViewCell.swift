@@ -16,25 +16,33 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var fillButton: UIButton!
+    
+    @IBOutlet weak var favoriteNameLabel: UILabel!
+    @IBOutlet weak var favoriteLanguageLabel: UILabel!
+    @IBOutlet weak var favoriteStatusLabel: UILabel!
+    @IBOutlet weak var favoriteImage: UIImageView!
+    @IBOutlet weak var deleteFavoriteButton: UIButton!
+    
     var idFilm: Int?
     var name: String?
     var language: String?
     var status: String?
     var image: String?
+    var isFavorite = false
     
     let defaults = UserDefaults.standard
-    var isLiked = false
     
     @IBAction func likeButton(_ sender: UIButton) {
-        isLiked = !isLiked
+        isFavorite = !isFavorite
         
-        if isLiked {
+        if isFavorite {
             //for like
             fillButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            Films.shared.saveFilms(idFilm: idFilm, name: name, language: language, status: status, image: image)
+            Films.shared.saveFilms(idFilm: idFilm, name: name, language: language, status: status, image: image, isFavorite: true)
         } else {
             //for not like
             fillButton.setImage(UIImage(systemName: "heart"), for: .normal)
+//            self.presentAlertController(withTitle: "Did you sure?", message: nil, style: .alert)
         }
     }
 }
@@ -52,6 +60,14 @@ extension MainTableViewCell {
         language = film.show?.language
         status = film.show?.status
         image = film.show?.image?.medium
+    }
+    
+    func loadDataFav(film: Films.Film) {
+        favoriteNameLabel.text = film.show?.name
+        favoriteLanguageLabel.text = film.show?.language
+        favoriteStatusLabel.text = film.show?.status
+        favoriteImage.image = getImage(from: film.show?.image?.medium ?? "Not Found")
+//        oneFilm = film.show
     }
     
     func getImage(from string: String) -> UIImage? {
@@ -75,5 +91,3 @@ extension MainTableViewCell {
         return image
     }
 }
-
-
