@@ -14,10 +14,16 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     //Creating and filling the array for Display
     var networkManager = NetworkManager()
-    var films: [Film] = [] {
+    let defaults = UserDefaults.standard
+    
+    // UserDefaults
+    
+    var films: [Films.Film] = [] {
         didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            DispatchQueue.main.async { [self] in
+                tableView?.delegate = self
+                tableView?.dataSource = self
+                tableView.reloadData()
             }
         }
     }
@@ -31,7 +37,9 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText != "" {
             if searchText.count >= 3 {
-                self.networkManager.fetchCurrent(onCompletion: { currentShowData in self.films = currentShowData }, forShow: searchText)
+                self.networkManager.fetchCurrent(onCompletion: {
+                    currentShowData in self.films = currentShowData
+                }, forShow: searchText)
             }
         }
     }
@@ -39,17 +47,21 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         searchOutlet.delegate = self
-        networkManager.fetchCurrent(onCompletion: { currentShowData in self.films = currentShowData }, forShow: "")
+        networkManager.fetchCurrent(onCompletion: {[weak self] currentShowData in
+            self?.films = currentShowData
+        }, forShow: "")
     }
     
-    // displaying data in a cell
+    // MARK: displaying data in a cell
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return films.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath) as! MainTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath)
+            as! MainTableViewCell
+        
         if films.count != 0 {
             cell.loadData(film: self.films[indexPath.row])
         } else {
@@ -57,5 +69,4 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         return cell
     }
-    
 }

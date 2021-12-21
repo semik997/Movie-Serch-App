@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		302F97E5277073E50000B975 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F97E4277073E50000B975 /* Links.swift */; };
 		30595240275CED40003A7049 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059523F275CED40003A7049 /* Film.swift */; };
 		30595242275D5078003A7049 /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30595241275D5078003A7049 /* LoadViewController.swift */; };
-		30A4565F276B7C64005FB706 /* ManagerFilmsDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A4565E276B7C64005FB706 /* ManagerFilmsDefaults.swift */; };
 		30C87F1427689B5E002C7242 /* Movie_Search_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30C87F1227689B5E002C7242 /* Movie_Search_App.xcdatamodeld */; };
 		30CA0C64275B8559009468D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C63275B8559009468D2 /* AppDelegate.swift */; };
 		30CA0C66275B8559009468D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C65275B8559009468D2 /* SceneDelegate.swift */; };
@@ -24,9 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		302F97E4277073E50000B975 /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		3059523F275CED40003A7049 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		30595241275D5078003A7049 /* LoadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadViewController.swift; sourceTree = "<group>"; };
-		30A4565E276B7C64005FB706 /* ManagerFilmsDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerFilmsDefaults.swift; sourceTree = "<group>"; };
 		30C87F1327689B5E002C7242 /* Movie_Serch_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movie_Serch_App.xcdatamodel; sourceTree = "<group>"; };
 		30CA0C60275B8559009468D2 /* Movie Search App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Search App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30CA0C63275B8559009468D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +58,7 @@
 			children = (
 				30CA0C65275B8559009468D2 /* SceneDelegate.swift */,
 				30CA0C63275B8559009468D2 /* AppDelegate.swift */,
+				302F97E4277073E50000B975 /* Links.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -67,7 +68,6 @@
 			children = (
 				30CA0C7A275B8951009468D2 /* MainViewController.swift */,
 				30CA0C80275C04AA009468D2 /* MainTableViewCell.swift */,
-				30A4565E276B7C64005FB706 /* ManagerFilmsDefaults.swift */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -192,9 +192,9 @@
 				30595240275CED40003A7049 /* Film.swift in Sources */,
 				30CA0C7F275BE43B009468D2 /* NetworkManager.swift in Sources */,
 				30595242275D5078003A7049 /* LoadViewController.swift in Sources */,
+				302F97E5277073E50000B975 /* Links.swift in Sources */,
 				30CA0C85275CC5EA009468D2 /* FavoritesTableViewCell.swift in Sources */,
 				30CA0C7D275B8965009468D2 /* FavoritesViewController.swift in Sources */,
-				30A4565F276B7C64005FB706 /* ManagerFilmsDefaults.swift in Sources */,
 				30CA0C64275B8559009468D2 /* AppDelegate.swift in Sources */,
 				30CA0C66275B8559009468D2 /* SceneDelegate.swift in Sources */,
 			);

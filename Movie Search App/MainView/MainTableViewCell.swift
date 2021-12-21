@@ -15,9 +15,13 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
-    
     @IBOutlet weak var fillButton: UIButton!
+    var name: String?
+    var language: String?
+    var status: String?
+    var image: String?
     
+    let defaults = UserDefaults.standard
     var isLiked = false
     
     @IBAction func likeButton(_ sender: UIButton) {
@@ -26,7 +30,7 @@ class MainTableViewCell: UITableViewCell {
         if isLiked {
             //for like
             fillButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-//            ManagerFilmsDefaults.filmName = name
+            Films.shared.saveFilms(name: name, language: language, status: status, image: image)
         } else {
             //for not like
             fillButton.setImage(UIImage(systemName: "heart"), for: .normal)
@@ -37,11 +41,15 @@ class MainTableViewCell: UITableViewCell {
 
 extension MainTableViewCell {
     
-    func loadData(film: Film) {
+    func loadData(film: Films.Film) {
         nameLabel?.text = film.show?.name
         languageLabel.text = film.show?.language
         countryLabel.text = film.show?.status
         imageFilm.image = getImage(from: film.show?.image?.medium ?? "Not found")
+        name = film.show?.name
+        language = film.show?.language
+        status = film.show?.status
+        image = film.show?.image?.medium
     }
     
     func getImage(from string: String) -> UIImage? {
@@ -65,3 +73,5 @@ extension MainTableViewCell {
         return image
     }
 }
+
+

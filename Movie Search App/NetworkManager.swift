@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-// api request
+// MARK: api request
 
 struct NetworkManager {
     
-    var onCompletion: (([Film]) -> Void)?
+    var onCompletion: (([Films.Film]) -> Void)?
     
-    func fetchCurrent(onCompletion: (([Film]) -> Void)?, forShow show: String){
-        let urlString = "https://api.tvmaze.com/search/shows?q=\(show)"
+    func fetchCurrent(onCompletion: (([Films.Film]) -> Void)?, forShow show: String){
+        let urlString = "\(linkAPI)\(show)"
         guard let url = URL(string: urlString) else { return }
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: url) {data, response, error in
@@ -24,18 +24,16 @@ struct NetworkManager {
                     onCompletion?(currentShow)
                 }
             }
-            
-            //call completion block with json
-            
+            // MARK: call completion block with json
         }
         task.resume()
     }
     
-    func parseJSON(withData data: Data) -> [Film]?{
+    func parseJSON(withData data: Data) -> [Films.Film]?{
         let decoder = JSONDecoder()
-        var currentShow: [Film] = []
+        var currentShow: [Films.Film] = []
         do {
-            let currentShowData = try decoder.decode([Film].self, from: data)
+            let currentShowData = try decoder.decode([Films.Film].self, from: data)
             
             for index in currentShowData{
                 currentShow.append(index)

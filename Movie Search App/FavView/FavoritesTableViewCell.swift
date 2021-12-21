@@ -13,9 +13,13 @@ class FavoritesTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imageFav: UIImageView!
     @IBOutlet weak var nameLabelFav: UILabel!
-    @IBOutlet weak var premLabelFav: UILabel!
+    @IBOutlet weak var languageLabelFav: UILabel!
     @IBOutlet weak var countryLabelFav: UILabel!
     @IBOutlet weak var favoritesControl: UIButton!
+    var name: String?
+    var language: String?
+    var status: String?
+    var image: String?
     
     var isLiked = false
     
@@ -25,23 +29,25 @@ class FavoritesTableViewCell: UITableViewCell {
         if isLiked {
             //for not like
             favoritesControl.setImage(UIImage(systemName: "heart"), for: .normal)
+            Films.shared.deleteFilm(name: name, language: language,
+                                    status: status, image: image)
         } else {
             //for like
             favoritesControl.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         }
     }
-
-//}
-//
-//extension FavoritesTableViewCell{
     
-    func loadDataFav(films: Film) {
-        DispatchQueue.main.async { [self] in
-            nameLabelFav?.text = films.show?.name
-            premLabelFav.text = films.show?.language
-            countryLabelFav.text = films.show?.status
-            imageFav.image = getImage(from: films.show?.image?.medium ?? "Not Found")
-        }
+    //extension FavoritesTableViewCell{
+    
+    func loadDataFav(film: Films.Film) {
+        nameLabelFav.text = film.show?.name
+        languageLabelFav.text = film.show?.language
+        countryLabelFav.text = film.show?.status
+        imageFav.image = getImage(from: film.show?.image?.medium ?? "Not Found")
+        name = film.show?.name
+        language = film.show?.language
+        status = film.show?.status
+        image = film.show?.image?.medium
     }
     
     func getImage(from string: String) -> UIImage? {
@@ -63,7 +69,6 @@ class FavoritesTableViewCell: UITableViewCell {
         catch {
             print(error.localizedDescription)
         }
-        
         return image
     }
     
