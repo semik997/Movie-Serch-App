@@ -48,14 +48,20 @@ class Films {
         }
     }
     
+    func saveFilm(favoriteFilmi: [Films.Film]) {
+        let filmecok = [Films.Film]()
+        favoriteFilm.insert(contentsOf: filmecok, at: 0)
+    }
+    
+    
     func saveFilms(idFilm: Int?, name: String?, language: String?, status: String?, image: String?, isFavorite: Bool) {
         
         let favoriteFilms = Film(show: Show(id: idFilm, name: name, language: language, status: status, image: Image(medium: image ?? " "), isFavorite: true))
-                                 
+        
         favoriteFilm.insert(favoriteFilms, at: 0)
     }
     
-    func deleteFilm(idFilm: Int?, name: String?, language: String?, status: String?, image: String?, isFavorite: Bool) {
+    func deleteFilm(idFilm: Int?) {
         favoriteFilm.removeAll(where: {$0.show?.id == idFilm})
         favoriteFilm = favoriteFilm
     }
