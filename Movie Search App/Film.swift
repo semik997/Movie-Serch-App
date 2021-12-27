@@ -24,12 +24,16 @@ class Films {
         let language: String?
         let status: String?
         let image: Image?
+        let summary: String?
         var isFavorite: Bool?
     }
     
     struct Image: Codable {
         let medium: String
+        let original: String?
     }
+    
+    // MARK: - User Data persistence model
     
     var favoriteFilm: [Films.Film] {
         
@@ -48,16 +52,17 @@ class Films {
         }
     }
     
+    // MARK: - Models for working with data in User Data
+    
     func saveFilm(favoriteFilmi: [Films.Film]) {
         let filmecok = [Films.Film]()
         favoriteFilm.insert(contentsOf: filmecok, at: 0)
     }
     
     
-    func saveFilms(idFilm: Int?, name: String?, language: String?, status: String?, image: String?, isFavorite: Bool) {
+    func saveFilms(idFilm: Int?, name: String?, language: String?, status: String?, image: String?, isFavorite: Bool, original: String?, summary: String) {
         
-        let favoriteFilms = Film(show: Show(id: idFilm, name: name, language: language, status: status, image: Image(medium: image ?? " "), isFavorite: true))
-        
+        let favoriteFilms = Film(show: Show(id: idFilm, name: name, language: language, status: status, image: Image(medium: image ?? " ", original: original ?? " "), summary: summary, isFavorite: true))
         favoriteFilm.insert(favoriteFilms, at: 0)
     }
     

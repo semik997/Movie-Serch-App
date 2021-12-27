@@ -7,7 +7,7 @@
 
 import UIKit
 protocol FavoriteProtocol: AnyObject {
-    func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?, language: String?, status: String?, image: String?)
+    func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?, language: String?, status: String?, image: String?, original: String?, summary: String?)
 }
 
 //Initialization of UI fields
@@ -26,6 +26,8 @@ class TableViewCell: UITableViewCell {
     var language: String?
     var status: String?
     var image: String?
+    var original: String?
+    var summary: String?
     var isFavorite = false
     
     private var currentFilm: Films.Film?
@@ -42,22 +44,22 @@ class TableViewCell: UITableViewCell {
     }
     
     @IBAction func likeButton(_ sender: UIButton) {
-        isFavorite = !isFavorite
         
         if isFavorite {
             //for like
-            fillButton.isSelected = true
-            isFavorite = true
-            delegate?.selectCell(isFavorite, idFilm: idFilm, name: name, language: language, status: status, image: image)
+            fillButton.isSelected = !fillButton.isSelected
+            isFavorite = !isFavorite
+            delegate?.selectCell(isFavorite, idFilm: idFilm, name: name, language: language, status: status, image: image, original: original, summary: summary)
         } else {
             //for not like
-            fillButton.isSelected = false
-            isFavorite = false
-            delegate?.selectCell(isFavorite, idFilm: idFilm, name: name, language: language, status: status, image: image)
+            fillButton.isSelected = !fillButton.isSelected
+            isFavorite = !isFavorite
+            delegate?.selectCell(isFavorite, idFilm: idFilm, name: name, language: language, status: status, image: image, original: original, summary: summary)
         }
     }
 }
 
+// MARK: - Uploading data to VC
 
 extension TableViewCell {
     
@@ -73,6 +75,9 @@ extension TableViewCell {
             language = film.show?.language
             status = film.show?.status
             image = film.show?.image?.medium
+            isFavorite = ((film.show?.isFavorite) != nil)
+            original = film.show?.image?.original
+            summary = film.show?.summary
             fillButton.isSelected = true
             
         } else {
@@ -85,11 +90,16 @@ extension TableViewCell {
             language = film.show?.language
             status = film.show?.status
             image = film.show?.image?.medium
+            isFavorite = ((film.show?.isFavorite) != nil)
+            original = film.show?.image?.original
+            summary = film.show?.summary
             fillButton.isSelected = false
             
         }
         
     }
+    
+    // MARK: - String in image conversion
     
     func getImage(from string: String) -> UIImage? {
         //Get valid URL

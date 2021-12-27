@@ -17,7 +17,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //Creating and filling the array for Display
     var networkManager = NetworkManager()
     let defaults = UserDefaults.standard
-    var isFavorite = false
     
     // UserDefaults
     
@@ -55,7 +54,22 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }, forShow: "")
     }
     
-    // MARK: displaying data in a cell
+    // MARK: - Detail setting
+    
+    @IBAction func cancelActionMain(_ segue: UIStoryboardSegue){
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetailMain" {
+            guard let indexPath = tableView.indexPathForSelectedRow else { return }
+            let film = films[indexPath.row]
+            let nav = segue.destination as! UINavigationController
+            let moreInfoMainVC = nav.topViewController as! MoreInfoViewController
+            moreInfoMainVC.detailedInformation = film
+        }
+    }
+    
+    // MARK: - Displaying data in a cell
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return films.count
@@ -72,25 +86,24 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         return cell
     }
-    
-    //    func search() {
-    //        presentAlertController(withTitle: "Do you sure?", message: nil, style: .alert)
-    //    }
 }
+
+// MARK: - Save and delete to favorites
+
 extension MainViewController: FavoriteProtocol {
     
-    func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?, language: String?, status: String?, image: String?) {
+    func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?, language: String?, status: String?, image: String?, original: String?, summary: String?) {
         
         if isFavorite {
             //for like
-            //            fillButton = true
-            Films.shared.saveFilms(idFilm: idFilm, name: name, language: language, status: status, image: image, isFavorite: true)
+            Films.shared.saveFilms(idFilm: idFilm, name: name, language: language, status: status, image: image, isFavorite: true, original: original, summary: summary ?? "No description text")
             
         } else {
             //for not like
-            
             Films.shared.deleteFilm(idFilm: idFilm)
-//                        presentAlertController(withTitle: "Did you sure?", message: nil, style: .alert)
+            self.tableView.reloadData()
+            self.films = Films.shared.favoriteFilm
+            
         }
     }
     

@@ -9,7 +9,7 @@ import UIKit
 
 class LoadViewController: UIViewController {
     
-    // Customization loading screen 
+    // Customization loading screen
     
     @IBOutlet weak var progress: UIProgressView!
     
