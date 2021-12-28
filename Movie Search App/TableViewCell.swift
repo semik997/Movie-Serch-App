@@ -7,7 +7,9 @@
 
 import UIKit
 protocol FavoriteProtocol: AnyObject {
-    func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?, language: String?, status: String?, image: String?, original: String?, summary: String?)
+    func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?,
+                    language: String?, status: String?, image: String?,
+                    original: String?, summary: String?)
 }
 
 //Initialization of UI fields
@@ -49,12 +51,16 @@ class TableViewCell: UITableViewCell {
             //for like
             fillButton.isSelected = !fillButton.isSelected
             isFavorite = !isFavorite
-            delegate?.selectCell(isFavorite, idFilm: idFilm, name: name, language: language, status: status, image: image, original: original, summary: summary)
+            delegate?.selectCell(isFavorite, idFilm: idFilm, name: name,
+                                 language: language, status: status, image: image,
+                                 original: original, summary: summary)
         } else {
             //for not like
             fillButton.isSelected = !fillButton.isSelected
             isFavorite = !isFavorite
-            delegate?.selectCell(isFavorite, idFilm: idFilm, name: name, language: language, status: status, image: image, original: original, summary: summary)
+            delegate?.selectCell(isFavorite, idFilm: idFilm, name: name,
+                                 language: language, status: status, image: image,
+                                 original: original, summary: summary)
         }
     }
 }
@@ -94,9 +100,7 @@ extension TableViewCell {
             original = film.show?.image?.original
             summary = film.show?.summary
             fillButton.isSelected = false
-            
         }
-        
     }
     
     // MARK: - String in image conversion

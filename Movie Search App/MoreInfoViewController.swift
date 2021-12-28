@@ -9,16 +9,19 @@ import UIKit
 
 class MoreInfoViewController: UITableViewController {
     
+    var detailedInformation: Films.Film?
+    
     @IBOutlet weak var mainMoreInfoImage: UIImageView!
     @IBOutlet weak var mainMoreInfoLabel: UILabel!
     
-    var detailedInformation: Films.Film?
+    
     
     private func setupMoreInformation () {
         if detailedInformation != nil {
-            mainMoreInfoImage.image = getImage(from: detailedInformation?.show?.image?.original ?? "Not found")
-            
-            let text = detailedInformation?.show?.summary ?? "No description text".replacingOccurrences(of: "<[^>]+>", with: "")
+            mainMoreInfoImage.image = getImage(from: detailedInformation?.show?.image?.original ??
+                                               "Not found")
+            let summary = detailedInformation?.show?.summary ?? "No description text"
+            let text = summary.replacingOccurrences(of: "<[^>]+>", with: "")
             mainMoreInfoLabel.text = text
         }
     }

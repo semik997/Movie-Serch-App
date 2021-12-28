@@ -13,13 +13,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var searchOutlet: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    
     //Creating and filling the array for Display
     var networkManager = NetworkManager()
     let defaults = UserDefaults.standard
     
     // UserDefaults
-    
     var films: [Films.Film] = [] {
         didSet {
             DispatchQueue.main.async { [self] in
@@ -38,19 +36,25 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     //Passing data to the search bar and sending a request
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText != "" {
+            let text = searchText.split(separator: " ").joined(separator: "%20")
             if searchText.count >= 3 {
                 self.networkManager.fetchCurrent(onCompletion: {
                     currentShowData in self.films = currentShowData
-                }, forShow: searchText)
+                }, forShow: text)
             }
+        } else {
+            tableView.reloadData()
+            networkManager.fetchCurrent(onCompletion: {[weak self]
+                currentShowData in self?.films = currentShowData
+            }, forShow: "")
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchOutlet.delegate = self
-        networkManager.fetchCurrent(onCompletion: {[weak self] currentShowData in
-            self?.films = currentShowData
+        networkManager.fetchCurrent(onCompletion: {[weak self]
+            currentShowData in self?.films = currentShowData
         }, forShow: "")
     }
     
@@ -75,9 +79,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return films.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell", for: indexPath)
-                as? TableViewCell else { return UITableViewCell()}
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell",
+                                                       for: indexPath) as? TableViewCell
+        else { return UITableViewCell()}
         cell.delegate = self
         if films.count != 0 {
             cell.loadData(film: films[indexPath.row])
@@ -92,11 +98,17 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 extension MainViewController: FavoriteProtocol {
     
-    func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?, language: String?, status: String?, image: String?, original: String?, summary: String?) {
+    func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?,
+                    language: String?, status: String?, image: String?,
+                    original: String?, summary: String?) {
         
         if isFavorite {
             //for like
-            Films.shared.saveFilms(idFilm: idFilm, name: name, language: language, status: status, image: image, isFavorite: true, original: original, summary: summary ?? "No description text")
+            Films.shared.saveFilms(idFilm: idFilm, name: name,
+                                   language: language, status: status,
+                                   image: image, isFavorite: true,
+                                   original: original, summary: summary ??
+                                   "No description text")
             
         } else {
             //for not like
