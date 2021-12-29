@@ -16,31 +16,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="7rH-yO-28X">
-                                <rect key="frame" x="32" y="530" width="350" height="4"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="350" id="ShS-i4-uTA"/>
-                                </constraints>
-                                <color key="progressTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="trackTintColor" systemColor="systemGray5Color"/>
-                            </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKx-g5-4Jg">
-                                <rect key="frame" x="86" y="398" width="242" height="100.5"/>
+                                <rect key="frame" x="86" y="201" width="242" height="494"/>
                                 <fontDescription key="fontDescription" name="PartyLetPlain" family="Party LET" pointSize="86"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="7rH-yO-28X">
+                                <rect key="frame" x="32" y="702.5" width="350" height="35.5"/>
+                                <color key="progressTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="trackTintColor" systemColor="systemGray5Color"/>
+                            </progressView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0Cn-R6-Our"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
                         <constraints>
-                            <constraint firstItem="7rH-yO-28X" firstAttribute="leading" secondItem="0Cn-R6-Our" secondAttribute="leading" constant="32" id="0n6-1c-HeT"/>
-                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="top" secondItem="0Cn-R6-Our" secondAttribute="top" constant="354" id="4nc-M9-Bv1"/>
-                            <constraint firstItem="0Cn-R6-Our" firstAttribute="trailing" secondItem="7rH-yO-28X" secondAttribute="trailing" constant="32" id="Cfg-bv-qtf"/>
-                            <constraint firstItem="7rH-yO-28X" firstAttribute="top" secondItem="rKx-g5-4Jg" secondAttribute="bottom" constant="31.5" id="Ot2-f1-KNR"/>
-                            <constraint firstItem="0Cn-R6-Our" firstAttribute="trailing" secondItem="rKx-g5-4Jg" secondAttribute="trailing" constant="86" id="n4j-YH-HDN"/>
-                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="leading" secondItem="0Cn-R6-Our" secondAttribute="leading" constant="86" id="rzG-BS-rG5"/>
-                            <constraint firstItem="0Cn-R6-Our" firstAttribute="bottom" secondItem="7rH-yO-28X" secondAttribute="bottom" constant="328" id="vit-9V-Meo"/>
+                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="centerY" secondItem="WDP-AZ-o4e" secondAttribute="centerY" id="5qW-7D-GFK"/>
+                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="leading" secondItem="0Cn-R6-Our" secondAttribute="leading" constant="86" id="A7x-RD-c0C"/>
+                            <constraint firstItem="7rH-yO-28X" firstAttribute="leading" secondItem="0Cn-R6-Our" secondAttribute="leading" constant="32" id="MpK-fV-Urs"/>
+                            <constraint firstItem="7rH-yO-28X" firstAttribute="centerX" secondItem="rKx-g5-4Jg" secondAttribute="centerX" id="N06-DP-MAC"/>
+                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="centerX" secondItem="WDP-AZ-o4e" secondAttribute="centerX" id="Omb-KR-Hds"/>
+                            <constraint firstItem="7rH-yO-28X" firstAttribute="top" secondItem="rKx-g5-4Jg" secondAttribute="bottom" constant="7.5" id="Ot2-f1-KNR"/>
+                            <constraint firstItem="0Cn-R6-Our" firstAttribute="bottom" secondItem="7rH-yO-28X" secondAttribute="bottom" constant="124" id="vit-9V-Meo"/>
+                            <constraint firstItem="rKx-g5-4Jg" firstAttribute="top" secondItem="0Cn-R6-Our" secondAttribute="top" constant="157" id="wUC-sb-qNf"/>
                         </constraints>
                     </view>
                     <connections>
@@ -242,7 +240,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ify-EE-gWc">
-                                                    <rect key="frame" x="359" y="21" width="35" height="44"/>
+                                                    <rect key="frame" x="359.5" y="21" width="34.5" height="44"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button"/>
@@ -355,17 +353,34 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWu-tK-dRn">
-                                                    <rect key="frame" x="20" y="10" width="374" height="280"/>
+                                                    <rect key="frame" x="20" y="10" width="374" height="234"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hw-qS-IQV">
+                                                    <rect key="frame" x="0.0" y="252" width="414" height="48"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="48" id="Ncd-d4-lAC"/>
+                                                    </constraints>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Find a trailer on YouTube">
+                                                        <fontDescription key="titleFontDescription" type="boldSystem" pointSize="22"/>
+                                                        <color key="baseForegroundColor" systemColor="labelColor"/>
+                                                    </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="searchInYTButton:" destination="zSC-pM-Aqb" eventType="touchUpInside" id="ALE-wC-Oxc"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="5hw-qS-IQV" firstAttribute="bottom" secondItem="wSZ-P4-PZA" secondAttribute="bottomMargin" constant="11" id="1j7-Um-z6P"/>
                                                 <constraint firstAttribute="trailing" secondItem="tWu-tK-dRn" secondAttribute="trailing" constant="20" symbolic="YES" id="Bar-tj-yHV"/>
-                                                <constraint firstAttribute="bottom" secondItem="tWu-tK-dRn" secondAttribute="bottom" constant="10" id="EU9-jH-CaO"/>
+                                                <constraint firstItem="5hw-qS-IQV" firstAttribute="top" secondItem="tWu-tK-dRn" secondAttribute="bottom" constant="8" id="FVu-Bl-AOs"/>
                                                 <constraint firstItem="tWu-tK-dRn" firstAttribute="leading" secondItem="wSZ-P4-PZA" secondAttribute="leading" constant="20" symbolic="YES" id="Gnu-QC-t1a"/>
                                                 <constraint firstItem="tWu-tK-dRn" firstAttribute="top" secondItem="wSZ-P4-PZA" secondAttribute="top" constant="10" id="iyi-tC-d7M"/>
+                                                <constraint firstItem="5hw-qS-IQV" firstAttribute="trailing" secondItem="tWu-tK-dRn" secondAttribute="trailing" constant="20" id="nFG-2i-XjT"/>
+                                                <constraint firstItem="5hw-qS-IQV" firstAttribute="leading" secondItem="tWu-tK-dRn" secondAttribute="leading" constant="-20" id="yl4-dH-Rc8"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -390,6 +405,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="YTButton" destination="5hw-qS-IQV" id="jc3-Fj-7uM"/>
                         <outlet property="mainMoreInfoImage" destination="zYS-6C-1vj" id="I5u-zP-Mjf"/>
                         <outlet property="mainMoreInfoLabel" destination="tWu-tK-dRn" id="iKz-sZ-Jje"/>
                     </connections>
@@ -397,7 +413,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kCU-pC-JNb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="H7N-nX-bKz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4280" y="211"/>
+            <point key="canvasLocation" x="4279.7101449275369" y="210.9375"/>
         </scene>
         <!--Main-->
         <scene sceneID="zh8-gj-Zv2">
@@ -462,7 +478,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="dqg-ij-Tgg"/>
+        <segue reference="kYw-hl-Sgl"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Photo" width="195" height="196"/>

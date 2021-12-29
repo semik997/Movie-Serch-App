@@ -75,7 +75,7 @@ extension TableViewCell {
             nameLabel?.text = film.show?.name
             languageLabel.text = film.show?.language
             countryLabel.text = film.show?.status
-            imageFilm.image = getImage(from: film.show?.image?.medium ?? "Not found")
+            imageFilm.image = getImage(from: film.show?.image?.medium ?? placeholderFilm)
             idFilm = film.show?.id
             name = film.show?.name
             language = film.show?.language
@@ -90,7 +90,7 @@ extension TableViewCell {
             nameLabel?.text = film.show?.name
             languageLabel.text = film.show?.language
             countryLabel.text = film.show?.status
-            imageFilm.image = getImage(from: film.show?.image?.medium ?? "Not found")
+            imageFilm.image = getImage(from: film.show?.image?.medium ?? placeholderFilm)
             idFilm = film.show?.id
             name = film.show?.name
             language = film.show?.language

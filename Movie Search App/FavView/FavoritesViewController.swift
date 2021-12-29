@@ -19,7 +19,7 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
     }
-    private var filtredFilms: [Films.Film]!
+    private var filtredFilms: [Films.Film] = []
     var filmsFav: [Films.Film] = Films.shared.favoriteFilm {
         didSet {
             tableViewFav.reloadData()
@@ -69,7 +69,6 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
             cell.loadData(film: filmsFav[indexPath.row])
         }
         cell.delegate = self
-        //        cell.loadData(film: filmsFav[indexPath.row])
         return cell
     }
     
@@ -151,6 +150,6 @@ extension FavoritesViewController: UISearchResultsUpdating {
         filtredFilms = filmsFav.filter { (film: Films.Film) -> Bool in
             return film.show?.name?.lowercased().contains(searchText.lowercased()) ?? false
         }
-        
+        tableViewFav.reloadData ()
     }
 }

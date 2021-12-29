@@ -13,15 +13,33 @@ class MoreInfoViewController: UITableViewController {
     
     @IBOutlet weak var mainMoreInfoImage: UIImageView!
     @IBOutlet weak var mainMoreInfoLabel: UILabel!
+    @IBOutlet weak var YTButton: UIButton!
     
+    // MARK: - Configuring a button to open a window with search in You Tube
     
+    @IBAction func searchInYTButton(_ sender: UIButton) {
+        let YoutubeUser =  detailedInformation?.show?.name
+        let text = YoutubeUser?.split(separator: " ").joined(separator: "%20")
+        let appURL = NSURL(string: "\(appYouTubeLink)\(text ?? "")")
+        let webURL = NSURL(string: "\(safariYouTubeLink)\(text ?? "")")
+        let application = UIApplication.shared
+        
+        if application.canOpenURL(appURL! as URL) {
+            // open URL inside app
+            application.open(appURL! as URL)
+        } else {
+            // if Youtube app is not installed, open URL inside Safari
+            application.open(webURL! as URL)
+        }
+    }
     
+    // MARK: - Configuring new window with additional information
     private func setupMoreInformation () {
         if detailedInformation != nil {
             mainMoreInfoImage.image = getImage(from: detailedInformation?.show?.image?.original ??
-                                               "Not found")
+                                               placeholderFilm)
             let summary = detailedInformation?.show?.summary ?? "No description text"
-            let text = summary.replacingOccurrences(of: "<[^>]+>", with: "")
+            let text = summary.replacingOccurrences(of: "<[^>]", with: "")
             mainMoreInfoLabel.text = text
         }
     }

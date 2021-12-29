@@ -25,5 +25,9 @@
 			</array>
 		</dict>
 	</dict>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>youtube</string>
+    </array>
 </dict>
 </plist>
