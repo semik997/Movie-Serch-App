@@ -13,9 +13,11 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var searchOutlet: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
+    
     //Creating and filling the array for Display
     var networkManager = NetworkManager()
     let defaults = UserDefaults.standard
+    var tap = UITapGestureRecognizer()
     
     // UserDefaults
     var films: [Films.Film] = [] {
@@ -50,18 +52,22 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+        self.searchOutlet.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         searchOutlet.delegate = self
         networkManager.fetchCurrent(onCompletion: {[weak self]
             currentShowData in self?.films = currentShowData
         }, forShow: "")
+        searchOutlet.delegate = self
     }
     
     // MARK: - Detail setting
     
-    @IBAction func cancelActionMain(_ segue: UIStoryboardSegue){
-    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetailMain" {
@@ -119,4 +125,16 @@ extension MainViewController: FavoriteProtocol {
         }
     }
     
+}
+
+// MARK: - Text field delegate
+
+extension MainViewController: UITextFieldDelegate {
+
+    
+    
+    private func textFieldShouldReturn(_ textField: UISearchBar) -> Bool {
+        searchOutlet.endEditing(true)
+        return true
+    }
 }

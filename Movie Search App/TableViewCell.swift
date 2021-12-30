@@ -49,7 +49,6 @@ class TableViewCell: UITableViewCell {
         
         if isFavorite {
             //for like
-            fillButton.isSelected = !fillButton.isSelected
             isFavorite = !isFavorite
             delegate?.selectCell(isFavorite, idFilm: idFilm, name: name,
                                  language: language, status: status, image: image,

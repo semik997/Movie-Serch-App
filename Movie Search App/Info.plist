@@ -6,6 +6,10 @@
 	<dict/>
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>youtube</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -25,9 +29,5 @@
 			</array>
 		</dict>
 	</dict>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>youtube</string>
-    </array>
 </dict>
 </plist>

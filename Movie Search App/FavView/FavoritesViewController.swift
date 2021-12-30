@@ -97,9 +97,6 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - Detail setting
     
-    @IBAction func cancelActionFav(_ segue: UIStoryboardSegue){
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetailMain" {
             guard let indexPath = tableViewFav.indexPathForSelectedRow else { return }
