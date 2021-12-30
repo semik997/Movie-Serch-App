@@ -11,8 +11,8 @@ class MoreInfoViewController: UITableViewController {
     
     var detailedInformation: Films.Film?
     
-    @IBOutlet weak var mainMoreInfoImage: UIImageView!
-    @IBOutlet weak var mainMoreInfoLabel: UILabel!
+    @IBOutlet weak var moreInfoImage: UIImageView!
+    @IBOutlet weak var moreIntoTextView: UITextView!
     @IBOutlet weak var YTButton: UIButton!
     
     // MARK: - Configuring a button to open a window with search in You Tube
@@ -36,10 +36,10 @@ class MoreInfoViewController: UITableViewController {
     // MARK: - Configuring new window with additional information
     private func setupMoreInformation () {
         if detailedInformation != nil {
-            mainMoreInfoImage.image = getImage(from: detailedInformation?.show?.image?.original ??
+            moreInfoImage.image = getImage(from: detailedInformation?.show?.image?.original ??
                                                placeholderFilm)
             let summary = detailedInformation?.show?.summary ?? "No description text"
-            mainMoreInfoLabel.text = summary.htmlString
+            moreIntoTextView.text = summary.htmlString
         }
     }
     

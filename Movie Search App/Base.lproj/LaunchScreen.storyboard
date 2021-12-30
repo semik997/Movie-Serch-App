@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjf-EZ-2y7">
-                                <rect key="frame" x="90" y="374" width="248" height="148"/>
+                                <rect key="frame" x="83" y="201" width="248" height="494"/>
                                 <fontDescription key="fontDescription" name="PartyLetPlain" family="Party LET" pointSize="86"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -26,10 +26,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
                         <constraints>
-                            <constraint firstItem="hjf-EZ-2y7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="90" id="1fc-UF-BVF"/>
-                            <constraint firstItem="hjf-EZ-2y7" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="5eL-dP-3hU"/>
-                            <constraint firstItem="hjf-EZ-2y7" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="7" id="mPl-yR-heB"/>
-                            <constraint firstItem="hjf-EZ-2y7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="330" id="ttT-cz-2VV"/>
+                            <constraint firstItem="hjf-EZ-2y7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="83" id="JIj-Di-q11"/>
+                            <constraint firstItem="hjf-EZ-2y7" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Jxv-BB-ZSn"/>
+                            <constraint firstItem="hjf-EZ-2y7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="157" id="TEe-D8-4t1"/>
+                            <constraint firstItem="hjf-EZ-2y7" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="at8-O3-Y3B"/>
                         </constraints>
                     </view>
                 </viewController>
