@@ -42,7 +42,6 @@ class TableViewCell: UITableViewCell {
                             for: .normal)
         fillButton.setImage(UIImage(systemName: "heart.fill"),
                             for: .selected)
-        
     }
     
     @IBAction func likeButton(_ sender: UIButton) {
@@ -111,7 +110,6 @@ extension TableViewCell {
             print("Unable to create URL")
             return nil
         }
-        
         var image: UIImage? = nil
         do {
             //Get valid data
@@ -119,7 +117,7 @@ extension TableViewCell {
             
             //Make image
             image = UIImage(data: data)
-        }catch {
+        } catch {
             print(error.localizedDescription)
         }
         return image

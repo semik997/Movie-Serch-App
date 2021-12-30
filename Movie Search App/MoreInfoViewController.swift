@@ -37,7 +37,7 @@ class MoreInfoViewController: UITableViewController {
     private func setupMoreInformation () {
         if detailedInformation != nil {
             moreInfoImage.image = getImage(from: detailedInformation?.show?.image?.original ??
-                                               placeholderFilm)
+                                           placeholderFilm)
             let summary = detailedInformation?.show?.summary ?? "No description text"
             moreIntoTextView.text = summary.htmlString
         }
@@ -52,7 +52,7 @@ class MoreInfoViewController: UITableViewController {
     @IBAction func exit(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
-
+    
     
     // MARK: - String in image conversion
     
@@ -71,7 +71,7 @@ class MoreInfoViewController: UITableViewController {
             
             //Make image
             image = UIImage(data: data)
-        }catch {
+        } catch {
             print(error.localizedDescription)
         }
         return image
@@ -79,10 +79,10 @@ class MoreInfoViewController: UITableViewController {
 }
 
 extension String {
-var utfData: Data? {
+    var utfData: Data? {
         return self.data(using: .utf8)
     }
-
+    
     var htmlAttributedString: NSAttributedString? {
         guard let data = self.utfData else {
             return nil
@@ -91,14 +91,14 @@ var utfData: Data? {
             return try NSAttributedString(data: data,
                                           options: [
                                             .documentType: NSAttributedString.DocumentType.html,
-                                            .characterEncoding: String.Encoding.utf8.rawValue
-                ], documentAttributes: nil)
+                                            .characterEncoding: String.Encoding.utf8.rawValue],
+                                          documentAttributes: nil)
         } catch {
             print(error.localizedDescription)
             return nil
         }
     }
-
+    
     var htmlString: String {
         return htmlAttributedString?.string ?? self
     }

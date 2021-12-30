@@ -67,7 +67,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: - Detail setting
     
-
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetailMain" {
@@ -115,13 +115,11 @@ extension MainViewController: FavoriteProtocol {
                                    image: image, isFavorite: true,
                                    original: original, summary: summary ??
                                    "No description text")
-            
         } else {
             //for not like
             Films.shared.deleteFilm(idFilm: idFilm)
             self.tableView.reloadData()
             self.films = Films.shared.favoriteFilm
-            
         }
     }
     
@@ -130,8 +128,6 @@ extension MainViewController: FavoriteProtocol {
 // MARK: - Text field delegate
 
 extension MainViewController: UITextFieldDelegate {
-
-    
     
     private func textFieldShouldReturn(_ textField: UISearchBar) -> Bool {
         searchOutlet.endEditing(true)
