@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MoreInfoViewController: UITableViewController {
+class MoreInfoViewController: UIViewController {
     
     var detailedInformation: Films.Film?
     

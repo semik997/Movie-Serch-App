@@ -25,42 +25,46 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             DispatchQueue.main.async { [self] in
                 tableView?.delegate = self
                 tableView?.dataSource = self
-                if Reachability.isConnectedToNetwork(){
-                    print("Internet Connection Available!")
-                }else{
-                    print("Internet Connection not Available!")
-                    presentInternetConnectionAlertController ()
-                }
-                
                 tableView.reloadData()
             }
         }
     }
     
-    //Screen identification for segway
-    func instantiateViewController(withIdentifier identifier: String) -> UIView {
-        return instantiateViewController(withIdentifier: "MainVC")
-    }
-    
-    //Passing data to the search bar and sending a request
+    // MARK: - Passing data to the search bar and sending a request
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText != "" {
-            let text = searchText.split(separator: " ").joined(separator: "%20")
-            if searchText.count >= 3 {
-                self.networkManager.fetchCurrent(onCompletion: {
-                    currentShowData in self.films = currentShowData
-                }, forShow: text)
+        // Check Internet connection
+        if Reachability.isConnectedToNetwork() {
+            // Check void text
+            if searchText != "" {
+                let text = searchText.split(separator: " ").joined(separator: "%20")
+                // Check count symbol
+                if searchText.count >= 3 {
+                    // need add timer in this fragment
+                    self.networkManager.fetchCurrent(onCompletion: {
+                        currentShowData in self.films = currentShowData
+                    }, forShow: text)
+                    
+                }
+            } else {
+                tableView.reloadData()
+                networkManager.fetchCurrent(onCompletion: { [weak self]
+                    currentShowData in self?.films = currentShowData
+                } , forShow: "")
             }
+                // print("Internet Connection Available!")
         } else {
-            tableView.reloadData()
-            networkManager.fetchCurrent(onCompletion: {[weak self]
-                currentShowData in self?.films = currentShowData
-            }, forShow: "")
+            print("Internet Connection not Available!")
+            presentInternetConnectionAlertController ()
         }
     }
+
+func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+    self.searchOutlet.endEditing(true)
+}
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
-        self.searchOutlet.endEditing(true)
+    // MARK: - Screen identification for segway
+    func instantiateViewController(withIdentifier identifier: String) -> UIView {
+        return instantiateViewController(withIdentifier: "MainVC")
     }
     
     override func viewDidLoad() {
@@ -113,8 +117,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         present(internetAlert, animated: true)
     }
-    
-    
 }
 
 // MARK: - Save and delete to favorites
@@ -136,7 +138,6 @@ extension MainViewController: FavoriteProtocol {
             //for not like
             Films.shared.deleteFilm(idFilm: idFilm)
             self.tableView.reloadData()
-            self.films = Films.shared.favoriteFilm
         }
     }
     
