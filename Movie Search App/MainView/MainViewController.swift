@@ -25,6 +25,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             DispatchQueue.main.async { [self] in
                 tableView?.delegate = self
                 tableView?.dataSource = self
+                if Reachability.isConnectedToNetwork(){
+                    print("Internet Connection Available!")
+                }else{
+                    print("Internet Connection not Available!")
+                    presentInternetConnectionAlertController ()
+                }
+                
                 tableView.reloadData()
             }
         }
@@ -67,8 +74,6 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: - Detail setting
     
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetailMain" {
             guard let indexPath = tableView.indexPathForSelectedRow else { return }
@@ -98,6 +103,18 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         return cell
     }
+    
+    func  presentInternetConnectionAlertController () {
+        let internetAlert = UIAlertController(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .cancel){ action in
+            self.tableView.reloadData()
+        }
+        internetAlert.addAction(ok)
+        
+        present(internetAlert, animated: true)
+    }
+    
+    
 }
 
 // MARK: - Save and delete to favorites

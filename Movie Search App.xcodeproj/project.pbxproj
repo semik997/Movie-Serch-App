@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		302CEE1527858CCD0017E0D7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CEE1427858CCD0017E0D7 /* Reachability.swift */; };
 		302F97E5277073E50000B975 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F97E4277073E50000B975 /* Links.swift */; };
 		30595240275CED40003A7049 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059523F275CED40003A7049 /* Film.swift */; };
 		30595242275D5078003A7049 /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30595241275D5078003A7049 /* LoadViewController.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		302CEE1427858CCD0017E0D7 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		302F97E4277073E50000B975 /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		3059523F275CED40003A7049 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		30595241275D5078003A7049 /* LoadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				3059523B275CEC33003A7049 /* Delegate */,
 				30595241275D5078003A7049 /* LoadViewController.swift */,
+				302CEE1427858CCD0017E0D7 /* Reachability.swift */,
 				3059523F275CED40003A7049 /* Film.swift */,
 				30CA0C7E275BE43B009468D2 /* NetworkManager.swift */,
 				30CA0C80275C04AA009468D2 /* TableViewCell.swift */,
@@ -190,6 +193,7 @@
 				30CA0C7B275B8951009468D2 /* MainViewController.swift in Sources */,
 				30CA0C81275C04AA009468D2 /* TableViewCell.swift in Sources */,
 				30DFA0042779C19000B09E34 /* MoreInfoViewController.swift in Sources */,
+				302CEE1527858CCD0017E0D7 /* Reachability.swift in Sources */,
 				30595240275CED40003A7049 /* Film.swift in Sources */,
 				30CA0C7F275BE43B009468D2 /* NetworkManager.swift in Sources */,
 				30595242275D5078003A7049 /* LoadViewController.swift in Sources */,
