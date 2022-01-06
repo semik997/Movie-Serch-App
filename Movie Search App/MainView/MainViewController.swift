@@ -32,6 +32,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: - Passing data to the search bar and sending a request
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+       
         // Check Internet connection
         if Reachability.isConnectedToNetwork() {
             // Check void text
