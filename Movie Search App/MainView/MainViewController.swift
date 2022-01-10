@@ -18,6 +18,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var networkManager = NetworkManager()
     let defaults = UserDefaults.standard
     var tap = UITapGestureRecognizer()
+    var text = ""
     
     // UserDefaults
     var films: [Films.Film] = [] {
@@ -40,7 +41,10 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 let text = searchText.split(separator: " ").joined(separator: "%20")
                 // Check count symbol
                 if searchText.count >= 3 {
-                    // need add timer in this fragment
+                    self.text = text
+                    NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(reload), object: nil)
+                    self.perform(#selector(reload), with: nil, afterDelay: 1)
+                    
                     self.networkManager.fetchCurrent(onCompletion: {
                         currentShowData in self.films = currentShowData
                     }, forShow: text)
@@ -62,6 +66,13 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
 func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
     self.searchOutlet.endEditing(true)
 }
+    
+    @objc func reload() {
+        self.networkManager.fetchCurrent(onCompletion: {
+            currentShowData in self.films = currentShowData
+        }, forShow: text)
+        print("Doing things")
+    }
     
     // MARK: - Screen identification for segway
     func instantiateViewController(withIdentifier identifier: String) -> UIView {
