@@ -10,6 +10,7 @@ import UIKit
 class FavoritesCollectionVC: UICollectionViewController {
     
     @IBOutlet var favoriteCollectionView: UICollectionView!
+    @IBOutlet weak var findImage: UIImageView!
     
     
     let itemPerRow: CGFloat = 3  // number of objects in a row
@@ -31,9 +32,9 @@ class FavoritesCollectionVC: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        filmsFav = Films.shared.favoriteFilm
         
+        filmsFav = Films.shared.favoriteFilm
+        findImage.isHidden = true
         
         // Setup the search controller
         searchController.searchResultsUpdater = self
@@ -42,7 +43,7 @@ class FavoritesCollectionVC: UICollectionViewController {
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favoriteCollectionView.reloadData()
@@ -51,13 +52,13 @@ class FavoritesCollectionVC: UICollectionViewController {
     
     
     // MARK: - UICollectionViewDataSource
-
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
-
+    
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         if isFiltering {
@@ -66,10 +67,10 @@ class FavoritesCollectionVC: UICollectionViewController {
             return filmsFav.count
         }
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = favoriteCollectionView.dequeueReusableCell(withReuseIdentifier: "favoriteCell",
-                                                       for: indexPath) as? CollectionViewCell else {
+        guard let cell = favoriteCollectionView.dequeueReusableCell(withReuseIdentifier: "mainCell",
+                                                                    for: indexPath) as? CollectionViewCell else {
             return UICollectionViewCell()
         }
         var film: [Films.Film]
@@ -85,7 +86,7 @@ class FavoritesCollectionVC: UICollectionViewController {
     }
     
     // MARK: - Setting up an alert controller
-
+    
     func presentAlertController(withTitle title: String?, message: String?,
                                 style: UIAlertController.Style, idFilm: Int) {
         let alertController = UIAlertController(title: title, message: message,
@@ -106,46 +107,63 @@ class FavoritesCollectionVC: UICollectionViewController {
         
         present(alertController, animated: true)
     }
-
+    
+    // MARK: - Detail setting
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+            guard let indexPath = favoriteCollectionView.indexPathsForSelectedItems else { return }
+            let film: Films.Film
+            if isFiltering {
+                film = filtredFilms[indexPath[0].row]
+            } else {
+                film = filmsFav[indexPath[0].row]
+            }
+            let nav = segue.destination as! UINavigationController
+            let MoreInfoFavoritesTableVC = nav.topViewController as! MoreInfoViewController
+            MoreInfoFavoritesTableVC.detailedInformation = film
+        }
+    }
+    
     
 }
 
 // MARK: - Save and delete to favorites
 
 extension FavoritesCollectionVC: FavoriteProtocolC {
-func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?,
-                language: String?, status: String?, image: String?,
-                original: String?, summary: String?) {
-    
-    if isFavorite {
-        //for like
+    func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?,
+                    language: String?, status: String?, image: String?,
+                    original: String?, summary: String?) {
         
-        Films.shared.saveFilms(idFilm: idFilm, name: name, language: language,
-                               status: status, image: image, isFavorite: true,
-                               original: original, summary: summary ?? "No description text")
-        
-    } else {
-        //for not like
-        presentAlertController(withTitle: "Do you sure?", message: nil, style: .alert,
-                               idFilm: idFilm ?? 0)
+        if isFavorite {
+            //for like
+            
+            Films.shared.saveFilms(idFilm: idFilm, name: name, language: language,
+                                   status: status, image: image, isFavorite: true,
+                                   original: original, summary: summary ?? "No description text")
+            
+        } else {
+            //for not like
+            presentAlertController(withTitle: "Do you sure?", message: nil, style: .alert,
+                                   idFilm: idFilm ?? 0)
+        }
     }
-}
 }
 
 // MARK: - Search in Favorite
 
 extension FavoritesCollectionVC: UISearchResultsUpdating {
-func updateSearchResults(for searchController: UISearchController) {
-    filterContentForSearchText(searchController.searchBar.text!)
-}
-
-private func filterContentForSearchText(_ searchText: String) {
-    
-    filtredFilms = filmsFav.filter { (film: Films.Film) -> Bool in
-        return film.show?.name?.lowercased().contains(searchText.lowercased()) ?? false
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
     }
-    favoriteCollectionView.reloadData ()
-}
+    
+    private func filterContentForSearchText(_ searchText: String) {
+        
+        filtredFilms = filmsFav.filter { (film: Films.Film) -> Bool in
+            return film.show?.name?.lowercased().contains(searchText.lowercased()) ?? false
+        }
+        favoriteCollectionView.reloadData ()
+    }
 }
 
 // MARK: - Setting size cell
@@ -164,31 +182,3 @@ extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
     }
     
 }
-
-
-
-
-
-
-
-// MARK: - old
-
-
-
-//// MARK: - Detail setting
-//
-//override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//    if segue.identifier == "showDetailMain" {
-//        guard let indexPath = tableViewFav.indexPathForSelectedRow else { return }
-//        let film: Films.Film
-//        if isFiltering {
-//            film = filtredFilms[indexPath.row]
-//        } else {
-//            film = filmsFav[indexPath.row ]
-//        }
-//        let nav = segue.destination as! UINavigationController
-//        let MoreInfoFavoritesTableVC = nav.topViewController as! MoreInfoViewController
-//        MoreInfoFavoritesTableVC.detailedInformation = film
-//    }
-//}
-//}

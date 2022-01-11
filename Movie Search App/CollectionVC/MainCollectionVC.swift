@@ -8,9 +8,10 @@
 import UIKit
 
 class MainCollectionVC: UICollectionViewController {
-
+    
     @IBOutlet var collectionViewSpace: UICollectionView!
-   
+    @IBOutlet weak var findImage: UIImageView!
+    
     private let searchController = UISearchController(searchResultsController: nil)
     var isFiltering: Bool {
         return searchController.isActive && !searchBarIsEmpty
@@ -42,8 +43,6 @@ class MainCollectionVC: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
         
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -52,23 +51,25 @@ class MainCollectionVC: UICollectionViewController {
         definesPresentationContext = true
         
     }
-
-    // MARK: UICollectionViewDataSource
-
+    
+    // MARK: - UICollectionViewDataSource
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return films.count
+        if films.count == 0 {
+            findImage.isHidden = false
+            return films.count
+        } else {
+            return films.count
+        }
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionViewSpace.dequeueReusableCell(withReuseIdentifier: "mainCell",
-                                                       for: indexPath) as? CollectionViewCell
+                                                                 for: indexPath) as? CollectionViewCell
         else { return UICollectionViewCell()}
         cell.delegate = self
         if films.count != 0 {
@@ -76,10 +77,10 @@ class MainCollectionVC: UICollectionViewController {
         } else {
 //            cell.mainImage.image
         }
-    
+        
         return cell
     }
-
+    
     func  presentInternetConnectionAlertController () {
         let internetAlert = UIAlertController(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .cancel){ action in
@@ -90,14 +91,18 @@ class MainCollectionVC: UICollectionViewController {
         present(internetAlert, animated: true)
     }
     
+    // MARK: - Detail setting
     
-}
-
-extension MainCollectionVC: FavoriteProtocolC {
-    
-    func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?, language: String?, status: String?, image: String?, original: String?, summary: String?) {
-        print(isFavorite, idFilm!, name!, language!, status!, image!, original!, summary!)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showDetail" {
+            guard let indexPath = collectionViewSpace.indexPathsForSelectedItems else { return }
+            let film = films[indexPath[0].row]
+            let nav = segue.destination as! UINavigationController
+            let moreInfoMainVC = nav.topViewController as! MoreInfoViewController
+            moreInfoMainVC.detailedInformation = film
+        }
     }
+    
 }
 
 extension MainCollectionVC: UISearchResultsUpdating {
@@ -109,21 +114,24 @@ extension MainCollectionVC: UISearchResultsUpdating {
             // Check void text
             if searchText != "" {
                 let text = searchText.split(separator: " ").joined(separator: "%20")
+                findImage.isHidden = false
                 // Check count symbol
                 if searchText.count >= 3 {
                     // need add timer in this fragment
+                    findImage.isHidden = true
                     self.networkManager.fetchCurrent(onCompletion: {
                         currentShowData in self.films = currentShowData
                     }, forShow: text)
                     
                 }
             } else {
+                findImage.isHidden = false
                 collectionViewSpace.reloadData()
                 networkManager.fetchCurrent(onCompletion: { [weak self]
                     currentShowData in self?.films = currentShowData
                 } , forShow: "")
             }
-                // print("Internet Connection Available!")
+            // print("Internet Connection Available!")
         } else {
             print("Internet Connection not Available!")
             presentInternetConnectionAlertController ()
@@ -131,7 +139,29 @@ extension MainCollectionVC: UISearchResultsUpdating {
     }
 }
 
+// MARK: - Save and delete to favorites
 
+extension MainCollectionVC: FavoriteProtocolC {
+    
+    func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?,
+                    language: String?, status: String?, image: String?,
+                    original: String?, summary: String?) {
+        
+        if isFavorite {
+            //for like
+            Films.shared.saveFilms(idFilm: idFilm, name: name,
+                                   language: language, status: status,
+                                   image: image, isFavorite: true,
+                                   original: original, summary: summary ??
+                                   "No description text")
+        } else {
+            //for not like
+            Films.shared.deleteFilm(idFilm: idFilm)
+            self.collectionViewSpace.reloadData()
+        }
+    }
+    
+}
 
 
 extension MainCollectionVC: UICollectionViewDelegateFlowLayout {

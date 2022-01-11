@@ -14,6 +14,7 @@ class MoreInfoViewController: UIViewController {
     @IBOutlet weak var moreInfoImage: UIImageView!
     @IBOutlet weak var moreIntoTextView: UITextView!
     @IBOutlet weak var YTButton: UIButton!
+    @IBOutlet weak var nameNavigationItem: UINavigationItem!
     
     // MARK: - Configuring a button to open a window with search in You Tube
     
@@ -40,12 +41,14 @@ class MoreInfoViewController: UIViewController {
                                            placeholderFilm)
             let summary = detailedInformation?.show?.summary ?? "No description text"
             moreIntoTextView.text = summary.htmlString
+            nameNavigationItem.title = detailedInformation?.show?.name
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMoreInformation ()
+        
     }
     
     

@@ -33,7 +33,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: - Passing data to the search bar and sending a request
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-       
+        
         // Check Internet connection
         if Reachability.isConnectedToNetwork() {
             // Check void text
@@ -56,16 +56,16 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
                     currentShowData in self?.films = currentShowData
                 } , forShow: "")
             }
-                // print("Internet Connection Available!")
+            // print("Internet Connection Available!")
         } else {
             print("Internet Connection not Available!")
             presentInternetConnectionAlertController ()
         }
     }
-
-func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
-    self.searchOutlet.endEditing(true)
-}
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+        self.searchOutlet.endEditing(true)
+    }
     
     @objc func reload() {
         self.networkManager.fetchCurrent(onCompletion: {

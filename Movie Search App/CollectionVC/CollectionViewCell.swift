@@ -17,6 +17,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var mainImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var fillButton: UIButton!
     
     
     //Initialization of UI fields
@@ -34,6 +35,32 @@ class CollectionViewCell: UICollectionViewCell {
     
     let defaults = UserDefaults.standard
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        fillButton.setImage(UIImage(systemName: "heart"),
+                            for: .normal)
+        fillButton.setImage(UIImage(systemName: "heart.fill"),
+                            for: .selected)
+    }
+    
+    @IBAction func likeButton(_ sender: UIButton) {
+        
+        if isFavorite {
+            //for like
+            isFavorite = !isFavorite
+            delegate?.selectCell(isFavorite, idFilm: idFilm, name: name,
+                                 language: language, status: status, image: image,
+                                 original: original, summary: summary)
+        } else {
+            //for not like
+            fillButton.isSelected = !fillButton.isSelected
+            isFavorite = !isFavorite
+            delegate?.selectCell(isFavorite, idFilm: idFilm, name: name,
+                                 language: language, status: status, image: image,
+                                 original: original, summary: summary)
+        }
+    }
+    
 }
 
 // MARK: - Uploading data to VC
@@ -43,9 +70,9 @@ extension CollectionViewCell {
     func loadData(film: Films.Film) {
         currentFilm = film
         if film.show?.isFavorite == true {
-//            nameLabel?.text = film.show?.name
-//            languageLabel.text = film.show?.language
-//            countryLabel.text = film.show?.status
+            nameLabel?.text = film.show?.name
+            //            languageLabel.text = film.show?.language
+            //            countryLabel.text = film.show?.status
             mainImage.image = getImage(from: film.show?.image?.medium ?? placeholderFilm)
             idFilm = film.show?.id
             name = film.show?.name
@@ -55,12 +82,12 @@ extension CollectionViewCell {
             isFavorite = ((film.show?.isFavorite) != nil)
             original = film.show?.image?.original
             summary = film.show?.summary
-//            fillButton.isSelected = true
+            fillButton.isSelected = true
             
         } else {
-//            nameLabel?.text = film.show?.name
-//            languageLabel.text = film.show?.language
-//            countryLabel.text = film.show?.status
+            nameLabel?.text = film.show?.name
+            //            languageLabel.text = film.show?.language
+            //            countryLabel.text = film.show?.status
             mainImage.image = getImage(from: film.show?.image?.medium ?? placeholderFilm)
             idFilm = film.show?.id
             name = film.show?.name
@@ -70,7 +97,7 @@ extension CollectionViewCell {
             isFavorite = ((film.show?.isFavorite) != nil)
             original = film.show?.image?.original
             summary = film.show?.summary
-//            fillButton.isSelected = false
+            fillButton.isSelected = false
         }
     }
     
