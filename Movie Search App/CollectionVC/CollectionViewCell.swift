@@ -2,7 +2,7 @@
 //  CollectionViewCell.swift
 //  Movie Search App
 //
-//  Created by Семен Колесников on 10.01.2022.
+//  Created by Sem Koliesnikov on 10.01.2022.
 //
 
 import UIKit
@@ -16,6 +16,8 @@ protocol FavoriteProtocolC: AnyObject {
 class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var mainImage: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    
     
     //Initialization of UI fields
     weak var delegate: FavoriteProtocolC?

@@ -2,7 +2,7 @@
 //  MainCollectionVC.swift
 //  Movie Search App
 //
-//  Created by Семен Колесников on 10.01.2022.
+//  Created by Sem Koliesnikov on 10.01.2022.
 //
 
 import UIKit
