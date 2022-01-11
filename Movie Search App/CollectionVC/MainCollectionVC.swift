@@ -33,8 +33,6 @@ class MainCollectionVC: UICollectionViewController {
     var films: [Films.Film] = [] {
         didSet {
             DispatchQueue.main.async { [self] in
-                collectionViewSpace?.delegate = self
-                collectionViewSpace?.dataSource = self
                 collectionViewSpace.reloadData()
             }
         }
@@ -49,6 +47,8 @@ class MainCollectionVC: UICollectionViewController {
         searchController.searchBar.placeholder = "Enter the name of the show to search"
         navigationItem.searchController = searchController
         definesPresentationContext = true
+        collectionViewSpace?.delegate = self
+        collectionViewSpace?.dataSource = self
         
     }
     
@@ -63,6 +63,7 @@ class MainCollectionVC: UICollectionViewController {
             findImage.isHidden = false
             return films.count
         } else {
+            findImage.isHidden = true
             return films.count
         }
     }
@@ -72,7 +73,7 @@ class MainCollectionVC: UICollectionViewController {
                                                                  for: indexPath) as? CollectionViewCell
         else { return UICollectionViewCell()}
         cell.delegate = self
-        if films.count != 0 {
+        if indexPath.row < films.count {
             cell.loadData(film: films[indexPath.row])
         } else {
 //            cell.mainImage.image
@@ -114,15 +115,14 @@ extension MainCollectionVC: UISearchResultsUpdating {
             // Check void text
             if searchText != "" {
                 let text = searchText.split(separator: " ").joined(separator: "%20")
-                findImage.isHidden = false
+                findImage.isHidden = true
                 // Check count symbol
                 if searchText.count >= 3 {
                     // need add timer in this fragment
                     findImage.isHidden = true
                     self.networkManager.fetchCurrent(onCompletion: {
-                        currentShowData in self.films = currentShowData
+                            currentShowData in self.films = currentShowData
                     }, forShow: text)
-                    
                 }
             } else {
                 findImage.isHidden = false

@@ -54,16 +54,24 @@ class FavoritesCollectionVC: UICollectionViewController {
     // MARK: - UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         if isFiltering {
+            if filtredFilms.count == 0 {
+                findImage.isHidden = false
+                return filtredFilms.count
+            }
+            findImage.isHidden = true
             return filtredFilms.count
         } else {
+            if filmsFav.count == 0 {
+                findImage.isHidden = false
+                return filmsFav.count
+            }
+            findImage.isHidden = true
             return filmsFav.count
         }
     }
