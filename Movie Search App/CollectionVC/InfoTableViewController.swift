@@ -10,9 +10,7 @@ import UIKit
 class InfoTableViewController: UITableViewController {
     
     weak var delegate: MainCollectionVC!
-    let array = ["Row 1",
-                 "Row 2",
-                 "Row 3"]
+    weak var delegateFav: FavoritesCollectionVC!
     
     override var preferredContentSize : CGSize
     {
@@ -38,21 +36,11 @@ class InfoTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return array.count
+        return 2
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
-        let textData = array[indexPath.row]
-        cell.textLabel?.text = textData
-        
-        return cell
+    @IBAction func exit(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
-    
-    
-    
-
 
 }

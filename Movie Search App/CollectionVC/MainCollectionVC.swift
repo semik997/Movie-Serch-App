@@ -11,7 +11,6 @@ class MainCollectionVC: UICollectionViewController {
     
     @IBOutlet var collectionViewSpace: UICollectionView!
     @IBOutlet weak var findImage: UIImageView!
-    @IBOutlet weak var moreInfoButton: UIBarButtonItem!
     
     
     

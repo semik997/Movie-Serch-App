@@ -131,10 +131,30 @@ class FavoritesCollectionVC: UICollectionViewController {
             let MoreInfoFavoritesTableVC = nav.topViewController as! MoreInfoViewController
             MoreInfoFavoritesTableVC.detailedInformation = film
         }
+        
+        // MARK: - info button
+        
+        if segue.identifier == "popVC" {
+            if let tvc = segue.destination as? InfoTableViewController
+            {
+                tvc.delegateFav = self
+                if let ppc = tvc.popoverPresentationController
+                {
+                    ppc.delegate = self
+                }
+            }
+        }
     }
-    
-    
 }
+
+extension FavoritesCollectionVC: UIPopoverPresentationControllerDelegate {
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+}
+
+
 
 // MARK: - Save and delete to favorites
 
