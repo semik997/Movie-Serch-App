@@ -11,6 +11,9 @@ class MainCollectionVC: UICollectionViewController {
     
     @IBOutlet var collectionViewSpace: UICollectionView!
     @IBOutlet weak var findImage: UIImageView!
+    @IBOutlet weak var moreInfoButton: UIBarButtonItem!
+    
+    
     
     private let searchController = UISearchController(searchResultsController: nil)
     var isFiltering: Bool {
@@ -49,7 +52,6 @@ class MainCollectionVC: UICollectionViewController {
         definesPresentationContext = true
         collectionViewSpace?.delegate = self
         collectionViewSpace?.dataSource = self
-        
     }
     
     // MARK: - UICollectionViewDataSource
@@ -75,10 +77,7 @@ class MainCollectionVC: UICollectionViewController {
         cell.delegate = self
         if indexPath.row < films.count {
             cell.loadData(film: films[indexPath.row])
-        } else {
-//            cell.mainImage.image
         }
-        
         return cell
     }
     
@@ -102,9 +101,31 @@ class MainCollectionVC: UICollectionViewController {
             let moreInfoMainVC = nav.topViewController as! MoreInfoViewController
             moreInfoMainVC.detailedInformation = film
         }
+        
+        // MARK: - info button
+        
+        if segue.identifier == "popVC" {
+            if let tvc = segue.destination as? InfoTableViewController
+            {
+                tvc.delegate = self
+                if let ppc = tvc.popoverPresentationController
+                {
+                    ppc.delegate = self
+                }
+            }
+        }
     }
-    
 }
+
+extension MainCollectionVC: UIPopoverPresentationControllerDelegate {
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+}
+
+
+// MARK: - Setting search bar
 
 extension MainCollectionVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
@@ -121,7 +142,7 @@ extension MainCollectionVC: UISearchResultsUpdating {
                     // need add timer in this fragment
                     findImage.isHidden = true
                     self.networkManager.fetchCurrent(onCompletion: {
-                            currentShowData in self.films = currentShowData
+                        currentShowData in self.films = currentShowData
                     }, forShow: text)
                 }
             } else {
@@ -163,6 +184,7 @@ extension MainCollectionVC: FavoriteProtocolC {
     
 }
 
+// MARK: - Setting item size
 
 extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
     
