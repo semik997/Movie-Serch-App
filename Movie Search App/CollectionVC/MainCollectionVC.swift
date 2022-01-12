@@ -44,10 +44,12 @@ class MainCollectionVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionViewSpace.backgroundView?.backgroundColor = UIColor.white
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Enter the name of the show to search"
         navigationItem.searchController = searchController
+        searchController.searchBar.barTintColor = collectionViewSpace.backgroundView?.backgroundColor
         definesPresentationContext = true
         collectionViewSpace?.delegate = self
         collectionViewSpace?.dataSource = self
@@ -88,6 +90,14 @@ class MainCollectionVC: UICollectionViewController {
         internetAlert.addAction(ok)
         
         present(internetAlert, animated: true)
+    }
+    
+    func changeColor (colorCompletion: UIColor) {
+        
+        if (collectionViewSpace != nil) {
+        collectionViewSpace.backgroundView?.backgroundColor = colorCompletion
+        collectionViewSpace?.reloadData()
+        }
     }
     
     // MARK: - Detail setting

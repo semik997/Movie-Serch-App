@@ -32,9 +32,9 @@ class InfoTableViewController: UITableViewController {
     override func viewWillLayoutSubviews() {
         preferredContentSize = CGSize(width: 170, height: tableView.contentSize.height)
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -42,5 +42,5 @@ class InfoTableViewController: UITableViewController {
     @IBAction func exit(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-
+    
 }

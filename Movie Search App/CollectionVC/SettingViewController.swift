@@ -2,17 +2,18 @@
 //  SettingViewController.swift
 //  Movie Search App
 //
-//  Created by Семен Колесников on 12.01.2022.
+//  Created by Sem Koliesnikov on 12.01.2022.
 //
 
 import UIKit
 
 class SettingViewController: UIViewController, UIColorPickerViewControllerDelegate {
-
+    
+    var mainCollectionVC = MainCollectionVC()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
     
     @IBAction func selectColorButton(_ sender: Any) {
@@ -20,9 +21,12 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
         let picker = UIColorPickerViewController()
         picker.delegate = self
         present(picker, animated: true, completion: nil)
-        let color = picker.selectedColor
-        view.backgroundColor = color
     }
     
+    func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
+        let color = viewController.selectedColor
+        view.backgroundColor = color
+        self.mainCollectionVC.changeColor(colorCompletion: color)
+    }
     
 }

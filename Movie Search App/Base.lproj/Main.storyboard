@@ -290,6 +290,9 @@
                             </tableView>
                             <searchBar contentMode="redraw" placeholder="Enter the name of the show to search" translatesAutoresizingMaskIntoConstraints="NO" id="fe7-2k-hG6">
                                 <rect key="frame" x="0.0" y="88" width="414" height="51"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="M70-75-ECW" id="wUn-ic-Pbk"/>
@@ -399,7 +402,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="FRs-Fe-Ioa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Weh-8f-Y2f">
                             <size key="itemSize" width="178" height="176"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -654,10 +657,10 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Big"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AFX-gx-UGS">
-                                <rect key="frame" x="156" y="414" width="91" height="31"/>
+                                <rect key="frame" x="151" y="414" width="101" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="2 columns"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Select color"/>
                                 <connections>
                                     <action selector="selectColorButton:" destination="CaP-hN-BRP" eventType="touchUpInside" id="it6-Bx-494"/>
                                 </connections>
