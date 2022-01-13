@@ -12,9 +12,6 @@ class FavoritesCollectionVC: UICollectionViewController {
     @IBOutlet var favoriteCollectionView: UICollectionView!
     @IBOutlet weak var findImage: UIImageView!
     
-    
-    let itemPerRow: CGFloat = 3  // number of objects in a row
-    let sectionInserts = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     private let searchController = UISearchController(searchResultsController: nil)
     var isFiltering: Bool {
         return searchController.isActive && !searchBarIsEmpty
@@ -199,14 +196,30 @@ extension FavoritesCollectionVC: UISearchResultsUpdating {
 extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let paddingWidth = sectionInserts.left * (itemPerRow + 1)  // number of indents in a row
-        let availableWidth = collectionView.frame.width - paddingWidth  // the area that the cell can occupy
-        let widthPerItem = availableWidth / itemPerRow  // calculating the width and height of a cell
-        return CGSize (width: widthPerItem, height: widthPerItem)
+        let itemPerRow: CGFloat = 2 // number of objects in a row
+        var min = true
+        var medium = false
+        var max = false
+        
+        if min {
+            return CGSize (width: 100, height: 100)
+        } else if medium {
+            return CGSize (width: 200, height: 200)
+        } else if max {
+            return CGSize (width: 400, height: 400)
+        }
+        
+//        let paddingWidth = sectionInserts.left * (itemPerRow + 1)  // number of indents in a row
+//        let availableWidth = collectionView.frame.width - paddingWidth  // the area that the cell can occupy
+//        let widthPerItem = availableWidth / itemPerRow  // calculating the width and height of a cell
+//        return CGSize (width: widthPerItem, height: widthPerItem)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let sectionInserts = UIEdgeInsets(top: 50, left: 50, bottom: 100, right: 50)
         return sectionInserts
     }
+    
+    
     
 }

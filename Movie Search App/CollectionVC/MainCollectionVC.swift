@@ -9,10 +9,8 @@ import UIKit
 
 class MainCollectionVC: UICollectionViewController {
     
-    @IBOutlet var collectionViewSpace: UICollectionView!
+    @IBOutlet weak var collectionViewSpace: UICollectionView!
     @IBOutlet weak var findImage: UIImageView!
-    
-    
     
     private let searchController = UISearchController(searchResultsController: nil)
     var isFiltering: Bool {
@@ -25,11 +23,13 @@ class MainCollectionVC: UICollectionViewController {
     
     //Creating and filling the array for Display
     var networkManager = NetworkManager()
+    var settingViewController = SettingViewController()
     let defaults = UserDefaults.standard
     var tap = UITapGestureRecognizer()
     var searchText = ""
     let itemPerRow: CGFloat = 3  // number of objects in a row
     let sectionInserts = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+    var selectColor = UIColor.white
     
     // UserDefaults
     var films: [Films.Film] = [] {
@@ -44,12 +44,14 @@ class MainCollectionVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionViewSpace.backgroundView?.backgroundColor = UIColor.white
+        settingViewController.delegate = self
+        
+        navigationController?.navigationBar.backgroundColor = selectColor
+        collectionViewSpace.backgroundColor = selectColor
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Enter the name of the show to search"
         navigationItem.searchController = searchController
-        searchController.searchBar.barTintColor = collectionViewSpace.backgroundView?.backgroundColor
         definesPresentationContext = true
         collectionViewSpace?.delegate = self
         collectionViewSpace?.dataSource = self
@@ -92,14 +94,6 @@ class MainCollectionVC: UICollectionViewController {
         present(internetAlert, animated: true)
     }
     
-    func changeColor (colorCompletion: UIColor) {
-        
-        if (collectionViewSpace != nil) {
-        collectionViewSpace.backgroundView?.backgroundColor = colorCompletion
-        collectionViewSpace?.reloadData()
-        }
-    }
-    
     // MARK: - Detail setting
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -130,6 +124,16 @@ extension MainCollectionVC: UIPopoverPresentationControllerDelegate {
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
+    }
+}
+
+// MARK: - Setting view color
+
+extension MainCollectionVC: SettingViewControllerDelegate {
+    func updateInterface(color: UIColor?, big: Bool?, medium: Bool?, small: Bool?) {
+        print(color ?? 1)
+        self.selectColor = color ?? UIColor.red
+        navigationController?.navigationBar.backgroundColor = color
     }
 }
 
@@ -198,13 +202,26 @@ extension MainCollectionVC: FavoriteProtocolC {
 extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let paddingWidth = sectionInserts.left * (itemPerRow + 1)  // number of indents in a row
-        let availableWidth = collectionView.frame.width - paddingWidth  // the area that the cell can occupy
-        let widthPerItem = availableWidth / itemPerRow  // calculating the width and height of a cell
-        return CGSize (width: widthPerItem, height: widthPerItem)
+        var min = false
+        var medium = false
+        var max = true
+        
+        if min {
+            return CGSize (width: 100, height: 100)
+        } else if medium {
+            return CGSize (width: 200, height: 200)
+        } else if max {
+            return CGSize (width: 400, height: 400)
+        }
+        
+//        let paddingWidth = sectionInserts.left * (itemPerRow + 1)  // number of indents in a row
+//        let availableWidth = collectionView.frame.width - paddingWidth  // the area that the cell can occupy
+//        let widthPerItem = availableWidth / itemPerRow  // calculating the width and height of a cell
+//        return CGSize (width: widthPerItem, height: widthPerItem)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let sectionInserts = UIEdgeInsets(top: 50, left: 100, bottom: 100, right: 100)
         return sectionInserts
     }
     
