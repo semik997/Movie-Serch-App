@@ -27,11 +27,14 @@ class FavoritesCollectionVC: UICollectionViewController {
         }
     }
     
+    var settingViewController = SettingViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         filmsFav = Films.shared.favoriteFilm
         findImage.isHidden = true
+        settingViewController.delegate = self
         
         // Setup the search controller
         searchController.searchResultsUpdater = self
@@ -151,6 +154,15 @@ extension FavoritesCollectionVC: UIPopoverPresentationControllerDelegate {
     }
 }
 
+
+extension FavoritesCollectionVC: SettingViewControllerDelegate {
+    
+    func updateInterface(color: UIColor?, big: Bool?, medium: Bool?, small: Bool?) {
+        favoriteCollectionView.backgroundColor = color
+//        self.selectColor = color ?? UIColor.red
+        navigationController?.navigationBar.backgroundColor = color
+    }
+}
 
 
 // MARK: - Save and delete to favorites

@@ -7,7 +7,10 @@
 
 import UIKit
 
-class InfoTableViewController: UITableViewController {
+class InfoTableViewController: UITableViewController, SettingViewControllerDelegate {
+    
+    @IBOutlet weak var settingViewButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     weak var delegate: MainCollectionVC!
     weak var delegateFav: FavoritesCollectionVC!
@@ -41,6 +44,23 @@ class InfoTableViewController: UITableViewController {
     
     @IBAction func exit(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func updateInterface(color: UIColor?, big: Bool?, medium: Bool?, small: Bool?) {
+        tableView.backgroundColor = color
+        settingViewButton.backgroundColor = color
+        cancelButton.backgroundColor = color
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "settingView" {
+            if let tvc = segue.destination as? SettingViewController {
+                tvc.delegate = self
+//                if let ppc = tvc.popoverPresentationController {
+//                    ppc.delegate = self
+//                }
+            }
+        }
     }
     
 }

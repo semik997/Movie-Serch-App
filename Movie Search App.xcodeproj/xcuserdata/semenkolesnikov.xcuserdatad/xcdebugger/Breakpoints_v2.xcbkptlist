@@ -229,38 +229,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2BC0AB1F-80C1-413E-9668-F7E1BA44BF07"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Movie Search App/CollectionVC/SettingViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "chooseBigSizeButton(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4A239570-1239-40BA-BF36-AEB305C9C2E7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Movie Search App/CollectionVC/SettingViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "chooseBigSizeButton(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "F6FCFF5A-63CB-47F8-A441-5146916CF8B5"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -277,7 +245,23 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5999A4AE-D9A8-4B6B-8130-9CC520EAFE23"
+            uuid = "D3ECED72-3C60-4A32-9564-34D7AC2970FD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movie Search App/CollectionVC/MainCollectionVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "updateInterface(color:big:medium:small:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7056D55A-91F6-4589-B1C5-CED5C5C4C2B2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -293,112 +277,96 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "72516315-BDB1-4EC9-B1B6-915D6416DC1E"
+            uuid = "98FC851B-A6CE-4157-B714-10553F5F3DC7"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Movie Search App/Delegate/SecondAPI.swift"
+            filePath = "Movie Search App/CollectionVC/InfoTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "fetchCurrent(forShow:)"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "updateInterface(color:big:medium:small:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F6248EB9-988C-47E4-95F3-98D38E90FA27"
+            uuid = "17C9B988-C34E-4A60-A042-C12A7292D74E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Movie Search App/Delegate/SecondAPI.swift"
+            filePath = "Movie Search App/CollectionVC/MainCollectionVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "fetchCurrent(forShow:)"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "updateInterface(color:big:medium:small:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B828F65B-4AEA-47A3-BF14-1ABD80C715DB"
+            uuid = "64D9359B-7457-479F-9B0B-F3B652F3E8C3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Movie Search App/Delegate/SecondAPI.swift"
+            filePath = "Movie Search App/CollectionVC/InfoTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
-            landmarkName = "fetchCurrent(forShow:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B828F65B-4AEA-47A3-BF14-1ABD80C715DB - 8db46e2ab266cd0f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.SecondAPI.fetchCurrent(forShow: Swift.String) -&gt; ()"
-                  moduleName = "Movie Search App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/semenkolesnikov/Projects/Movie-Search-App/Movie%20Search%20App/Delegate/SecondAPI.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "80">
-               </Location>
-               <Location
-                  uuid = "B828F65B-4AEA-47A3-BF14-1ABD80C715DB - 8db46e2ab266cd0f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Movie_Search_App.SecondAPI.fetchCurrent(forShow: Swift.String) -&gt; ()"
-                  moduleName = "Movie Search App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/semenkolesnikov/Projects/Movie-Search-App/Movie%20Search%20App/Delegate/SecondAPI.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "29"
-                  endingLineNumber = "29"
-                  offsetFromSymbolStart = "124">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F8A13DCE-7156-4591-BB96-1AE0A496CFB2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Movie Search App/Delegate/SecondAPI.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "fetchCurrent(forShow:)"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "updateInterface(color:big:medium:small:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4D23F4DB-537C-4425-ACE4-EE5F5422AB87"
+            uuid = "9525AD59-0FA6-454A-998B-BC2C3F57E157"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Movie Search App/Delegate/SecondAPI.swift"
+            filePath = "Movie Search App/CollectionVC/InfoTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "fetchCurrent(forShow:)"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "updateInterface(color:big:medium:small:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9888407F-8954-48DE-AEBA-3612FF32DE08"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movie Search App/CollectionVC/MainCollectionVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "updateInterface(color:big:medium:small:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A0D24A36-3C84-4808-AC35-F144AE79D82C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Movie Search App/CollectionVC/MainCollectionVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "updateInterface(color:big:medium:small:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
