@@ -14,6 +14,7 @@ class InfoTableViewController: UITableViewController, SettingViewControllerDeleg
     
     weak var delegate: MainCollectionVC!
     weak var delegateFav: FavoritesCollectionVC!
+    weak var delegateSetting: SettingViewControllerDelegate?
     
     override var preferredContentSize : CGSize
     {
@@ -50,6 +51,8 @@ class InfoTableViewController: UITableViewController, SettingViewControllerDeleg
         tableView.backgroundColor = color
         settingViewButton.backgroundColor = color
         cancelButton.backgroundColor = color
+        
+        delegateSetting?.updateInterface(color: color, big: big, medium: medium, small: small)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

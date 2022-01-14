@@ -24,7 +24,6 @@ class MainCollectionVC: UICollectionViewController {
     //Creating and filling the array for Display
     var networkManager = NetworkManager()
     var secondAPI = SecondAPI()
-    var settingViewController = SettingViewController()
     let defaults = UserDefaults.standard
     var tap = UITapGestureRecognizer()
     var searchText = ""
@@ -44,8 +43,6 @@ class MainCollectionVC: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        settingViewController.delegate = self
         
         navigationController?.navigationBar.backgroundColor = selectColor
         collectionViewSpace.backgroundColor = selectColor
@@ -112,6 +109,7 @@ class MainCollectionVC: UICollectionViewController {
             
             if let tvc = segue.destination as? InfoTableViewController {
                 tvc.delegate = self
+                tvc.delegateSetting = self
                 if let ppc = tvc.popoverPresentationController {
                     ppc.delegate = self
                 }
@@ -133,7 +131,6 @@ extension MainCollectionVC: SettingViewControllerDelegate {
     
     func updateInterface(color: UIColor?, big: Bool?, medium: Bool?, small: Bool?) {
         collectionViewSpace.backgroundColor = color
-        self.selectColor = color ?? UIColor.red
         navigationController?.navigationBar.backgroundColor = color
     }
 }
@@ -156,7 +153,7 @@ extension MainCollectionVC: UISearchResultsUpdating {
                     // need add timer in this fragment
                     findImage.isHidden = true
                     self.secondAPI.fetchCurrent(forShow: text)
-
+                    
                     self.networkManager.fetchCurrent(onCompletion: {
                         currentShowData in self.films = currentShowData
                     }, forShow: text)
@@ -217,10 +214,10 @@ extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
             return CGSize (width: 400, height: 400)
         }
         
-//        let paddingWidth = sectionInserts.left * (itemPerRow + 1)  // number of indents in a row
-//        let availableWidth = collectionView.frame.width - paddingWidth  // the area that the cell can occupy
-//        let widthPerItem = availableWidth / itemPerRow  // calculating the width and height of a cell
-//        return CGSize (width: widthPerItem, height: widthPerItem)
+        //        let paddingWidth = sectionInserts.left * (itemPerRow + 1)  // number of indents in a row
+        //        let availableWidth = collectionView.frame.width - paddingWidth  // the area that the cell can occupy
+        //        let widthPerItem = availableWidth / itemPerRow  // calculating the width and height of a cell
+        //        return CGSize (width: widthPerItem, height: widthPerItem)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

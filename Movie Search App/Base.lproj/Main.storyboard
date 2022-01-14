@@ -370,7 +370,9 @@
                                                 </constraints>
                                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="plain" image="rectangle.grid.1x2.fill" catalog="system"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="pause.fill" catalog="system">
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="chooseMediumSizeButton:" destination="CaP-hN-BRP" eventType="touchUpInside" id="CQB-dJ-Xui"/>
                                                 </connections>
@@ -627,7 +629,7 @@
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="noImage" width="300" height="300"/>
-        <image name="rectangle.grid.1x2.fill" catalog="system" width="128" height="101"/>
+        <image name="pause.fill" catalog="system" width="116" height="128"/>
         <image name="rectangle.grid.3x2.fill" catalog="system" width="128" height="101"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>

@@ -135,11 +135,10 @@ class FavoritesCollectionVC: UICollectionViewController {
         // MARK: - info button
         
         if segue.identifier == "popVC" {
-            if let tvc = segue.destination as? InfoTableViewController
-            {
+            if let tvc = segue.destination as? InfoTableViewController {
                 tvc.delegateFav = self
-                if let ppc = tvc.popoverPresentationController
-                {
+                tvc.delegateSetting = self
+                if let ppc = tvc.popoverPresentationController {
                     ppc.delegate = self
                 }
             }
@@ -159,7 +158,6 @@ extension FavoritesCollectionVC: SettingViewControllerDelegate {
     
     func updateInterface(color: UIColor?, big: Bool?, medium: Bool?, small: Bool?) {
         favoriteCollectionView.backgroundColor = color
-//        self.selectColor = color ?? UIColor.red
         navigationController?.navigationBar.backgroundColor = color
     }
 }
