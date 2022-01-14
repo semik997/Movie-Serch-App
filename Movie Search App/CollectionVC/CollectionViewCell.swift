@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol FavoriteProtocolC: AnyObject {
+protocol FavoriteProtocol: AnyObject {
     func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?, name: String?,
                     language: String?, status: String?, image: String?,
                     original: String?, summary: String?)
@@ -21,7 +21,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     
     //Initialization of UI fields
-    weak var delegate: FavoriteProtocolC?
+    weak var delegate: FavoriteProtocol?
     var idFilm: Int?
     var url: String?
     var name: String?

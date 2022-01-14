@@ -21,7 +21,7 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
     var small = false
     var medium = false
     var big = false
-    var color = UIColor.red
+    var color = UIColor.white
     
     
     @IBAction func chooseBigSizeButton(_ sender: UIButton) {

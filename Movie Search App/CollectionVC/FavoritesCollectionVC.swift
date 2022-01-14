@@ -28,6 +28,9 @@ class FavoritesCollectionVC: UICollectionViewController {
     }
     
     var settingViewController = SettingViewController()
+    var small: Bool?
+    var medium: Bool?
+    var big: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,13 +162,17 @@ extension FavoritesCollectionVC: SettingViewControllerDelegate {
     func updateInterface(color: UIColor?, big: Bool?, medium: Bool?, small: Bool?) {
         favoriteCollectionView.backgroundColor = color
         navigationController?.navigationBar.backgroundColor = color
+        self.big = big
+        self.medium = medium
+        self.small = small
+        favoriteCollectionView.reloadData()
     }
 }
 
 
 // MARK: - Save and delete to favorites
 
-extension FavoritesCollectionVC: FavoriteProtocolC {
+extension FavoritesCollectionVC: FavoriteProtocol {
     func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?, name: String?,
                     language: String?, status: String?, image: String?,
                     original: String?, summary: String?) {
@@ -206,18 +213,15 @@ extension FavoritesCollectionVC: UISearchResultsUpdating {
 extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemPerRow: CGFloat = 2 // number of objects in a row
-        var min = true
-        var medium = false
-        var max = false
         
-        if min {
-            return CGSize (width: 100, height: 100)
-        } else if medium {
+        if self.small ?? false {
+            return CGSize (width: 100, height: 150)
+        } else if self.medium ?? false {
             return CGSize (width: 200, height: 200)
-        } else if max {
+        } else if self.big ?? false {
             return CGSize (width: 400, height: 400)
         }
+        return CGSize (width: 200, height: 200)
         
 //        let paddingWidth = sectionInserts.left * (itemPerRow + 1)  // number of indents in a row
 //        let availableWidth = collectionView.frame.width - paddingWidth  // the area that the cell can occupy
@@ -226,8 +230,19 @@ extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let sectionInserts = UIEdgeInsets(top: 50, left: 50, bottom: 100, right: 50)
-        return sectionInserts
+        
+        if self.small ?? false {
+            let sectionInserts = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+            return sectionInserts
+        } else if self.medium ?? false {
+            let sectionInserts = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+            return sectionInserts
+        } else if self.big ?? false {
+            let sectionInserts = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+            return sectionInserts
+        }
+        return UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+        
     }
     
     

@@ -27,9 +27,9 @@ class MainCollectionVC: UICollectionViewController {
     let defaults = UserDefaults.standard
     var tap = UITapGestureRecognizer()
     var searchText = ""
-    let itemPerRow: CGFloat = 3  // number of objects in a row
-    let sectionInserts = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-    var selectColor = UIColor.white
+    var small: Bool?
+    var medium: Bool?
+    var big: Bool?
     
     // UserDefaults
     var films: [Films.Film] = [] {
@@ -44,8 +44,6 @@ class MainCollectionVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.backgroundColor = selectColor
-        collectionViewSpace.backgroundColor = selectColor
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Enter the name of the show to search"
@@ -132,6 +130,9 @@ extension MainCollectionVC: SettingViewControllerDelegate {
     func updateInterface(color: UIColor?, big: Bool?, medium: Bool?, small: Bool?) {
         collectionViewSpace.backgroundColor = color
         navigationController?.navigationBar.backgroundColor = color
+        self.big = big
+        self.medium = medium
+        self.small = small
     }
 }
 
@@ -175,7 +176,7 @@ extension MainCollectionVC: UISearchResultsUpdating {
 
 // MARK: - Save and delete to favorites
 
-extension MainCollectionVC: FavoriteProtocolC {
+extension MainCollectionVC: FavoriteProtocol {
     
     func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?, name: String?,
                     language: String?, status: String?, image: String?,
@@ -202,17 +203,16 @@ extension MainCollectionVC: FavoriteProtocolC {
 extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var min = false
-        var medium = false
-        var max = true
-        
-        if min {
-            return CGSize (width: 100, height: 100)
-        } else if medium {
+
+        if self.small ?? false {
+            
+            return CGSize (width: 100, height: 150)
+        } else if self.medium ?? false {
             return CGSize (width: 200, height: 200)
-        } else if max {
+        } else if self.big ?? false {
             return CGSize (width: 400, height: 400)
         }
+        return CGSize (width: 200, height: 200)
         
         //        let paddingWidth = sectionInserts.left * (itemPerRow + 1)  // number of indents in a row
         //        let availableWidth = collectionView.frame.width - paddingWidth  // the area that the cell can occupy
@@ -221,8 +221,17 @@ extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let sectionInserts = UIEdgeInsets(top: 50, left: 100, bottom: 100, right: 100)
-        return sectionInserts
+        if self.small ?? false {
+            let sectionInserts = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+            return sectionInserts
+        } else if self.medium ?? false {
+            let sectionInserts = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+            return sectionInserts
+        } else if self.big ?? false {
+            let sectionInserts = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+            return sectionInserts
+        }
+        return UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
     }
     
 }
