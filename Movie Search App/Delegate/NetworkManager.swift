@@ -12,6 +12,7 @@ import SystemConfiguration
 // MARK: - Api request
 
 struct NetworkManager {
+    
     func fetchCurrent(onCompletion: (([Films.Film]) -> Void)?, forShow show: String) {
         DispatchQueue.global(qos: .background).async {
             let urlString = "\(linkAPI)\(show)"

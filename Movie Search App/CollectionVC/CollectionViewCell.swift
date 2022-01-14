@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FavoriteProtocolC: AnyObject {
-    func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?,
+    func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?, name: String?,
                     language: String?, status: String?, image: String?,
                     original: String?, summary: String?)
 }
@@ -23,6 +23,7 @@ class CollectionViewCell: UICollectionViewCell {
     //Initialization of UI fields
     weak var delegate: FavoriteProtocolC?
     var idFilm: Int?
+    var url: String?
     var name: String?
     var language: String?
     var status: String?
@@ -48,19 +49,18 @@ class CollectionViewCell: UICollectionViewCell {
         if isFavorite {
             //for like
             isFavorite = !isFavorite
-            delegate?.selectCell(isFavorite, idFilm: idFilm, name: name,
+            delegate?.selectCell(isFavorite, idFilm: idFilm, url: url, name: name,
                                  language: language, status: status, image: image,
                                  original: original, summary: summary)
         } else {
             //for not like
             fillButton.isSelected = !fillButton.isSelected
             isFavorite = !isFavorite
-            delegate?.selectCell(isFavorite, idFilm: idFilm, name: name,
+            delegate?.selectCell(isFavorite, idFilm: idFilm, url: url, name: name,
                                  language: language, status: status, image: image,
                                  original: original, summary: summary)
         }
     }
-    
 }
 
 // MARK: - Uploading data to VC
@@ -75,6 +75,7 @@ extension CollectionViewCell {
             //            countryLabel.text = film.show?.status
             mainImage.image = getImage(from: film.show?.image?.medium ?? placeholderFilm)
             idFilm = film.show?.id
+            url = film.show?.url
             name = film.show?.name
             language = film.show?.language
             status = film.show?.status
@@ -90,6 +91,7 @@ extension CollectionViewCell {
             //            countryLabel.text = film.show?.status
             mainImage.image = getImage(from: film.show?.image?.medium ?? placeholderFilm)
             idFilm = film.show?.id
+            url = film.show?.url
             name = film.show?.name
             language = film.show?.language
             status = film.show?.status

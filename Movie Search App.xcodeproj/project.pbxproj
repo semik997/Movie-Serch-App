@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		302A14D3279162B800033937 /* SecondAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302A14D2279162B800033937 /* SecondAPI.swift */; };
 		302CEE1527858CCD0017E0D7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CEE1427858CCD0017E0D7 /* Reachability.swift */; };
 		302F97E5277073E50000B975 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F97E4277073E50000B975 /* Links.swift */; };
 		30595240275CED40003A7049 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059523F275CED40003A7049 /* Film.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		302A14D2279162B800033937 /* SecondAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondAPI.swift; sourceTree = "<group>"; };
 		302CEE1427858CCD0017E0D7 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		302F97E4277073E50000B975 /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
 		3059523F275CED40003A7049 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				302CEE1427858CCD0017E0D7 /* Reachability.swift */,
 				3059523F275CED40003A7049 /* Film.swift */,
 				30CA0C7E275BE43B009468D2 /* NetworkManager.swift */,
+				302A14D2279162B800033937 /* SecondAPI.swift */,
 			);
 			path = Delegate;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 			files = (
 				30C87F1427689B5E002C7242 /* Movie_Search_App.xcdatamodeld in Sources */,
 				30CA0C7B275B8951009468D2 /* MainViewController.swift in Sources */,
+				302A14D3279162B800033937 /* SecondAPI.swift in Sources */,
 				30CA0C81275C04AA009468D2 /* TableViewCell.swift in Sources */,
 				30DFA0042779C19000B09E34 /* MoreInfoViewController.swift in Sources */,
 				30687FFE278C43A1003CDE31 /* MainCollectionVC.swift in Sources */,

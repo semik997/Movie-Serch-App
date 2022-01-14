@@ -23,6 +23,7 @@ class MainCollectionVC: UICollectionViewController {
     
     //Creating and filling the array for Display
     var networkManager = NetworkManager()
+    var secondAPI = SecondAPI()
     var settingViewController = SettingViewController()
     let defaults = UserDefaults.standard
     var tap = UITapGestureRecognizer()
@@ -108,11 +109,9 @@ class MainCollectionVC: UICollectionViewController {
         // MARK: - info button
         
         if segue.identifier == "popVC" {
-            if let tvc = segue.destination as? InfoTableViewController
-            {
+            if let tvc = segue.destination as? InfoTableViewController {
                 tvc.delegate = self
-                if let ppc = tvc.popoverPresentationController
-                {
+                if let ppc = tvc.popoverPresentationController {
                     ppc.delegate = self
                 }
             }
@@ -154,6 +153,8 @@ extension MainCollectionVC: UISearchResultsUpdating {
                 if searchText.count >= 3 {
                     // need add timer in this fragment
                     findImage.isHidden = true
+                    self.secondAPI.fetchCurrent(forShow: text)
+
                     self.networkManager.fetchCurrent(onCompletion: {
                         currentShowData in self.films = currentShowData
                     }, forShow: text)
@@ -177,13 +178,13 @@ extension MainCollectionVC: UISearchResultsUpdating {
 
 extension MainCollectionVC: FavoriteProtocolC {
     
-    func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?,
+    func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?, name: String?,
                     language: String?, status: String?, image: String?,
                     original: String?, summary: String?) {
         
         if isFavorite {
             //for like
-            Films.shared.saveFilms(idFilm: idFilm, name: name,
+            Films.shared.saveFilms(idFilm: idFilm, url: url, name: name,
                                    language: language, status: status,
                                    image: image, isFavorite: true,
                                    original: original, summary: summary ??

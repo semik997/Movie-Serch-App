@@ -56,6 +56,19 @@ class MoreInfoViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func shareActive(_ sender: UIBarButtonItem) {
+        
+        let shareController = UIActivityViewController(activityItems: [detailedInformation?.show?.url ?? ""], applicationActivities: nil)
+        
+        shareController.completionWithItemsHandler = { _, bool, _, _ in
+            if bool {
+            print("Successful")}
+        }
+        present (shareController, animated: true, completion: nil)
+        
+    }
+    
+    
     
     // MARK: - String in image conversion
     

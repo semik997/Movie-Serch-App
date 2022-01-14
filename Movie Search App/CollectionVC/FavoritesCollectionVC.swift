@@ -156,14 +156,14 @@ extension FavoritesCollectionVC: UIPopoverPresentationControllerDelegate {
 // MARK: - Save and delete to favorites
 
 extension FavoritesCollectionVC: FavoriteProtocolC {
-    func selectCell(_ isFavorite: Bool, idFilm: Int?, name: String?,
+    func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?, name: String?,
                     language: String?, status: String?, image: String?,
                     original: String?, summary: String?) {
         
         if isFavorite {
             //for like
             
-            Films.shared.saveFilms(idFilm: idFilm, name: name, language: language,
+            Films.shared.saveFilms(idFilm: idFilm, url: url, name: name, language: language,
                                    status: status, image: image, isFavorite: true,
                                    original: original, summary: summary ?? "No description text")
             
