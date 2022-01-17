@@ -15,8 +15,8 @@ class SecondAPI {
     func fetchShowRaiting(forShow show: String, completionHandler: @escaping (Films.FilmIMDb) -> Void) {
         
         let headers = [
-            "x-rapidapi-host": "imdb8.p.rapidapi.com",
-            "x-rapidapi-key": "ece2314f79msh4522e10877770d5p170740jsn01828e60d0af"
+            "x-rapidapi-host": "\(apiHost)",
+            "x-rapidapi-key": "\(apiKey)"
         ]
         let request = NSMutableURLRequest(url: NSURL(string: "\(raitingAPI)\(show)")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
