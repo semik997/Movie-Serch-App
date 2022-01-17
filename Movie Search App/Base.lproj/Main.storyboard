@@ -413,6 +413,8 @@
                             <constraint firstItem="l9O-mB-gdj" firstAttribute="leading" secondItem="toK-2G-EYY" secondAttribute="leading" constant="56" id="pvJ-kp-Kdu"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="mmK-5d-D6l"/>
+                    <size key="freeformSize" width="414" height="896"/>
                     <connections>
                         <outlet property="bigSizeCellButton" destination="9gz-wX-WRV" id="YbC-ke-IVV"/>
                         <outlet property="mediumSizeCellButton" destination="ftW-sm-Elg" id="PED-PW-cOE"/>
@@ -551,7 +553,6 @@
         <!--Main-->
         <scene sceneID="2yG-hE-maY">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S63-uQ-nUB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" interfaceStyle="light" id="V8S-Eq-bqD" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Main" image="magnifyingglass" catalog="system" id="4Xa-xY-vok">
                         <color key="badgeColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -571,13 +572,13 @@
                         <segue destination="ify-wK-8SR" kind="relationship" relationship="rootViewController" id="SEK-pK-TkD"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S63-uQ-nUB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2557.971014492754" y="1247.5446428571429"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="XM4-R4-1vu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aFx-Qy-IDl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" interfaceStyle="light" id="lgv-uC-oSt" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Favorites" image="star.fill" catalog="system" id="Tbh-Pp-Ut7">
                         <color key="badgeColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -597,6 +598,7 @@
                         <segue destination="xI9-lk-m09" kind="relationship" relationship="rootViewController" id="6lc-nb-JyZ"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aFx-Qy-IDl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2557.971014492754" y="1974.7767857142856"/>
         </scene>
@@ -606,6 +608,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" interfaceStyle="light" id="TzU-YB-OE2" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wX4-UZ-ejD">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -620,7 +623,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Zvb-0v-biD"/>
+        <segue reference="wLn-w4-dUj"/>
         <segue reference="LBk-bH-Prt"/>
     </inferredMetricsTieBreakers>
     <resources>

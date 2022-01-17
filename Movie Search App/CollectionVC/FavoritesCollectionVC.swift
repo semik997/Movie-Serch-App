@@ -31,6 +31,7 @@ class FavoritesCollectionVC: UICollectionViewController {
     var small: Bool?
     var medium: Bool?
     var big: Bool?
+    var defaultSizeCell = CGSize (width: 200, height: 200)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +55,7 @@ class FavoritesCollectionVC: UICollectionViewController {
     }
     
     
-    // MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -96,7 +97,7 @@ class FavoritesCollectionVC: UICollectionViewController {
         return cell
     }
     
-    // MARK: - Setting up an alert controller
+// MARK: - Setting up an alert controller
     
     func presentAlertController(withTitle title: String?, message: String?,
                                 style: UIAlertController.Style, idFilm: Int) {
@@ -119,7 +120,7 @@ class FavoritesCollectionVC: UICollectionViewController {
         present(alertController, animated: true)
     }
     
-    // MARK: - Detail setting
+// MARK: - Detail setting
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
@@ -135,7 +136,7 @@ class FavoritesCollectionVC: UICollectionViewController {
             MoreInfoFavoritesTableVC.detailedInformation = film
         }
         
-        // MARK: - info button
+// MARK: - Info button
         
         if segue.identifier == "popVC" {
             if let tvc = segue.destination as? InfoTableViewController {
@@ -156,19 +157,23 @@ extension FavoritesCollectionVC: UIPopoverPresentationControllerDelegate {
     }
 }
 
+// MARK: - Setting view color
 
 extension FavoritesCollectionVC: SettingViewControllerDelegate {
     
     func updateInterface(color: UIColor?, big: Bool?, medium: Bool?, small: Bool?) {
-        favoriteCollectionView.backgroundColor = color
-        navigationController?.navigationBar.backgroundColor = color
+        
+        if color == UIColor.white {
+        } else {
+            favoriteCollectionView.backgroundColor = color
+            navigationController?.navigationBar.backgroundColor = color
+        }
         self.big = big
         self.medium = medium
         self.small = small
         favoriteCollectionView.reloadData()
     }
 }
-
 
 // MARK: - Save and delete to favorites
 
@@ -214,37 +219,31 @@ extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if self.small ?? false {
-            return CGSize (width: 100, height: 150)
-        } else if self.medium ?? false {
-            return CGSize (width: 200, height: 200)
-        } else if self.big ?? false {
-            return CGSize (width: 400, height: 400)
+        if self.small == false && self.medium == false && self.big == false {
+            return defaultSizeCell
+        } else {
+            // apply small size cell
+            if self.small ?? false {
+                let sizeCell = CGSize (width: 100, height: 150)
+                self.defaultSizeCell = sizeCell
+                return sizeCell
+                // apply medium size cell
+            } else if self.medium ?? false {
+                let sizeCell = CGSize (width: 200, height: 200)
+                self.defaultSizeCell = sizeCell
+                return sizeCell
+                // apply big size cell
+            } else if self.big ?? false {
+                let sizeCell = CGSize (width: 400, height: 400)
+                self.defaultSizeCell = sizeCell
+                return sizeCell
+            }
+            return defaultSizeCell
         }
-        return CGSize (width: 200, height: 200)
-        
-//        let paddingWidth = sectionInserts.left * (itemPerRow + 1)  // number of indents in a row
-//        let availableWidth = collectionView.frame.width - paddingWidth  // the area that the cell can occupy
-//        let widthPerItem = availableWidth / itemPerRow  // calculating the width and height of a cell
-//        return CGSize (width: widthPerItem, height: widthPerItem)
     }
     
+    // setting cell intervals
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        if self.small ?? false {
-            let sectionInserts = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
-            return sectionInserts
-        } else if self.medium ?? false {
-            let sectionInserts = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
-            return sectionInserts
-        } else if self.big ?? false {
-            let sectionInserts = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
-            return sectionInserts
-        }
         return UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
-        
     }
-    
-    
-    
 }

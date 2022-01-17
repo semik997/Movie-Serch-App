@@ -16,6 +16,7 @@ class InfoTableViewController: UITableViewController, SettingViewControllerDeleg
     weak var delegateFav: FavoritesCollectionVC!
     weak var delegateSetting: SettingViewControllerDelegate?
     
+    // setup size view
     override var preferredContentSize : CGSize
     {
         get
@@ -43,15 +44,15 @@ class InfoTableViewController: UITableViewController, SettingViewControllerDeleg
         return 2
     }
     
+    //MARK: - Setting view
+    
+    // exit
     @IBAction func exit(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
     
+    // delegate size and color
     func updateInterface(color: UIColor?, big: Bool?, medium: Bool?, small: Bool?) {
-        tableView.backgroundColor = color
-        settingViewButton.backgroundColor = color
-        cancelButton.backgroundColor = color
-        
         delegateSetting?.updateInterface(color: color, big: big, medium: medium, small: small)
     }
     
@@ -59,9 +60,6 @@ class InfoTableViewController: UITableViewController, SettingViewControllerDeleg
         if segue.identifier == "settingView" {
             if let tvc = segue.destination as? SettingViewController {
                 tvc.delegate = self
-//                if let ppc = tvc.popoverPresentationController {
-//                    ppc.delegate = self
-//                }
             }
         }
     }
