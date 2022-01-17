@@ -84,8 +84,8 @@ extension CollectionViewCell {
             fillButton.isSelected = true
             self.secondAPI.fetchShowRaiting(forShow: imdb ?? "") { [self] currentShowIMDb in
                 self.rating = currentShowIMDb.rating
-                self.ratingLabel.text = "\(String(describing: rating))/10"
             }
+            ratingLabel.text = "\(rating ?? 0)/10"
             
         } else {
             nameLabel?.text = film.show?.name
@@ -99,9 +99,6 @@ extension CollectionViewCell {
             summary = film.show?.summary
             imdb = film.show?.externals?.imdb
             fillButton.isSelected = false
-            self.secondAPI.fetchShowRaiting(forShow: imdb ?? "") { [self] currentShowIMDb in
-                self.rating = currentShowIMDb.rating
-            }
             ratingLabel.text = "\(rating ?? 0)/10"
         }
     }
