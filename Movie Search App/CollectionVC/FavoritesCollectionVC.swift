@@ -179,15 +179,14 @@ extension FavoritesCollectionVC: SettingViewControllerDelegate {
 
 extension FavoritesCollectionVC: FavoriteProtocol {
     func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?, name: String?,
-                    language: String?, status: String?, image: String?,
-                    original: String?, summary: String?) {
+                    image: String?, original: String?, summary: String?,
+                    imdb: String?) {
         
         if isFavorite {
             //for like
             
-            Films.shared.saveFilms(idFilm: idFilm, url: url, name: name, language: language,
-                                   status: status, image: image, isFavorite: true,
-                                   original: original, summary: summary ?? "No description text")
+            Films.shared.saveFilms(idFilm: idFilm, url: url, name: name, image: image, isFavorite: true,
+                                   original: original, summary: summary ?? "No description text", imdb: imdb)
             
         } else {
             //for not like

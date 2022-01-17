@@ -144,6 +144,7 @@ extension MainCollectionVC: SettingViewControllerDelegate {
 // MARK: - Setting search bar
 
 extension MainCollectionVC: UISearchResultsUpdating {
+    
     func updateSearchResults(for searchController: UISearchController) {
         self.searchText = searchController.searchBar.text!
         
@@ -157,8 +158,6 @@ extension MainCollectionVC: UISearchResultsUpdating {
                 if searchText.count >= 3 {
                     // need add timer in this fragment
                     findImage.isHidden = true
-                    self.secondAPI.fetchCurrent(forShow: text)
-                    
                     self.networkManager.fetchCurrent(onCompletion: {
                         currentShowData in self.films = currentShowData
                     }, forShow: text)
@@ -182,17 +181,16 @@ extension MainCollectionVC: UISearchResultsUpdating {
 
 extension MainCollectionVC: FavoriteProtocol {
     
-    func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?, name: String?,
-                    language: String?, status: String?, image: String?,
-                    original: String?, summary: String?) {
+    func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?,
+                    name: String?, image: String?, original: String?,
+                    summary: String?, imdb: String?) {
         
         if isFavorite {
             //for like
             Films.shared.saveFilms(idFilm: idFilm, url: url, name: name,
-                                   language: language, status: status,
                                    image: image, isFavorite: true,
                                    original: original, summary: summary ??
-                                   "No description text")
+                                   "No description text", imdb: imdb)
         } else {
             //for not like
             Films.shared.deleteFilm(idFilm: idFilm)

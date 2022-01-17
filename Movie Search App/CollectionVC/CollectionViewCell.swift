@@ -8,9 +8,8 @@
 import UIKit
 
 protocol FavoriteProtocol: AnyObject {
-    func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?, name: String?,
-                    language: String?, status: String?, image: String?,
-                    original: String?, summary: String?)
+    func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?, name: String?, image: String?,
+                    original: String?, summary: String?, imdb: String?)
 }
 
 class CollectionViewCell: UICollectionViewCell {
@@ -18,18 +17,20 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mainImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var fillButton: UIButton!
+    @IBOutlet weak var ratingLabel: UILabel!
     
     
     //Initialization of UI fields
     weak var delegate: FavoriteProtocol?
+    var secondAPI = SecondAPI()
     var idFilm: Int?
     var url: String?
     var name: String?
-    var language: String?
-    var status: String?
     var image: String?
     var original: String?
     var summary: String?
+    var imdb: String?
+    var rating: Double?
     var isFavorite = false
     
     private var currentFilm: Films.Film?
@@ -50,15 +51,15 @@ class CollectionViewCell: UICollectionViewCell {
             //for like
             isFavorite = !isFavorite
             delegate?.selectCell(isFavorite, idFilm: idFilm, url: url, name: name,
-                                 language: language, status: status, image: image,
-                                 original: original, summary: summary)
+                                 image: image, original: original, summary: summary,
+                                 imdb: imdb)
         } else {
             //for not like
             fillButton.isSelected = !fillButton.isSelected
             isFavorite = !isFavorite
             delegate?.selectCell(isFavorite, idFilm: idFilm, url: url, name: name,
-                                 language: language, status: status, image: image,
-                                 original: original, summary: summary)
+                                 image: image,original: original, summary: summary,
+                                 imdb: imdb)
         }
     }
 }
@@ -71,35 +72,37 @@ extension CollectionViewCell {
         currentFilm = film
         if film.show?.isFavorite == true {
             nameLabel?.text = film.show?.name
-            //            languageLabel.text = film.show?.language
-            //            countryLabel.text = film.show?.status
             mainImage.image = getImage(from: film.show?.image?.medium ?? placeholderFilm)
             idFilm = film.show?.id
             url = film.show?.url
             name = film.show?.name
-            language = film.show?.language
-            status = film.show?.status
             image = film.show?.image?.medium
             isFavorite = ((film.show?.isFavorite) != nil)
             original = film.show?.image?.original
             summary = film.show?.summary
+            imdb = film.show?.externals?.imdb
             fillButton.isSelected = true
+            self.secondAPI.fetchShowRaiting(forShow: imdb ?? "") { [self] currentShowIMDb in
+                self.rating = currentShowIMDb.rating
+                self.ratingLabel.text = "\(String(describing: rating))/10"
+            }
             
         } else {
             nameLabel?.text = film.show?.name
-            //            languageLabel.text = film.show?.language
-            //            countryLabel.text = film.show?.status
             mainImage.image = getImage(from: film.show?.image?.medium ?? placeholderFilm)
             idFilm = film.show?.id
             url = film.show?.url
             name = film.show?.name
-            language = film.show?.language
-            status = film.show?.status
             image = film.show?.image?.medium
             isFavorite = ((film.show?.isFavorite) != nil)
             original = film.show?.image?.original
             summary = film.show?.summary
+            imdb = film.show?.externals?.imdb
             fillButton.isSelected = false
+            self.secondAPI.fetchShowRaiting(forShow: imdb ?? "") { [self] currentShowIMDb in
+                self.rating = currentShowIMDb.rating
+            }
+            ratingLabel.text = "\(rating ?? 0)/10"
         }
     }
     

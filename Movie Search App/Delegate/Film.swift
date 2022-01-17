@@ -8,12 +8,13 @@
 import Foundation
 import UIKit
 
-// data request structure via API from https://www.tvmaze.com/api
+
 class Films {
     
     private let defaults = UserDefaults.standard
     static let shared = Films()
     
+    // data request structure via API from https://www.tvmaze.com/api
     struct Film: Codable {
         let show: Show?
     }
@@ -22,16 +23,24 @@ class Films {
         let id: Int?
         let url: String?
         let name: String?
-        let language: String?
-        let status: String?
         let image: Image?
+        let externals: Externals?
         let summary: String?
         var isFavorite: Bool?
+    }
+    
+    struct Externals: Codable {
+        let imdb: String?
     }
     
     struct Image: Codable {
         let medium: String
         let original: String?
+    }
+    
+    // request from https://rapidapi.com/apidojo/api/imdb8/
+    struct FilmIMDb: Codable {
+        let rating: Double?
     }
     
     // MARK: - User Data persistence model
@@ -55,9 +64,9 @@ class Films {
     
     // MARK: - Models for working with data in User Data
     
-    func saveFilms(idFilm: Int?, url: String?, name: String?, language: String?, status: String?, image: String?, isFavorite: Bool, original: String?, summary: String) {
+    func saveFilms(idFilm: Int?, url: String?, name: String?, image: String?, isFavorite: Bool, original: String?, summary: String?, imdb: String?) {
         
-        let favoriteFilms = Film(show: Show(id: idFilm, url: url, name: name, language: language, status: status, image: Image(medium: image ?? placeholderFilm, original: original ?? placeholderFilm), summary: summary, isFavorite: true))
+        let favoriteFilms = Film(show: Show(id: idFilm, url: url, name: name, image: Image(medium: image ?? placeholderFilm, original: original ?? placeholderFilm), externals: Externals(imdb: imdb), summary: summary, isFavorite: true))
         favoriteFilm.insert(favoriteFilms, at: 0)
     }
     
