@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 
 class Films {
@@ -61,6 +62,28 @@ class Films {
             }
         }
     }
+    
+    var filmsFavorite: [FavoriteFilm] = []
+    
+    func filmSave(idFilm: Int?, url: String?, name: String?, image: String?, isFavorite: Bool, original: String?, summary: String?, imdb: String?) {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context =  appDelegate.persistentContainer.viewContext
+        
+        guard let entity = NSEntityDescription.entity(forEntityName: "FavoriteFilms", in: context)
+        else { return }
+        
+        let filmObject = FavoriteFilm(entity: entity, insertInto: context)
+        
+        do {
+            try context.save()
+            
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+    }
+    
+    
     
     // MARK: - Models for working with data in User Data
     
