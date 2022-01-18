@@ -57,15 +57,21 @@ class MoreInfoViewController: UIViewController {
     }
     
     @IBAction func shareActive(_ sender: UIBarButtonItem) {
-        
-        let shareController = UIActivityViewController(activityItems: [detailedInformation?.show?.url ?? ""], applicationActivities: nil)
-        
-        shareController.completionWithItemsHandler = { _, bool, _, _ in
-            if bool {
-            print("Successful")}
+        let shareController: UIActivityViewController
+        if detailedInformation?.show?.externals?.imdb == nil {
+            shareController = UIActivityViewController(activityItems: [detailedInformation?.show?.url ?? ""], applicationActivities: nil)
+            shareController.completionWithItemsHandler = { _, bool, _, _ in
+                if bool {
+                    print("Successful")}
+            }
+        } else {
+            shareController = UIActivityViewController(activityItems: ["https://www.imdb.com/title/\(detailedInformation?.show?.externals?.imdb ?? "")" ], applicationActivities: nil)
+            shareController.completionWithItemsHandler = { _, bool, _, _ in
+                if bool {
+                    print("Successful")}
+            }
         }
         present (shareController, animated: true, completion: nil)
-        
     }
     
     
