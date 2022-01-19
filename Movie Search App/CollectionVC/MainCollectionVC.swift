@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MainCollectionVC: UICollectionViewController {
     
@@ -31,12 +32,17 @@ class MainCollectionVC: UICollectionViewController {
     var medium: Bool?
     var big: Bool?
     var defaultSizeCell = CGSize (width: 200, height: 200)
+    var context = (UIApplication.shared.delegate as!
+                   AppDelegate).persistentContainer.viewContext
+    var oneFilm: [FavoriteFilm]?
+    
     
     // UserDefaults
     var films: [Films.Film] = [] {
         didSet {
             DispatchQueue.main.async { [self] in
                 collectionViewSpace.reloadData()
+                
             }
         }
     }
@@ -52,6 +58,36 @@ class MainCollectionVC: UICollectionViewController {
         definesPresentationContext = true
         collectionViewSpace?.delegate = self
         collectionViewSpace?.dataSource = self
+        getDataFromParse()
+    }
+    
+    
+    // MARK: - Save in CoreData
+    
+    func getDataFromParse() {
+        
+        do {
+            self.oneFilm = try context.fetch(FavoriteFilm.fetchRequest())
+            DispatchQueue.main.async {
+                self.collectionViewSpace.reloadData()
+            }
+        } catch {
+            
+        }
+        
+        
+//        let fetchRequest: NSFetchRequest<FavoriteFilm> = FavoriteFilm.fetchRequest()
+//        fetchRequest.predicate =  NSPredicate(format: "name != nil")
+//
+//        var records = 0
+//        do {
+//            records = try context.count(for: fetchRequest)
+//            print("Film already")
+//        } catch let error as NSError {
+//            print(error.localizedDescription)
+//        }
+        
+        
     }
     
 // MARK: - UICollectionViewDataSource
@@ -185,14 +221,45 @@ extension MainCollectionVC: FavoriteProtocol {
                     name: String?, image: String?, original: String?,
                     summary: String?, imdb: String?) {
         
+        
         if isFavorite {
             //for like
-            Films.shared.saveFilms(idFilm: idFilm, url: url, name: name,
-                                   image: image, isFavorite: true,
-                                   original: original, summary: summary ??
-                                   "No description text", imdb: imdb)
+            
+            let likeFilms = FavoriteFilm(context: self.context)
+            likeFilms.isFavorite = true
+            likeFilms.idFilm = Int16(idFilm ?? 0)
+            likeFilms.url = url
+            likeFilms.name = name
+            likeFilms.original = original
+            likeFilms.medium = image
+            likeFilms.summary = summary
+            likeFilms.imdb = imdb
+            
+            do {
+                try context.save()
+            } catch {
+                context.rollback()
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+            
+            getDataFromParse()
+            
+//            Films.shared.saveFilms(idFilm: idFilm, url: url, name: name,
+//                                   image: image, isFavorite: true,
+//                                   original: original, summary: summary ??
+//                                   "No description text", imdb: imdb)
         } else {
             //for not like
+            
+            do {
+                try context.deletedObjects
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+            
             Films.shared.deleteFilm(idFilm: idFilm)
             self.collectionViewSpace.reloadData()
         }

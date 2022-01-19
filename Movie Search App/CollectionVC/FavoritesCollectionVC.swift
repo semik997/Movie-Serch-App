@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoritesCollectionVC: UICollectionViewController {
     
@@ -20,23 +21,19 @@ class FavoritesCollectionVC: UICollectionViewController {
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
     }
-    private var filtredFilms: [Films.Film] = []
-    var filmsFav: [Films.Film] = Films.shared.favoriteFilm {
-        didSet {
-            favoriteCollectionView.reloadData()
-        }
-    }
-    
+    private var filtredFilms: [FavoriteFilm] = []
+    var filmsFav: [FavoriteFilm] = []
     var settingViewController = SettingViewController()
     var small: Bool?
     var medium: Bool?
     var big: Bool?
     var defaultSizeCell = CGSize (width: 200, height: 200)
+    var context: NSManagedObjectContext! // fix !
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        filmsFav = Films.shared.favoriteFilm
+//        filmsFav = FavoriteFilm(context: context)
         findImage.isHidden = true
         settingViewController.delegate = self
         
@@ -51,9 +48,20 @@ class FavoritesCollectionVC: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favoriteCollectionView.reloadData()
-        filmsFav = Films.shared.favoriteFilm
+//        filmsFav = FavoriteFilm(context: context)
+        let context = getContext()
+        let fetchRequest: NSFetchRequest<FavoriteFilm> = FavoriteFilm.fetchRequest()
+        do {
+            filmsFav = try context.fetch(fetchRequest)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
     }
     
+    private func getContext() -> NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
+    }
     
 // MARK: - UICollectionViewDataSource
     
@@ -85,13 +93,13 @@ class FavoritesCollectionVC: UICollectionViewController {
                                                                     for: indexPath) as? CollectionViewCell else {
             return UICollectionViewCell()
         }
-        var film: [Films.Film]
+        var film: [FavoriteFilm]
         if isFiltering {
             film = [filtredFilms[indexPath.row]]
-            cell.loadData(film: filtredFilms[indexPath.row])
+            cell.loadDataFavorite(film: filtredFilms[indexPath.row])
         } else {
             film = [filmsFav[indexPath.row]]
-            cell.loadData(film: filmsFav[indexPath.row])
+            cell.loadDataFavorite(film: filmsFav[indexPath.row])
         }
         cell.delegate = self
         return cell
@@ -104,7 +112,7 @@ class FavoritesCollectionVC: UICollectionViewController {
         let alertController = UIAlertController(title: title, message: message,
                                                 preferredStyle: style)
         let yes = UIAlertAction(title: "Yes, I'am sure", style: .default) { action in
-            guard let index = self.filmsFav.firstIndex(where: { $0.show?.id == idFilm})
+            guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
             else { return }
             self.filmsFav.remove(at: index)
             Films.shared.deleteFilm(idFilm: idFilm)
@@ -125,7 +133,7 @@ class FavoritesCollectionVC: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             guard let indexPath = favoriteCollectionView.indexPathsForSelectedItems else { return }
-            let film: Films.Film
+            let film: FavoriteFilm
             if isFiltering {
                 film = filtredFilms[indexPath[0].row]
             } else {
@@ -133,7 +141,7 @@ class FavoritesCollectionVC: UICollectionViewController {
             }
             let nav = segue.destination as! UINavigationController
             let MoreInfoFavoritesTableVC = nav.topViewController as! MoreInfoViewController
-            MoreInfoFavoritesTableVC.detailedInformation = film
+//            MoreInfoFavoritesTableVC.detailedInformation = film
         }
         
 // MARK: - Info button
@@ -205,8 +213,8 @@ extension FavoritesCollectionVC: UISearchResultsUpdating {
     
     private func filterContentForSearchText(_ searchText: String) {
         
-        filtredFilms = filmsFav.filter { (film: Films.Film) -> Bool in
-            return film.show?.name?.lowercased().contains(searchText.lowercased()) ?? false
+        filtredFilms = filmsFav.filter { (film: FavoriteFilm) -> Bool in
+            return film.name?.lowercased().contains(searchText.lowercased()) ?? false
         }
         favoriteCollectionView.reloadData ()
     }

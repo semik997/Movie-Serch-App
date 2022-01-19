@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol FavoriteProtocol: AnyObject {
     func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?, name: String?, image: String?,
@@ -28,13 +29,15 @@ class CollectionViewCell: UICollectionViewCell {
     var name: String?
     var image: String?
     var original: String?
+    var imageFav: UIImage?
+    var originalFav: UIImage?
     var summary: String?
     var imdb: String?
     var rating: Double?
     var isFavorite = false
     
     private var currentFilm: Films.Film?
-    
+    var context: NSManagedObjectContext! // fix !
     let defaults = UserDefaults.standard
     
     override func awakeFromNib() {
@@ -71,24 +74,6 @@ extension CollectionViewCell {
     
     func loadData(film: Films.Film) {
         currentFilm = film
-        if film.show?.isFavorite == true {
-            nameLabel?.text = film.show?.name
-            mainImage.image = getImage(from: film.show?.image?.medium ?? placeholderFilm)
-            idFilm = film.show?.id
-            url = film.show?.url
-            name = film.show?.name
-            image = film.show?.image?.medium
-            isFavorite = ((film.show?.isFavorite) != nil)
-            original = film.show?.image?.original
-            summary = film.show?.summary
-            imdb = film.show?.externals?.imdb
-            fillButton.isSelected = true
-            self.secondAPI.fetchShowRaiting(forShow: imdb ?? "") { [self] currentShowIMDb in
-                self.rating = currentShowIMDb.rating
-            }
-            ratingLabel.text = "\(rating ?? 0)/10"
-            
-        } else {
             nameLabel?.text = film.show?.name
             mainImage.image = getImage(from: film.show?.image?.medium ?? placeholderFilm)
             idFilm = film.show?.id
@@ -100,8 +85,26 @@ extension CollectionViewCell {
             summary = film.show?.summary
             imdb = film.show?.externals?.imdb
             fillButton.isSelected = false
+            self.secondAPI.fetchShowRaiting(forShow: imdb ?? "") { [self] currentShowIMDb in
+                self.rating = currentShowIMDb.rating
+            }
             ratingLabel.text = "\(rating ?? 0)/10"
-        }
+    }
+    
+    func loadDataFavorite(film: FavoriteFilm) {
+        nameLabel?.text = film.name
+        mainImage.image = getImage(from: film.medium ?? placeholderFilm)
+        idFilm = Int(film.idFilm)
+        url = film.url
+        name = film.name
+        imageFav = getImage(from: film.medium ?? placeholderFilm)
+        isFavorite = film.isFavorite
+        originalFav = getImage(from: film.original ?? placeholderFilm)
+        summary = film.summary
+        imdb = film.imdb
+        fillButton.isSelected = true
+        ratingLabel.text = "\(rating ?? 0)/10"
+        
     }
     
     // MARK: - String in image conversion
