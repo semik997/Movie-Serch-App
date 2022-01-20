@@ -98,13 +98,13 @@ extension CollectionViewCell {
     
     func loadDataFavorite(film: FavoriteFilm) {
         nameLabel?.text = film.name
-        mainImage.image = getImage(from: film.medium ?? placeholderFilm)
+        mainImage.image = UIImage(data: film.medium!)
         idFilm = film.idFilm
         url = film.url
         name = film.name
-        imageFav = getImage(from: film.medium ?? placeholderFilm)
+        imageFav = UIImage(data: film.medium!)
         isFavorite = film.isFavorite
-        originalFav = getImage(from: film.original ?? placeholderFilm)
+        originalFav = UIImage(data: film.original!)
         summary = film.summary
         imdb = film.imdb
         fillButton.isSelected = true
@@ -134,3 +134,5 @@ extension CollectionViewCell {
         return image
     }
 }
+
+

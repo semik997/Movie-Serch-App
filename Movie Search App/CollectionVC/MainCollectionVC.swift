@@ -131,7 +131,7 @@ class MainCollectionVC: UICollectionViewController {
             moreInfoMainVC.detail = film
         }
         
-        // MARK: - Info button
+    // MARK: - Info button
         
         if segue.identifier == "popVC" {
             
@@ -153,7 +153,7 @@ extension MainCollectionVC: UIPopoverPresentationControllerDelegate {
     }
 }
 
-// MARK: - Setting view color
+    // MARK: - Setting view color
 
 extension MainCollectionVC: SettingViewControllerDelegate {
     
@@ -170,7 +170,7 @@ extension MainCollectionVC: SettingViewControllerDelegate {
 }
 
 
-// MARK: - Setting search bar
+    // MARK: - Setting search bar
 
 extension MainCollectionVC: UISearchResultsUpdating {
     
@@ -206,7 +206,7 @@ extension MainCollectionVC: UISearchResultsUpdating {
     }
 }
 
-// MARK: - Save and delete to favorites
+    // MARK: - Save and delete to favorites
 
 extension MainCollectionVC: FavoriteProtocol {
     
@@ -218,13 +218,18 @@ extension MainCollectionVC: FavoriteProtocol {
         if isFavorite {
             //for like
             
+            let originalImage = getImage(from: original!)
+            let imageImage = getImage(from: image!)
+            let originalImageData = originalImage?.jpegData(compressionQuality: 1.0)
+            let imageData = imageImage?.jpegData(compressionQuality: 1.0)
+            
             let likeFilms = FavoriteFilm(context: self.context)
             likeFilms.isFavorite = true
             likeFilms.idFilm = idFilm ?? 0
             likeFilms.url = url
             likeFilms.name = name
-            likeFilms.original = original
-            likeFilms.medium = image
+            likeFilms.original = originalImageData
+            likeFilms.medium = imageData
             likeFilms.summary = summary
             likeFilms.imdb = imdb
             do {
@@ -253,9 +258,31 @@ extension MainCollectionVC: FavoriteProtocol {
 //            self.collectionViewSpace.reloadData()
         }
     }
+    
+    // MARK: - String in image conversion
+    
+    func getImage(from string: String) -> UIImage? {
+        //Get valid URL
+        guard let url = URL(string: string)
+        else {
+            print("Unable to create URL")
+            return nil
+        }
+        var image: UIImage? = nil
+        do {
+            //Get valid data
+            let data = try Data(contentsOf: url, options: [])
+            
+            //Make image
+            image = UIImage(data: data)
+        } catch {
+            print(error.localizedDescription)
+        }
+        return image
+    }
 }
 
-// MARK: - Setting item size
+    // MARK: - Setting item size
 
 extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
     
@@ -287,5 +314,49 @@ extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
     // setting cell intervals
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+    }
+}
+
+    // MARK: - Extention from save image
+
+extension MainCollectionVC {
+    
+    func NKPlaceholderImage(image: UIImage?, imageView: UIImageView?, imgUrl: String, compate:@escaping (UIImage?) -> Void) {
+        
+        if image != nil && imageView != nil {
+            imageView!.image = image!
+        }
+        
+        var urlcatch = imgUrl.replacingOccurrences(of: "/", with: "#")
+        let documentpath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        urlcatch = documentpath + "/" + "\(urlcatch)"
+        
+        let image = UIImage(contentsOfFile:urlcatch)
+        if image != nil && imageView != nil
+        {
+            imageView!.image = image!
+            compate(image)
+            
+        }else{
+            
+            if let url = URL(string: imgUrl){
+                
+                DispatchQueue.global(qos: .background).async {
+                    () -> Void in
+                    let imgdata = NSData(contentsOf: url)
+                    DispatchQueue.main.async {
+                        () -> Void in
+                        imgdata?.write(toFile: urlcatch, atomically: true)
+                        let image = UIImage(contentsOfFile:urlcatch)
+                        compate(image)
+                        if image != nil  {
+                            if imageView != nil  {
+                                imageView!.image = image!
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

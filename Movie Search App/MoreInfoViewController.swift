@@ -55,8 +55,7 @@ class MoreInfoViewController: UIViewController {
     // MARK: - Configuring new window with additional information
     private func setupMoreInformation () {
         if detailedInformation != nil {
-            moreInfoImage.image = getImage(from: detailedInformation?.original ??
-                                           placeholderFilm)
+            moreInfoImage.image = UIImage(data: (detailedInformation?.original)!)
             let summary = detailedInformation?.summary ?? "No description text"
             moreIntoTextView.text = summary.htmlString
             nameNavigationItem.title = detailedInformation?.name
@@ -140,6 +139,8 @@ class MoreInfoViewController: UIViewController {
     }
 }
 
+    // MARK: - Extention from html
+
 extension String {
     var utfData: Data? {
         return self.data(using: .utf8)
@@ -165,3 +166,7 @@ extension String {
         return htmlAttributedString?.string ?? self
     }
 }
+
+    // MARK: - Extention from save image
+
+

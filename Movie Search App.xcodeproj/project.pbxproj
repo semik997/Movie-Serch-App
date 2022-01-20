@@ -18,6 +18,8 @@
 		30687FFE278C43A1003CDE31 /* MainCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30687FFD278C43A1003CDE31 /* MainCollectionVC.swift */; };
 		30688000278C43BF003CDE31 /* FavoritesCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30687FFF278C43BF003CDE31 /* FavoritesCollectionVC.swift */; };
 		30688002278C43DA003CDE31 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30688001278C43DA003CDE31 /* CollectionViewCell.swift */; };
+		30863A102799B70F00CC45BA /* FavoriteFilm+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30863A0E2799B70F00CC45BA /* FavoriteFilm+CoreDataClass.swift */; };
+		30863A112799B70F00CC45BA /* FavoriteFilm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30863A0F2799B70F00CC45BA /* FavoriteFilm+CoreDataProperties.swift */; };
 		30CA0C64275B8559009468D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C63275B8559009468D2 /* AppDelegate.swift */; };
 		30CA0C66275B8559009468D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C65275B8559009468D2 /* SceneDelegate.swift */; };
 		30CA0C6B275B8559009468D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30CA0C69275B8559009468D2 /* Main.storyboard */; };
@@ -27,8 +29,6 @@
 		30CA0C7D275B8965009468D2 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C7C275B8965009468D2 /* FavoritesViewController.swift */; };
 		30CA0C7F275BE43B009468D2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C7E275BE43B009468D2 /* NetworkManager.swift */; };
 		30CA0C81275C04AA009468D2 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C80275C04AA009468D2 /* TableViewCell.swift */; };
-		30CC8450279860F800F02BA9 /* FavoriteFilm+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CC844E279860F800F02BA9 /* FavoriteFilm+CoreDataClass.swift */; };
-		30CC8451279860F800F02BA9 /* FavoriteFilm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CC844F279860F800F02BA9 /* FavoriteFilm+CoreDataProperties.swift */; };
 		30DFA0042779C19000B09E34 /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DFA0032779C19000B09E34 /* MoreInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +43,8 @@
 		30687FFD278C43A1003CDE31 /* MainCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionVC.swift; sourceTree = "<group>"; };
 		30687FFF278C43BF003CDE31 /* FavoritesCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionVC.swift; sourceTree = "<group>"; };
 		30688001278C43DA003CDE31 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		30863A0E2799B70F00CC45BA /* FavoriteFilm+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteFilm+CoreDataClass.swift"; sourceTree = "<group>"; };
+		30863A0F2799B70F00CC45BA /* FavoriteFilm+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteFilm+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		30C87F1327689B5E002C7242 /* Movie_Serch_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Movie_Serch_App.xcdatamodel; sourceTree = "<group>"; };
 		30CA0C60275B8559009468D2 /* Movie Search App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Movie Search App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30CA0C63275B8559009468D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,8 +57,6 @@
 		30CA0C7C275B8965009468D2 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		30CA0C7E275BE43B009468D2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		30CA0C80275C04AA009468D2 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		30CC844E279860F800F02BA9 /* FavoriteFilm+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteFilm+CoreDataClass.swift"; sourceTree = "<group>"; };
-		30CC844F279860F800F02BA9 /* FavoriteFilm+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteFilm+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		30DFA0032779C19000B09E34 /* MoreInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,8 +160,8 @@
 		30CC84522798613400F02BA9 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				30CC844F279860F800F02BA9 /* FavoriteFilm+CoreDataProperties.swift */,
-				30CC844E279860F800F02BA9 /* FavoriteFilm+CoreDataClass.swift */,
+				30863A0E2799B70F00CC45BA /* FavoriteFilm+CoreDataClass.swift */,
+				30863A0F2799B70F00CC45BA /* FavoriteFilm+CoreDataProperties.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -241,10 +241,10 @@
 				302A14D3279162B800033937 /* SecondAPI.swift in Sources */,
 				30CA0C81275C04AA009468D2 /* TableViewCell.swift in Sources */,
 				30DFA0042779C19000B09E34 /* MoreInfoViewController.swift in Sources */,
-				30CC8450279860F800F02BA9 /* FavoriteFilm+CoreDataClass.swift in Sources */,
 				30687FFE278C43A1003CDE31 /* MainCollectionVC.swift in Sources */,
-				30CC8451279860F800F02BA9 /* FavoriteFilm+CoreDataProperties.swift in Sources */,
+				30863A102799B70F00CC45BA /* FavoriteFilm+CoreDataClass.swift in Sources */,
 				305ADFE9278EFB0A002D39C8 /* SettingViewController.swift in Sources */,
+				30863A112799B70F00CC45BA /* FavoriteFilm+CoreDataProperties.swift in Sources */,
 				30688002278C43DA003CDE31 /* CollectionViewCell.swift in Sources */,
 				302CEE1527858CCD0017E0D7 /* Reachability.swift in Sources */,
 				305C361E2799434400477095 /* Movie_Search_App.xcdatamodeld in Sources */,
