@@ -14,10 +14,10 @@
 		30595242275D5078003A7049 /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30595241275D5078003A7049 /* LoadViewController.swift */; };
 		305ADFE7278EC5D4002D39C8 /* InfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305ADFE6278EC5D3002D39C8 /* InfoTableViewController.swift */; };
 		305ADFE9278EFB0A002D39C8 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305ADFE8278EFB0A002D39C8 /* SettingViewController.swift */; };
+		305C361E2799434400477095 /* Movie_Search_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30C87F1227689B5E002C7242 /* Movie_Search_App.xcdatamodeld */; };
 		30687FFE278C43A1003CDE31 /* MainCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30687FFD278C43A1003CDE31 /* MainCollectionVC.swift */; };
 		30688000278C43BF003CDE31 /* FavoritesCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30687FFF278C43BF003CDE31 /* FavoritesCollectionVC.swift */; };
 		30688002278C43DA003CDE31 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30688001278C43DA003CDE31 /* CollectionViewCell.swift */; };
-		30C87F1427689B5E002C7242 /* Movie_Search_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30C87F1227689B5E002C7242 /* Movie_Search_App.xcdatamodeld */; };
 		30CA0C64275B8559009468D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C63275B8559009468D2 /* AppDelegate.swift */; };
 		30CA0C66275B8559009468D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C65275B8559009468D2 /* SceneDelegate.swift */; };
 		30CA0C6B275B8559009468D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30CA0C69275B8559009468D2 /* Main.storyboard */; };
@@ -237,7 +237,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30C87F1427689B5E002C7242 /* Movie_Search_App.xcdatamodeld in Sources */,
 				30CA0C7B275B8951009468D2 /* MainViewController.swift in Sources */,
 				302A14D3279162B800033937 /* SecondAPI.swift in Sources */,
 				30CA0C81275C04AA009468D2 /* TableViewCell.swift in Sources */,
@@ -248,6 +247,7 @@
 				305ADFE9278EFB0A002D39C8 /* SettingViewController.swift in Sources */,
 				30688002278C43DA003CDE31 /* CollectionViewCell.swift in Sources */,
 				302CEE1527858CCD0017E0D7 /* Reachability.swift in Sources */,
+				305C361E2799434400477095 /* Movie_Search_App.xcdatamodeld in Sources */,
 				30595240275CED40003A7049 /* Film.swift in Sources */,
 				30CA0C7F275BE43B009468D2 /* NetworkManager.swift in Sources */,
 				30688000278C43BF003CDE31 /* FavoritesCollectionVC.swift in Sources */,

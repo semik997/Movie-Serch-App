@@ -33,7 +33,7 @@ class FavoritesCollectionVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        filmsFav = FavoriteFilm(context: context)
+        //        filmsFav = FavoriteFilm(context: context)
         findImage.isHidden = true
         settingViewController.delegate = self
         
@@ -48,7 +48,7 @@ class FavoritesCollectionVC: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favoriteCollectionView.reloadData()
-//        filmsFav = FavoriteFilm(context: context)
+        //        filmsFav = FavoriteFilm(context: context)
         let context = getContext()
         let fetchRequest: NSFetchRequest<FavoriteFilm> = FavoriteFilm.fetchRequest()
         do {
@@ -63,7 +63,7 @@ class FavoritesCollectionVC: UICollectionViewController {
         return appDelegate.persistentContainer.viewContext
     }
     
-// MARK: - UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -105,7 +105,7 @@ class FavoritesCollectionVC: UICollectionViewController {
         return cell
     }
     
-// MARK: - Setting up an alert controller
+    // MARK: - Setting up an alert controller
     
     func presentAlertController(withTitle title: String?, message: String?,
                                 style: UIAlertController.Style, idFilm: Int) {
@@ -128,7 +128,7 @@ class FavoritesCollectionVC: UICollectionViewController {
         present(alertController, animated: true)
     }
     
-// MARK: - Detail setting
+    // MARK: - Detail setting
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
@@ -141,10 +141,10 @@ class FavoritesCollectionVC: UICollectionViewController {
             }
             let nav = segue.destination as! UINavigationController
             let MoreInfoFavoritesTableVC = nav.topViewController as! MoreInfoViewController
-//            MoreInfoFavoritesTableVC.detailedInformation = film
+            //            MoreInfoFavoritesTableVC.detailedInformation = film
         }
         
-// MARK: - Info button
+    //MARK: - Info button
         
         if segue.identifier == "popVC" {
             if let tvc = segue.destination as? InfoTableViewController {
@@ -165,7 +165,7 @@ extension FavoritesCollectionVC: UIPopoverPresentationControllerDelegate {
     }
 }
 
-// MARK: - Setting view color
+    // MARK: - Setting view color
 
 extension FavoritesCollectionVC: SettingViewControllerDelegate {
     
@@ -183,7 +183,7 @@ extension FavoritesCollectionVC: SettingViewControllerDelegate {
     }
 }
 
-// MARK: - Save and delete to favorites
+    // MARK: - Save and delete to favorites
 
 extension FavoritesCollectionVC: FavoriteProtocol {
     func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?, name: String?,
@@ -204,7 +204,7 @@ extension FavoritesCollectionVC: FavoriteProtocol {
     }
 }
 
-// MARK: - Search in Favorite
+    // MARK: - Search in Favorite
 
 extension FavoritesCollectionVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
@@ -220,7 +220,7 @@ extension FavoritesCollectionVC: UISearchResultsUpdating {
     }
 }
 
-// MARK: - Setting size cell
+    // MARK: - Setting size cell
 
 extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
     

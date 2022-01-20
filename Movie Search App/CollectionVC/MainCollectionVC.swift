@@ -74,23 +74,9 @@ class MainCollectionVC: UICollectionViewController {
         } catch {
             
         }
-        
-        
-//        let fetchRequest: NSFetchRequest<FavoriteFilm> = FavoriteFilm.fetchRequest()
-//        fetchRequest.predicate =  NSPredicate(format: "name != nil")
-//
-//        var records = 0
-//        do {
-//            records = try context.count(for: fetchRequest)
-//            print("Film already")
-//        } catch let error as NSError {
-//            print(error.localizedDescription)
-//        }
-        
-        
     }
     
-// MARK: - UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -116,7 +102,7 @@ class MainCollectionVC: UICollectionViewController {
         }
         return cell
     }
-    
+    // MARK: - Checking internet connection
     func  presentInternetConnectionAlertController () {
         let internetAlert = UIAlertController(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .cancel){ action in
@@ -127,7 +113,7 @@ class MainCollectionVC: UICollectionViewController {
         present(internetAlert, animated: true)
     }
     
-// MARK: - Detail setting
+    // MARK: - Detail setting
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
@@ -138,7 +124,7 @@ class MainCollectionVC: UICollectionViewController {
             moreInfoMainVC.detailedInformation = film
         }
         
-// MARK: - Info button
+        // MARK: - Info button
         
         if segue.identifier == "popVC" {
             
@@ -160,7 +146,7 @@ extension MainCollectionVC: UIPopoverPresentationControllerDelegate {
     }
 }
 
-// MARK: - Setting view color
+    // MARK: - Setting view color
 
 extension MainCollectionVC: SettingViewControllerDelegate {
     
@@ -177,7 +163,7 @@ extension MainCollectionVC: SettingViewControllerDelegate {
 }
 
 
-// MARK: - Setting search bar
+    // MARK: - Setting search bar
 
 extension MainCollectionVC: UISearchResultsUpdating {
     
@@ -213,7 +199,7 @@ extension MainCollectionVC: UISearchResultsUpdating {
     }
 }
 
-// MARK: - Save and delete to favorites
+    // MARK: - Save and delete to favorites
 
 extension MainCollectionVC: FavoriteProtocol {
     
@@ -227,7 +213,7 @@ extension MainCollectionVC: FavoriteProtocol {
             
             let likeFilms = FavoriteFilm(context: self.context)
             likeFilms.isFavorite = true
-            likeFilms.idFilm = Int16(idFilm ?? 0)
+//            likeFilms.idFilm = Int16(Int64(idFilm ?? 0))
             likeFilms.url = url
             likeFilms.name = name
             likeFilms.original = original
@@ -251,9 +237,9 @@ extension MainCollectionVC: FavoriteProtocol {
 //                                   "No description text", imdb: imdb)
         } else {
             //for not like
-            
+            let removeFilm = FavoriteFilm(context: self.context)
             do {
-                try context.deletedObjects
+                try self.context.delete(removeFilm)
                 try context.save()
             } catch {
                 let nserror = error as NSError
@@ -267,7 +253,7 @@ extension MainCollectionVC: FavoriteProtocol {
     
 }
 
-// MARK: - Setting item size
+    // MARK: - Setting item size
 
 extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
     

@@ -37,7 +37,7 @@ class CollectionViewCell: UICollectionViewCell {
     var isFavorite = false
     
     private var currentFilm: Films.Film?
-    var context: NSManagedObjectContext! // fix !
+    var context: NSManagedObjectContext?
     let defaults = UserDefaults.standard
     
     override func awakeFromNib() {
@@ -56,7 +56,6 @@ class CollectionViewCell: UICollectionViewCell {
             delegate?.selectCell(isFavorite, idFilm: idFilm, url: url, name: name,
                                  image: image, original: original, summary: summary,
                                  imdb: imdb)
-            
         } else {
             //for not like
             fillButton.isSelected = !fillButton.isSelected
@@ -68,7 +67,7 @@ class CollectionViewCell: UICollectionViewCell {
     }
 }
 
-// MARK: - Uploading data to VC
+    // MARK: - Uploading data to VC
 
 extension CollectionViewCell {
     
@@ -94,7 +93,7 @@ extension CollectionViewCell {
     func loadDataFavorite(film: FavoriteFilm) {
         nameLabel?.text = film.name
         mainImage.image = getImage(from: film.medium ?? placeholderFilm)
-        idFilm = Int(film.idFilm)
+//        idFilm = Int(film.idFilm)
         url = film.url
         name = film.name
         imageFav = getImage(from: film.medium ?? placeholderFilm)

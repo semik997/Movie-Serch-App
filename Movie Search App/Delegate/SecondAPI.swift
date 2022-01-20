@@ -11,7 +11,7 @@ import SystemConfiguration
 
 class SecondAPI {
     
-// MARK: - Fetch show raiting
+    // MARK: - Fetch show raiting
     func fetchShowRaiting(forShow show: String, completionHandler: @escaping (Films.FilmIMDb) -> Void) {
         
         let headers = [
