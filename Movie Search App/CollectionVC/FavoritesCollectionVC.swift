@@ -28,7 +28,7 @@ class FavoritesCollectionVC: UICollectionViewController {
     var medium: Bool?
     var big: Bool?
     var defaultSizeCell = CGSize (width: 200, height: 200)
-    var context: NSManagedObjectContext! // fix !
+    var context: NSManagedObjectContext? // fix !
     
     
     override func viewDidLoad() {
@@ -117,18 +117,16 @@ class FavoritesCollectionVC: UICollectionViewController {
             else { return }
             let context = self.getContext()
             let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FavoriteFilm")
-//            request.predicate = NSPredicate(format:"idFilm == %@", idFilm)
+            request.predicate = NSPredicate(format:"idFilm = %@", "\(idFilm)")
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
             do {
                 try context.execute(deleteRequest)
-//                try self.context.delete(index)
                 try context.save()
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
             self.filmsFav.remove(at: index)
-            Films.shared.deleteFilm(idFilm: idFilm)
             self.favoriteCollectionView.reloadData()
         }
         
@@ -203,13 +201,7 @@ extension FavoritesCollectionVC: FavoriteProtocol {
                     image: String?, original: String?, summary: String?,
                     imdb: String?) {
         
-        if isFavorite {
-            //for like
-            
-            Films.shared.saveFilms(idFilm: idFilm, url: url, name: name, image: image, isFavorite: true,
-                                   original: original, summary: summary ?? "No description text", imdb: imdb)
-            
-        } else {
+        if isFavorite == false {
             //for not like
             presentAlertController(withTitle: "Do you sure?", message: nil, style: .alert,
                                    idFilm: idFilm ?? 0)

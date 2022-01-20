@@ -47,7 +47,6 @@ class MainCollectionVC: UICollectionViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,12 +67,17 @@ class MainCollectionVC: UICollectionViewController {
         
         do {
             self.oneFilm = try context.fetch(FavoriteFilm.fetchRequest())
-            DispatchQueue.main.async {
-                self.collectionViewSpace.reloadData()
-            }
+//            DispatchQueue.main.async {
+//                self.collectionViewSpace.reloadData()
+//            }
         } catch {
             
         }
+    }
+    
+    private func getContext() -> NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
     }
     
     // MARK: - UICollectionViewDataSource
@@ -82,7 +86,8 @@ class MainCollectionVC: UICollectionViewController {
         return 1
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView,
+                                 numberOfItemsInSection section: Int) -> Int {
         if films.count == 0 {
             findImage.isHidden = false
             return films.count
@@ -92,16 +97,18 @@ class MainCollectionVC: UICollectionViewController {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView,
+                                 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionViewSpace.dequeueReusableCell(withReuseIdentifier: "mainCell",
                                                                  for: indexPath) as? CollectionViewCell
-        else { return UICollectionViewCell()}
+        else { return UICollectionViewCell() }
         cell.delegate = self
         if indexPath.row < films.count {
             cell.loadData(film: films[indexPath.row])
         }
         return cell
     }
+    
     // MARK: - Checking internet connection
     func  presentInternetConnectionAlertController () {
         let internetAlert = UIAlertController(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", preferredStyle: .alert)
@@ -146,7 +153,7 @@ extension MainCollectionVC: UIPopoverPresentationControllerDelegate {
     }
 }
 
-    // MARK: - Setting view color
+// MARK: - Setting view color
 
 extension MainCollectionVC: SettingViewControllerDelegate {
     
@@ -163,7 +170,7 @@ extension MainCollectionVC: SettingViewControllerDelegate {
 }
 
 
-    // MARK: - Setting search bar
+// MARK: - Setting search bar
 
 extension MainCollectionVC: UISearchResultsUpdating {
     
@@ -189,7 +196,7 @@ extension MainCollectionVC: UISearchResultsUpdating {
                 collectionViewSpace.reloadData()
                 networkManager.fetchCurrent(onCompletion: { [weak self]
                     currentShowData in self?.films = currentShowData
-                } , forShow: "")
+                }, forShow: "")
             }
             // print("Internet Connection Available!")
         } else {
@@ -199,7 +206,7 @@ extension MainCollectionVC: UISearchResultsUpdating {
     }
 }
 
-    // MARK: - Save and delete to favorites
+// MARK: - Save and delete to favorites
 
 extension MainCollectionVC: FavoriteProtocol {
     
@@ -220,7 +227,6 @@ extension MainCollectionVC: FavoriteProtocol {
             likeFilms.medium = image
             likeFilms.summary = summary
             likeFilms.imdb = imdb
-            
             do {
                 try context.save()
             } catch {
@@ -228,32 +234,28 @@ extension MainCollectionVC: FavoriteProtocol {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
-            
             getDataFromParse()
             
-//            Films.shared.saveFilms(idFilm: idFilm, url: url, name: name,
-//                                   image: image, isFavorite: true,
-//                                   original: original, summary: summary ??
-//                                   "No description text", imdb: imdb)
         } else {
             //for not like
-            let removeFilm = FavoriteFilm(context: self.context)
+            
+            let context = self.getContext()
+            let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FavoriteFilm")
+            request.predicate = NSPredicate(format:"idFilm = %@", "\(idFilm ?? 0)")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
             do {
-                try self.context.delete(removeFilm)
+                try context.execute(deleteRequest)
                 try context.save()
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
-            
-            Films.shared.deleteFilm(idFilm: idFilm)
-            self.collectionViewSpace.reloadData()
+//            self.collectionViewSpace.reloadData()
         }
     }
-    
 }
 
-    // MARK: - Setting item size
+// MARK: - Setting item size
 
 extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
     

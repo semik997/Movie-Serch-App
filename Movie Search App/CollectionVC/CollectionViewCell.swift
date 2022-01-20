@@ -48,17 +48,23 @@ class CollectionViewCell: UICollectionViewCell {
                             for: .selected)
     }
     
+    private func getContext() -> NSManagedObjectContext {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
+    }
+    
     @IBAction func likeButton(_ sender: UIButton) {
         
         if isFavorite {
-            //for like
+            //delited like
+            fillButton.isSelected = false
             isFavorite = !isFavorite
             delegate?.selectCell(isFavorite, idFilm: idFilm, url: url, name: name,
                                  image: image, original: original, summary: summary,
                                  imdb: imdb)
         } else {
-            //for not like
-            fillButton.isSelected = !fillButton.isSelected
+            //add to like
+            fillButton.isSelected = true
             isFavorite = !isFavorite
             delegate?.selectCell(isFavorite, idFilm: idFilm, url: url, name: name,
                                  image: image,original: original, summary: summary,
@@ -67,27 +73,27 @@ class CollectionViewCell: UICollectionViewCell {
     }
 }
 
-    // MARK: - Uploading data to VC
+// MARK: - Uploading data to VC
 
 extension CollectionViewCell {
     
     func loadData(film: Films.Film) {
         currentFilm = film
-            nameLabel?.text = film.show?.name
-            mainImage.image = getImage(from: film.show?.image?.medium ?? placeholderFilm)
-            idFilm = film.show?.id
-            url = film.show?.url
-            name = film.show?.name
-            image = film.show?.image?.medium
-            isFavorite = ((film.show?.isFavorite) != nil)
-            original = film.show?.image?.original
-            summary = film.show?.summary
-            imdb = film.show?.externals?.imdb
-            fillButton.isSelected = false
-            self.secondAPI.fetchShowRaiting(forShow: imdb ?? "") { [self] currentShowIMDb in
-                self.rating = currentShowIMDb.rating
-            }
-            ratingLabel.text = "\(rating ?? 0)/10"
+        nameLabel?.text = film.show?.name
+        mainImage.image = getImage(from: film.show?.image?.medium ?? placeholderFilm)
+        idFilm = film.show?.id
+        url = film.show?.url
+        name = film.show?.name
+        image = film.show?.image?.medium
+        isFavorite = ((film.show?.isFavorite) != nil)
+        original = film.show?.image?.original
+        summary = film.show?.summary
+        imdb = film.show?.externals?.imdb
+        fillButton.isSelected = false
+        self.secondAPI.fetchShowRaiting(forShow: imdb ?? "") { [self] currentShowIMDb in
+            self.rating = currentShowIMDb.rating
+        }
+        ratingLabel.text = "\(rating ?? 0)/10"
     }
     
     func loadDataFavorite(film: FavoriteFilm) {
