@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 protocol FavoriteProtocol: AnyObject {
-    func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?, name: String?, image: String?,
+    func selectCell(_ isFavorite: Bool, idFilm: Double?, url: String?, name: String?, image: String?,
                     original: String?, summary: String?, imdb: String?)
 }
 
@@ -24,7 +24,7 @@ class CollectionViewCell: UICollectionViewCell {
     //Initialization of UI fields
     weak var delegate: FavoriteProtocol?
     var secondAPI = SecondAPI()
-    var idFilm: Int?
+    var idFilm: Double?
     var url: String?
     var name: String?
     var image: String?
@@ -93,7 +93,7 @@ extension CollectionViewCell {
     func loadDataFavorite(film: FavoriteFilm) {
         nameLabel?.text = film.name
         mainImage.image = getImage(from: film.medium ?? placeholderFilm)
-//        idFilm = Int(film.idFilm)
+        idFilm = film.idFilm
         url = film.url
         name = film.name
         imageFav = getImage(from: film.medium ?? placeholderFilm)

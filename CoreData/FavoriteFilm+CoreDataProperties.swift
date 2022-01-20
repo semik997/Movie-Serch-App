@@ -17,7 +17,7 @@ extension FavoriteFilm {
     }
 
     @NSManaged public var url: String?
-    @NSManaged public var idFilm: Int16
+    @NSManaged public var idFilm: Double
     @NSManaged public var name: String?
     @NSManaged public var medium: String?
     @NSManaged public var isFavorite: Bool

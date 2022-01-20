@@ -30,6 +30,7 @@ class FavoritesCollectionVC: UICollectionViewController {
     var defaultSizeCell = CGSize (width: 200, height: 200)
     var context: NSManagedObjectContext! // fix !
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -108,12 +109,24 @@ class FavoritesCollectionVC: UICollectionViewController {
     // MARK: - Setting up an alert controller
     
     func presentAlertController(withTitle title: String?, message: String?,
-                                style: UIAlertController.Style, idFilm: Int) {
+                                style: UIAlertController.Style, idFilm: Double) {
         let alertController = UIAlertController(title: title, message: message,
                                                 preferredStyle: style)
         let yes = UIAlertAction(title: "Yes, I'am sure", style: .default) { action in
             guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
             else { return }
+            let context = self.getContext()
+            let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FavoriteFilm")
+//            request.predicate = NSPredicate(format:"idFilm == %@", idFilm)
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+            do {
+                try context.execute(deleteRequest)
+//                try self.context.delete(index)
+                try context.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
             self.filmsFav.remove(at: index)
             Films.shared.deleteFilm(idFilm: idFilm)
             self.favoriteCollectionView.reloadData()
@@ -141,10 +154,10 @@ class FavoritesCollectionVC: UICollectionViewController {
             }
             let nav = segue.destination as! UINavigationController
             let MoreInfoFavoritesTableVC = nav.topViewController as! MoreInfoViewController
-            //            MoreInfoFavoritesTableVC.detailedInformation = film
+            MoreInfoFavoritesTableVC.detailedInformation = film
         }
         
-    //MARK: - Info button
+        //MARK: - Info button
         
         if segue.identifier == "popVC" {
             if let tvc = segue.destination as? InfoTableViewController {
@@ -165,7 +178,7 @@ extension FavoritesCollectionVC: UIPopoverPresentationControllerDelegate {
     }
 }
 
-    // MARK: - Setting view color
+// MARK: - Setting view color
 
 extension FavoritesCollectionVC: SettingViewControllerDelegate {
     
@@ -183,10 +196,10 @@ extension FavoritesCollectionVC: SettingViewControllerDelegate {
     }
 }
 
-    // MARK: - Save and delete to favorites
+// MARK: - Save and delete to favorites
 
 extension FavoritesCollectionVC: FavoriteProtocol {
-    func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?, name: String?,
+    func selectCell(_ isFavorite: Bool, idFilm: Double?, url: String?, name: String?,
                     image: String?, original: String?, summary: String?,
                     imdb: String?) {
         
@@ -204,7 +217,7 @@ extension FavoritesCollectionVC: FavoriteProtocol {
     }
 }
 
-    // MARK: - Search in Favorite
+// MARK: - Search in Favorite
 
 extension FavoritesCollectionVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
@@ -220,7 +233,7 @@ extension FavoritesCollectionVC: UISearchResultsUpdating {
     }
 }
 
-    // MARK: - Setting size cell
+// MARK: - Setting size cell
 
 extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
     

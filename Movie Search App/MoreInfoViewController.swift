@@ -9,7 +9,8 @@ import UIKit
 
 class MoreInfoViewController: UIViewController {
     
-    var detailedInformation: Films.Film?
+    var detailedInformation: FavoriteFilm?
+    var detail: Films.Film?
     
     @IBOutlet weak var moreInfoImage: UIImageView!
     @IBOutlet weak var moreIntoTextView: UITextView!
@@ -19,29 +20,52 @@ class MoreInfoViewController: UIViewController {
     // MARK: - Configuring a button to open a window with search in You Tube
     
     @IBAction private func searchInYTButton(_ sender: UIButton) {
-        let youtubeUser =  detailedInformation?.show?.name
-        let text = youtubeUser?.split(separator: " ").joined(separator: "%20")
-        let appURL = NSURL(string: "\(appYouTubeLink)\(text ?? "")")
-        let webURL = NSURL(string: "\(safariYouTubeLink)\(text ?? "")")
-        let application = UIApplication.shared
-        
-        if application.canOpenURL(appURL! as URL) {
-            // open URL inside app
-            application.open(appURL! as URL)
+        if detailedInformation?.name == nil {
+            let youtubeUser =  detail?.show?.name
+            let text = youtubeUser?.split(separator: " ").joined(separator: "%20")
+            let appURL = NSURL(string: "\(appYouTubeLink)\(text ?? "")")
+            let webURL = NSURL(string: "\(safariYouTubeLink)\(text ?? "")")
+            let application = UIApplication.shared
+            
+            if application.canOpenURL(appURL! as URL) {
+                // open URL inside app
+                application.open(appURL! as URL)
+            } else {
+                // if Youtube app is not installed, open URL inside Safari
+                application.open(webURL! as URL)
+            }
         } else {
-            // if Youtube app is not installed, open URL inside Safari
-            application.open(webURL! as URL)
+            let youtubeUser =  detailedInformation?.name
+            let text = youtubeUser?.split(separator: " ").joined(separator: "%20")
+            let appURL = NSURL(string: "\(appYouTubeLink)\(text ?? "")")
+            let webURL = NSURL(string: "\(safariYouTubeLink)\(text ?? "")")
+            let application = UIApplication.shared
+            
+            if application.canOpenURL(appURL! as URL) {
+                // open URL inside app
+                application.open(appURL! as URL)
+            } else {
+                // if Youtube app is not installed, open URL inside Safari
+                application.open(webURL! as URL)
+            }
         }
+        
     }
     
     // MARK: - Configuring new window with additional information
     private func setupMoreInformation () {
         if detailedInformation != nil {
-            moreInfoImage.image = getImage(from: detailedInformation?.show?.image?.original ??
+            moreInfoImage.image = getImage(from: detailedInformation?.original ??
                                            placeholderFilm)
-            let summary = detailedInformation?.show?.summary ?? "No description text"
+            let summary = detailedInformation?.summary ?? "No description text"
             moreIntoTextView.text = summary.htmlString
-            nameNavigationItem.title = detailedInformation?.show?.name
+            nameNavigationItem.title = detailedInformation?.name
+        } else {
+            moreInfoImage.image = getImage(from: detail?.show?.image?.original ??
+                                           placeholderFilm)
+            let summary = detail?.show?.summary ?? "No description text"
+            moreIntoTextView.text = summary.htmlString
+            nameNavigationItem.title = detail?.show?.name
         }
     }
     
@@ -58,17 +82,33 @@ class MoreInfoViewController: UIViewController {
     
     @IBAction func shareActive(_ sender: UIBarButtonItem) {
         let shareController: UIActivityViewController
-        if detailedInformation?.show?.externals?.imdb == nil {
-            shareController = UIActivityViewController(activityItems: [detailedInformation?.show?.url ?? ""], applicationActivities: nil)
+        if detail?.show?.externals?.imdb == nil && detail?.show?.url == nil {
+        if detailedInformation?.imdb == nil {
+            shareController = UIActivityViewController(activityItems: [detailedInformation?.url ?? ""], applicationActivities: nil)
             shareController.completionWithItemsHandler = { _, bool, _, _ in
                 if bool {
                     print("Successful")}
             }
         } else {
-            shareController = UIActivityViewController(activityItems: ["https://www.imdb.com/title/\(detailedInformation?.show?.externals?.imdb ?? "")" ], applicationActivities: nil)
+            shareController = UIActivityViewController(activityItems: ["https://www.imdb.com/title/\(detailedInformation?.imdb ?? "")" ], applicationActivities: nil)
             shareController.completionWithItemsHandler = { _, bool, _, _ in
                 if bool {
                     print("Successful")}
+            }
+        }
+        } else {
+            if detail?.show?.externals?.imdb == nil {
+                shareController = UIActivityViewController(activityItems: [detail?.show?.url ?? ""], applicationActivities: nil)
+                shareController.completionWithItemsHandler = { _, bool, _, _ in
+                    if bool {
+                        print("Successful")}
+                }
+            } else {
+                shareController = UIActivityViewController(activityItems: ["https://www.imdb.com/title/\(detail?.show?.externals?.imdb ?? "")" ], applicationActivities: nil)
+                shareController.completionWithItemsHandler = { _, bool, _, _ in
+                    if bool {
+                        print("Successful")}
+                }
             }
         }
         present (shareController, animated: true, completion: nil)

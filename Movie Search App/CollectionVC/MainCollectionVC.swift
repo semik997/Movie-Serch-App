@@ -121,7 +121,7 @@ class MainCollectionVC: UICollectionViewController {
             let film = films[indexPath[0].row]
             let nav = segue.destination as! UINavigationController
             let moreInfoMainVC = nav.topViewController as! MoreInfoViewController
-            moreInfoMainVC.detailedInformation = film
+            moreInfoMainVC.detail = film
         }
         
         // MARK: - Info button
@@ -203,7 +203,7 @@ extension MainCollectionVC: UISearchResultsUpdating {
 
 extension MainCollectionVC: FavoriteProtocol {
     
-    func selectCell(_ isFavorite: Bool, idFilm: Int?, url: String?,
+    func selectCell(_ isFavorite: Bool, idFilm: Double?, url: String?,
                     name: String?, image: String?, original: String?,
                     summary: String?, imdb: String?) {
         
@@ -213,7 +213,7 @@ extension MainCollectionVC: FavoriteProtocol {
             
             let likeFilms = FavoriteFilm(context: self.context)
             likeFilms.isFavorite = true
-//            likeFilms.idFilm = Int16(Int64(idFilm ?? 0))
+            likeFilms.idFilm = idFilm ?? 0
             likeFilms.url = url
             likeFilms.name = name
             likeFilms.original = original
