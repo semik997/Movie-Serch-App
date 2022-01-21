@@ -14,15 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
-        
         let mvc = window?.rootViewController as? MainCollectionVC
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
         mvc?.context = context
-//
-//        let fvc = window?.rootViewController as? FavoritesCollectionVC
-//
-//        fvc?.context = context
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -55,9 +49,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Save changes in the application's managed object context when the application transitions to the background.
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
-    
-    
-    
-    
 }
-
