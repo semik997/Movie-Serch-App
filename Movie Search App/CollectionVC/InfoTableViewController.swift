@@ -63,5 +63,4 @@ class InfoTableViewController: UITableViewController, SettingViewControllerDeleg
             }
         }
     }
-    
 }

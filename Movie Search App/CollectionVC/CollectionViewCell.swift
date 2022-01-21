@@ -109,7 +109,6 @@ extension CollectionViewCell {
         imdb = film.imdb
         fillButton.isSelected = true
         ratingLabel.text = "\(rating ?? 0)/10"
-        
     }
     
     // MARK: - String in image conversion

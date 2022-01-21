@@ -36,13 +36,10 @@ class MainCollectionVC: UICollectionViewController {
                    AppDelegate).persistentContainer.viewContext
     var oneFilm: [FavoriteFilm]?
     
-    
-    // UserDefaults
     var films: [Films.Film] = [] {
         didSet {
             DispatchQueue.main.async { [self] in
                 collectionViewSpace.reloadData()
-                
             }
         }
     }
@@ -67,11 +64,7 @@ class MainCollectionVC: UICollectionViewController {
         
         do {
             self.oneFilm = try context.fetch(FavoriteFilm.fetchRequest())
-//            DispatchQueue.main.async {
-//                self.collectionViewSpace.reloadData()
-//            }
         } catch {
-            
         }
     }
     
@@ -116,7 +109,6 @@ class MainCollectionVC: UICollectionViewController {
             self.collectionViewSpace.reloadData()
         }
         internetAlert.addAction(ok)
-        
         present(internetAlert, animated: true)
     }
     
@@ -169,7 +161,6 @@ extension MainCollectionVC: SettingViewControllerDelegate {
     }
 }
 
-
     // MARK: - Setting search bar
 
 extension MainCollectionVC: UISearchResultsUpdating {
@@ -198,7 +189,6 @@ extension MainCollectionVC: UISearchResultsUpdating {
                     currentShowData in self?.films = currentShowData
                 }, forShow: "")
             }
-            // print("Internet Connection Available!")
         } else {
             print("Internet Connection not Available!")
             presentInternetConnectionAlertController ()
@@ -255,7 +245,6 @@ extension MainCollectionVC: FavoriteProtocol {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
-//            self.collectionViewSpace.reloadData()
         }
     }
     
@@ -326,18 +315,16 @@ extension MainCollectionVC {
         if image != nil && imageView != nil {
             imageView!.image = image!
         }
-        
         var urlcatch = imgUrl.replacingOccurrences(of: "/", with: "#")
         let documentpath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         urlcatch = documentpath + "/" + "\(urlcatch)"
-        
         let image = UIImage(contentsOfFile:urlcatch)
         if image != nil && imageView != nil
         {
             imageView!.image = image!
             compate(image)
             
-        }else{
+        } else {
             
             if let url = URL(string: imgUrl){
                 

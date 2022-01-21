@@ -49,7 +49,6 @@ class MoreInfoViewController: UIViewController {
                 application.open(webURL! as URL)
             }
         }
-        
     }
     
     // MARK: - Configuring new window with additional information
@@ -166,7 +165,3 @@ extension String {
         return htmlAttributedString?.string ?? self
     }
 }
-
-    // MARK: - Extention from save image
-
-

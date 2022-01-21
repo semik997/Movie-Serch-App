@@ -28,13 +28,12 @@ class FavoritesCollectionVC: UICollectionViewController {
     var medium: Bool?
     var big: Bool?
     var defaultSizeCell = CGSize (width: 200, height: 200)
-    var context: NSManagedObjectContext? // fix !
+    var context: NSManagedObjectContext?
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //        filmsFav = FavoriteFilm(context: context)
         findImage.isHidden = true
         settingViewController.delegate = self
         
@@ -49,7 +48,6 @@ class FavoritesCollectionVC: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favoriteCollectionView.reloadData()
-        //        filmsFav = FavoriteFilm(context: context)
         let context = getContext()
         let fetchRequest: NSFetchRequest<FavoriteFilm> = FavoriteFilm.fetchRequest()
         do {
@@ -70,8 +68,8 @@ class FavoritesCollectionVC: UICollectionViewController {
         return 1
     }
     
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView,
+                                 numberOfItemsInSection section: Int) -> Int {
         if isFiltering {
             if filtredFilms.count == 0 {
                 findImage.isHidden = false
@@ -89,11 +87,11 @@ class FavoritesCollectionVC: UICollectionViewController {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt
+                                 indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = favoriteCollectionView.dequeueReusableCell(withReuseIdentifier: "mainCell",
-                                                                    for: indexPath) as? CollectionViewCell else {
-            return UICollectionViewCell()
-        }
+                                                                    for: indexPath) as? CollectionViewCell
+        else {  return UICollectionViewCell() }
         var film: [FavoriteFilm]
         if isFiltering {
             film = [filtredFilms[indexPath.row]]
