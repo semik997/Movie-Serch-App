@@ -74,11 +74,11 @@ class MoreInfoViewController: UIViewController {
     }
     
     
-    @IBAction func exit(_ sender: UIBarButtonItem) {
+    @IBAction private func exit(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func shareActive(_ sender: UIBarButtonItem) {
+    @IBAction private func shareActive(_ sender: UIBarButtonItem) {
         let shareController: UIActivityViewController
         if detail?.show?.externals?.imdb == nil && detail?.show?.url == nil {
         if detailedInformation?.imdb == nil {
@@ -116,7 +116,7 @@ class MoreInfoViewController: UIViewController {
     
     // MARK: - String in image conversion
     
-    func getImage(from string: String) -> UIImage? {
+    private func getImage(from string: String) -> UIImage? {
         //Get valid URL
         guard let url = URL(string: string)
         else {
@@ -141,14 +141,13 @@ class MoreInfoViewController: UIViewController {
     // MARK: - Extention from html
 
 extension String {
-    var utfData: Data? {
+    private var utfData: Data? {
         return self.data(using: .utf8)
     }
     
     var htmlAttributedString: NSAttributedString? {
         guard let data = self.utfData else {
-            return nil
-        }
+            return nil }
         do {
             return try NSAttributedString(data: data,
                                           options: [
@@ -157,11 +156,8 @@ extension String {
                                           documentAttributes: nil)
         } catch {
             print(error.localizedDescription)
-            return nil
-        }
+            return nil }
     }
-    
     var htmlString: String {
-        return htmlAttributedString?.string ?? self
-    }
+        return htmlAttributedString?.string ?? self }
 }

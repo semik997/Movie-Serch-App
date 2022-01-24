@@ -23,11 +23,11 @@ class FavoritesCollectionVC: UICollectionViewController {
     }
     private var filtredFilms: [FavoriteFilm] = []
     private var filmsFav: [FavoriteFilm] = []
-    var settingViewController = SettingViewController()
-    var small: Bool?
-    var medium: Bool?
-    var big: Bool?
-    var defaultSizeCell = CGSize (width: 200, height: 200)
+    private var settingViewController = SettingViewController()
+    private var small: Bool?
+    private var medium: Bool?
+    private var big: Bool?
+    private var defaultSizeCell = CGSize (width: 200, height: 200)
     var context: NSManagedObjectContext?
     
     
@@ -58,8 +58,8 @@ class FavoritesCollectionVC: UICollectionViewController {
     }
     
     private func getContext() -> NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.persistentContainer.viewContext
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        return appDelegate!.persistentContainer.viewContext
     }
     
     // MARK: - UICollectionViewDataSource
@@ -106,7 +106,7 @@ class FavoritesCollectionVC: UICollectionViewController {
     
     // MARK: - Setting up an alert controller
     
-    func presentAlertController(withTitle title: String?, message: String?,
+    private func presentAlertController(withTitle title: String?, message: String?,
                                 style: UIAlertController.Style, idFilm: Double) {
         let alertController = UIAlertController(title: title, message: message,
                                                 preferredStyle: style)

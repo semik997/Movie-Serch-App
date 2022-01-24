@@ -55,7 +55,7 @@ class InfoTableViewController: UITableViewController, SettingViewControllerDeleg
     }
     
     // exit
-    @IBAction func exit(_ sender: UIButton) {
+    @IBAction private func exit(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
 }

@@ -23,18 +23,18 @@ class CollectionViewCell: UICollectionViewCell {
     
     //Initialization of UI fields
     weak var delegate: FavoriteProtocol?
-    var secondAPI = SecondAPI()
-    var idFilm: Double?
-    var url: String?
-    var name: String?
-    var image: String?
-    var original: String?
-    var imageFav: UIImage?
-    var originalFav: UIImage?
-    var summary: String?
-    var imdb: String?
-    var rating: Double?
-    var isFavorite = false
+    private var secondAPI = SecondAPI()
+    private var idFilm: Double?
+    private var url: String?
+    private var name: String?
+    private var image: String?
+    private var original: String?
+    private var imageFav: UIImage?
+    private var originalFav: UIImage?
+    private var summary: String?
+    private var imdb: String?
+    private var rating: Double?
+    private var isFavorite = false
     
     private var currentFilm: Films.Film?
     var context: NSManagedObjectContext?

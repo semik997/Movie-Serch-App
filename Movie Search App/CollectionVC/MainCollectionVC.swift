@@ -58,8 +58,8 @@ class MainCollectionVC: UICollectionViewController {
     // MARK: - Save in CoreData
     
     private func getContext() -> NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.persistentContainer.viewContext
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        return appDelegate!.persistentContainer.viewContext
     }
     
     // MARK: - UICollectionViewDataSource
@@ -92,7 +92,7 @@ class MainCollectionVC: UICollectionViewController {
     }
     
     // MARK: - Checking internet connection
-    func  presentInternetConnectionAlertController () {
+    private func presentInternetConnectionAlertController () {
         let internetAlert = UIAlertController(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", preferredStyle: .alert)
         let ok = UIAlertAction(title: "OK", style: .cancel){ action in
             self.collectionViewSpace.reloadData()
@@ -234,7 +234,7 @@ extension MainCollectionVC: FavoriteProtocol {
     
     // MARK: - String in image conversion
     
-    func getImage(from string: String) -> UIImage? {
+    private func getImage(from string: String) -> UIImage? {
         //Get valid URL
         guard let url = URL(string: string)
         else {

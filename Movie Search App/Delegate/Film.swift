@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import CoreData
 
-
 class Films {
     
     private let defaults = UserDefaults.standard
@@ -63,18 +62,18 @@ class Films {
         }
     }
     
-    // MARK: - Models for working with data in User Data
-    
-    func saveFilms(idFilm: Double?, url: String?, name: String?,
-                   image: String?, isFavorite: Bool, original: String?,
-                   summary: String?, imdb: String?) {
-        
-        let favoriteFilms = Film(show: Show(id: idFilm, url: url, name: name, image: Image(medium: image ?? placeholderFilm, original: original ?? placeholderFilm), externals: Externals(imdb: imdb), summary: summary, isFavorite: true))
-        favoriteFilm.insert(favoriteFilms, at: 0)
-    }
-    
-    func deleteFilm(idFilm: Double?) {
-        favoriteFilm.removeAll(where: {$0.show?.id == idFilm})
-        favoriteFilm = favoriteFilm
-    }
+//    // MARK: - Models for working with data in User Data
+//    
+//    func saveFilms(idFilm: Double?, url: String?, name: String?,
+//                   image: String?, isFavorite: Bool, original: String?,
+//                   summary: String?, imdb: String?) {
+//        
+//        let favoriteFilms = Film(show: Show(id: idFilm, url: url, name: name, image: Image(medium: image ?? placeholderFilm, original: original ?? placeholderFilm), externals: Externals(imdb: imdb), summary: summary, isFavorite: true))
+//        favoriteFilm.insert(favoriteFilms, at: 0)
+//    }
+//    
+//    func deleteFilm(idFilm: Double?) {
+//        favoriteFilm.removeAll(where: {$0.show?.id == idFilm})
+//        favoriteFilm = favoriteFilm
+//    }
 }

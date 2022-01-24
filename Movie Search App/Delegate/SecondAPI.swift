@@ -36,7 +36,7 @@ class SecondAPI {
     }
     
     // Call completion block with json
-    func parseJSONRaitinig(withData data: Data) -> Films.FilmIMDb? {
+    private func parseJSONRaitinig(withData data: Data) -> Films.FilmIMDb? {
         let decoder = JSONDecoder()
         var currentShowIMDb: Films.FilmIMDb
         do {

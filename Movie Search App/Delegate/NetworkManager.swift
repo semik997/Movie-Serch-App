@@ -31,7 +31,7 @@ struct NetworkManager {
     
     // MARK: - Call completion block with json
     
-    func parseJSON(withData data: Data) -> [Films.Film]? {
+    private func parseJSON(withData data: Data) -> [Films.Film]? {
         let decoder = JSONDecoder()
         var currentShow: [Films.Film] = []
         do {

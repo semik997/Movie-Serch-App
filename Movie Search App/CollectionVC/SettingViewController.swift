@@ -18,14 +18,14 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
     @IBOutlet weak var smallSizeCellButton: UIButton!
     
     weak var delegate: SettingViewControllerDelegate?
-    var small = false
-    var medium = false
-    var big = false
-    var color = UIColor.white
-    var defaultColor: UIColor?
+    private var small = false
+    private var medium = false
+    private var big = false
+    private var color = UIColor.white
+    private var defaultColor: UIColor?
     
     // apply big size cell
-    @IBAction func chooseBigSizeButton(_ sender: UIButton) {
+    @IBAction private func chooseBigSizeButton(_ sender: UIButton) {
         big = true
         small = false
         medium = false
@@ -33,7 +33,7 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
     }
     
     // apply medium size cell
-    @IBAction func chooseMediumSizeButton(_ sender: UIButton) {
+    @IBAction private func chooseMediumSizeButton(_ sender: UIButton) {
         small = false
         medium = true
         big = false
@@ -41,7 +41,7 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
     }
     
     // apply small size cell
-    @IBAction func chooseSmallSizeButton(_ sender: UIButton) {
+    @IBAction private func chooseSmallSizeButton(_ sender: UIButton) {
         small = true
         medium = false
         big = false
