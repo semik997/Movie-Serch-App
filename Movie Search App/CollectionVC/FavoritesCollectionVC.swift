@@ -22,7 +22,7 @@ class FavoritesCollectionVC: UICollectionViewController {
         return text.isEmpty
     }
     private var filtredFilms: [FavoriteFilm] = []
-    var filmsFav: [FavoriteFilm] = []
+    private var filmsFav: [FavoriteFilm] = []
     var settingViewController = SettingViewController()
     var small: Bool?
     var medium: Bool?
@@ -148,9 +148,9 @@ class FavoritesCollectionVC: UICollectionViewController {
             } else {
                 film = filmsFav[indexPath[0].row]
             }
-            let nav = segue.destination as! UINavigationController
-            let MoreInfoFavoritesTableVC = nav.topViewController as! MoreInfoViewController
-            MoreInfoFavoritesTableVC.detailedInformation = film
+            let nav = segue.destination as? UINavigationController
+            let MoreInfoFavoritesTableVC = nav?.topViewController as? MoreInfoViewController
+            MoreInfoFavoritesTableVC?.detailedInformation = film
         }
         
         //MARK: - Info button

@@ -17,16 +17,11 @@ class InfoTableViewController: UITableViewController, SettingViewControllerDeleg
     weak var delegateSetting: SettingViewControllerDelegate?
     
     // setup size view
-    override var preferredContentSize : CGSize
-    {
-        get
-        {
-            return CGSize(width: 170 , height: tableView.contentSize.height)
-        }
-        set
-        {
-            super.preferredContentSize = newValue
-        }
+    override var preferredContentSize : CGSize {
+        get {
+            return CGSize(width: 170 , height: tableView.contentSize.height) }
+        set {
+            super.preferredContentSize = newValue }
     }
     
     override func viewDidLoad() {
@@ -46,11 +41,6 @@ class InfoTableViewController: UITableViewController, SettingViewControllerDeleg
     
     //MARK: - Setting view
     
-    // exit
-    @IBAction func exit(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     // delegate size and color
     func updateInterface(color: UIColor?, big: Bool?, medium: Bool?, small: Bool?) {
         delegateSetting?.updateInterface(color: color, big: big, medium: medium, small: small)
@@ -62,5 +52,10 @@ class InfoTableViewController: UITableViewController, SettingViewControllerDeleg
                 tvc.delegate = self
             }
         }
+    }
+    
+    // exit
+    @IBAction func exit(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
     }
 }

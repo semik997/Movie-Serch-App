@@ -48,12 +48,7 @@ class CollectionViewCell: UICollectionViewCell {
                             for: .selected)
     }
     
-    private func getContext() -> NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        return appDelegate.persistentContainer.viewContext
-    }
-    
-    @IBAction func likeButton(_ sender: UIButton) {
+    @IBAction private func likeButton(_ sender: UIButton) {
         
         if isFavorite {
             //delited like
@@ -113,7 +108,7 @@ extension CollectionViewCell {
     
     // MARK: - String in image conversion
     
-    func getImage(from string: String) -> UIImage? {
+    private func getImage(from string: String) -> UIImage? {
         //Get valid URL
         guard let url = URL(string: string)
         else {

@@ -23,20 +23,18 @@ class MainCollectionVC: UICollectionViewController {
     }
     
     //Creating and filling the array for Display
-    var networkManager = NetworkManager()
-    var secondAPI = SecondAPI()
-    let defaults = UserDefaults.standard
-    var tap = UITapGestureRecognizer()
-    var searchText = ""
-    var small: Bool?
-    var medium: Bool?
-    var big: Bool?
-    var defaultSizeCell = CGSize (width: 200, height: 200)
+    private var networkManager = NetworkManager()
+    private var secondAPI = SecondAPI()
+    private let defaults = UserDefaults.standard
+    private var tap = UITapGestureRecognizer()
+    private var searchText = ""
+    private var small: Bool?
+    private var medium: Bool?
+    private var big: Bool?
+    private var defaultSizeCell = CGSize (width: 200, height: 200)
     var context = (UIApplication.shared.delegate as!
                    AppDelegate).persistentContainer.viewContext
-    var oneFilm: [FavoriteFilm]?
-    
-    var films: [Films.Film] = [] {
+    private var films: [Films.Film] = [] {
         didSet {
             DispatchQueue.main.async { [self] in
                 collectionViewSpace.reloadData()
@@ -54,19 +52,10 @@ class MainCollectionVC: UICollectionViewController {
         definesPresentationContext = true
         collectionViewSpace?.delegate = self
         collectionViewSpace?.dataSource = self
-        getDataFromParse()
     }
     
     
     // MARK: - Save in CoreData
-    
-    func getDataFromParse() {
-        
-        do {
-            self.oneFilm = try context.fetch(FavoriteFilm.fetchRequest())
-        } catch {
-        }
-    }
     
     private func getContext() -> NSManagedObjectContext {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -118,9 +107,9 @@ class MainCollectionVC: UICollectionViewController {
         if segue.identifier == "showDetail" {
             guard let indexPath = collectionViewSpace.indexPathsForSelectedItems else { return }
             let film = films[indexPath[0].row]
-            let nav = segue.destination as! UINavigationController
-            let moreInfoMainVC = nav.topViewController as! MoreInfoViewController
-            moreInfoMainVC.detail = film
+            let nav = segue.destination as? UINavigationController
+            let moreInfoMainVC = nav?.topViewController as? MoreInfoViewController
+            moreInfoMainVC?.detail = film
         }
         
     // MARK: - Info button
@@ -168,15 +157,11 @@ extension MainCollectionVC: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         self.searchText = searchController.searchBar.text!
         
-        // Check Internet connection
         if Reachability.isConnectedToNetwork() {
-            // Check void text
             if searchText != "" {
                 let text = searchText.split(separator: " ").joined(separator: "%20")
                 findImage.isHidden = true
-                // Check count symbol
                 if searchText.count >= 3 {
-                    // need add timer in this fragment
                     findImage.isHidden = true
                     self.networkManager.fetchCurrent(onCompletion: {
                         currentShowData in self.films = currentShowData
@@ -229,7 +214,6 @@ extension MainCollectionVC: FavoriteProtocol {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
-            getDataFromParse()
             
         } else {
             //for not like

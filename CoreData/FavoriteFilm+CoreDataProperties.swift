@@ -2,7 +2,7 @@
 //  FavoriteFilm+CoreDataProperties.swift
 //  Movie Search App
 //
-//  Created by Семен Колесников on 20.01.2022.
+//  Created by Sem Koliesnikov on 20.01.2022.
 //
 //
 
