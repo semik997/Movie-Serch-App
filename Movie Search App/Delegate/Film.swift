@@ -42,38 +42,4 @@ class Films {
     struct FilmIMDb: Codable {
         let rating: Double?
     }
-    
-    // MARK: - User Data persistence model
-    
-    var favoriteFilm: [Films.Film] {
-        
-        get {
-            if let data = defaults.value(forKey: "favoriteFilm") {
-                return try! PropertyListDecoder().decode([Films.Film].self, from: data as! Data)
-            } else {
-                return [Films.Film] ()
-            }
-        }
-        
-        set {
-            if let data = try? PropertyListEncoder().encode(newValue) {
-                defaults.set(data, forKey: "favoriteFilm")
-            }
-        }
-    }
-    
-//    // MARK: - Models for working with data in User Data
-//    
-//    func saveFilms(idFilm: Double?, url: String?, name: String?,
-//                   image: String?, isFavorite: Bool, original: String?,
-//                   summary: String?, imdb: String?) {
-//        
-//        let favoriteFilms = Film(show: Show(id: idFilm, url: url, name: name, image: Image(medium: image ?? placeholderFilm, original: original ?? placeholderFilm), externals: Externals(imdb: imdb), summary: summary, isFavorite: true))
-//        favoriteFilm.insert(favoriteFilms, at: 0)
-//    }
-//    
-//    func deleteFilm(idFilm: Double?) {
-//        favoriteFilm.removeAll(where: {$0.show?.id == idFilm})
-//        favoriteFilm = favoriteFilm
-//    }
 }

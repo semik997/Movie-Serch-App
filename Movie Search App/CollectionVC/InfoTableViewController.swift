@@ -30,6 +30,7 @@ class InfoTableViewController: UITableViewController, SettingViewControllerDeleg
     }
     
     override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews();
         preferredContentSize = CGSize(width: 170, height: tableView.contentSize.height)
     }
     

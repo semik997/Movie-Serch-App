@@ -23,30 +23,30 @@ class MoreInfoViewController: UIViewController {
         if detailedInformation?.name == nil {
             let youtubeUser =  detail?.show?.name
             let text = youtubeUser?.split(separator: " ").joined(separator: "%20")
-            let appURL = NSURL(string: "\(appYouTubeLink)\(text ?? "")")
-            let webURL = NSURL(string: "\(safariYouTubeLink)\(text ?? "")")
+            guard let appURL = NSURL(string: "\(appYouTubeLink)\(text ?? "")") else { return }
+            guard let webURL = NSURL(string: "\(safariYouTubeLink)\(text ?? "")") else { return }
             let application = UIApplication.shared
             
-            if application.canOpenURL(appURL! as URL) {
+            if application.canOpenURL(appURL as URL) {
                 // open URL inside app
-                application.open(appURL! as URL)
+                application.open(appURL as URL)
             } else {
                 // if Youtube app is not installed, open URL inside Safari
-                application.open(webURL! as URL)
+                application.open(webURL as URL)
             }
         } else {
             let youtubeUser =  detailedInformation?.name
             let text = youtubeUser?.split(separator: " ").joined(separator: "%20")
-            let appURL = NSURL(string: "\(appYouTubeLink)\(text ?? "")")
-            let webURL = NSURL(string: "\(safariYouTubeLink)\(text ?? "")")
+            guard let appURL = NSURL(string: "\(appYouTubeLink)\(text ?? "")") else { return }
+            guard let webURL = NSURL(string: "\(safariYouTubeLink)\(text ?? "")") else { return }
             let application = UIApplication.shared
             
-            if application.canOpenURL(appURL! as URL) {
+            if application.canOpenURL(appURL as URL) {
                 // open URL inside app
-                application.open(appURL! as URL)
+                application.open(appURL as URL)
             } else {
                 // if Youtube app is not installed, open URL inside Safari
-                application.open(webURL! as URL)
+                application.open(webURL as URL)
             }
         }
     }

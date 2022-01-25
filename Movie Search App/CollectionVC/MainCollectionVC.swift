@@ -249,7 +249,7 @@ extension MainCollectionVC: FavoriteProtocol {
             //Make image
             image = UIImage(data: data)
         } catch {
-            print(error.localizedDescription)
+            image = getImage(from: placeholderFilm)
         }
         return image
     }
@@ -259,29 +259,37 @@ extension MainCollectionVC: FavoriteProtocol {
 
 extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
     
+    enum ChooseSize {
+        case big
+        case medium
+        case small
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var size = ChooseSize.medium
         
         if self.small == false && self.medium == false && self.big == false {
             return defaultSizeCell
+        } else if self.small == true {
+            size = ChooseSize.small
+        } else if self.big == true {
+            size = ChooseSize.big
         } else {
-            // apply small size cell
-            if self.small ?? false {
-                let sizeCell = CGSize (width: 100, height: 150)
-                self.defaultSizeCell = sizeCell
-                return sizeCell
-                // apply medium size cell
-            } else if self.medium ?? false {
-                let sizeCell = CGSize (width: 200, height: 200)
-                self.defaultSizeCell = sizeCell
-                return sizeCell
-                // apply big size cell
-            } else if self.big ?? false {
-                let sizeCell = CGSize (width: 400, height: 400)
-                self.defaultSizeCell = sizeCell
-                return sizeCell
-            }
-            return defaultSizeCell
+            size = ChooseSize.medium
         }
+        
+        switch size {
+        case .big:
+            let sizeCell = CGSize (width: 400, height: 400)
+            self.defaultSizeCell = sizeCell
+        case .medium:
+            let sizeCell = CGSize (width: 200, height: 200)
+            self.defaultSizeCell = sizeCell
+        case .small:
+            let sizeCell = CGSize (width: 100, height: 150)
+            self.defaultSizeCell = sizeCell
+        }
+        return defaultSizeCell
     }
     
     // setting cell intervals
