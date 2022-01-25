@@ -174,8 +174,8 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1AO-ik-zar">
                                                                     <rect key="frame" x="0.0" y="0.0" width="92" height="21"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="21" id="Lna-gN-kIJ"/>
-                                                                        <constraint firstAttribute="width" constant="92" id="QsG-Dy-oP3"/>
+                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="Lna-gN-kIJ"/>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="QsG-Dy-oP3"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="10"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -184,8 +184,8 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UNg-bE-9oh">
                                                                     <rect key="frame" x="0.0" y="21" width="92" height="23"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="23" id="0hH-EV-Yz9"/>
-                                                                        <constraint firstAttribute="width" constant="92" id="5wZ-xz-geF"/>
+                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="23" id="0hH-EV-Yz9"/>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="5wZ-xz-geF"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="10"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -487,8 +487,8 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQ2-Qw-DCR">
                                                                     <rect key="frame" x="0.0" y="0.0" width="92" height="21"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="height" constant="21" id="2BX-cl-FJX"/>
-                                                                        <constraint firstAttribute="width" constant="92" id="Udp-0f-jEk"/>
+                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="2BX-cl-FJX"/>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="Udp-0f-jEk"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="10"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -497,8 +497,8 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zg-1a-HsD">
                                                                     <rect key="frame" x="0.0" y="21" width="92" height="21"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="92" id="T5v-ma-GVl"/>
-                                                                        <constraint firstAttribute="height" constant="21" id="WRJ-YO-3S3"/>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="T5v-ma-GVl"/>
+                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="WRJ-YO-3S3"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="10"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -510,7 +510,7 @@
                                                             <rect key="frame" x="0.0" y="42" width="92" height="29"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="7Gh-uP-hWP"/>
-                                                                <constraint firstAttribute="height" constant="29" id="CWR-cU-gxj"/>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="29" id="CWR-cU-gxj"/>
                                                             </constraints>
                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" title="Button"/>
