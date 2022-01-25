@@ -1,5 +1,5 @@
 //
-//  Links.swift
+//  Constants.swift
 //  Movie Search App
 //
 //  Created by Sem Koliesnikov on 20.12.2021.
@@ -17,3 +17,8 @@ let apiKey = "ece2314f79msh4522e10877770d5p170740jsn01828e60d0af"
 let appYouTubeLink = "youtube://www.youtube.com/results?search_query="
 let safariYouTubeLink = "https://www.youtube.com/results?search_query="
 let placeholderFilm = "https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled.png"
+
+    // MARK: - Constants
+
+let showDetail = "showDetail"
+let infoButton = "popVC"

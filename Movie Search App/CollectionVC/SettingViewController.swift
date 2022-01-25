@@ -13,6 +13,12 @@ protocol SettingViewControllerDelegate: AnyObject {
 
 class SettingViewController: UIViewController, UIColorPickerViewControllerDelegate {
     
+    enum ChooseSize {
+        case big
+        case medium
+        case small
+    }
+    
     @IBOutlet weak var bigSizeCellButton: UIButton!
     @IBOutlet weak var mediumSizeCellButton: UIButton!
     @IBOutlet weak var smallSizeCellButton: UIButton!
@@ -23,31 +29,43 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
     private var big = false
     private var color = UIColor.white
     private var defaultColor: UIColor?
+    var size = ChooseSize.medium
     
-    // apply big size cell
+    
     @IBAction private func chooseBigSizeButton(_ sender: UIButton) {
-        big = true
-        small = false
-        medium = false
-        self.delegate?.updateInterface(color: color, big: big, medium: medium, small: small)
+        size = ChooseSize.big
+        sizeInspektor()
     }
-    
-    // apply medium size cell
     @IBAction private func chooseMediumSizeButton(_ sender: UIButton) {
-        small = false
-        medium = true
-        big = false
-        self.delegate?.updateInterface(color: color, big: big, medium: medium, small: small)
+        size = ChooseSize.medium
+        sizeInspektor()
+    }
+    @IBAction private func chooseSmallSizeButton(_ sender: UIButton) {
+        size = ChooseSize.small
+        sizeInspektor()
     }
     
-    // apply small size cell
-    @IBAction private func chooseSmallSizeButton(_ sender: UIButton) {
-        small = true
-        medium = false
-        big = false
-        self.delegate?.updateInterface(color: color, big: big, medium: medium, small: small)
+    
+    func sizeInspektor() {
+    switch size {
+    case .big:
+            big = true
+            small = false
+            medium = false
+            self.delegate?.updateInterface(color: color, big: big, medium: medium, small: small)
         
+    case .medium:
+            small = false
+            medium = true
+            big = false
+            self.delegate?.updateInterface(color: color, big: big, medium: medium, small: small)
+    case .small:
+            small = true
+            medium = false
+            big = false
+            self.delegate?.updateInterface(color: color, big: big, medium: medium, small: small)
     }
+}
     
     override func viewDidLoad() {
         super.viewDidLoad()

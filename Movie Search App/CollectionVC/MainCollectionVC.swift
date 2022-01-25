@@ -104,7 +104,7 @@ class MainCollectionVC: UICollectionViewController {
     // MARK: - Detail setting
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
+        if segue.identifier == showDetail {
             guard let indexPath = collectionViewSpace.indexPathsForSelectedItems else { return }
             let film = films[indexPath[0].row]
             let nav = segue.destination as? UINavigationController
@@ -114,7 +114,7 @@ class MainCollectionVC: UICollectionViewController {
         
     // MARK: - Info button
         
-        if segue.identifier == "popVC" {
+        if segue.identifier == infoButton {
             
             if let tvc = segue.destination as? InfoTableViewController {
                 tvc.delegate = self

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		302A14D3279162B800033937 /* SecondAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302A14D2279162B800033937 /* SecondAPI.swift */; };
 		302CEE1527858CCD0017E0D7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CEE1427858CCD0017E0D7 /* Reachability.swift */; };
-		302F97E5277073E50000B975 /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F97E4277073E50000B975 /* Links.swift */; };
+		302F97E5277073E50000B975 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F97E4277073E50000B975 /* Constants.swift */; };
 		30595240275CED40003A7049 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059523F275CED40003A7049 /* Film.swift */; };
 		30595242275D5078003A7049 /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30595241275D5078003A7049 /* LoadViewController.swift */; };
 		305ADFE7278EC5D4002D39C8 /* InfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305ADFE6278EC5D3002D39C8 /* InfoTableViewController.swift */; };
@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		302A14D2279162B800033937 /* SecondAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondAPI.swift; sourceTree = "<group>"; };
 		302CEE1427858CCD0017E0D7 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		302F97E4277073E50000B975 /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
+		302F97E4277073E50000B975 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3059523F275CED40003A7049 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		30595241275D5078003A7049 /* LoadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadViewController.swift; sourceTree = "<group>"; };
 		305ADFE6278EC5D3002D39C8 /* InfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewController.swift; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 			children = (
 				30CA0C65275B8559009468D2 /* SceneDelegate.swift */,
 				30CA0C63275B8559009468D2 /* AppDelegate.swift */,
-				302F97E4277073E50000B975 /* Links.swift */,
+				302F97E4277073E50000B975 /* Constants.swift */,
 				30595241275D5078003A7049 /* LoadViewController.swift */,
 				302CEE1427858CCD0017E0D7 /* Reachability.swift */,
 				3059523F275CED40003A7049 /* Film.swift */,
@@ -236,7 +236,7 @@
 				30688000278C43BF003CDE31 /* FavoritesCollectionVC.swift in Sources */,
 				30595242275D5078003A7049 /* LoadViewController.swift in Sources */,
 				305ADFE7278EC5D4002D39C8 /* InfoTableViewController.swift in Sources */,
-				302F97E5277073E50000B975 /* Links.swift in Sources */,
+				302F97E5277073E50000B975 /* Constants.swift in Sources */,
 				30CA0C64275B8559009468D2 /* AppDelegate.swift in Sources */,
 				30CA0C66275B8559009468D2 /* SceneDelegate.swift in Sources */,
 			);

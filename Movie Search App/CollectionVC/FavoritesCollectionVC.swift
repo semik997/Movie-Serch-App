@@ -40,7 +40,7 @@ class FavoritesCollectionVC: UICollectionViewController {
         // Setup the search controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Enter the name of the show to search"
+        searchController.searchBar.placeholder = "Enter name to search"
         navigationItem.searchController = searchController
         definesPresentationContext = true
     }
@@ -111,21 +111,7 @@ class FavoritesCollectionVC: UICollectionViewController {
         let alertController = UIAlertController(title: title, message: message,
                                                 preferredStyle: style)
         let yes = UIAlertAction(title: "Yes, I'am sure", style: .default) { action in
-            guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
-            else { return }
-            let context = self.getContext()
-            let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FavoriteFilm")
-            request.predicate = NSPredicate(format:"idFilm = %@", "\(idFilm)")
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
-            do {
-                try context.execute(deleteRequest)
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-            self.filmsFav.remove(at: index)
-            self.favoriteCollectionView.reloadData()
+            self.deleteFilm(withTitle: title, message: message, idFilm: idFilm)
         }
         
         let no = UIAlertAction(title: "No thanks", style: .cancel){ action in
@@ -137,10 +123,31 @@ class FavoritesCollectionVC: UICollectionViewController {
         present(alertController, animated: true)
     }
     
+    private func deleteFilm(withTitle title: String?, message: String?, idFilm: Double) {
+        
+        guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
+        else { return }
+        let context = self.getContext()
+        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FavoriteFilm")
+        request.predicate = NSPredicate(format:"idFilm = %@", "\(idFilm)")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+        self.filmsFav.remove(at: index)
+        self.favoriteCollectionView.reloadData()
+        
+    }
+    
+    
     // MARK: - Detail setting
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
+        if segue.identifier == showDetail {
             guard let indexPath = favoriteCollectionView.indexPathsForSelectedItems else { return }
             let film: FavoriteFilm
             if isFiltering {
@@ -155,7 +162,7 @@ class FavoritesCollectionVC: UICollectionViewController {
         
         //MARK: - Info button
         
-        if segue.identifier == "popVC" {
+        if segue.identifier == infoButton {
             if let tvc = segue.destination as? InfoTableViewController {
                 tvc.delegateFav = self
                 tvc.delegateSetting = self
@@ -201,7 +208,7 @@ extension FavoritesCollectionVC: FavoriteProtocol {
         
         if isFavorite == false {
             //for not like
-            presentAlertController(withTitle: "Do you sure?", message: nil, style: .alert,
+            presentAlertController(withTitle: "Are you sure??", message: nil, style: .alert,
                                    idFilm: idFilm ?? 0)
         }
     }

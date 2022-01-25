@@ -75,7 +75,7 @@ extension CollectionViewCell {
     func loadData(film: Films.Film) {
         currentFilm = film
         nameLabel?.text = film.show?.name
-        mainImage.image = getImage(from: film.show?.image?.medium ?? placeholderFilm)
+        mainImage.image = getImage(from: (film.show?.image?.medium ?? placeholderFilm))
         idFilm = film.show?.id
         url = film.show?.url
         name = film.show?.name
@@ -123,7 +123,7 @@ extension CollectionViewCell {
             //Make image
             image = UIImage(data: data)
         } catch {
-            print(error.localizedDescription)
+            image = getImage(from: placeholderFilm)
         }
         return image
     }
