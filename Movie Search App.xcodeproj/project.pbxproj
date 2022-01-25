@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		302A14D3279162B800033937 /* SecondAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302A14D2279162B800033937 /* SecondAPI.swift */; };
+		302A14D3279162B800033937 /* RapidApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302A14D2279162B800033937 /* RapidApiManager.swift */; };
 		302CEE1527858CCD0017E0D7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CEE1427858CCD0017E0D7 /* Reachability.swift */; };
 		302F97E5277073E50000B975 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F97E4277073E50000B975 /* Constants.swift */; };
 		30595240275CED40003A7049 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059523F275CED40003A7049 /* Film.swift */; };
@@ -29,12 +29,12 @@
 		30CA0C6B275B8559009468D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30CA0C69275B8559009468D2 /* Main.storyboard */; };
 		30CA0C70275B855B009468D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30CA0C6F275B855B009468D2 /* Assets.xcassets */; };
 		30CA0C73275B855B009468D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30CA0C71275B855B009468D2 /* LaunchScreen.storyboard */; };
-		30CA0C7F275BE43B009468D2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C7E275BE43B009468D2 /* NetworkManager.swift */; };
+		30CA0C7F275BE43B009468D2 /* TVMazeApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C7E275BE43B009468D2 /* TVMazeApiManager.swift */; };
 		30DFA0042779C19000B09E34 /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DFA0032779C19000B09E34 /* MoreInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		302A14D2279162B800033937 /* SecondAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondAPI.swift; sourceTree = "<group>"; };
+		302A14D2279162B800033937 /* RapidApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidApiManager.swift; sourceTree = "<group>"; };
 		302CEE1427858CCD0017E0D7 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		302F97E4277073E50000B975 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3059523F275CED40003A7049 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 		30CA0C6F275B855B009468D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30CA0C72275B855B009468D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30CA0C74275B855B009468D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		30CA0C7E275BE43B009468D2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		30CA0C7E275BE43B009468D2 /* TVMazeApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMazeApiManager.swift; sourceTree = "<group>"; };
 		30DFA0032779C19000B09E34 /* MoreInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,8 +82,8 @@
 				30595241275D5078003A7049 /* LoadViewController.swift */,
 				302CEE1427858CCD0017E0D7 /* Reachability.swift */,
 				3059523F275CED40003A7049 /* Film.swift */,
-				30CA0C7E275BE43B009468D2 /* NetworkManager.swift */,
-				302A14D2279162B800033937 /* SecondAPI.swift */,
+				30CA0C7E275BE43B009468D2 /* TVMazeApiManager.swift */,
+				302A14D2279162B800033937 /* RapidApiManager.swift */,
 				30863A12279AF48800CC45BA /* GoogleService-Info.plist */,
 			);
 			path = Delegate;
@@ -222,7 +222,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				302A14D3279162B800033937 /* SecondAPI.swift in Sources */,
+				302A14D3279162B800033937 /* RapidApiManager.swift in Sources */,
 				30DFA0042779C19000B09E34 /* MoreInfoViewController.swift in Sources */,
 				30687FFE278C43A1003CDE31 /* MainCollectionVC.swift in Sources */,
 				30863A102799B70F00CC45BA /* FavoriteFilm+CoreDataClass.swift in Sources */,
@@ -232,7 +232,7 @@
 				302CEE1527858CCD0017E0D7 /* Reachability.swift in Sources */,
 				305C361E2799434400477095 /* Movie_Search_App.xcdatamodeld in Sources */,
 				30595240275CED40003A7049 /* Film.swift in Sources */,
-				30CA0C7F275BE43B009468D2 /* NetworkManager.swift in Sources */,
+				30CA0C7F275BE43B009468D2 /* TVMazeApiManager.swift in Sources */,
 				30688000278C43BF003CDE31 /* FavoritesCollectionVC.swift in Sources */,
 				30595242275D5078003A7049 /* LoadViewController.swift in Sources */,
 				305ADFE7278EC5D4002D39C8 /* InfoTableViewController.swift in Sources */,

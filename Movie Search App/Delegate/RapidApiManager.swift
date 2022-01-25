@@ -1,5 +1,5 @@
 //
-//  SecondAPI.swift
+//  RapidApiManager.swift
 //  Movie Search App
 //
 //  Created by Sem Koliesnikov on 14.01.2022.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SystemConfiguration
 
-class SecondAPI {
+class RapidApiManager {
     
     // MARK: - Fetch show raiting
     func fetchShowRaiting(forShow show: String, completionHandler: @escaping (Films.FilmIMDb) -> Void) {

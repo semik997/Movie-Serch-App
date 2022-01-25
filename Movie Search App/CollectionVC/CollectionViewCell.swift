@@ -23,7 +23,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     //Initialization of UI fields
     weak var delegate: FavoriteProtocol?
-    private var secondAPI = SecondAPI()
+    private var rapidApiManager = RapidApiManager()
     private var idFilm: Double?
     private var url: String?
     private var name: String?
@@ -85,7 +85,7 @@ extension CollectionViewCell {
         summary = film.show?.summary
         imdb = film.show?.externals?.imdb
         fillButton.isSelected = false
-        self.secondAPI.fetchShowRaiting(forShow: imdb ?? "") { [self] currentShowIMDb in
+        self.rapidApiManager.fetchShowRaiting(forShow: imdb ?? "") { [self] currentShowIMDb in
             self.rating = currentShowIMDb.rating
         }
         ratingLabel.text = "\(rating ?? 0)/10"

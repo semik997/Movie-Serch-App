@@ -1,5 +1,5 @@
 //
-//  NetworWeatherManager.swift
+//  TVMazeApiManager.swift
 //  Movie Serch App
 //
 //  Created by Sem Koliesnikov on 04.12.2021.
@@ -11,7 +11,7 @@ import SystemConfiguration
 
     // MARK: - Api request
 
-struct NetworkManager {
+struct TVMazeApiManager {
     
     func fetchCurrent(onCompletion: (([Films.Film]) -> Void)?, forShow show: String) {
         DispatchQueue.global(qos: .background).async {

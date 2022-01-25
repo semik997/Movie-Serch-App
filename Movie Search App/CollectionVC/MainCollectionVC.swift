@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 class MainCollectionVC: UICollectionViewController {
     
@@ -23,8 +24,8 @@ class MainCollectionVC: UICollectionViewController {
     }
     
     //Creating and filling the array for Display
-    private var networkManager = NetworkManager()
-    private var secondAPI = SecondAPI()
+    private var tVMazeApiManager = TVMazeApiManager()
+    private var rapidApiManager = RapidApiManager()
     private let defaults = UserDefaults.standard
     private var tap = UITapGestureRecognizer()
     private var searchText = ""
@@ -53,6 +54,12 @@ class MainCollectionVC: UICollectionViewController {
         collectionViewSpace?.delegate = self
         collectionViewSpace?.dataSource = self
     }
+
+    
+//    func uploadImage(photo: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
+//        let storage = Storage.storage()
+//    }
+    
     
     
     // MARK: - Save in CoreData
@@ -163,14 +170,14 @@ extension MainCollectionVC: UISearchResultsUpdating {
                 findImage.isHidden = true
                 if searchText.count >= 3 {
                     findImage.isHidden = true
-                    self.networkManager.fetchCurrent(onCompletion: {
+                    self.tVMazeApiManager.fetchCurrent(onCompletion: {
                         currentShowData in self.films = currentShowData
                     }, forShow: text)
                 }
             } else {
                 findImage.isHidden = false
                 collectionViewSpace.reloadData()
-                networkManager.fetchCurrent(onCompletion: { [weak self]
+                tVMazeApiManager.fetchCurrent(onCompletion: { [weak self]
                     currentShowData in self?.films = currentShowData
                 }, forShow: "")
             }
