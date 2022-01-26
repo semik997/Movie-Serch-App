@@ -12,7 +12,7 @@ import Firebase
 class MainCollectionVC: UICollectionViewController {
     
     @IBOutlet weak var collectionViewSpace: UICollectionView!
-    @IBOutlet weak var findImage: UIImageView!
+    @IBOutlet weak var noContentImageView: UIImageView!
     
     private let searchController = UISearchController(searchResultsController: nil)
     var isFiltering: Bool {
@@ -55,13 +55,6 @@ class MainCollectionVC: UICollectionViewController {
         collectionViewSpace?.delegate = self
         collectionViewSpace?.dataSource = self
     }
-
-    
-//    func uploadImage(photo: UIImage, completion: @escaping (Result<URL, Error>) -> Void) {
-//        let storage = Storage.storage()
-//    }
-    
-    
     
     // MARK: - Save in CoreData
     
@@ -79,10 +72,10 @@ class MainCollectionVC: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
         if films.count == 0 {
-            findImage.isHidden = false
+            noContentImageView.isHidden = false
             return films.count
         } else {
-            findImage.isHidden = true
+            noContentImageView.isHidden = true
             return films.count
         }
     }
@@ -102,9 +95,7 @@ class MainCollectionVC: UICollectionViewController {
     // MARK: - Checking internet connection
     private func presentInternetConnectionAlertController () {
         let internetAlert = UIAlertController(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .cancel){ action in
-            self.collectionViewSpace.reloadData()
-        }
+        let ok = UIAlertAction(title: "OK", style: .cancel)
         internetAlert.addAction(ok)
         present(internetAlert, animated: true)
     }
@@ -120,7 +111,7 @@ class MainCollectionVC: UICollectionViewController {
             moreInfoMainVC?.detail = film
         }
         
-    // MARK: - Info button
+        // MARK: - Info button
         
         if segue.identifier == infoButton {
             
@@ -142,7 +133,7 @@ extension MainCollectionVC: UIPopoverPresentationControllerDelegate {
     }
 }
 
-    // MARK: - Setting view color
+// MARK: - Setting view color
 
 extension MainCollectionVC: SettingViewControllerDelegate {
     
@@ -158,7 +149,7 @@ extension MainCollectionVC: SettingViewControllerDelegate {
     }
 }
 
-    // MARK: - Setting search bar
+// MARK: - Setting search bar
 
 extension MainCollectionVC: UISearchResultsUpdating {
     
@@ -168,15 +159,15 @@ extension MainCollectionVC: UISearchResultsUpdating {
         if Reachability.isConnectedToNetwork() {
             if searchText != "" {
                 let text = searchText.split(separator: " ").joined(separator: "%20")
-                findImage.isHidden = true
+                noContentImageView.isHidden = true
                 if searchText.count >= 3 {
-                    findImage.isHidden = true
+                    noContentImageView.isHidden = true
                     self.tVMazeApiManager.fetchCurrent(onCompletion: {
                         currentShowData in self.films = currentShowData
                     }, forShow: text)
                 }
             } else {
-                findImage.isHidden = false
+                noContentImageView.isHidden = false
                 collectionViewSpace.reloadData()
                 tVMazeApiManager.fetchCurrent(onCompletion: { [weak self]
                     currentShowData in self?.films = currentShowData
@@ -189,14 +180,13 @@ extension MainCollectionVC: UISearchResultsUpdating {
     }
 }
 
-    // MARK: - Save and delete to favorites
+// MARK: - Save and delete to favorites
 
 extension MainCollectionVC: FavoriteProtocol {
     
     func selectCell(_ isFavorite: Bool, idFilm: Double?, url: String?,
                     name: String?, image: String?, original: String?,
                     summary: String?, imdb: String?) {
-        
         
         if isFavorite {
             //for like
@@ -222,7 +212,6 @@ extension MainCollectionVC: FavoriteProtocol {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
-            
         } else {
             //for not like
             
@@ -263,7 +252,7 @@ extension MainCollectionVC: FavoriteProtocol {
     }
 }
 
-    // MARK: - Setting item size
+// MARK: - Setting size cell
 
 extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
     
@@ -306,7 +295,7 @@ extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
     }
 }
 
-    // MARK: - Extention from save image
+// MARK: - Extention from save image
 
 extension MainCollectionVC {
     

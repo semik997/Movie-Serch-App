@@ -247,7 +247,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionViewSpace" destination="FRs-Fe-Ioa" id="0yr-IG-l8v"/>
-                        <outlet property="findImage" destination="W44-IM-teH" id="Jch-FX-CRC"/>
+                        <outlet property="noContentImageView" destination="W44-IM-teH" id="Jch-FX-CRC"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RCo-SC-gRr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

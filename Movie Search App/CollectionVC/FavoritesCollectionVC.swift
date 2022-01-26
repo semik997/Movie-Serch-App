@@ -107,7 +107,7 @@ class FavoritesCollectionVC: UICollectionViewController {
     // MARK: - Setting up an alert controller
     
     private func presentAlertController(withTitle title: String?, message: String?,
-                                style: UIAlertController.Style, idFilm: Double) {
+                                        style: UIAlertController.Style, idFilm: Double) {
         let alertController = UIAlertController(title: title, message: message,
                                                 preferredStyle: style)
         let yes = UIAlertAction(title: "Yes, I'am sure", style: .default) { action in
@@ -199,21 +199,6 @@ extension FavoritesCollectionVC: SettingViewControllerDelegate {
     }
 }
 
-// MARK: - Save and delete to favorites
-
-extension FavoritesCollectionVC: FavoriteProtocol {
-    func selectCell(_ isFavorite: Bool, idFilm: Double?, url: String?, name: String?,
-                    image: String?, original: String?, summary: String?,
-                    imdb: String?) {
-        
-        if isFavorite == false {
-            //for not like
-            presentAlertController(withTitle: "Are you sure??", message: nil, style: .alert,
-                                   idFilm: idFilm ?? 0)
-        }
-    }
-}
-
 // MARK: - Search in Favorite
 
 extension FavoritesCollectionVC: UISearchResultsUpdating {
@@ -227,6 +212,19 @@ extension FavoritesCollectionVC: UISearchResultsUpdating {
             return film.name?.lowercased().contains(searchText.lowercased()) ?? false
         }
         favoriteCollectionView.reloadData ()
+    }
+}
+
+// MARK: - Save and delete to favorites
+
+extension FavoritesCollectionVC: FavoriteDeletProtocol {
+    func deleteFavoriteFilm(isFavorite: Bool, idFilm: Double?) {
+        
+        if isFavorite == false {
+            //for not like
+            presentAlertController(withTitle: "Are you sure??", message: nil, style: .alert,
+                                   idFilm: idFilm ?? 0)
+        }
     }
 }
 

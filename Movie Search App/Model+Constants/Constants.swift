@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
     // MARK: - API link
 let linkAPI = "https://api.tvmaze.com/search/shows?q="

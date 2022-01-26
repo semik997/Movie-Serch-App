@@ -13,6 +13,10 @@ protocol FavoriteProtocol: AnyObject {
                     original: String?, summary: String?, imdb: String?)
 }
 
+protocol FavoriteDeletProtocol: AnyObject {
+    func deleteFavoriteFilm(isFavorite: Bool, idFilm: Double?)
+}
+
 class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var mainImage: UIImageView!
@@ -23,6 +27,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     //Initialization of UI fields
     weak var delegate: FavoriteProtocol?
+    weak var delegateDelete: FavoriteDeletProtocol?
     private var rapidApiManager = RapidApiManager()
     private var idFilm: Double?
     private var url: String?
@@ -54,9 +59,7 @@ class CollectionViewCell: UICollectionViewCell {
             //delited like
             fillButton.isSelected = false
             isFavorite = !isFavorite
-            delegate?.selectCell(isFavorite, idFilm: idFilm, url: url, name: name,
-                                 image: image, original: original, summary: summary,
-                                 imdb: imdb)
+            delegateDelete?.deleteFavoriteFilm(isFavorite: isFavorite, idFilm: idFilm)
         } else {
             //add to like
             fillButton.isSelected = true
