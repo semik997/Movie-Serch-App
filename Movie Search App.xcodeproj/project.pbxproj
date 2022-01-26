@@ -78,12 +78,6 @@
 			children = (
 				30CA0C65275B8559009468D2 /* SceneDelegate.swift */,
 				30CA0C63275B8559009468D2 /* AppDelegate.swift */,
-				302F97E4277073E50000B975 /* Constants.swift */,
-				30595241275D5078003A7049 /* LoadViewController.swift */,
-				302CEE1427858CCD0017E0D7 /* Reachability.swift */,
-				3059523F275CED40003A7049 /* Film.swift */,
-				30CA0C7E275BE43B009468D2 /* TVMazeApiManager.swift */,
-				302A14D2279162B800033937 /* RapidApiManager.swift */,
 				30863A12279AF48800CC45BA /* GoogleService-Info.plist */,
 			);
 			path = Delegate;
@@ -95,10 +89,45 @@
 				30687FFD278C43A1003CDE31 /* MainCollectionVC.swift */,
 				30687FFF278C43BF003CDE31 /* FavoritesCollectionVC.swift */,
 				30688001278C43DA003CDE31 /* CollectionViewCell.swift */,
-				305ADFE6278EC5D3002D39C8 /* InfoTableViewController.swift */,
-				305ADFE8278EFB0A002D39C8 /* SettingViewController.swift */,
 			);
 			path = CollectionVC;
+			sourceTree = "<group>";
+		};
+		307DC0E827A14BE200647613 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				302A14D2279162B800033937 /* RapidApiManager.swift */,
+				30CA0C7E275BE43B009468D2 /* TVMazeApiManager.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		307DC0E927A14C0D00647613 /* Model+Constants */ = {
+			isa = PBXGroup;
+			children = (
+				3059523F275CED40003A7049 /* Film.swift */,
+				302F97E4277073E50000B975 /* Constants.swift */,
+			);
+			path = "Model+Constants";
+			sourceTree = "<group>";
+		};
+		307DC0EA27A14C5B00647613 /* LoadScreen+Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				302CEE1427858CCD0017E0D7 /* Reachability.swift */,
+				30595241275D5078003A7049 /* LoadViewController.swift */,
+			);
+			path = "LoadScreen+Reachability";
+			sourceTree = "<group>";
+		};
+		307DC0EB27A14CD200647613 /* TableVC */ = {
+			isa = PBXGroup;
+			children = (
+				305ADFE6278EC5D3002D39C8 /* InfoTableViewController.swift */,
+				305ADFE8278EFB0A002D39C8 /* SettingViewController.swift */,
+				30DFA0032779C19000B09E34 /* MoreInfoViewController.swift */,
+			);
+			path = TableVC;
 			sourceTree = "<group>";
 		};
 		30CA0C57275B8559009468D2 = {
@@ -121,9 +150,12 @@
 		30CA0C62275B8559009468D2 /* Movie Search App */ = {
 			isa = PBXGroup;
 			children = (
+				307DC0EA27A14C5B00647613 /* LoadScreen+Reachability */,
+				307DC0E927A14C0D00647613 /* Model+Constants */,
+				307DC0E827A14BE200647613 /* API */,
 				3059523B275CEC33003A7049 /* Delegate */,
 				30688003278C4416003CDE31 /* CollectionVC */,
-				30DFA0032779C19000B09E34 /* MoreInfoViewController.swift */,
+				307DC0EB27A14CD200647613 /* TableVC */,
 				30CA0C69275B8559009468D2 /* Main.storyboard */,
 				30CA0C6F275B855B009468D2 /* Assets.xcassets */,
 				30CA0C71275B855B009468D2 /* LaunchScreen.storyboard */,

@@ -33,6 +33,7 @@ class MainCollectionVC: UICollectionViewController {
     private var medium: Bool?
     private var big: Bool?
     private var defaultSizeCell = CGSize (width: 200, height: 200)
+    
     var context = (UIApplication.shared.delegate as!
                    AppDelegate).persistentContainer.viewContext
     private var films: [Films.Film] = [] {
