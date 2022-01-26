@@ -100,7 +100,7 @@ class FavoritesCollectionVC: UICollectionViewController {
             film = [filmsFav[indexPath.row]]
             cell.loadDataFavorite(film: filmsFav[indexPath.row])
         }
-        cell.delegate = self
+        cell.delegateDelete = self
         return cell
     }
     

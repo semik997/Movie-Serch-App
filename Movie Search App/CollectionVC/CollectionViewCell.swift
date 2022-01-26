@@ -60,6 +60,9 @@ class CollectionViewCell: UICollectionViewCell {
             fillButton.isSelected = false
             isFavorite = !isFavorite
             delegateDelete?.deleteFavoriteFilm(isFavorite: isFavorite, idFilm: idFilm)
+            delegate?.selectCell(isFavorite, idFilm: idFilm, url: url, name: name,
+                                 image: image,original: original, summary: summary,
+                                 imdb: imdb)
         } else {
             //add to like
             fillButton.isSelected = true
