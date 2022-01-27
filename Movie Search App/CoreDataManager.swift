@@ -41,8 +41,5 @@ class CoreDataManager: UICollectionViewController {
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
-    
-    
-    
 }
 

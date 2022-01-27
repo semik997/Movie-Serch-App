@@ -86,11 +86,13 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == seguesConstant.showDetail {
-            guard let indexPath = collectionViewSpace.indexPathsForSelectedItems else { return }
-            let film = films[indexPath[0].row]
-            let nav = segue.destination as? UINavigationController
-            let moreInfoMainVC = nav?.topViewController as? MoreInfoViewController
-            moreInfoMainVC?.detail = film
+            if let cell = sender as? CollectionViewCell,
+               let indexPath = collectionViewSpace.indexPath(for: cell) {
+                let film = films[indexPath.row]
+                let nav = segue.destination as? UINavigationController
+                let moreInfoMainVC = nav?.topViewController as? MoreInfoViewController
+                moreInfoMainVC?.detail = film
+            }
         }
         
         // MARK: - Info button
