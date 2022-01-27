@@ -18,6 +18,7 @@
 		30687FFE278C43A1003CDE31 /* MainCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30687FFD278C43A1003CDE31 /* MainCollectionVC.swift */; };
 		30688000278C43BF003CDE31 /* FavoritesCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30687FFF278C43BF003CDE31 /* FavoritesCollectionVC.swift */; };
 		30688002278C43DA003CDE31 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30688001278C43DA003CDE31 /* CollectionViewCell.swift */; };
+		307DC0ED27A2C6BB00647613 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307DC0EC27A2C6BB00647613 /* CoreDataManager.swift */; };
 		30863A102799B70F00CC45BA /* FavoriteFilm+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30863A0E2799B70F00CC45BA /* FavoriteFilm+CoreDataClass.swift */; };
 		30863A112799B70F00CC45BA /* FavoriteFilm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30863A0F2799B70F00CC45BA /* FavoriteFilm+CoreDataProperties.swift */; };
 		30863A13279AF48800CC45BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30863A12279AF48800CC45BA /* GoogleService-Info.plist */; };
@@ -44,6 +45,7 @@
 		30687FFD278C43A1003CDE31 /* MainCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionVC.swift; sourceTree = "<group>"; };
 		30687FFF278C43BF003CDE31 /* FavoritesCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionVC.swift; sourceTree = "<group>"; };
 		30688001278C43DA003CDE31 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		307DC0EC27A2C6BB00647613 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		30863A0E2799B70F00CC45BA /* FavoriteFilm+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteFilm+CoreDataClass.swift"; sourceTree = "<group>"; };
 		30863A0F2799B70F00CC45BA /* FavoriteFilm+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteFilm+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		30863A12279AF48800CC45BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 		30CA0C62275B8559009468D2 /* Movie Search App */ = {
 			isa = PBXGroup;
 			children = (
+				307DC0EC27A2C6BB00647613 /* CoreDataManager.swift */,
 				307DC0EA27A14C5B00647613 /* LoadScreen+Reachability */,
 				307DC0E927A14C0D00647613 /* Model+Constants */,
 				307DC0E827A14BE200647613 /* API */,
@@ -260,6 +263,7 @@
 				30863A102799B70F00CC45BA /* FavoriteFilm+CoreDataClass.swift in Sources */,
 				305ADFE9278EFB0A002D39C8 /* SettingViewController.swift in Sources */,
 				30863A112799B70F00CC45BA /* FavoriteFilm+CoreDataProperties.swift in Sources */,
+				307DC0ED27A2C6BB00647613 /* CoreDataManager.swift in Sources */,
 				30688002278C43DA003CDE31 /* CollectionViewCell.swift in Sources */,
 				302CEE1527858CCD0017E0D7 /* Reachability.swift in Sources */,
 				305C361E2799434400477095 /* Movie_Search_App.xcdatamodeld in Sources */,

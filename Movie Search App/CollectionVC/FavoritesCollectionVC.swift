@@ -25,6 +25,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     private var filmsFav: [FavoriteFilm] = []
     private var settingViewController = SettingViewController()
     private var seguesConstant = SeguesConst()
+    private var coreDataManager = CoreDataManager()
     private var chooseSize: SettingViewController.ChooseSize?
     private var defaultSizeCell: CGSize?
     var context: NSManagedObjectContext?
@@ -47,7 +48,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favoriteCollectionView.reloadData()
-        let context = getContext()
+        let context = coreDataManager.getContext()
         let fetchRequest: NSFetchRequest<FavoriteFilm> = FavoriteFilm.fetchRequest()
         do {
             filmsFav = try context.fetch(fetchRequest)
@@ -127,14 +128,6 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         return UIModalPresentationStyle.none
     }
     
-    
-    // MARK: - Initial context
-    
-    private func getContext() -> NSManagedObjectContext {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return context! }
-        return appDelegate.persistentContainer.viewContext
-    }
-    
     // MARK: - Setting up an alert controller
     
     private func presentAlertController(withTitle title: String?, message: String?,
@@ -142,7 +135,11 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         let alertController = UIAlertController(title: title, message: message,
                                                 preferredStyle: style)
         let yes = UIAlertAction(title: "Yes, I'am sure", style: .default) { action in
-            self.deleteFilm(withTitle: title, message: message, idFilm: idFilm)
+            guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
+            else { return }
+            self.coreDataManager.deleteFromData(idFilm: idFilm)
+            self.filmsFav.remove(at: index)
+            self.favoriteCollectionView.reloadData()
         }
         
         let no = UIAlertAction(title: "No thanks", style: .cancel){ action in
@@ -152,26 +149,6 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         alertController.addAction(no)
         
         present(alertController, animated: true)
-    }
-    
-    private func deleteFilm(withTitle title: String?, message: String?, idFilm: Double) {
-        
-        guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
-        else { return }
-        let context = self.getContext()
-        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FavoriteFilm")
-        request.predicate = NSPredicate(format:"idFilm = %@", "\(idFilm)")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
-        do {
-            try context.execute(deleteRequest)
-            try context.save()
-        } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-        self.filmsFav.remove(at: index)
-        self.favoriteCollectionView.reloadData()
-        
     }
 }
 
@@ -211,7 +188,7 @@ extension FavoritesCollectionVC: UISearchResultsUpdating {
 // MARK: - Save and delete to favorites
 
 extension FavoritesCollectionVC: FavoriteDeletProtocol {
-    func deleteFavoriteFilm(isFavorite: Bool, idFilm: Double?) {
+    func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?) {
         
         if isFavorite == false {
             //for not like
