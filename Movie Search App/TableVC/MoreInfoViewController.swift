@@ -9,13 +9,57 @@ import UIKit
 
 class MoreInfoViewController: UIViewController {
     
-    var detailedInformation: FavoriteFilm?
-    var detail: Films.Film?
-    
     @IBOutlet weak var moreInfoImage: UIImageView!
     @IBOutlet weak var moreIntoTextView: UITextView!
     @IBOutlet weak var YTButton: UIButton!
     @IBOutlet weak var nameNavigationItem: UINavigationItem!
+    
+    var detailedInformation: FavoriteFilm?
+    var detail: Films.Film?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupMoreInformation ()
+    }
+    
+    // MARK: - Configuring new window with additional information
+    private func setupMoreInformation () {
+        if detailedInformation != nil {
+            moreInfoImage.image = UIImage(data: (detailedInformation?.original)!)
+            let summary = detailedInformation?.summary ?? "No description text"
+            moreIntoTextView.text = summary.htmlString
+            nameNavigationItem.title = detailedInformation?.name
+        } else {
+            moreInfoImage.image = getImage(from: detail?.show?.image?.original ??
+                                           placeholderFilm)
+            let summary = detail?.show?.summary ?? "No description text"
+            moreIntoTextView.text = summary.htmlString
+            nameNavigationItem.title = detail?.show?.name
+        }
+    }
+    
+    // MARK: - String in image conversion
+    
+    private func getImage(from string: String) -> UIImage? {
+        //Get valid URL
+        guard let url = URL(string: string)
+        else {
+            print("Unable to create URL")
+            return nil
+        }
+        
+        var image: UIImage? = nil
+        do {
+            //Get valid data
+            let data = try Data(contentsOf: url, options: [])
+            
+            //Make image
+            image = UIImage(data: data)
+        } catch {
+            print(error.localizedDescription)
+        }
+        return image
+    }
     
     // MARK: - Configuring a button to open a window with search in You Tube
     
@@ -51,29 +95,6 @@ class MoreInfoViewController: UIViewController {
         }
     }
     
-    // MARK: - Configuring new window with additional information
-    private func setupMoreInformation () {
-        if detailedInformation != nil {
-            moreInfoImage.image = UIImage(data: (detailedInformation?.original)!)
-            let summary = detailedInformation?.summary ?? "No description text"
-            moreIntoTextView.text = summary.htmlString
-            nameNavigationItem.title = detailedInformation?.name
-        } else {
-            moreInfoImage.image = getImage(from: detail?.show?.image?.original ??
-                                           placeholderFilm)
-            let summary = detail?.show?.summary ?? "No description text"
-            moreIntoTextView.text = summary.htmlString
-            nameNavigationItem.title = detail?.show?.name
-        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupMoreInformation ()
-        
-    }
-    
-    
     @IBAction private func exit(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
@@ -81,19 +102,19 @@ class MoreInfoViewController: UIViewController {
     @IBAction private func shareActive(_ sender: UIBarButtonItem) {
         let shareController: UIActivityViewController
         if detail?.show?.externals?.imdb == nil && detail?.show?.url == nil {
-        if detailedInformation?.imdb == nil {
-            shareController = UIActivityViewController(activityItems: [detailedInformation?.url ?? ""], applicationActivities: nil)
-            shareController.completionWithItemsHandler = { _, bool, _, _ in
-                if bool {
-                    print("Successful")}
+            if detailedInformation?.imdb == nil {
+                shareController = UIActivityViewController(activityItems: [detailedInformation?.url ?? ""], applicationActivities: nil)
+                shareController.completionWithItemsHandler = { _, bool, _, _ in
+                    if bool {
+                        print("Successful")}
+                }
+            } else {
+                shareController = UIActivityViewController(activityItems: ["https://www.imdb.com/title/\(detailedInformation?.imdb ?? "")" ], applicationActivities: nil)
+                shareController.completionWithItemsHandler = { _, bool, _, _ in
+                    if bool {
+                        print("Successful")}
+                }
             }
-        } else {
-            shareController = UIActivityViewController(activityItems: ["https://www.imdb.com/title/\(detailedInformation?.imdb ?? "")" ], applicationActivities: nil)
-            shareController.completionWithItemsHandler = { _, bool, _, _ in
-                if bool {
-                    print("Successful")}
-            }
-        }
         } else {
             if detail?.show?.externals?.imdb == nil {
                 shareController = UIActivityViewController(activityItems: [detail?.show?.url ?? ""], applicationActivities: nil)
@@ -111,34 +132,9 @@ class MoreInfoViewController: UIViewController {
         }
         present (shareController, animated: true, completion: nil)
     }
-    
-    
-    
-    // MARK: - String in image conversion
-    
-    private func getImage(from string: String) -> UIImage? {
-        //Get valid URL
-        guard let url = URL(string: string)
-        else {
-            print("Unable to create URL")
-            return nil
-        }
-        
-        var image: UIImage? = nil
-        do {
-            //Get valid data
-            let data = try Data(contentsOf: url, options: [])
-            
-            //Make image
-            image = UIImage(data: data)
-        } catch {
-            print(error.localizedDescription)
-        }
-        return image
-    }
 }
 
-    // MARK: - Extention from html
+// MARK: - Extention from html
 
 extension String {
     private var utfData: Data? {
