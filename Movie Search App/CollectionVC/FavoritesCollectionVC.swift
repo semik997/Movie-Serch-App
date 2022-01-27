@@ -100,16 +100,18 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == seguesConstant.showDetail {
-            guard let indexPath = favoriteCollectionView.indexPathsForSelectedItems else { return }
+            if let cell = sender as? CollectionViewCell,
+               let indexPath = favoriteCollectionView.indexPath(for: cell){
             let film: FavoriteFilm
             if isFiltering {
-                film = filtredFilms[indexPath[0].row]
+                film = filtredFilms[indexPath.row]
             } else {
-                film = filmsFav[indexPath[0].row]
+                film = filmsFav[indexPath.row]
             }
             let nav = segue.destination as? UINavigationController
             let MoreInfoFavoritesTableVC = nav?.topViewController as? MoreInfoViewController
             MoreInfoFavoritesTableVC?.detailedInformation = film
+            }
         }
         
         //MARK: - Info button
