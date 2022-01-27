@@ -24,10 +24,9 @@ class FavoritesCollectionVC: UICollectionViewController {
     private var filtredFilms: [FavoriteFilm] = []
     private var filmsFav: [FavoriteFilm] = []
     private var settingViewController = SettingViewController()
-    private var small: Bool?
-    private var medium: Bool?
-    private var big: Bool?
-    private var defaultSizeCell = CGSize (width: 200, height: 200)
+    private var seguesConstant = SeguesConst()
+    private var chooseSize: SettingViewController.ChooseSize?
+    private var defaultSizeCell: CGSize?
     var context: NSManagedObjectContext?
     
     
@@ -58,8 +57,8 @@ class FavoritesCollectionVC: UICollectionViewController {
     }
     
     private func getContext() -> NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        return appDelegate!.persistentContainer.viewContext
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return context! }
+        return appDelegate.persistentContainer.viewContext
     }
     
     // MARK: - UICollectionViewDataSource
@@ -147,7 +146,7 @@ class FavoritesCollectionVC: UICollectionViewController {
     // MARK: - Detail setting
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showDetail {
+        if segue.identifier == seguesConstant.showDetail {
             guard let indexPath = favoriteCollectionView.indexPathsForSelectedItems else { return }
             let film: FavoriteFilm
             if isFiltering {
@@ -162,7 +161,7 @@ class FavoritesCollectionVC: UICollectionViewController {
         
         //MARK: - Info button
         
-        if segue.identifier == infoButton {
+        if segue.identifier == seguesConstant.infoButton {
             if let tvc = segue.destination as? InfoTableViewController {
                 tvc.delegateFav = self
                 tvc.delegateSetting = self
@@ -185,16 +184,14 @@ extension FavoritesCollectionVC: UIPopoverPresentationControllerDelegate {
 
 extension FavoritesCollectionVC: SettingViewControllerDelegate {
     
-    func updateInterface(color: UIColor?, big: Bool?, medium: Bool?, small: Bool?) {
+    func updateInterface(color: UIColor?, size: SettingViewController.ChooseSize?) {
         
         if color == UIColor.white {
         } else {
             favoriteCollectionView.backgroundColor = color
             navigationController?.navigationBar.backgroundColor = color
         }
-        self.big = big
-        self.medium = medium
-        self.small = small
+        self.chooseSize = size
         favoriteCollectionView.reloadData()
     }
 }
@@ -232,26 +229,9 @@ extension FavoritesCollectionVC: FavoriteDeletProtocol {
 
 extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
     
-    enum ChooseSize {
-        case big
-        case medium
-        case small
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var size = ChooseSize.medium
         
-        if self.small == false && self.medium == false && self.big == false {
-            return defaultSizeCell
-        } else if self.small == true {
-            size = ChooseSize.small
-        } else if self.big == true {
-            size = ChooseSize.big
-        } else {
-            size = ChooseSize.medium
-        }
-        
-        switch size {
+        switch self.chooseSize {
         case .big:
             let sizeCell = CGSize (width: 400, height: 400)
             self.defaultSizeCell = sizeCell
@@ -261,8 +241,13 @@ extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
         case .small:
             let sizeCell = CGSize (width: 100, height: 150)
             self.defaultSizeCell = sizeCell
+        case .noChoose:
+            defaultSizeCell
+        case .none:
+            let sizeCell = CGSize (width: 200, height: 200)
+            self.defaultSizeCell = sizeCell
         }
-        return defaultSizeCell
+        return defaultSizeCell ?? CGSize (width: 200, height: 200)
     }
     
     // setting cell intervals

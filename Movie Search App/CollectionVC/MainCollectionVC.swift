@@ -26,12 +26,11 @@ class MainCollectionVC: UICollectionViewController {
     //Creating and filling the array for Display
     private var tVMazeApiManager = TVMazeApiManager()
     private var rapidApiManager = RapidApiManager()
+    private var seguesConstant = SeguesConst()
     private let defaults = UserDefaults.standard
     private var tap = UITapGestureRecognizer()
     private var searchText = ""
-    private var small: Bool?
-    private var medium: Bool?
-    private var big: Bool?
+    private var chooseSize: SettingViewController.ChooseSize?
     private var defaultSizeCell = CGSize (width: 200, height: 200)
     
     var context = (UIApplication.shared.delegate as!
@@ -59,8 +58,8 @@ class MainCollectionVC: UICollectionViewController {
     // MARK: - Save in CoreData
     
     private func getContext() -> NSManagedObjectContext {
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        return appDelegate!.persistentContainer.viewContext
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return context }
+        return appDelegate.persistentContainer.viewContext
     }
     
     // MARK: - UICollectionViewDataSource
@@ -103,7 +102,7 @@ class MainCollectionVC: UICollectionViewController {
     // MARK: - Detail setting
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showDetail {
+        if segue.identifier == seguesConstant.showDetail {
             guard let indexPath = collectionViewSpace.indexPathsForSelectedItems else { return }
             let film = films[indexPath[0].row]
             let nav = segue.destination as? UINavigationController
@@ -113,7 +112,7 @@ class MainCollectionVC: UICollectionViewController {
         
         // MARK: - Info button
         
-        if segue.identifier == infoButton {
+        if segue.identifier == seguesConstant.infoButton {
             
             if let tvc = segue.destination as? InfoTableViewController {
                 tvc.delegate = self
@@ -137,15 +136,13 @@ extension MainCollectionVC: UIPopoverPresentationControllerDelegate {
 
 extension MainCollectionVC: SettingViewControllerDelegate {
     
-    func updateInterface(color: UIColor?, big: Bool?, medium: Bool?, small: Bool?) {
+    func updateInterface(color: UIColor?, size: SettingViewController.ChooseSize?) {
         if color == UIColor.white {
         } else {
             collectionViewSpace.backgroundColor = color
             navigationController?.navigationBar.backgroundColor = color
         }
-        self.big = big
-        self.medium = medium
-        self.small = small
+        self.chooseSize = size
     }
 }
 
@@ -256,26 +253,9 @@ extension MainCollectionVC: FavoriteProtocol {
 
 extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
     
-    enum ChooseSize {
-        case big
-        case medium
-        case small
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var size = ChooseSize.medium
         
-        if self.small == false && self.medium == false && self.big == false {
-            return defaultSizeCell
-        } else if self.small == true {
-            size = ChooseSize.small
-        } else if self.big == true {
-            size = ChooseSize.big
-        } else {
-            size = ChooseSize.medium
-        }
-        
-        switch size {
+        switch self.chooseSize {
         case .big:
             let sizeCell = CGSize (width: 400, height: 400)
             self.defaultSizeCell = sizeCell
@@ -284,6 +264,12 @@ extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
             self.defaultSizeCell = sizeCell
         case .small:
             let sizeCell = CGSize (width: 100, height: 150)
+            self.defaultSizeCell = sizeCell
+        case .noChoose:
+            let sizeCell = CGSize (width: 200, height: 200)
+            self.defaultSizeCell = sizeCell
+        case .none:
+            let sizeCell = CGSize (width: 200, height: 200)
             self.defaultSizeCell = sizeCell
         }
         return defaultSizeCell

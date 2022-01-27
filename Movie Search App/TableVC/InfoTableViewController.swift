@@ -43,8 +43,8 @@ class InfoTableViewController: UITableViewController, SettingViewControllerDeleg
     //MARK: - Setting view
     
     // delegate size and color
-    func updateInterface(color: UIColor?, big: Bool?, medium: Bool?, small: Bool?) {
-        delegateSetting?.updateInterface(color: color, big: big, medium: medium, small: small)
+    func updateInterface(color: UIColor?, size: SettingViewController.ChooseSize?) {
+        delegateSetting?.updateInterface(color: color, size: size)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
