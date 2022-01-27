@@ -26,14 +26,12 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     private var tVMazeApiManager = TVMazeApiManager()
     private var rapidApiManager = RapidApiManager()
     private var seguesConstant = SeguesConst()
+    private var coreDataManager = CoreDataManager()
     private let defaults = UserDefaults.standard
     private var tap = UITapGestureRecognizer()
     private var searchText = ""
     private var chooseSize: SettingViewController.ChooseSize?
     private var defaultSizeCell = CGSize (width: 200, height: 200)
-    
-    var context = (UIApplication.shared.delegate as!
-                   AppDelegate).persistentContainer.viewContext
     private var films: [Films.Film] = [] {
         didSet {
             DispatchQueue.main.async { [self] in
@@ -76,7 +74,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         guard let cell = collectionViewSpace.dequeueReusableCell(withReuseIdentifier: "mainCell",
                                                                  for: indexPath) as? CollectionViewCell
         else { return UICollectionViewCell() }
-        cell.delegate = self
+        cell.delegateDelete = self
         if indexPath.row < films.count {
             cell.loadData(film: films[indexPath.row])
         }
@@ -117,13 +115,6 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         let ok = UIAlertAction(title: "OK", style: .cancel)
         internetAlert.addAction(ok)
         present(internetAlert, animated: true)
-    }
-    
-    // MARK: - Save in CoreData
-    
-    private func getContext() -> NSManagedObjectContext {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return context }
-        return appDelegate.persistentContainer.viewContext
     }
 }
 
@@ -175,51 +166,36 @@ extension MainCollectionVC: UISearchResultsUpdating {
 
 // MARK: - Save and delete to favorites
 
-extension MainCollectionVC: FavoriteProtocol {
+extension MainCollectionVC: FavoriteDeletProtocol {
     
-    func changeFilm(_ isFavorite: Bool, idFilm: Double?, url: String?,
-                    name: String?, image: String?, original: String?,
-                    summary: String?, imdb: String?) {
+    func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?) {
         
-        if isFavorite {
-            //for like
+        if let idFilm = idFilm, let film = films.first(where: { $0.show?.id == idFilm }) {
             
-            let originalImage = getImage(from: original!)
-            let imageImage = getImage(from: image!)
-            let originalImageData = originalImage?.jpegData(compressionQuality: 1.0)
-            let imageData = imageImage?.jpegData(compressionQuality: 1.0)
-            
-            let likeFilms = FavoriteFilm(context: self.context)
-            likeFilms.isFavorite = true
-            likeFilms.idFilm = idFilm ?? 0
-            likeFilms.url = url
-            likeFilms.name = name
-            likeFilms.original = originalImageData
-            likeFilms.medium = imageData
-            likeFilms.summary = summary
-            likeFilms.imdb = imdb
-            do {
-                try context.save()
-            } catch {
-                context.rollback()
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        } else {
-            //for not like
-            
-            let context = self.getContext()
-            let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FavoriteFilm")
-            request.predicate = NSPredicate(format:"idFilm = %@", "\(idFilm ?? 0)")
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
-            do {
-                try context.execute(deleteRequest)
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            if isFavorite {
+                //for like
+                
+                let originalImage = getImage(from: film.show?.image?.original ?? "placeholderFilm")
+                let imageImage = getImage(from: film.show?.image?.medium ?? "placeholderFilm")
+                let originalImageData = originalImage?.jpegData(compressionQuality: 1.0)
+                let imageData = imageImage?.jpegData(compressionQuality: 1.0)
+                
+                let likeFilms = FavoriteFilm(context: self.coreDataManager.context)
+                likeFilms.isFavorite = true
+                likeFilms.idFilm = idFilm
+                likeFilms.url = film.show?.url
+                likeFilms.name = film.show?.name
+                likeFilms.original = originalImageData
+                likeFilms.medium = imageData
+                likeFilms.summary = film.show?.summary
+                likeFilms.imdb = film.show?.externals?.imdb
+                coreDataManager.saveInData()
+            } else {
+                //for not like
+                coreDataManager.deleteFromData (idFilm: idFilm)
             }
         }
+        
     }
     
     // MARK: - String in image conversion
