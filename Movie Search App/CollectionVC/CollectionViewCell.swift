@@ -8,13 +8,8 @@
 import UIKit
 import CoreData
 
-protocol FavoriteProtocol: AnyObject {
-    func changeFilm(_ isFavorite: Bool, idFilm: Double?, url: String?, name: String?, image: String?,
-                    original: String?, summary: String?, imdb: String?)
-}
-
 protocol FavoriteDeletProtocol: AnyObject {
-    func deleteFavoriteFilm(isFavorite: Bool, idFilm: Double?)
+    func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?)
 }
 
 class CollectionViewCell: UICollectionViewCell {
@@ -26,7 +21,6 @@ class CollectionViewCell: UICollectionViewCell {
     
     
     //Initialization of UI fields
-    weak var delegate: FavoriteProtocol?
     weak var delegateDelete: FavoriteDeletProtocol?
     private var rapidApiManager = RapidApiManager()
     private var idFilm: Double?
@@ -59,17 +53,13 @@ class CollectionViewCell: UICollectionViewCell {
             //delited like
             fillButton.isSelected = false
             isFavorite = !isFavorite
-            delegateDelete?.deleteFavoriteFilm(isFavorite: isFavorite, idFilm: idFilm)
-            delegate?.changeFilm(isFavorite, idFilm: idFilm, url: url, name: name,
-                                 image: image,original: original, summary: summary,
-                                 imdb: imdb)
+            delegateDelete?.actionForFavoriteFilm(isFavorite: isFavorite, idFilm: idFilm)
+            
         } else {
             //add to like
             fillButton.isSelected = true
             isFavorite = !isFavorite
-            delegate?.changeFilm(isFavorite, idFilm: idFilm, url: url, name: name,
-                                 image: image,original: original, summary: summary,
-                                 imdb: imdb)
+            delegateDelete?.actionForFavoriteFilm(isFavorite: isFavorite, idFilm: idFilm)
         }
     }
 }
