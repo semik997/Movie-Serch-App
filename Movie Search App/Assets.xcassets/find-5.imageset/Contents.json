@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "BadBoys.jpeg",
+      "filename" : "find-5.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "find-6.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "find-7.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
