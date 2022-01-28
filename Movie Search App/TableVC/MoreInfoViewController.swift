@@ -25,7 +25,9 @@ class MoreInfoViewController: UIViewController {
     // MARK: - Configuring new window with additional information
     private func setupMoreInformation () {
         if detailedInformation != nil {
-            moreInfoImage.image = UIImage(data: (detailedInformation?.original)!)
+            if let originalLogo = detailedInformation?.original {
+                moreInfoImage.image = UIImage(data: (originalLogo))
+            }
             let summary = detailedInformation?.summary ?? "No description text"
             moreIntoTextView.text = summary.htmlString
             nameNavigationItem.title = detailedInformation?.name
