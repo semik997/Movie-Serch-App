@@ -104,6 +104,8 @@ class MoreInfoViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - Share function
+    
     @IBAction private func shareActive(_ sender: UIBarButtonItem) {
         let shareController: UIActivityViewController
         if detail?.show?.externals?.imdb == nil && detail?.show?.url == nil {
