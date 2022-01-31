@@ -8,61 +8,17 @@
 import CoreData
 import UIKit
 
-class CoreDataManager: NSObject {
+class CoreDataManager: UICollectionViewController {
     
-    static let shared = CoreDataManager()
-    private var context: NSManagedObjectContext {
-        return persistentContainer.viewContext
+    var context = (UIApplication.shared.delegate as!
+                   AppDelegate).persistentContainer.viewContext
+    
+    func getContext() -> NSManagedObjectContext {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return context }
+        return appDelegate.persistentContainer.viewContext
     }
     
-    // MARK: - Core Data stack
-    private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Movie_Search_App")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
-    
-    private override init() {
-        super.init()
-    }
-    
-    // MARK: - Core Data Saving support
-    
-    func saveContext() {
-        
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }
-    // MARK: - Saving film to Core Data
-    func saveInData(film: Films.Film, idFilm: Double) {
-        
-        let originalImage = UIImage.getImage(from: film.show?.image?.original ?? "placeholderFilm")
-        let imageImage = UIImage.getImage(from: film.show?.image?.medium ?? "placeholderFilm")
-        let originalImageData = originalImage?.jpegData(compressionQuality: 1.0)
-        let imageData = imageImage?.jpegData(compressionQuality: 1.0)
-        
-        let likeFilms = FavoriteFilm(context: context)
-        likeFilms.isFavorite = true
-        likeFilms.idFilm = idFilm
-        likeFilms.url = film.show?.url
-        likeFilms.name = film.show?.name
-        likeFilms.original = originalImageData
-        likeFilms.medium = imageData
-        likeFilms.summary = film.show?.summary
-        likeFilms.imdb = film.show?.externals?.imdb
-        
+    func saveInData () {
         do {
             try context.save()
         } catch {
@@ -71,13 +27,12 @@ class CoreDataManager: NSObject {
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
-    // MARK: - Deleting a movie from Core Data
-    func deleteFromData(idFilm: Double) {
-        
+    
+    func deleteFromData (idFilm: Double) {
+        let context = getContext()
         let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FavoriteFilm")
         request.predicate = NSPredicate(format:"idFilm = %@", "\(idFilm)")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
-        
         do {
             try context.execute(deleteRequest)
             try context.save()
@@ -86,18 +41,5 @@ class CoreDataManager: NSObject {
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
-    
-    func fetchFilm() -> [FavoriteFilm] {
-        var filmsFav: [FavoriteFilm]?
-        let fetchRequest: NSFetchRequest<FavoriteFilm> = FavoriteFilm.fetchRequest()
-        do {
-            filmsFav = try context.fetch(fetchRequest)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-        return filmsFav ?? []
-        
-    }
-    
 }
 

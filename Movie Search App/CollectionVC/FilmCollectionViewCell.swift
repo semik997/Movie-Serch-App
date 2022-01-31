@@ -35,6 +35,7 @@ class FilmCollectionViewCell: UICollectionViewCell {
     private var imdb: String?
     private var rating: Double?
     private var isFavorite = false
+    private var getImage: UIImage?
     
     private var currentFilm: Films.Film?
     var context: NSManagedObjectContext?
@@ -104,5 +105,7 @@ extension FilmCollectionViewCell {
         ratingLabel.text = "\(rating ?? 0)/10"
     }
 }
+
+
 
 
