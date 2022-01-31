@@ -21,6 +21,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     
     //Initialization of UI fields
+//    let imageCache = NSCache<NSString, UIImage>()
     weak var delegateDelete: FavoriteDeletProtocol?
     private var rapidApiManager = RapidApiManager()
     private var idFilm: Double?
@@ -34,6 +35,7 @@ class CollectionViewCell: UICollectionViewCell {
     private var imdb: String?
     private var rating: Double?
     private var isFavorite = false
+    private var getImage: UIImage?
     
     private var currentFilm: Films.Film?
     var context: NSManagedObjectContext?
@@ -71,7 +73,8 @@ extension CollectionViewCell {
     func loadData(film: Films.Film) {
         currentFilm = film
         nameLabel?.text = film.show?.name
-        mainImage.image = getImage(from: (film.show?.image?.medium ?? placeholderFilm))
+        setImage(from: (film.show?.image?.medium ?? placeholderFilm))
+//        mainImage.image = getImage(from: (film.show?.image?.medium ?? placeholderFilm))
         idFilm = film.show?.id
         url = film.show?.url
         name = film.show?.name
@@ -104,25 +107,56 @@ extension CollectionViewCell {
     
     // MARK: - String in image conversion
     
-    private func getImage(from string: String) -> UIImage? {
-        //Get valid URL
-        guard let url = URL(string: string)
-        else {
-            print("Unable to create URL")
-            return nil
+    func setImage(from url: String) {
+        guard let imageURL = URL(string: url) else { return }
+
+            // just not to cause a deadlock in UI!
+        DispatchQueue.global().async {
+            guard let imageData = try? Data(contentsOf: imageURL) else { return }
+
+            let image = UIImage(data: imageData)
+            DispatchQueue.main.async {
+                self.mainImage.image = image
+            }
         }
-        var image: UIImage? = nil
-        do {
-            //Get valid data
-            let data = try Data(contentsOf: url, options: [])
-            
-            //Make image
-            image = UIImage(data: data)
-        } catch {
-            image = getImage(from: placeholderFilm)
-        }
-        return image
     }
+//
+//    func loadImageUsingCache(withUrl urlString : String) {
+//            let url = URL(string: urlString)
+//            if url == nil {return}
+//            self.mainImage = nil
+//
+//            // check cached image
+//            if let cachedImage = imageCache.object(forKey: urlString as NSString)  {
+//                self.mainImage = cachedImage
+//                return
+//            }
+//
+//        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView.init(style: .gray)
+//            addSubview(activityIndicator)
+//            activityIndicator.startAnimating()
+//            activityIndicator.center = self.center
+//
+//            // if not, download image from url
+//            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+//                if error != nil {
+//                    print(error!)
+//                    return
+//                }
+//
+//                DispatchQueue.main.async {
+//                    if let image = UIImage(data: data!) {
+//                        self.imageCache.setObject(image, forKey: urlString as NSString)
+//                        self.mainImage = image
+//                        activityIndicator.removeFromSuperview()
+//                    }
+//                }
+//
+//            }).resume()
+//        }
+//
 }
+
+
 
 

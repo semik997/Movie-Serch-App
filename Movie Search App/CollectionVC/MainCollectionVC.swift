@@ -176,7 +176,6 @@ extension MainCollectionVC: FavoriteDeletProtocol {
             
             if isFavorite {
                 //for like
-                
                 let originalImage = getImage(from: film.show?.image?.original ?? "placeholderFilm")
                 let imageImage = getImage(from: film.show?.image?.medium ?? "placeholderFilm")
                 let originalImageData = originalImage?.jpegData(compressionQuality: 1.0)

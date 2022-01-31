@@ -110,7 +110,6 @@
 				E8FBD9A6F06CC836F6925542 /* Pods-Movie Search App.release.xcconfig */,
 >>>>>>> 6992df7 (Added pod file, Fixed warning)
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -198,7 +197,6 @@
 		30CA0C62275B8559009468D2 /* Movie Search App */ = {
 			isa = PBXGroup;
 			children = (
-				307DC0EC27A2C6BB00647613 /* CoreDataManager.swift */,
 				307DC0EA27A14C5B00647613 /* LoadScreen+Reachability */,
 				307DC0E927A14C0D00647613 /* Model+Constants */,
 				307DC0E827A14BE200647613 /* API */,
@@ -219,6 +217,7 @@
 			children = (
 				30863A0E2799B70F00CC45BA /* FavoriteFilm+CoreDataClass.swift */,
 				30863A0F2799B70F00CC45BA /* FavoriteFilm+CoreDataProperties.swift */,
+				307DC0EC27A2C6BB00647613 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
