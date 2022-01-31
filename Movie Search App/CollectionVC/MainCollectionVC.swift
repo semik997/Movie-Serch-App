@@ -203,7 +203,11 @@ extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
             let sizeCell = CGSize (width: 100, height: 150)
             self.defaultSizeCell = sizeCell
         case .noChoose:
+<<<<<<< HEAD
             break
+=======
+            break 
+>>>>>>> 6992df7 (Added pod file, Fixed warning)
         case .none:
             let sizeCell = CGSize (width: 200, height: 200)
             self.defaultSizeCell = sizeCell
