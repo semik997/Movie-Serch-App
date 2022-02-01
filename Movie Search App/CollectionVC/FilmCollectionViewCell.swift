@@ -105,7 +105,3 @@ extension FilmCollectionViewCell {
         ratingLabel.text = "\(rating ?? 0)/10"
     }
 }
-
-
-
-
