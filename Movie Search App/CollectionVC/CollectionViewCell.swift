@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import SDWebImage
 
 protocol FavoriteDeletProtocol: AnyObject {
     func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?)
@@ -21,7 +22,6 @@ class CollectionViewCell: UICollectionViewCell {
     
     
     //Initialization of UI fields
-//    let imageCache = NSCache<NSString, UIImage>()
     weak var delegateDelete: FavoriteDeletProtocol?
     private var rapidApiManager = RapidApiManager()
     private var idFilm: Double?
@@ -35,8 +35,6 @@ class CollectionViewCell: UICollectionViewCell {
     private var imdb: String?
     private var rating: Double?
     private var isFavorite = false
-    private var getImage: UIImage?
-    
     private var currentFilm: Films.Film?
     var context: NSManagedObjectContext?
     let defaults = UserDefaults.standard
@@ -73,10 +71,8 @@ extension CollectionViewCell {
     func loadData(film: Films.Film) {
         currentFilm = film
         nameLabel?.text = film.show?.name
-        setImage(from: (film.show?.image?.medium ?? placeholderFilm))
-        
-//        mainImage.image = getImage(from: (film.show?.image?.medium ?? placeholderFilm))
-        
+        let imageURL = URL(string: film.show?.image?.medium ?? placeholderFilm)
+        mainImage.sd_setImage(with: imageURL, completed: nil)
         idFilm = film.show?.id
         url = film.show?.url
         name = film.show?.name
@@ -106,55 +102,5 @@ extension CollectionViewCell {
         fillButton.isSelected = true
         ratingLabel.text = "\(rating ?? 0)/10"
     }
-    
-    // MARK: - String in image conversion
-    
-    func setImage(from url: String) {
-        guard let imageURL = URL(string: url) else { return }
 
-            // just not to cause a deadlock in UI!
-        DispatchQueue.global().async {
-            guard let imageData = try? Data(contentsOf: imageURL) else { return }
-
-            let image = UIImage(data: imageData)
-            DispatchQueue.main.async {
-                self.mainImage.image = image
-            }
-        }
-    }
-//
-//    func loadImageUsingCache(withUrl urlString : String) {
-//            let url = URL(string: urlString)
-//            if url == nil {return}
-//            self.mainImage = nil
-//
-//            // check cached image
-//            if let cachedImage = imageCache.object(forKey: urlString as NSString)  {
-//                self.mainImage = cachedImage
-//                return
-//            }
-//
-//        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView.init(style: .gray)
-//            addSubview(activityIndicator)
-//            activityIndicator.startAnimating()
-//            activityIndicator.center = self.center
-//
-//            // if not, download image from url
-//            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-//                if error != nil {
-//                    print(error!)
-//                    return
-//                }
-//
-//                DispatchQueue.main.async {
-//                    if let image = UIImage(data: data!) {
-//                        self.imageCache.setObject(image, forKey: urlString as NSString)
-//                        self.mainImage = image
-//                        activityIndicator.removeFromSuperview()
-//                    }
-//                }
-//
-//            }).resume()
-//        }
-//
 }
