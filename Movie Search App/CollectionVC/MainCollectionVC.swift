@@ -172,6 +172,7 @@ extension MainCollectionVC: FavoriteDeleteProtocol {
     
     func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?) {
         
+        
         if let idFilm = idFilm, let film = films.first(where: { $0.show?.id == idFilm }) {
             
             if isFavorite {
@@ -181,6 +182,23 @@ extension MainCollectionVC: FavoriteDeleteProtocol {
                 //for not like
                 CoreDataManager.shared.deleteFromData (idFilm: idFilm)
             }
+        }
+        
+        func uploadImage(name: String, photo: UIImage) {
+            
+            if let idFilm = idFilm, let film = films.first(where: { $0.show?.id == idFilm }) {
+            
+            let reference = Storage.storage().reference().child("moviesPicture").child(name)
+                guard let image = getImage(from: film.show?.image?.original ?? "placeholderFilm") else { return }
+                guard let imageData = image.jpegData(compressionQuality: 0.4) else { return }
+                let metadata = StorageMetadata()
+                metadata.contentType = "image/jpeg"
+                reference.putData(imageData, metadata: metadata)
+            
+            } else {
+                //for not like
+            }
+                    
         }
         
     }
