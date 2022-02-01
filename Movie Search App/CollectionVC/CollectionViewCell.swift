@@ -74,7 +74,9 @@ extension CollectionViewCell {
         currentFilm = film
         nameLabel?.text = film.show?.name
         setImage(from: (film.show?.image?.medium ?? placeholderFilm))
+        
 //        mainImage.image = getImage(from: (film.show?.image?.medium ?? placeholderFilm))
+        
         idFilm = film.show?.id
         url = film.show?.url
         name = film.show?.name
@@ -156,7 +158,3 @@ extension CollectionViewCell {
 //        }
 //
 }
-
-
-
-
