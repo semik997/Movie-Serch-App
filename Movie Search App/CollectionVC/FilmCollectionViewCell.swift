@@ -35,8 +35,6 @@ class FilmCollectionViewCell: UICollectionViewCell {
     private var imdb: String?
     private var rating: Double?
     private var isFavorite = false
-    private var getImage: UIImage?
-    
     private var currentFilm: Films.Film?
     var context: NSManagedObjectContext?
     let defaults = UserDefaults.standard

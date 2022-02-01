@@ -1,4 +1,5 @@
 ${PODS_ROOT}/Target Support Files/Pods-Movie Search App/Pods-Movie Search App-frameworks.sh
+<<<<<<< HEAD
 ${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework
 <<<<<<< HEAD
 ${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework
@@ -24,3 +25,6 @@ ${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework
 ${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework
 ${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework
 ${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework
+=======
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
+>>>>>>> 8713030 (Added SDWebImage library and)
