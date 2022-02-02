@@ -190,13 +190,10 @@ extension MainCollectionVC: FavoriteDeleteProtocol {
             
             let reference = Storage.storage().reference().child("moviesPicture").child(name)
                 guard let image = getImage(from: film.show?.image?.original ?? "placeholderFilm") else { return }
-                guard let imageData = image.jpegData(compressionQuality: 0.4) else { return }
+                guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }
                 let metadata = StorageMetadata()
                 metadata.contentType = "image/jpeg"
                 reference.putData(imageData, metadata: metadata)
-            
-            } else {
-                //for not like
             }
                     
         }
