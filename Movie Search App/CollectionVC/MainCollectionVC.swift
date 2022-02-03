@@ -22,7 +22,6 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         return text.isEmpty
     }
     
-    //Creating and filling the array for Display
     private var tVMazeApiManager = TVMazeApiManager()
     private var rapidApiManager = RapidApiManager()
     private var seguesConstant = SeguesConst()
@@ -42,6 +41,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setup the search controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Enter the name of the show to search"
@@ -51,7 +51,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         collectionViewSpace?.dataSource = self
     }
     
-    // MARK: - UICollectionViewDataSource
+    // MARK: - Setting the number of cells and their filling
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -166,7 +166,7 @@ extension MainCollectionVC: UISearchResultsUpdating {
     }
 }
 
-// MARK: - Save and delete to favorites
+// MARK: - Saving and deleting from favorites
 
 extension MainCollectionVC: FavoriteDeleteProtocol {
     
@@ -184,6 +184,7 @@ extension MainCollectionVC: FavoriteDeleteProtocol {
             }
         }
         
+        //MARK: - Saving an Image to Firebase
         func uploadImage(name: String, photo: UIImage) {
             
             if let idFilm = idFilm, let film = films.first(where: { $0.show?.id == idFilm }) {
@@ -195,9 +196,7 @@ extension MainCollectionVC: FavoriteDeleteProtocol {
                 metadata.contentType = "image/jpeg"
                 reference.putData(imageData, metadata: metadata)
             }
-                    
         }
-        
     }
 }
 

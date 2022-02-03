@@ -35,7 +35,7 @@ class RapidApiManager {
         dataTask.resume()
     }
     
-    // Call completion block with json
+    // MARK: - Call completion block with json
     private func parseJSONRaitinig(withData data: Data) -> Films.FilmIMDb? {
         let decoder = JSONDecoder()
         var currentShowIMDb: Films.FilmIMDb

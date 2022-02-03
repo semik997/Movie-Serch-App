@@ -36,8 +36,6 @@ class FilmCollectionViewCell: UICollectionViewCell {
     private var rating: Double?
     private var isFavorite = false
     private var currentFilm: Films.Film?
-    var context: NSManagedObjectContext?
-    let defaults = UserDefaults.standard
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -69,9 +67,9 @@ class FilmCollectionViewCell: UICollectionViewCell {
 extension FilmCollectionViewCell {
     
     func loadData(film: Films.Film) {
+        let imageURL = URL(string: film.show?.image?.medium ?? placeholderFilm)
         currentFilm = film
         nameLabel?.text = film.show?.name
-        let imageURL = URL(string: film.show?.image?.medium ?? placeholderFilm)
         mainImage.sd_setImage(with: imageURL, completed: nil)
         idFilm = film.show?.id
         url = film.show?.url

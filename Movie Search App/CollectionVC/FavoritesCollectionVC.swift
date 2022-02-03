@@ -27,7 +27,6 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     private var seguesConstant = SeguesConst()
     private var chooseSize: SettingViewController.ChooseSize?
     private var defaultSizeCell: CGSize?
-    var context: NSManagedObjectContext?
     
     
     override func viewDidLoad() {
@@ -50,7 +49,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         filmsFav = CoreDataManager.shared.fetchFilm()
     }
     
-    // MARK: - UICollectionViewDataSource
+    // MARK: - Setting the number of cells and their filling
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -180,7 +179,7 @@ extension FavoritesCollectionVC: UISearchResultsUpdating {
     }
 }
 
-// MARK: - Save and delete to favorites
+// MARK: - Show alert to delete movie
 
 extension FavoritesCollectionVC: FavoriteDeleteProtocol {
     func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?) {

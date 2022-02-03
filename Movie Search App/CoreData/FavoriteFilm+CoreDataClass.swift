@@ -11,11 +11,11 @@ import CoreData
 
 
 public class FavoriteFilm: NSManagedObject {
-
+    
     @nonobjc public class func fetchRequest() -> NSFetchRequest<FavoriteFilm> {
         return NSFetchRequest<FavoriteFilm>(entityName: "FavoriteFilm")
     }
-
+    
     @NSManaged public var idFilm: Double
     @NSManaged public var imdb: String?
     @NSManaged public var isFavorite: Bool

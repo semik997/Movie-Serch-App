@@ -110,8 +110,8 @@
 		307DC0E827A14BE200647613 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				302A14D2279162B800033937 /* RapidApiManager.swift */,
 				30CA0C7E275BE43B009468D2 /* TVMazeApiManager.swift */,
+				302A14D2279162B800033937 /* RapidApiManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -170,7 +170,6 @@
 				307DC0EA27A14C5B00647613 /* LoadScreen+Reachability */,
 				307DC0E927A14C0D00647613 /* Model+Constants */,
 				307DC0E827A14BE200647613 /* API */,
-				3059523B275CEC33003A7049 /* Delegate */,
 				30688003278C4416003CDE31 /* CollectionVC */,
 				307DC0EB27A14CD200647613 /* TableVC */,
 				30CA0C69275B8559009468D2 /* Main.storyboard */,

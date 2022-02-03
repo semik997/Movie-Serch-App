@@ -12,6 +12,7 @@ public class Reachability {
     
     class func isConnectedToNetwork() -> Bool {
         
+        // Internet connection check
         var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0,
                                       sin_port: 0, sin_addr: in_addr(s_addr: 0),
                                       sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SystemConfiguration
 
-    // MARK: - Api request
+// MARK: - Api request
 
 struct TVMazeApiManager {
     

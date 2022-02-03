@@ -51,14 +51,14 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
         super.viewDidLoad()
     }
     
+    // MARK: - Select and apply color after selection
     @IBAction func selectColorButton(_ sender: Any) {
-        
         let picker = UIColorPickerViewController()
         picker.delegate = self
         present(picker, animated: true, completion: nil)
     }
     
-    // apply color after selection
+    // apply color
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
         if viewController.selectedColor == color {
             self.delegate?.updateInterface(color: color, size: size)

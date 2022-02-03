@@ -18,6 +18,7 @@ class CoreDataManager: UICollectionViewController {
         return appDelegate.persistentContainer.viewContext
     }
     
+    // MARK: - Saving from CoreData
     func saveInData () {
         do {
             try context.save()
@@ -28,6 +29,7 @@ class CoreDataManager: UICollectionViewController {
         }
     }
     
+    // MARK: - Removing from CoreData
     func deleteFromData (idFilm: Double) {
         let context = getContext()
         let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FavoriteFilm")
