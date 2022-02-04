@@ -20,7 +20,7 @@ class LoadViewController: UIViewController {
         // initialization of a timer to fill the download field
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
             if self.progress.progress != 1 {
-                self.progress.progress += 0.05
+                self.progress.progress += 0.2
             } else { // switching to another screen after filling in the loading field
                 
                 timer.invalidate()

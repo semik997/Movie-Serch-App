@@ -95,11 +95,13 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
             if let cell = sender as? FilmCollectionViewCell,
                let indexPath = favoriteCollectionView.indexPath(for: cell){
                 let film: FavoriteFilm
+                
                 if isFiltering {
                     film = filtredFilms[indexPath.row]
                 } else {
                     film = filmsFav[indexPath.row]
                 }
+                
                 let nav = segue.destination as? UINavigationController
                 let MoreInfoFavoritesTableVC = nav?.topViewController as? MoreInfoViewController
                 MoreInfoFavoritesTableVC?.detailedInformation = film
@@ -110,8 +112,10 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         
         if segue.identifier == seguesConstant.infoButton {
             if let tvc = segue.destination as? InfoTableViewController {
+                
                 tvc.delegateFav = self
                 tvc.delegateSetting = self
+                
                 if let ppc = tvc.popoverPresentationController {
                     ppc.delegate = self
                 }
@@ -181,7 +185,12 @@ extension FavoritesCollectionVC: UISearchResultsUpdating {
 
 // MARK: - Show alert to delete movie
 
+<<<<<<< HEAD
 extension FavoritesCollectionVC: FavoriteDeleteProtocol {
+=======
+extension FavoritesCollectionVC: FavoriteDeletProtocol {
+
+>>>>>>> c495c83 (Redesigned settings screen)
     func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?) {
         
         if isFavorite == false {

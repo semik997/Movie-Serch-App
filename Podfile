@@ -14,10 +14,13 @@ pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'Firebase/Storage'
 
+<<<<<<< HEAD
 
 =======
 pod 'SDWebImage'
 >>>>>>> 8713030 (Added SDWebImage library and)
 
+=======
+>>>>>>> c495c83 (Redesigned settings screen)
 end
 

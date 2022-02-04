@@ -32,23 +32,41 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
     private var defaultColor: UIColor?
     var size = ChooseSize.noChoose
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bigSizeCellButton.setImage(UIImage(named: "big-icon"), for: .normal)
+        bigSizeCellButton.setImage(UIImage(named: "complete"), for: .selected)
+        
+        mediumSizeCellButton.setImage(UIImage(named: "medium"), for: .normal)
+        mediumSizeCellButton.setImage(UIImage(named: "complete"), for: .selected)
+        
+        smallSizeCellButton.setImage(UIImage(named: "small"), for: .normal)
+        smallSizeCellButton.setImage(UIImage(named: "complete"), for: .selected)
+        
+        mediumSizeCellButton.isSelected = true
+    }
+    
     
     @IBAction private func chooseBigSizeButton(_ sender: UIButton) {
         size = ChooseSize.big
+        bigSizeCellButton.isSelected = true
+        mediumSizeCellButton.isSelected = false
+        smallSizeCellButton.isSelected = false
         self.delegate?.updateInterface(color: color, size: size)
     }
     @IBAction private func chooseMediumSizeButton(_ sender: UIButton) {
         size = ChooseSize.medium
+        bigSizeCellButton.isSelected = false
+        mediumSizeCellButton.isSelected = true
+        smallSizeCellButton.isSelected = false
         self.delegate?.updateInterface(color: color, size: size)
     }
     @IBAction private func chooseSmallSizeButton(_ sender: UIButton) {
         size = ChooseSize.small
+        bigSizeCellButton.isSelected = false
+        mediumSizeCellButton.isSelected = false
+        smallSizeCellButton.isSelected = true
         self.delegate?.updateInterface(color: color, size: size)
-    }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
     
     // MARK: - Select and apply color after selection
@@ -68,3 +86,5 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
         }
     }
 }
+
+

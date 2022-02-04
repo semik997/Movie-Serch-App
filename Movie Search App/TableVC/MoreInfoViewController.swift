@@ -20,6 +20,8 @@ class MoreInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupMoreInformation ()
+        
+        
     }
     
     // MARK: - Configuring new window with additional information
@@ -85,6 +87,7 @@ class MoreInfoViewController: UIViewController {
     
     @IBAction private func shareActive(_ sender: UIBarButtonItem) {
         let shareController: UIActivityViewController
+        
         if detail?.show?.externals?.imdb == nil && detail?.show?.url == nil {
             if detailedInformation?.imdb == nil {
                 shareController = UIActivityViewController(activityItems: [detailedInformation?.url ?? ""], applicationActivities: nil)

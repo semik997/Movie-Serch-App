@@ -19,6 +19,7 @@ class FilmCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var fillButton: UIButton!
     @IBOutlet weak var ratingLabel: UILabel!
+
     
     
     //Initialization of UI fields
@@ -49,7 +50,6 @@ class FilmCollectionViewCell: UICollectionViewCell {
         
         if isFavorite {
             //delited like
-            fillButton.isSelected = false
             isFavorite = !isFavorite
             delegate?.actionForFavoriteFilm(isFavorite: isFavorite, idFilm: idFilm)
             

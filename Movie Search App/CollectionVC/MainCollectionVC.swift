@@ -61,11 +61,10 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
                                  numberOfItemsInSection section: Int) -> Int {
         if films.count == 0 {
             noContentImageView.isHidden = false
-            return films.count
         } else {
             noContentImageView.isHidden = true
-            return films.count
         }
+        return films.count
     }
     
     override func collectionView(_ collectionView: UICollectionView,
@@ -190,7 +189,7 @@ extension MainCollectionVC: FavoriteDeleteProtocol {
             if let idFilm = idFilm, let film = films.first(where: { $0.show?.id == idFilm }) {
             
             let reference = Storage.storage().reference().child("moviesPicture").child(name)
-                guard let image = getImage(from: film.show?.image?.original ?? "placeholderFilm") else { return }
+                guard let image = getImage(from: film.show?.image?.original ?? "") else { return }
                 guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }
                 let metadata = StorageMetadata()
                 metadata.contentType = "image/jpeg"

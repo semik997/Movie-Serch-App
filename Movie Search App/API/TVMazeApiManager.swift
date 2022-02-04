@@ -14,7 +14,6 @@ import SystemConfiguration
 struct TVMazeApiManager {
     
     func fetchCurrent(onCompletion: (([Films.Film]) -> Void)?, forShow show: String) {
-        DispatchQueue.global(qos: .background).async {
             let urlString = "\(linkAPI)\(show)"
             guard let url = URL(string: urlString) else { return }
             let session = URLSession(configuration: .default)
@@ -26,7 +25,6 @@ struct TVMazeApiManager {
                 }
             }
             task.resume()
-        }
     }
     
     // MARK: - Call completion block with json
