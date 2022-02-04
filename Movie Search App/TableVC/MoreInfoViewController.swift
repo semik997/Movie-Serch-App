@@ -19,6 +19,7 @@ class MoreInfoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupMoreInformation ()
         
         
@@ -89,15 +90,18 @@ class MoreInfoViewController: UIViewController {
         let shareController: UIActivityViewController
         
         if detail?.show?.externals?.imdb == nil && detail?.show?.url == nil {
+            
             if detailedInformation?.imdb == nil {
                 shareController = UIActivityViewController(activityItems: [detailedInformation?.url ?? ""], applicationActivities: nil)
                 shareController.completionWithItemsHandler = { _, bool, _, _ in
+                    
                     if bool {
                         print("Successful")}
                 }
             } else {
                 shareController = UIActivityViewController(activityItems: ["https://www.imdb.com/title/\(detailedInformation?.imdb ?? "")" ], applicationActivities: nil)
                 shareController.completionWithItemsHandler = { _, bool, _, _ in
+                    
                     if bool {
                         print("Successful")}
                 }
@@ -106,12 +110,14 @@ class MoreInfoViewController: UIViewController {
             if detail?.show?.externals?.imdb == nil {
                 shareController = UIActivityViewController(activityItems: [detail?.show?.url ?? ""], applicationActivities: nil)
                 shareController.completionWithItemsHandler = { _, bool, _, _ in
+                    
                     if bool {
                         print("Successful")}
                 }
             } else {
                 shareController = UIActivityViewController(activityItems: ["https://www.imdb.com/title/\(detail?.show?.externals?.imdb ?? "")" ], applicationActivities: nil)
                 shareController.completionWithItemsHandler = { _, bool, _, _ in
+                    
                     if bool {
                         print("Successful")}
                 }
@@ -120,7 +126,5 @@ class MoreInfoViewController: UIViewController {
         present (shareController, animated: true, completion: nil)
     }
 }
-
-
 
 

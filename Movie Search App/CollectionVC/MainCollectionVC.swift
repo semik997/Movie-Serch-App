@@ -82,9 +82,11 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     // MARK: - Detail setting
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == seguesConstant.showDetail {
             if let cell = sender as? FilmCollectionViewCell,
                let indexPath = collectionViewSpace.indexPath(for: cell) {
+                
                 let film = films[indexPath.row]
                 let nav = segue.destination as? UINavigationController
                 let moreInfoMainVC = nav?.topViewController as? MoreInfoViewController
@@ -97,6 +99,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         if segue.identifier == seguesConstant.infoButton {
             
             if let tvc = segue.destination as? InfoTableViewController {
+                
                 tvc.delegate = self
                 tvc.delegateSetting = self
                 if let ppc = tvc.popoverPresentationController {
@@ -111,7 +114,10 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     
     // MARK: - Checking internet connection
     private func presentInternetConnectionAlertController () {
+        
+        
         let internetAlert = UIAlertController(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", preferredStyle: .alert)
+        
         let ok = UIAlertAction(title: "OK", style: .cancel)
         internetAlert.addAction(ok)
         present(internetAlert, animated: true)
@@ -143,9 +149,12 @@ extension MainCollectionVC: UISearchResultsUpdating {
         if Reachability.isConnectedToNetwork() {
             
             if searchText != "" {
+                
                 let text = searchText.split(separator: " ").joined(separator: "%20")
                 noContentImageView.isHidden = true
+                
                 if searchText.count >= 3 {
+                    
                     noContentImageView.isHidden = true
                     self.tVMazeApiManager.fetchCurrent(onCompletion: {
                         currentShowData in self.films = currentShowData
@@ -187,8 +196,8 @@ extension MainCollectionVC: FavoriteDeleteProtocol {
         func uploadImage(name: String, photo: UIImage) {
             
             if let idFilm = idFilm, let film = films.first(where: { $0.show?.id == idFilm }) {
-            
-            let reference = Storage.storage().reference().child("moviesPicture").child(name)
+                
+                let reference = Storage.storage().reference().child("moviesPicture").child(name)
                 guard let image = getImage(from: film.show?.image?.original ?? "") else { return }
                 guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }
                 let metadata = StorageMetadata()

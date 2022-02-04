@@ -45,6 +45,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         favoriteCollectionView.reloadData()
         filmsFav = CoreDataManager.shared.fetchFilm()
     }
@@ -58,6 +59,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
         if isFiltering {
+            
             if filtredFilms.count == 0 {
                 findImage.isHidden = false
                 return filtredFilms.count
@@ -79,6 +81,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         guard let cell = favoriteCollectionView.dequeueReusableCell(withReuseIdentifier: "mainCell",
                                                                     for: indexPath) as? FilmCollectionViewCell
         else {  return UICollectionViewCell() }
+        
         if isFiltering {
             cell.loadDataFavorite(film: filtredFilms[indexPath.row])
         } else {
@@ -91,6 +94,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     // MARK: - Detail setting
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == seguesConstant.showDetail {
             if let cell = sender as? FilmCollectionViewCell,
                let indexPath = favoriteCollectionView.indexPath(for: cell){
@@ -111,6 +115,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         //MARK: - Info button
         
         if segue.identifier == seguesConstant.infoButton {
+            
             if let tvc = segue.destination as? InfoTableViewController {
                 
                 tvc.delegateFav = self
@@ -140,11 +145,11 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
             self.favoriteCollectionView.reloadData()
         }
         
-        let no = UIAlertAction(title: "No thanks", style: .cancel){ action in
+        let noButton = UIAlertAction(title: "No thanks", style: .cancel){ action in
             self.favoriteCollectionView.reloadData()
         }
-        alertController.addAction(yes)
-        alertController.addAction(no)
+        alertController.addAction(yesButton)
+        alertController.addAction(noButton)
         
         present(alertController, animated: true)
     }
@@ -185,12 +190,7 @@ extension FavoritesCollectionVC: UISearchResultsUpdating {
 
 // MARK: - Show alert to delete movie
 
-<<<<<<< HEAD
 extension FavoritesCollectionVC: FavoriteDeleteProtocol {
-=======
-extension FavoritesCollectionVC: FavoriteDeletProtocol {
-
->>>>>>> c495c83 (Redesigned settings screen)
     func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?) {
         
         if isFavorite == false {

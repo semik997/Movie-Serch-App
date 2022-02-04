@@ -14,9 +14,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
+<<<<<<< HEAD
         //        let mvc = window?.rootViewController as? CoreDataManager
         //        guard let context = (UIApplication.shared.delegate as? CoreDataManager)?.persistentContainer.viewContext else { return }
         //        mvc?.context = context
+=======
+        let mvc = window?.rootViewController as? CoreDataManager
+        guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else { return }
+        mvc?.context = context
+        
+        
+>>>>>>> baea8b4 (Refactor code)
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
