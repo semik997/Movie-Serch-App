@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoadViewController: UIViewController {
+class SplashScreen: UIViewController {
     
     // Customization loading screen
     

@@ -62,14 +62,12 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
             
             if filtredFilms.count == 0 {
                 findImage.isHidden = false
-                return filtredFilms.count
             }
             findImage.isHidden = true
             return filtredFilms.count
         } else {
             if filmsFav.count == 0 {
                 findImage.isHidden = false
-                return filmsFav.count
             }
             findImage.isHidden = true
             return filmsFav.count

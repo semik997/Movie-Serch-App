@@ -13,7 +13,7 @@
 		302CEE1527858CCD0017E0D7 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302CEE1427858CCD0017E0D7 /* Reachability.swift */; };
 		302F97E5277073E50000B975 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302F97E4277073E50000B975 /* Constants.swift */; };
 		30595240275CED40003A7049 /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3059523F275CED40003A7049 /* Film.swift */; };
-		30595242275D5078003A7049 /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30595241275D5078003A7049 /* LoadViewController.swift */; };
+		30595242275D5078003A7049 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30595241275D5078003A7049 /* SplashScreen.swift */; };
 		305ADFE7278EC5D4002D39C8 /* InfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305ADFE6278EC5D3002D39C8 /* InfoTableViewController.swift */; };
 		305ADFE9278EFB0A002D39C8 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305ADFE8278EFB0A002D39C8 /* SettingViewController.swift */; };
 		305C361E2799434400477095 /* Movie_Search_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 30C87F1227689B5E002C7242 /* Movie_Search_App.xcdatamodeld */; };
@@ -42,7 +42,7 @@
 		302CEE1427858CCD0017E0D7 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		302F97E4277073E50000B975 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3059523F275CED40003A7049 /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
-		30595241275D5078003A7049 /* LoadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadViewController.swift; sourceTree = "<group>"; };
+		30595241275D5078003A7049 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		305ADFE6278EC5D3002D39C8 /* InfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewController.swift; sourceTree = "<group>"; };
 		305ADFE8278EFB0A002D39C8 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		30687FFD278C43A1003CDE31 /* MainCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionVC.swift; sourceTree = "<group>"; };
@@ -125,13 +125,13 @@
 			path = "Model+Constants";
 			sourceTree = "<group>";
 		};
-		307DC0EA27A14C5B00647613 /* LoadScreen+Reachability */ = {
+		307DC0EA27A14C5B00647613 /* SplashScreen+Reachability */ = {
 			isa = PBXGroup;
 			children = (
 				302CEE1427858CCD0017E0D7 /* Reachability.swift */,
-				30595241275D5078003A7049 /* LoadViewController.swift */,
+				30595241275D5078003A7049 /* SplashScreen.swift */,
 			);
-			path = "LoadScreen+Reachability";
+			path = "SplashScreen+Reachability";
 			sourceTree = "<group>";
 		};
 		307DC0EB27A14CD200647613 /* TableVC */ = {
@@ -339,7 +339,7 @@
 				30595240275CED40003A7049 /* Film.swift in Sources */,
 				30CA0C7F275BE43B009468D2 /* TVMazeApiManager.swift in Sources */,
 				30688000278C43BF003CDE31 /* FavoritesCollectionVC.swift in Sources */,
-				30595242275D5078003A7049 /* LoadViewController.swift in Sources */,
+				30595242275D5078003A7049 /* SplashScreen.swift in Sources */,
 				305ADFE7278EC5D4002D39C8 /* InfoTableViewController.swift in Sources */,
 				302F97E5277073E50000B975 /* Constants.swift in Sources */,
 				30CA0C64275B8559009468D2 /* AppDelegate.swift in Sources */,
