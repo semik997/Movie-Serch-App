@@ -28,8 +28,12 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     private let defaults = UserDefaults.standard
     private var tap = UITapGestureRecognizer()
     private var searchText = ""
+    private let insret = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+    private let bigSize = CGSize (width: 400, height: 400)
+    private let mediumSize = CGSize (width: 200, height: 200)
+    private let smallSize = CGSize (width: 100, height: 150)
     private var chooseSize: SettingViewController.ChooseSize?
-    private var defaultSizeCell = CGSize (width: 200, height: 200)
+    private var defaultSizeCell: CGSize?
     private var films: [Films.Film] = [] {
         didSet {
             DispatchQueue.main.async { [self] in
@@ -216,25 +220,25 @@ extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
         
         switch self.chooseSize {
         case .big:
-            let sizeCell = CGSize (width: 400, height: 400)
+            let sizeCell = bigSize
             self.defaultSizeCell = sizeCell
         case .medium:
-            let sizeCell = CGSize (width: 200, height: 200)
+            let sizeCell = mediumSize
             self.defaultSizeCell = sizeCell
         case .small:
-            let sizeCell = CGSize (width: 100, height: 150)
+            let sizeCell = smallSize
             self.defaultSizeCell = sizeCell
         case .noChoose:
             break
         case .none:
-            let sizeCell = CGSize (width: 200, height: 200)
+            let sizeCell = defaultSizeCell
             self.defaultSizeCell = sizeCell
         }
-        return defaultSizeCell
+        return defaultSizeCell ?? CGSize (width: 200, height: 200)
     }
     
     // setting cell intervals
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+        return self.insret
     }
 }

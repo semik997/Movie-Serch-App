@@ -55,14 +55,15 @@ class MoreInfoViewController: UIViewController {
             let application = UIApplication.shared
             
             if application.canOpenURL(appURL as URL) {
+                
                 // open URL inside app
                 application.open(appURL as URL)
             } else {
+                
                 // if Youtube app is not installed, open URL inside Safari
                 application.open(webURL as URL)
             }
         }
-        
         if let info = detail?.show?.name{
             let youtubeUser =  info
             let text = youtubeUser.split(separator: " ").joined(separator: "%20")
@@ -71,9 +72,11 @@ class MoreInfoViewController: UIViewController {
             let application = UIApplication.shared
             
             if application.canOpenURL(appURL as URL) {
+                
                 // open URL inside app
                 application.open(appURL as URL)
             } else {
+                
                 // if Youtube app is not installed, open URL inside Safari
                 application.open(webURL as URL)
             }
@@ -89,9 +92,13 @@ class MoreInfoViewController: UIViewController {
     @IBAction private func shareActive(_ sender: UIBarButtonItem) {
         let shareController: UIActivityViewController
         
+        // Checking for the presence of a movie in the imdb database
         if detail?.show?.externals?.imdb == nil && detail?.show?.url == nil {
             
+            // Checking the screen where the user came from
             if detailedInformation?.imdb == nil {
+                
+                // User came from favorite screen, movie not in imdb
                 shareController = UIActivityViewController(activityItems: [detailedInformation?.url ?? ""], applicationActivities: nil)
                 shareController.completionWithItemsHandler = { _, bool, _, _ in
                     
@@ -99,6 +106,8 @@ class MoreInfoViewController: UIViewController {
                         print("Successful")}
                 }
             } else {
+                
+                // The movie is on imdb
                 shareController = UIActivityViewController(activityItems: ["https://www.imdb.com/title/\(detailedInformation?.imdb ?? "")" ], applicationActivities: nil)
                 shareController.completionWithItemsHandler = { _, bool, _, _ in
                     
@@ -107,6 +116,8 @@ class MoreInfoViewController: UIViewController {
                 }
             }
         } else {
+            
+            // User came from main screen, movie not in imdb
             if detail?.show?.externals?.imdb == nil {
                 shareController = UIActivityViewController(activityItems: [detail?.show?.url ?? ""], applicationActivities: nil)
                 shareController.completionWithItemsHandler = { _, bool, _, _ in
@@ -115,6 +126,8 @@ class MoreInfoViewController: UIViewController {
                         print("Successful")}
                 }
             } else {
+                
+                // The movie is on imdb
                 shareController = UIActivityViewController(activityItems: ["https://www.imdb.com/title/\(detail?.show?.externals?.imdb ?? "")" ], applicationActivities: nil)
                 shareController.completionWithItemsHandler = { _, bool, _, _ in
                     

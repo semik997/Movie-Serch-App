@@ -18,9 +18,9 @@ class SplashScreen: UIViewController {
         
         progress.setProgress(0, animated: true)
         // initialization of a timer to fill the download field
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            if self.progress.progress != 1 {
-                self.progress.progress += 0.2
+        Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
+            if self.progress.progress != maxValue {
+                self.progress.progress += addValue
             } else { // switching to another screen after filling in the loading field
                 
                 timer.invalidate()

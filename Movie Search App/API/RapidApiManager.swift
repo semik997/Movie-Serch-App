@@ -20,7 +20,7 @@ class RapidApiManager {
         ]
         let request = NSMutableURLRequest(url: NSURL(string: "\(raitingAPI)\(show)")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: timeoutInterval)
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         

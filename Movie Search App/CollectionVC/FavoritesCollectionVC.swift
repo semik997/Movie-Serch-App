@@ -27,6 +27,11 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     private var seguesConstant = SeguesConst()
     private var chooseSize: SettingViewController.ChooseSize?
     private var defaultSizeCell: CGSize?
+    private let insret = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+    private let bigSize = CGSize (width: 400, height: 400)
+    private let mediumSize = CGSize (width: 200, height: 200)
+    private let smallSize = CGSize (width: 100, height: 150)
+    
     
     
     override func viewDidLoad() {
@@ -202,23 +207,23 @@ extension FavoritesCollectionVC: FavoriteDeleteProtocol {
 // MARK: - Setting size cell
 
 extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         switch self.chooseSize {
         case .big:
-            let sizeCell = CGSize (width: 400, height: 400)
+            let sizeCell = bigSize
             self.defaultSizeCell = sizeCell
         case .medium:
-            let sizeCell = CGSize (width: 200, height: 200)
+            let sizeCell = mediumSize
             self.defaultSizeCell = sizeCell
         case .small:
-            let sizeCell = CGSize (width: 100, height: 150)
+            let sizeCell = smallSize
             self.defaultSizeCell = sizeCell
         case .noChoose:
             break
         case .none:
-            let sizeCell = CGSize (width: 200, height: 200)
+            let sizeCell = defaultSizeCell
             self.defaultSizeCell = sizeCell
         }
         return defaultSizeCell ?? CGSize (width: 200, height: 200)
@@ -226,6 +231,6 @@ extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
     
     // setting cell intervals
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+        return self.insret
     }
 }
