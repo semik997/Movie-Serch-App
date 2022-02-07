@@ -21,9 +21,6 @@
 		30863A102799B70F00CC45BA /* FavoriteFilm+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30863A0E2799B70F00CC45BA /* FavoriteFilm+CoreDataClass.swift */; };
 		30863A112799B70F00CC45BA /* FavoriteFilm+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30863A0F2799B70F00CC45BA /* FavoriteFilm+CoreDataProperties.swift */; };
 		30863A13279AF48800CC45BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30863A12279AF48800CC45BA /* GoogleService-Info.plist */; };
-		30863A19279AF68F00CC45BA /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 30863A18279AF68F00CC45BA /* FirebaseAnalyticsWithoutAdIdSupport */; };
-		30863A1B279AF68F00CC45BA /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 30863A1A279AF68F00CC45BA /* FirebaseDatabase */; };
-		30863A1D279AF68F00CC45BA /* FirebaseDatabaseSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 30863A1C279AF68F00CC45BA /* FirebaseDatabaseSwift-Beta */; };
 		30CA0C64275B8559009468D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C63275B8559009468D2 /* AppDelegate.swift */; };
 		30CA0C66275B8559009468D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CA0C65275B8559009468D2 /* SceneDelegate.swift */; };
 		30CA0C6B275B8559009468D2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30CA0C69275B8559009468D2 /* Main.storyboard */; };
@@ -64,9 +61,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30863A1B279AF68F00CC45BA /* FirebaseDatabase in Frameworks */,
-				30863A1D279AF68F00CC45BA /* FirebaseDatabaseSwift-Beta in Frameworks */,
-				30863A19279AF68F00CC45BA /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,9 +185,6 @@
 			);
 			name = "Movie Search App";
 			packageProductDependencies = (
-				30863A18279AF68F00CC45BA /* FirebaseAnalyticsWithoutAdIdSupport */,
-				30863A1A279AF68F00CC45BA /* FirebaseDatabase */,
-				30863A1C279AF68F00CC45BA /* FirebaseDatabaseSwift-Beta */,
 			);
 			productName = "Movie Serch App";
 			productReference = 30CA0C60275B8559009468D2 /* Movie Search App.app */;
@@ -224,7 +215,6 @@
 			);
 			mainGroup = 30CA0C57275B8559009468D2;
 			packageReferences = (
-				30863A17279AF68F00CC45BA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 30CA0C61275B8559009468D2 /* Products */;
 			projectDirPath = "";
@@ -498,35 +488,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		30863A17279AF68F00CC45BA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		30863A18279AF68F00CC45BA /* FirebaseAnalyticsWithoutAdIdSupport */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 30863A17279AF68F00CC45BA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalyticsWithoutAdIdSupport;
-		};
-		30863A1A279AF68F00CC45BA /* FirebaseDatabase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 30863A17279AF68F00CC45BA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
-		};
-		30863A1C279AF68F00CC45BA /* FirebaseDatabaseSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 30863A17279AF68F00CC45BA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseDatabaseSwift-Beta";
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		30C87F1227689B5E002C7242 /* Movie_Search_App.xcdatamodeld */ = {

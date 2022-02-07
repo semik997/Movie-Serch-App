@@ -24,17 +24,18 @@ class MoreInfoViewController: UIViewController {
     
     // MARK: - Configuring new window with additional information
     private func setupMoreInformation () {
-        if detailedInformation != nil {
-            if let originalLogo = detailedInformation?.original {
+        if let info = detailedInformation {
+            if let originalLogo = info.original {
                 moreInfoImage.image = UIImage(data: (originalLogo))
             }
-            let summary = detailedInformation?.summary ?? "No description text"
+            let summary = info.nonEmptySummary
             moreIntoTextView.text = summary.htmlString
-            nameNavigationItem.title = detailedInformation?.name
-        } else {
-            moreInfoImage.image = getImage(from: detail?.show?.image?.original ??
+            nameNavigationItem.title = info.name
+        }
+        if let info = detail {
+            moreInfoImage.image = getImage(from: info.show?.image?.original ??
                                            placeholderFilm)
-            let summary = detail?.show?.summary ?? "No description text"
+            let summary = info.show?.summary ?? "No description text"
             moreIntoTextView.text = summary.htmlString
             nameNavigationItem.title = detail?.show?.name
         }
@@ -66,11 +67,11 @@ class MoreInfoViewController: UIViewController {
     // MARK: - Configuring a button to open a window with search in You Tube
     
     @IBAction private func searchInYTButton(_ sender: UIButton) {
-        if detailedInformation?.name == nil {
-            let youtubeUser =  detail?.show?.name
-            let text = youtubeUser?.split(separator: " ").joined(separator: "%20")
-            guard let appURL = NSURL(string: "\(appYouTubeLink)\(text ?? "")") else { return }
-            guard let webURL = NSURL(string: "\(safariYouTubeLink)\(text ?? "")") else { return }
+        if let info = detailedInformation?.name {
+            let youtubeUser =  info
+            let text = youtubeUser.split(separator: " ").joined(separator: "%20")
+            guard let appURL = NSURL(string: "\(appYouTubeLink)\(text )") else { return }
+            guard let webURL = NSURL(string: "\(safariYouTubeLink)\(text )") else { return }
             let application = UIApplication.shared
             
             if application.canOpenURL(appURL as URL) {
@@ -80,11 +81,13 @@ class MoreInfoViewController: UIViewController {
                 // if Youtube app is not installed, open URL inside Safari
                 application.open(webURL as URL)
             }
-        } else {
-            let youtubeUser =  detailedInformation?.name
-            let text = youtubeUser?.split(separator: " ").joined(separator: "%20")
-            guard let appURL = NSURL(string: "\(appYouTubeLink)\(text ?? "")") else { return }
-            guard let webURL = NSURL(string: "\(safariYouTubeLink)\(text ?? "")") else { return }
+        }
+        
+        if let info = detail?.show?.name{
+            let youtubeUser =  info
+            let text = youtubeUser.split(separator: " ").joined(separator: "%20")
+            guard let appURL = NSURL(string: "\(appYouTubeLink)\(text )") else { return }
+            guard let webURL = NSURL(string: "\(safariYouTubeLink)\(text )") else { return }
             let application = UIApplication.shared
             
             if application.canOpenURL(appURL as URL) {

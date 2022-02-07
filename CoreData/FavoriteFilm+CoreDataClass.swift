@@ -25,5 +25,13 @@ public class FavoriteFilm: NSManagedObject {
     @NSManaged public var summary: String?
     @NSManaged public var url: String?
 
+    public var nonEmptySummary: String {
+        if let summary = summary {
+            return summary.isEmpty ? "Stub" : summary
+        }
+        return "Stub"
+    }
+
+    
     
 }
