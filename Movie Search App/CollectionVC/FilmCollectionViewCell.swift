@@ -60,6 +60,15 @@ class FilmCollectionViewCell: UICollectionViewCell {
             delegate?.actionForFavoriteFilm(isFavorite: isFavorite, idFilm: idFilm)
         }
     }
+    
+    @IBAction func favoriteLikeButton(_ sender: UIButton) {
+        
+        if isFavorite {
+            //delited like
+            isFavorite = !isFavorite
+            delegateDelete?.actionForFavoriteFilm(isFavorite: isFavorite, idFilm: idFilm)
+        }
+    }
 }
 
 // MARK: - Uploading data to VC

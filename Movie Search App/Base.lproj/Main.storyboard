@@ -565,7 +565,7 @@
                                                                 <color key="baseForegroundColor" systemColor="systemPinkColor"/>
                                                             </buttonConfiguration>
                                                             <connections>
-                                                                <action selector="likeButton:" destination="m6A-We-FPt" eventType="touchUpInside" id="GpG-FF-vxC"/>
+                                                                <action selector="favoriteLikeButton:" destination="m6A-We-FPt" eventType="touchUpInside" id="bfH-eQ-ccT"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
