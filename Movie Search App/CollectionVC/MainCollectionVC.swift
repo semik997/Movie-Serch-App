@@ -7,9 +7,8 @@
 
 import UIKit
 import CoreData
-import Firebase
 
-class MainCollectionVC: UICollectionViewController {
+class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var collectionViewSpace: UICollectionView!
     @IBOutlet weak var noContentImageView: UIImageView!
@@ -55,13 +54,6 @@ class MainCollectionVC: UICollectionViewController {
         collectionViewSpace?.dataSource = self
     }
     
-    // MARK: - Save in CoreData
-    
-    private func getContext() -> NSManagedObjectContext {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return context }
-        return appDelegate.persistentContainer.viewContext
-    }
-    
     // MARK: - UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -91,14 +83,6 @@ class MainCollectionVC: UICollectionViewController {
         return cell
     }
     
-    // MARK: - Checking internet connection
-    private func presentInternetConnectionAlertController () {
-        let internetAlert = UIAlertController(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .cancel)
-        internetAlert.addAction(ok)
-        present(internetAlert, animated: true)
-    }
-    
     // MARK: - Detail setting
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -123,14 +107,26 @@ class MainCollectionVC: UICollectionViewController {
             }
         }
     }
-}
-
-extension MainCollectionVC: UIPopoverPresentationControllerDelegate {
-    
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
     }
+    
+    // MARK: - Checking internet connection
+    private func presentInternetConnectionAlertController () {
+        let internetAlert = UIAlertController(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .cancel)
+        internetAlert.addAction(ok)
+        present(internetAlert, animated: true)
+    }
+    
+    // MARK: - Save in CoreData
+    
+    private func getContext() -> NSManagedObjectContext {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return context }
+        return appDelegate.persistentContainer.viewContext
+    }
 }
+
 
 // MARK: - Setting view color
 
@@ -181,7 +177,7 @@ extension MainCollectionVC: UISearchResultsUpdating {
 
 extension MainCollectionVC: FavoriteProtocol {
     
-    func selectCell(_ isFavorite: Bool, idFilm: Double?, url: String?,
+    func changeFilm(_ isFavorite: Bool, idFilm: Double?, url: String?,
                     name: String?, image: String?, original: String?,
                     summary: String?, imdb: String?) {
         
@@ -266,8 +262,7 @@ extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
             let sizeCell = CGSize (width: 100, height: 150)
             self.defaultSizeCell = sizeCell
         case .noChoose:
-            let sizeCell = CGSize (width: 200, height: 200)
-            self.defaultSizeCell = sizeCell
+            break
         case .none:
             let sizeCell = CGSize (width: 200, height: 200)
             self.defaultSizeCell = sizeCell
@@ -278,47 +273,5 @@ extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
     // setting cell intervals
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
-    }
-}
-
-// MARK: - Extention from save image
-
-extension MainCollectionVC {
-    
-    func NKPlaceholderImage(image: UIImage?, imageView: UIImageView?, imgUrl: String, compate:@escaping (UIImage?) -> Void) {
-        
-        if image != nil && imageView != nil {
-            imageView!.image = image!
-        }
-        var urlcatch = imgUrl.replacingOccurrences(of: "/", with: "#")
-        let documentpath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        urlcatch = documentpath + "/" + "\(urlcatch)"
-        let image = UIImage(contentsOfFile:urlcatch)
-        if image != nil && imageView != nil
-        {
-            imageView!.image = image!
-            compate(image)
-            
-        } else {
-            
-            if let url = URL(string: imgUrl){
-                
-                DispatchQueue.global(qos: .background).async {
-                    () -> Void in
-                    let imgdata = NSData(contentsOf: url)
-                    DispatchQueue.main.async {
-                        () -> Void in
-                        imgdata?.write(toFile: urlcatch, atomically: true)
-                        let image = UIImage(contentsOfFile:urlcatch)
-                        compate(image)
-                        if image != nil  {
-                            if imageView != nil  {
-                                imageView!.image = image!
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 }

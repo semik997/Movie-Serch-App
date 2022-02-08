@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 protocol FavoriteProtocol: AnyObject {
-    func selectCell(_ isFavorite: Bool, idFilm: Double?, url: String?, name: String?, image: String?,
+    func changeFilm(_ isFavorite: Bool, idFilm: Double?, url: String?, name: String?, image: String?,
                     original: String?, summary: String?, imdb: String?)
 }
 
@@ -60,14 +60,14 @@ class CollectionViewCell: UICollectionViewCell {
             fillButton.isSelected = false
             isFavorite = !isFavorite
             delegateDelete?.deleteFavoriteFilm(isFavorite: isFavorite, idFilm: idFilm)
-            delegate?.selectCell(isFavorite, idFilm: idFilm, url: url, name: name,
+            delegate?.changeFilm(isFavorite, idFilm: idFilm, url: url, name: name,
                                  image: image,original: original, summary: summary,
                                  imdb: imdb)
         } else {
             //add to like
             fillButton.isSelected = true
             isFavorite = !isFavorite
-            delegate?.selectCell(isFavorite, idFilm: idFilm, url: url, name: name,
+            delegate?.changeFilm(isFavorite, idFilm: idFilm, url: url, name: name,
                                  image: image,original: original, summary: summary,
                                  imdb: imdb)
         }

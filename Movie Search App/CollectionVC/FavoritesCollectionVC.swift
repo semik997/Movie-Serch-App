@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class FavoritesCollectionVC: UICollectionViewController {
+class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet var favoriteCollectionView: UICollectionView!
     @IBOutlet weak var findImage: UIImageView!
@@ -56,11 +56,6 @@ class FavoritesCollectionVC: UICollectionViewController {
         }
     }
     
-    private func getContext() -> NSManagedObjectContext {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return context! }
-        return appDelegate.persistentContainer.viewContext
-    }
-    
     // MARK: - UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -91,16 +86,53 @@ class FavoritesCollectionVC: UICollectionViewController {
         guard let cell = favoriteCollectionView.dequeueReusableCell(withReuseIdentifier: "mainCell",
                                                                     for: indexPath) as? CollectionViewCell
         else {  return UICollectionViewCell() }
-        var film: [FavoriteFilm]
         if isFiltering {
-            film = [filtredFilms[indexPath.row]]
             cell.loadDataFavorite(film: filtredFilms[indexPath.row])
         } else {
-            film = [filmsFav[indexPath.row]]
             cell.loadDataFavorite(film: filmsFav[indexPath.row])
         }
         cell.delegateDelete = self
         return cell
+    }
+    
+    // MARK: - Detail setting
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == seguesConstant.showDetail {
+            guard let indexPath = favoriteCollectionView.indexPathsForSelectedItems else { return }
+            let film: FavoriteFilm
+            if isFiltering {
+                film = filtredFilms[indexPath[0].row]
+            } else {
+                film = filmsFav[indexPath[0].row]
+            }
+            let nav = segue.destination as? UINavigationController
+            let MoreInfoFavoritesTableVC = nav?.topViewController as? MoreInfoViewController
+            MoreInfoFavoritesTableVC?.detailedInformation = film
+        }
+        
+        //MARK: - Info button
+        
+        if segue.identifier == seguesConstant.infoButton {
+            if let tvc = segue.destination as? InfoTableViewController {
+                tvc.delegateFav = self
+                tvc.delegateSetting = self
+                if let ppc = tvc.popoverPresentationController {
+                    ppc.delegate = self
+                }
+            }
+        }
+    }
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+    
+    
+    // MARK: - Initial context
+    
+    private func getContext() -> NSManagedObjectContext {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return context! }
+        return appDelegate.persistentContainer.viewContext
     }
     
     // MARK: - Setting up an alert controller
@@ -141,44 +173,8 @@ class FavoritesCollectionVC: UICollectionViewController {
         self.favoriteCollectionView.reloadData()
         
     }
-    
-    
-    // MARK: - Detail setting
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == seguesConstant.showDetail {
-            guard let indexPath = favoriteCollectionView.indexPathsForSelectedItems else { return }
-            let film: FavoriteFilm
-            if isFiltering {
-                film = filtredFilms[indexPath[0].row]
-            } else {
-                film = filmsFav[indexPath[0].row]
-            }
-            let nav = segue.destination as? UINavigationController
-            let MoreInfoFavoritesTableVC = nav?.topViewController as? MoreInfoViewController
-            MoreInfoFavoritesTableVC?.detailedInformation = film
-        }
-        
-        //MARK: - Info button
-        
-        if segue.identifier == seguesConstant.infoButton {
-            if let tvc = segue.destination as? InfoTableViewController {
-                tvc.delegateFav = self
-                tvc.delegateSetting = self
-                if let ppc = tvc.popoverPresentationController {
-                    ppc.delegate = self
-                }
-            }
-        }
-    }
 }
 
-extension FavoritesCollectionVC: UIPopoverPresentationControllerDelegate {
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.none
-    }
-}
 
 // MARK: - Setting view color
 
@@ -242,7 +238,7 @@ extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
             let sizeCell = CGSize (width: 100, height: 150)
             self.defaultSizeCell = sizeCell
         case .noChoose:
-            defaultSizeCell
+            break
         case .none:
             let sizeCell = CGSize (width: 200, height: 200)
             self.defaultSizeCell = sizeCell
