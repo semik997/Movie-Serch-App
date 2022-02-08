@@ -26,7 +26,6 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     private var tVMazeApiManager = TVMazeApiManager()
     private var rapidApiManager = RapidApiManager()
     private var seguesConstant = SeguesConst()
-    private var coreDataManager = CoreDataManager()
     private let defaults = UserDefaults.standard
     private var tap = UITapGestureRecognizer()
     private var searchText = ""
@@ -72,9 +71,9 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionViewSpace.dequeueReusableCell(withReuseIdentifier: "mainCell",
-                                                                 for: indexPath) as? CollectionViewCell
+                                                                 for: indexPath) as? FilmCollectionViewCell
         else { return UICollectionViewCell() }
-        cell.delegateDelete = self
+        cell.delegate = self
         if indexPath.row < films.count {
             cell.loadData(film: films[indexPath.row])
         }
@@ -85,7 +84,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == seguesConstant.showDetail {
-            if let cell = sender as? CollectionViewCell,
+            if let cell = sender as? FilmCollectionViewCell,
                let indexPath = collectionViewSpace.indexPath(for: cell) {
                 let film = films[indexPath.row]
                 let nav = segue.destination as? UINavigationController
@@ -143,6 +142,7 @@ extension MainCollectionVC: UISearchResultsUpdating {
         self.searchText = searchController.searchBar.text!
         
         if Reachability.isConnectedToNetwork() {
+            
             if searchText != "" {
                 let text = searchText.split(separator: " ").joined(separator: "%20")
                 noContentImageView.isHidden = true
@@ -168,7 +168,7 @@ extension MainCollectionVC: UISearchResultsUpdating {
 
 // MARK: - Save and delete to favorites
 
-extension MainCollectionVC: FavoriteDeletProtocol {
+extension MainCollectionVC: FavoriteDeleteProtocol {
     
     func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?) {
         
@@ -176,50 +176,13 @@ extension MainCollectionVC: FavoriteDeletProtocol {
             
             if isFavorite {
                 //for like
-                
-                let originalImage = getImage(from: film.show?.image?.original ?? "placeholderFilm")
-                let imageImage = getImage(from: film.show?.image?.medium ?? "placeholderFilm")
-                let originalImageData = originalImage?.jpegData(compressionQuality: 1.0)
-                let imageData = imageImage?.jpegData(compressionQuality: 1.0)
-                
-                let likeFilms = FavoriteFilm(context: self.coreDataManager.context)
-                likeFilms.isFavorite = true
-                likeFilms.idFilm = idFilm
-                likeFilms.url = film.show?.url
-                likeFilms.name = film.show?.name
-                likeFilms.original = originalImageData
-                likeFilms.medium = imageData
-                likeFilms.summary = film.show?.summary
-                likeFilms.imdb = film.show?.externals?.imdb
-                coreDataManager.saveInData()
+                CoreDataManager.shared.saveInData(film: film, idFilm: idFilm)
             } else {
                 //for not like
-                coreDataManager.deleteFromData (idFilm: idFilm)
+                CoreDataManager.shared.deleteFromData (idFilm: idFilm)
             }
         }
         
-    }
-    
-    // MARK: - String in image conversion
-    
-    private func getImage(from string: String) -> UIImage? {
-        //Get valid URL
-        guard let url = URL(string: string)
-        else {
-            print("Unable to create URL")
-            return nil
-        }
-        var image: UIImage? = nil
-        do {
-            //Get valid data
-            let data = try Data(contentsOf: url, options: [])
-            
-            //Make image
-            image = UIImage(data: data)
-        } catch {
-            image = getImage(from: placeholderFilm)
-        }
-        return image
     }
 }
 

@@ -25,7 +25,6 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     private var filmsFav: [FavoriteFilm] = []
     private var settingViewController = SettingViewController()
     private var seguesConstant = SeguesConst()
-    private var coreDataManager = CoreDataManager()
     private var chooseSize: SettingViewController.ChooseSize?
     private var defaultSizeCell: CGSize?
     var context: NSManagedObjectContext?
@@ -48,10 +47,9 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favoriteCollectionView.reloadData()
-        let context = coreDataManager.getContext()
         let fetchRequest: NSFetchRequest<FavoriteFilm> = FavoriteFilm.fetchRequest()
         do {
-            filmsFav = try context.fetch(fetchRequest)
+            filmsFav = try CoreDataManager.shared.context.fetch(fetchRequest)
         } catch let error as NSError {
             print(error.localizedDescription)
         }
@@ -85,14 +83,14 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt
                                  indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = favoriteCollectionView.dequeueReusableCell(withReuseIdentifier: "mainCell",
-                                                                    for: indexPath) as? CollectionViewCell
+                                                                    for: indexPath) as? FilmCollectionViewCell
         else {  return UICollectionViewCell() }
         if isFiltering {
             cell.loadDataFavorite(film: filtredFilms[indexPath.row])
         } else {
             cell.loadDataFavorite(film: filmsFav[indexPath.row])
         }
-        cell.delegateDelete = self
+        cell.delegate = self
         return cell
     }
     
@@ -100,17 +98,17 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == seguesConstant.showDetail {
-            if let cell = sender as? CollectionViewCell,
+            if let cell = sender as? FilmCollectionViewCell,
                let indexPath = favoriteCollectionView.indexPath(for: cell){
-            let film: FavoriteFilm
-            if isFiltering {
-                film = filtredFilms[indexPath.row]
-            } else {
-                film = filmsFav[indexPath.row]
-            }
-            let nav = segue.destination as? UINavigationController
-            let MoreInfoFavoritesTableVC = nav?.topViewController as? MoreInfoViewController
-            MoreInfoFavoritesTableVC?.detailedInformation = film
+                let film: FavoriteFilm
+                if isFiltering {
+                    film = filtredFilms[indexPath.row]
+                } else {
+                    film = filmsFav[indexPath.row]
+                }
+                let nav = segue.destination as? UINavigationController
+                let MoreInfoFavoritesTableVC = nav?.topViewController as? MoreInfoViewController
+                MoreInfoFavoritesTableVC?.detailedInformation = film
             }
         }
         
@@ -139,7 +137,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         let yes = UIAlertAction(title: "Yes, I'am sure", style: .default) { action in
             guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
             else { return }
-            self.coreDataManager.deleteFromData(idFilm: idFilm)
+            CoreDataManager.shared.deleteFromData(idFilm: idFilm)
             self.filmsFav.remove(at: index)
             self.favoriteCollectionView.reloadData()
         }
@@ -189,7 +187,7 @@ extension FavoritesCollectionVC: UISearchResultsUpdating {
 
 // MARK: - Save and delete to favorites
 
-extension FavoritesCollectionVC: FavoriteDeletProtocol {
+extension FavoritesCollectionVC: FavoriteDeleteProtocol {
     func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?) {
         
         if isFavorite == false {
