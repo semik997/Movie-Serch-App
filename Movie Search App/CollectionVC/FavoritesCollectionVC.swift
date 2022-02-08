@@ -47,12 +47,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favoriteCollectionView.reloadData()
-        let fetchRequest: NSFetchRequest<FavoriteFilm> = FavoriteFilm.fetchRequest()
-        do {
-            filmsFav = try CoreDataManager.shared.context.fetch(fetchRequest)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
+        filmsFav = CoreDataManager.shared.fetchFilm()
     }
     
     // MARK: - UICollectionViewDataSource
