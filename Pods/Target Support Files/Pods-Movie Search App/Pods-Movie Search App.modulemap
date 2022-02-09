@@ -1,6 +1,0 @@
-framework module Pods_Movie_Search_App {
-  umbrella header "Pods-Movie Search App-umbrella.h"
-
-  export *
-  module * { export * }
-}

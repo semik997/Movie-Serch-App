@@ -7,7 +7,6 @@
 
 import UIKit
 import CoreData
-import SDWebImage
 
 protocol FavoriteDeletProtocol: AnyObject {
     func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?)
@@ -72,7 +71,7 @@ extension CollectionViewCell {
         currentFilm = film
         nameLabel?.text = film.show?.name
         let imageURL = URL(string: film.show?.image?.medium ?? placeholderFilm)
-        mainImage.sd_setImage(with: imageURL, completed: nil)
+        //mainImage.sd_setImage(with: imageURL, completed: nil)
         idFilm = film.show?.id
         url = film.show?.url
         name = film.show?.name
