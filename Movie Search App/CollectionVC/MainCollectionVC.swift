@@ -31,9 +31,6 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     private var searchText = ""
     private var chooseSize: SettingViewController.ChooseSize?
     private var defaultSizeCell = CGSize (width: 200, height: 200)
-    
-    var context = (UIApplication.shared.delegate as!
-                   AppDelegate).persistentContainer.viewContext
     private var films: [Films.Film] = [] {
         didSet {
             DispatchQueue.main.async { [self] in
@@ -74,7 +71,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionViewSpace.dequeueReusableCell(withReuseIdentifier: "mainCell",
-                                                                 for: indexPath) as? CollectionViewCell
+                                                                 for: indexPath) as? FilmCollectionViewCell
         else { return UICollectionViewCell() }
         cell.delegate = self
         if indexPath.row < films.count {
@@ -87,11 +84,13 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == seguesConstant.showDetail {
-            guard let indexPath = collectionViewSpace.indexPathsForSelectedItems else { return }
-            let film = films[indexPath[0].row]
-            let nav = segue.destination as? UINavigationController
-            let moreInfoMainVC = nav?.topViewController as? MoreInfoViewController
-            moreInfoMainVC?.detail = film
+            if let cell = sender as? FilmCollectionViewCell,
+               let indexPath = collectionViewSpace.indexPath(for: cell) {
+                let film = films[indexPath.row]
+                let nav = segue.destination as? UINavigationController
+                let moreInfoMainVC = nav?.topViewController as? MoreInfoViewController
+                moreInfoMainVC?.detail = film
+            }
         }
         
         // MARK: - Info button
@@ -118,13 +117,6 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         internetAlert.addAction(ok)
         present(internetAlert, animated: true)
     }
-    
-    // MARK: - Save in CoreData
-    
-    private func getContext() -> NSManagedObjectContext {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return context }
-        return appDelegate.persistentContainer.viewContext
-    }
 }
 
 
@@ -150,6 +142,7 @@ extension MainCollectionVC: UISearchResultsUpdating {
         self.searchText = searchController.searchBar.text!
         
         if Reachability.isConnectedToNetwork() {
+            
             if searchText != "" {
                 let text = searchText.split(separator: " ").joined(separator: "%20")
                 noContentImageView.isHidden = true
@@ -175,73 +168,21 @@ extension MainCollectionVC: UISearchResultsUpdating {
 
 // MARK: - Save and delete to favorites
 
-extension MainCollectionVC: FavoriteProtocol {
+extension MainCollectionVC: FavoriteDeleteProtocol {
     
-    func changeFilm(_ isFavorite: Bool, idFilm: Double?, url: String?,
-                    name: String?, image: String?, original: String?,
-                    summary: String?, imdb: String?) {
+    func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?) {
         
-        if isFavorite {
-            //for like
+        if let idFilm = idFilm, let film = films.first(where: { $0.show?.id == idFilm }) {
             
-            let originalImage = getImage(from: original!)
-            let imageImage = getImage(from: image!)
-            let originalImageData = originalImage?.jpegData(compressionQuality: 1.0)
-            let imageData = imageImage?.jpegData(compressionQuality: 1.0)
-            
-            let likeFilms = FavoriteFilm(context: self.context)
-            likeFilms.isFavorite = true
-            likeFilms.idFilm = idFilm ?? 0
-            likeFilms.url = url
-            likeFilms.name = name
-            likeFilms.original = originalImageData
-            likeFilms.medium = imageData
-            likeFilms.summary = summary
-            likeFilms.imdb = imdb
-            do {
-                try context.save()
-            } catch {
-                context.rollback()
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        } else {
-            //for not like
-            
-            let context = self.getContext()
-            let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FavoriteFilm")
-            request.predicate = NSPredicate(format:"idFilm = %@", "\(idFilm ?? 0)")
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
-            do {
-                try context.execute(deleteRequest)
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            if isFavorite {
+                //for like
+                CoreDataManager.shared.saveInData(film: film, idFilm: idFilm)
+            } else {
+                //for not like
+                CoreDataManager.shared.deleteFromData (idFilm: idFilm)
             }
         }
-    }
-    
-    // MARK: - String in image conversion
-    
-    private func getImage(from string: String) -> UIImage? {
-        //Get valid URL
-        guard let url = URL(string: string)
-        else {
-            print("Unable to create URL")
-            return nil
-        }
-        var image: UIImage? = nil
-        do {
-            //Get valid data
-            let data = try Data(contentsOf: url, options: [])
-            
-            //Make image
-            image = UIImage(data: data)
-        } catch {
-            image = getImage(from: placeholderFilm)
-        }
-        return image
+        
     }
 }
 

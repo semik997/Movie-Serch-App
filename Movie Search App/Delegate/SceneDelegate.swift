@@ -14,9 +14,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
-        let mvc = window?.rootViewController as? MainCollectionVC
-        guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else { return }
-        mvc?.context = context
+        //        let mvc = window?.rootViewController as? CoreDataManager
+        //        guard let context = (UIApplication.shared.delegate as? CoreDataManager)?.persistentContainer.viewContext else { return }
+        //        mvc?.context = context
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -47,6 +47,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
         
         // Save changes in the application's managed object context when the application transitions to the background.
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        (UIApplication.shared.delegate as? CoreDataManager)?.saveContext()
     }
 }

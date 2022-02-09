@@ -47,13 +47,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         favoriteCollectionView.reloadData()
-        let context = getContext()
-        let fetchRequest: NSFetchRequest<FavoriteFilm> = FavoriteFilm.fetchRequest()
-        do {
-            filmsFav = try context.fetch(fetchRequest)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
+        filmsFav = CoreDataManager.shared.fetchFilm()
     }
     
     // MARK: - UICollectionViewDataSource
@@ -84,14 +78,14 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt
                                  indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = favoriteCollectionView.dequeueReusableCell(withReuseIdentifier: "mainCell",
-                                                                    for: indexPath) as? CollectionViewCell
+                                                                    for: indexPath) as? FilmCollectionViewCell
         else {  return UICollectionViewCell() }
         if isFiltering {
             cell.loadDataFavorite(film: filtredFilms[indexPath.row])
         } else {
             cell.loadDataFavorite(film: filmsFav[indexPath.row])
         }
-        cell.delegateDelete = self
+        cell.delegate = self
         return cell
     }
     
@@ -99,16 +93,18 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == seguesConstant.showDetail {
-            guard let indexPath = favoriteCollectionView.indexPathsForSelectedItems else { return }
-            let film: FavoriteFilm
-            if isFiltering {
-                film = filtredFilms[indexPath[0].row]
-            } else {
-                film = filmsFav[indexPath[0].row]
+            if let cell = sender as? FilmCollectionViewCell,
+               let indexPath = favoriteCollectionView.indexPath(for: cell){
+                let film: FavoriteFilm
+                if isFiltering {
+                    film = filtredFilms[indexPath.row]
+                } else {
+                    film = filmsFav[indexPath.row]
+                }
+                let nav = segue.destination as? UINavigationController
+                let MoreInfoFavoritesTableVC = nav?.topViewController as? MoreInfoViewController
+                MoreInfoFavoritesTableVC?.detailedInformation = film
             }
-            let nav = segue.destination as? UINavigationController
-            let MoreInfoFavoritesTableVC = nav?.topViewController as? MoreInfoViewController
-            MoreInfoFavoritesTableVC?.detailedInformation = film
         }
         
         //MARK: - Info button
@@ -127,14 +123,6 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         return UIModalPresentationStyle.none
     }
     
-    
-    // MARK: - Initial context
-    
-    private func getContext() -> NSManagedObjectContext {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return context! }
-        return appDelegate.persistentContainer.viewContext
-    }
-    
     // MARK: - Setting up an alert controller
     
     private func presentAlertController(withTitle title: String?, message: String?,
@@ -142,7 +130,11 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         let alertController = UIAlertController(title: title, message: message,
                                                 preferredStyle: style)
         let yes = UIAlertAction(title: "Yes, I'am sure", style: .default) { action in
-            self.deleteFilm(withTitle: title, message: message, idFilm: idFilm)
+            guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
+            else { return }
+            CoreDataManager.shared.deleteFromData(idFilm: idFilm)
+            self.filmsFav.remove(at: index)
+            self.favoriteCollectionView.reloadData()
         }
         
         let no = UIAlertAction(title: "No thanks", style: .cancel){ action in
@@ -152,26 +144,6 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         alertController.addAction(no)
         
         present(alertController, animated: true)
-    }
-    
-    private func deleteFilm(withTitle title: String?, message: String?, idFilm: Double) {
-        
-        guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
-        else { return }
-        let context = self.getContext()
-        let request: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FavoriteFilm")
-        request.predicate = NSPredicate(format:"idFilm = %@", "\(idFilm)")
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
-        do {
-            try context.execute(deleteRequest)
-            try context.save()
-        } catch {
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-        self.filmsFav.remove(at: index)
-        self.favoriteCollectionView.reloadData()
-        
     }
 }
 
@@ -210,8 +182,8 @@ extension FavoritesCollectionVC: UISearchResultsUpdating {
 
 // MARK: - Save and delete to favorites
 
-extension FavoritesCollectionVC: FavoriteDeletProtocol {
-    func deleteFavoriteFilm(isFavorite: Bool, idFilm: Double?) {
+extension FavoritesCollectionVC: FavoriteDeleteProtocol {
+    func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?) {
         
         if isFavorite == false {
             //for not like

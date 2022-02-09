@@ -33,35 +33,12 @@ class MoreInfoViewController: UIViewController {
             nameNavigationItem.title = info.name
         }
         if let info = detail {
-            moreInfoImage.image = getImage(from: info.show?.image?.original ??
+            moreInfoImage.image = UIImage.getImage(from: info.show?.image?.original ??
                                            placeholderFilm)
             let summary = info.show?.summary ?? "No description text"
             moreIntoTextView.text = summary.htmlString
             nameNavigationItem.title = detail?.show?.name
         }
-    }
-    
-    // MARK: - String in image conversion
-    
-    private func getImage(from string: String) -> UIImage? {
-        //Get valid URL
-        guard let url = URL(string: string)
-        else {
-            print("Unable to create URL")
-            return nil
-        }
-        
-        var image: UIImage? = nil
-        do {
-            //Get valid data
-            let data = try Data(contentsOf: url, options: [])
-            
-            //Make image
-            image = UIImage(data: data)
-        } catch {
-            print(error.localizedDescription)
-        }
-        return image
     }
     
     // MARK: - Configuring a button to open a window with search in You Tube
@@ -104,6 +81,8 @@ class MoreInfoViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    // MARK: - Share function
+    
     @IBAction private func shareActive(_ sender: UIBarButtonItem) {
         let shareController: UIActivityViewController
         if detail?.show?.externals?.imdb == nil && detail?.show?.url == nil {
@@ -139,26 +118,6 @@ class MoreInfoViewController: UIViewController {
     }
 }
 
-// MARK: - Extention from html
 
-extension String {
-    private var utfData: Data? {
-        return self.data(using: .utf8)
-    }
-    
-    var htmlAttributedString: NSAttributedString? {
-        guard let data = self.utfData else {
-            return nil }
-        do {
-            return try NSAttributedString(data: data,
-                                          options: [
-                                            .documentType: NSAttributedString.DocumentType.html,
-                                            .characterEncoding: String.Encoding.utf8.rawValue],
-                                          documentAttributes: nil)
-        } catch {
-            print(error.localizedDescription)
-            return nil }
-    }
-    var htmlString: String {
-        return htmlAttributedString?.string ?? self }
-}
+
+
