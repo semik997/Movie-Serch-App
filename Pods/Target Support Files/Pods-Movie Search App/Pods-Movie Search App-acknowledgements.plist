@@ -699,6 +699,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 			<string>Apache</string>
 			<key>Title</key>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 			<string>FirebaseAuth</string>
 			<key>Type</key>
@@ -913,6 +914,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 			<string>Apache</string>
 			<key>Title</key>
 >>>>>>> 98dd208 (Connect saving images in Firebase)
+=======
+>>>>>>> e1ee695 (Removed extra podfile)
 			<string>FirebaseCore</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
@@ -1793,6 +1796,7 @@ FirestoreEncoder
 			<string>Apache</string>
 			<key>Title</key>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 			<string>FirebaseStorage</string>
 			<key>Type</key>
@@ -2219,6 +2223,8 @@ FirestoreEncoder
 			<string>Apache</string>
 			<key>Title</key>
 >>>>>>> 98dd208 (Connect saving images in Firebase)
+=======
+>>>>>>> e1ee695 (Removed extra podfile)
 			<string>GoogleDataTransport</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>

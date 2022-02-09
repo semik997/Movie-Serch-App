@@ -467,6 +467,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 ## FirebaseAuth
 
@@ -675,6 +676,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 >>>>>>> 98dd208 (Connect saving images in Firebase)
+=======
+>>>>>>> e1ee695 (Removed extra podfile)
 ## FirebaseCore
 
 
@@ -1537,6 +1540,7 @@ FirestoreEncoder
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 ## FirebaseStorage
 
@@ -1951,6 +1955,8 @@ FirestoreEncoder
 
 
 >>>>>>> 98dd208 (Connect saving images in Firebase)
+=======
+>>>>>>> e1ee695 (Removed extra podfile)
 ## GoogleDataTransport
 
 

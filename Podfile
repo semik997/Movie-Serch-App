@@ -10,9 +10,7 @@ target 'Movie Search App' do
 <<<<<<< HEAD
 pod 'Firebase/Firestore'
 pod 'SDWebImage'
-pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
-pod 'Firebase/Storage'
 
 <<<<<<< HEAD
 

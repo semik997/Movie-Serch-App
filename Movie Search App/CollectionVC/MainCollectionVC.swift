@@ -197,18 +197,18 @@ extension MainCollectionVC: FavoriteDeleteProtocol {
         }
         
         //MARK: - Saving an Image to Firebase
-        func uploadImage(name: String, photo: UIImage) {
-            
-            if let idFilm = idFilm, let film = films.first(where: { $0.show?.id == idFilm }) {
-                
-                let reference = Storage.storage().reference().child("moviesPicture").child(name)
-                guard let image = getImage(from: film.show?.image?.original ?? "") else { return }
-                guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }
-                let metadata = StorageMetadata()
-                metadata.contentType = "image/jpeg"
-                reference.putData(imageData, metadata: metadata)
-            }
-        }
+//        func uploadImage(name: String, photo: UIImage) {
+//
+//            if let idFilm = idFilm, let film = films.first(where: { $0.show?.id == idFilm }) {
+//
+//                let reference = Storage.storage().reference().child("moviesPicture").child(name)
+//                guard let image = getImage(from: film.show?.image?.original ?? "") else { return }
+//                guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }
+//                let metadata = StorageMetadata()
+//                metadata.contentType = "image/jpeg"
+//                reference.putData(imageData, metadata: metadata)
+//            }
+//        }
     }
 }
 
