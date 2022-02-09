@@ -7,7 +7,6 @@
 
 import UIKit
 import CoreData
-import Firebase
 
 class MainCollectionVC: UICollectionViewController {
     
@@ -266,8 +265,7 @@ extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
             let sizeCell = CGSize (width: 100, height: 150)
             self.defaultSizeCell = sizeCell
         case .noChoose:
-            let sizeCell = CGSize (width: 200, height: 200)
-            self.defaultSizeCell = sizeCell
+            break
         case .none:
             let sizeCell = CGSize (width: 200, height: 200)
             self.defaultSizeCell = sizeCell

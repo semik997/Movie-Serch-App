@@ -6,6 +6,6 @@ target 'Movie Search App' do
   use_frameworks!
 
   # Pods for Movie Search App
-  pod 'Firebase/Firestore'
+  pod 'SDWebImage'
 
 end

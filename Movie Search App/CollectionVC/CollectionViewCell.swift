@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import SDWebImage
 
 protocol FavoriteProtocol: AnyObject {
     func selectCell(_ isFavorite: Bool, idFilm: Double?, url: String?, name: String?, image: String?,
@@ -81,7 +82,8 @@ extension CollectionViewCell {
     func loadData(film: Films.Film) {
         currentFilm = film
         nameLabel?.text = film.show?.name
-        mainImage.image = getImage(from: (film.show?.image?.medium ?? placeholderFilm))
+        let imageURL = URL(string: film.show?.image?.medium ?? placeholderFilm)
+        mainImage.sd_setImage(with: imageURL, completed: nil)
         idFilm = film.show?.id
         url = film.show?.url
         name = film.show?.name
