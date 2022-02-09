@@ -7,18 +7,9 @@ target 'Movie Search App' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-<<<<<<< HEAD
 pod 'Firebase/Firestore'
 pod 'SDWebImage'
-pod 'Firebase/Firestore'
+pod 'Firebase/Storage'
 
-<<<<<<< HEAD
-
-=======
-pod 'SDWebImage'
->>>>>>> 8713030 (Added SDWebImage library and)
-
-=======
->>>>>>> c495c83 (Redesigned settings screen)
 end
 

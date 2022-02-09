@@ -140,7 +140,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
                                         style: UIAlertController.Style, idFilm: Double) {
         let alertController = UIAlertController(title: title, message: message,
                                                 preferredStyle: style)
-        let yes = UIAlertAction(title: "Yes, I'am sure", style: .default) { action in
+        let yesButton = UIAlertAction(title: "Yes, I'am sure", style: .default) { action in
             guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
             else { return }
             CoreDataManager.shared.deleteFromData(idFilm: idFilm)

@@ -66,7 +66,7 @@ class FilmCollectionViewCell: UICollectionViewCell {
         if isFavorite {
             //delited like
             isFavorite = !isFavorite
-            delegateDelete?.actionForFavoriteFilm(isFavorite: isFavorite, idFilm: idFilm)
+            delegate?.actionForFavoriteFilm(isFavorite: isFavorite, idFilm: idFilm)
         }
     }
 }
