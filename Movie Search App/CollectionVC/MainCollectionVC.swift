@@ -30,7 +30,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     private let defaults = UserDefaults.standard
     private var tap = UITapGestureRecognizer()
     private var searchText = ""
-    private let insret = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+    private let inseret = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
     private let bigSize = CGSize (width: 400, height: 400)
     private let mediumSize = CGSize (width: 200, height: 200)
     private let smallSize = CGSize (width: 100, height: 150)
@@ -55,9 +55,10 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         definesPresentationContext = true
         collectionViewSpace?.delegate = self
         collectionViewSpace?.dataSource = self
+        
     }
     
-    // MARK: - Setting the number of cells and their filling
+    // MARK: - UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -241,6 +242,6 @@ extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
     
     // setting cell intervals
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return self.insret
+        return self.inseret
     }
 }

@@ -46,29 +46,20 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
         mediumSizeCellButton.isSelected = true
     }
     
-    
-    @IBAction private func chooseBigSizeButton(_ sender: UIButton) {
+    @IBAction func chooseSizeButton(_ sender: UIButton) {
         
-        size = ChooseSize.big
-        bigSizeCellButton.isSelected = true
         mediumSizeCellButton.isSelected = false
-        smallSizeCellButton.isSelected = false
-        self.delegate?.updateInterface(color: color, size: size)
-    }
-    @IBAction private func chooseMediumSizeButton(_ sender: UIButton) {
-      
-        size = ChooseSize.medium
-        bigSizeCellButton.isSelected = false
-        mediumSizeCellButton.isSelected = true
-        smallSizeCellButton.isSelected = false
-        self.delegate?.updateInterface(color: color, size: size)
-    }
-    @IBAction private func chooseSmallSizeButton(_ sender: UIButton) {
-     
-        size = ChooseSize.small
-        bigSizeCellButton.isSelected = false
-        mediumSizeCellButton.isSelected = false
-        smallSizeCellButton.isSelected = true
+        
+        if sender == bigSizeCellButton {
+            size = ChooseSize.big
+            bigSizeCellButton.isSelected = true
+        } else if sender == mediumSizeCellButton {
+            size = ChooseSize.medium
+            mediumSizeCellButton.isSelected = true
+        } else {
+            size = ChooseSize.small
+            smallSizeCellButton.isSelected = true
+        }
         self.delegate?.updateInterface(color: color, size: size)
     }
     

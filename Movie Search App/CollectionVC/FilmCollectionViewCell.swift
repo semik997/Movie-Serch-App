@@ -50,6 +50,7 @@ class FilmCollectionViewCell: UICollectionViewCell {
         
         if isFavorite {
             //delited like
+            fillButton.isSelected = false
             isFavorite = !isFavorite
             delegate?.actionForFavoriteFilm(isFavorite: isFavorite, idFilm: idFilm)
             

@@ -11,6 +11,10 @@ class SplashScreen: UIViewController {
     
     // Customization loading screen
     
+    private let timeIntervalWithTimer = 0.1
+    private let maxValueLoadingBar: Float = 1
+    private let addValueLoadingBar: Float = 0.2
+    
     @IBOutlet weak var progress: UIProgressView!
     
     override func viewDidLoad() {
@@ -18,9 +22,9 @@ class SplashScreen: UIViewController {
         
         progress.setProgress(0, animated: true)
         // initialization of a timer to fill the download field
-        Timer.scheduledTimer(withTimeInterval: interval, repeats: true) { timer in
-            if self.progress.progress != maxValue {
-                self.progress.progress += addValue
+        Timer.scheduledTimer(withTimeInterval: timeIntervalWithTimer, repeats: true) { timer in
+            if self.progress.progress != self.maxValueLoadingBar {
+                self.progress.progress += self.addValueLoadingBar
             } else { // switching to another screen after filling in the loading field
                 
                 timer.invalidate()

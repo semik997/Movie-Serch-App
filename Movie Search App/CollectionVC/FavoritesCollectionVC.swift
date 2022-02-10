@@ -140,20 +140,20 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
                                         style: UIAlertController.Style, idFilm: Double) {
         let alertController = UIAlertController(title: title, message: message,
                                                 preferredStyle: style)
-        let yesButton = UIAlertAction(title: "Yes, I'am sure", style: .default) { action in
-            guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
-            else { return }
-            CoreDataManager.shared.deleteFromData(idFilm: idFilm)
-            self.filmsFav.remove(at: index)
+        alertController.addAction(
+            UIAlertAction(title: "Yes, I'am sure",
+                          style: .default,
+                          handler: { action in
+                              guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
+                              else { return }
+                              CoreDataManager.shared.deleteFromData(idFilm: idFilm)
+                              self.filmsFav.remove(at: index)
+                              self.favoriteCollectionView.reloadData()
+                          })
+        )
+        alertController.addAction(UIAlertAction(title: "No thanks", style: .default, handler: { action in
             self.favoriteCollectionView.reloadData()
-        }
-        
-        let noButton = UIAlertAction(title: "No thanks", style: .cancel){ action in
-            self.favoriteCollectionView.reloadData()
-        }
-        alertController.addAction(yesButton)
-        alertController.addAction(noButton)
-        
+        }))
         present(alertController, animated: true)
     }
 }

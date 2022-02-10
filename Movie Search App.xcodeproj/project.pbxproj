@@ -87,14 +87,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		300F544327B3F8510031C473 /* New Group */ = {
+		300F544327B3F8510031C473 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
 				30CA0C63275B8559009468D2 /* AppDelegate.swift */,
 				30CA0C65275B8559009468D2 /* SceneDelegate.swift */,
 				30863A12279AF48800CC45BA /* GoogleService-Info.plist */,
 			);
-			path = "New Group";
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		30688003278C4416003CDE31 /* CollectionVC */ = {
@@ -165,7 +165,7 @@
 		30CA0C62275B8559009468D2 /* Movie Search App */ = {
 			isa = PBXGroup;
 			children = (
-				300F544327B3F8510031C473 /* New Group */,
+				300F544327B3F8510031C473 /* Delegate */,
 				300F543A27B27D4C0031C473 /* Extension */,
 				30CC84522798613400F02BA9 /* CoreData */,
 				307DC0EA27A14C5B00647613 /* SplashScreen+Reachability */,

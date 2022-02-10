@@ -418,7 +418,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="chooseBigSizeButton:" destination="CaP-hN-BRP" eventType="touchUpInside" id="n23-HC-ckT"/>
+                                                    <action selector="chooseSizeButton:" destination="CaP-hN-BRP" eventType="touchUpInside" id="NhM-jo-wXv"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ftW-sm-Elg">
@@ -437,7 +437,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="chooseMediumSizeButton:" destination="CaP-hN-BRP" eventType="touchUpInside" id="CQB-dJ-Xui"/>
+                                                    <action selector="chooseSizeButton:" destination="CaP-hN-BRP" eventType="touchUpInside" id="8CE-Lj-6ti"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LbM-zm-myt">
@@ -456,7 +456,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="chooseSmallSizeButton:" destination="CaP-hN-BRP" eventType="touchUpInside" id="NEh-Mn-LqV"/>
+                                                    <action selector="chooseSizeButton:" destination="CaP-hN-BRP" eventType="touchUpInside" id="ZJZ-Wu-nlA"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -480,7 +480,7 @@
                     <navigationItem key="navigationItem" id="mmK-5d-D6l"/>
                     <size key="freeformSize" width="414" height="896"/>
                     <connections>
-                        <outlet property="bigSizeCellButton" destination="9gz-wX-WRV" id="YbC-ke-IVV"/>
+                        <outlet property="bigSizeCellButton" destination="9gz-wX-WRV" id="Fxo-wz-Ey6"/>
                         <outlet property="mediumSizeCellButton" destination="ftW-sm-Elg" id="PED-PW-cOE"/>
                         <outlet property="smallSizeCellButton" destination="LbM-zm-myt" id="Mve-WG-Gie"/>
                     </connections>
@@ -704,8 +704,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wLn-w4-dUj"/>
-        <segue reference="Riq-qh-Xj8"/>
+        <segue reference="Zvb-0v-biD"/>
+        <segue reference="LBk-bH-Prt"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="19420" width="2000.5" height="2000.5"/>
