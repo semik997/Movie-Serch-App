@@ -11,7 +11,7 @@ import UIKit
 class CoreDataManager: NSObject {
     
     static let shared = CoreDataManager()
-    private var context: NSManagedObjectContext {
+    var context: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
     
@@ -30,6 +30,20 @@ class CoreDataManager: NSObject {
         super.init()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func fetchFilm() -> [FavoriteFilm] {
+        var filmsFav: [FavoriteFilm]?
+        let fetchRequest: NSFetchRequest<FavoriteFilm> = FavoriteFilm.fetchRequest()
+        do {
+            filmsFav = try context.fetch(fetchRequest)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+        return filmsFav ?? []
+    }
     // MARK: - Core Data Saving support
     
     func saveContext() {
@@ -86,18 +100,6 @@ class CoreDataManager: NSObject {
             fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
-    
-    func fetchFilm() -> [FavoriteFilm] {
-        var filmsFav: [FavoriteFilm]?
-        let fetchRequest: NSFetchRequest<FavoriteFilm> = FavoriteFilm.fetchRequest()
-        do {
-            filmsFav = try context.fetch(fetchRequest)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-        return filmsFav ?? []
-        
-    }
-    
 }
+
 

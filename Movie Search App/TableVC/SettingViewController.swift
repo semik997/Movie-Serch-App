@@ -32,25 +32,41 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
     private var defaultColor: UIColor?
     var size = ChooseSize.noChoose
     
-    
-    @IBAction private func chooseBigSizeButton(_ sender: UIButton) {
-        size = ChooseSize.big
-        self.delegate?.updateInterface(color: color, size: size)
-    }
-    @IBAction private func chooseMediumSizeButton(_ sender: UIButton) {
-        size = ChooseSize.medium
-        self.delegate?.updateInterface(color: color, size: size)
-    }
-    @IBAction private func chooseSmallSizeButton(_ sender: UIButton) {
-        size = ChooseSize.small
-        self.delegate?.updateInterface(color: color, size: size)
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        bigSizeCellButton.setImage(UIImage(named: "big"), for: .normal)
+        bigSizeCellButton.setImage(UIImage(named: "complete"), for: .selected)
+        
+        mediumSizeCellButton.setImage(UIImage(named: "medium"), for: .normal)
+        mediumSizeCellButton.setImage(UIImage(named: "complete"), for: .selected)
+        
+        smallSizeCellButton.setImage(UIImage(named: "small"), for: .normal)
+        smallSizeCellButton.setImage(UIImage(named: "complete"), for: .selected)
+        
+        mediumSizeCellButton.isSelected = true
     }
     
+    @IBAction func chooseSizeButton(_ sender: UIButton) {
+        switch sender {
+        case bigSizeCellButton:
+            size = ChooseSize.big
+        case mediumSizeCellButton:
+            size = ChooseSize.medium
+        case smallSizeCellButton:
+            size = ChooseSize.small
+        default:
+            size = ChooseSize.medium
+        }
+        
+        bigSizeCellButton.isSelected = size == .big
+        mediumSizeCellButton.isSelected = size == .medium
+        smallSizeCellButton.isSelected = size == .small
+        
+        delegate?.updateInterface(color: color,
+                                  size: size)
+    }
+    
+    // MARK: - Select and apply color after selection
     @IBAction func selectColorButton(_ sender: Any) {
         
         let picker = UIColorPickerViewController()
@@ -58,8 +74,9 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
         present(picker, animated: true, completion: nil)
     }
     
-    // apply color after selection
+    // apply color
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
+        
         if viewController.selectedColor == color {
             self.delegate?.updateInterface(color: color, size: size)
         } else {
@@ -68,3 +85,5 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
         }
     }
 }
+
+

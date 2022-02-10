@@ -18,6 +18,7 @@ class InfoTableViewController: UITableViewController, SettingViewControllerDeleg
     
     // setup size view
     override var preferredContentSize : CGSize {
+        
         get {
             return CGSize(width: 170 , height: tableView.contentSize.height) }
         set {
@@ -48,7 +49,9 @@ class InfoTableViewController: UITableViewController, SettingViewControllerDeleg
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "settingView" {
+        
             if let tvc = segue.destination as? SettingViewController {
                 tvc.delegate = self
             }

@@ -20,7 +20,7 @@ class RapidApiManager {
         ]
         let request = NSMutableURLRequest(url: NSURL(string: "\(raitingAPI)\(show)")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          timeoutInterval: timeoutInterval)
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         
@@ -35,7 +35,7 @@ class RapidApiManager {
         dataTask.resume()
     }
     
-    // Call completion block with json
+    // MARK: - Call completion block with json
     private func parseJSONRaitinig(withData data: Data) -> Films.FilmIMDb? {
         let decoder = JSONDecoder()
         var currentShowIMDb: Films.FilmIMDb

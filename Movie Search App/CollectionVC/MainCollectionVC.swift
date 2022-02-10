@@ -7,6 +7,8 @@
 
 import UIKit
 import CoreData
+import Firebase
+import FirebaseStorage
 
 class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControllerDelegate {
     
@@ -22,15 +24,18 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         return text.isEmpty
     }
     
-    //Creating and filling the array for Display
     private var tVMazeApiManager = TVMazeApiManager()
     private var rapidApiManager = RapidApiManager()
     private var seguesConstant = SeguesConst()
     private let defaults = UserDefaults.standard
     private var tap = UITapGestureRecognizer()
     private var searchText = ""
+    private let indents = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+    private let bigSize = CGSize (width: 400, height: 400)
+    private let mediumSize = CGSize (width: 200, height: 200)
+    private let smallSize = CGSize (width: 100, height: 150)
     private var chooseSize: SettingViewController.ChooseSize?
-    private var defaultSizeCell = CGSize (width: 200, height: 200)
+    private var defaultSizeCell: CGSize?
     private var films: [Films.Film] = [] {
         didSet {
             DispatchQueue.main.async { [self] in
@@ -42,6 +47,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setup the search controller
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Enter the name of the show to search"
@@ -49,6 +55,8 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         definesPresentationContext = true
         collectionViewSpace?.delegate = self
         collectionViewSpace?.dataSource = self
+        collectionViewSpace.keyboardDismissMode = .onDrag
+        
     }
     
     // MARK: - UICollectionViewDataSource
@@ -61,11 +69,10 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
                                  numberOfItemsInSection section: Int) -> Int {
         if films.count == 0 {
             noContentImageView.isHidden = false
-            return films.count
         } else {
             noContentImageView.isHidden = true
-            return films.count
         }
+        return films.count
     }
     
     override func collectionView(_ collectionView: UICollectionView,
@@ -83,9 +90,11 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     // MARK: - Detail setting
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == seguesConstant.showDetail {
             if let cell = sender as? FilmCollectionViewCell,
                let indexPath = collectionViewSpace.indexPath(for: cell) {
+                
                 let film = films[indexPath.row]
                 let nav = segue.destination as? UINavigationController
                 let moreInfoMainVC = nav?.topViewController as? MoreInfoViewController
@@ -98,6 +107,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         if segue.identifier == seguesConstant.infoButton {
             
             if let tvc = segue.destination as? InfoTableViewController {
+                
                 tvc.delegate = self
                 tvc.delegateSetting = self
                 if let ppc = tvc.popoverPresentationController {
@@ -112,7 +122,10 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     
     // MARK: - Checking internet connection
     private func presentInternetConnectionAlertController () {
+        
+        
         let internetAlert = UIAlertController(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", preferredStyle: .alert)
+        
         let ok = UIAlertAction(title: "OK", style: .cancel)
         internetAlert.addAction(ok)
         present(internetAlert, animated: true)
@@ -144,9 +157,12 @@ extension MainCollectionVC: UISearchResultsUpdating {
         if Reachability.isConnectedToNetwork() {
             
             if searchText != "" {
+                
                 let text = searchText.split(separator: " ").joined(separator: "%20")
                 noContentImageView.isHidden = true
+                
                 if searchText.count >= 3 {
+                    
                     noContentImageView.isHidden = true
                     self.tVMazeApiManager.fetchCurrent(onCompletion: {
                         currentShowData in self.films = currentShowData
@@ -166,13 +182,17 @@ extension MainCollectionVC: UISearchResultsUpdating {
     }
 }
 
-// MARK: - Save and delete to favorites
+// MARK: - Saving and deleting from favorites
 
 extension MainCollectionVC: FavoriteDeleteProtocol {
     
     func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?) {
         
+        
         if let idFilm = idFilm, let film = films.first(where: { $0.show?.id == idFilm }) {
+            
+            guard let originalImage = UIImage.getImage(from: film.show?.image?.original ?? "placeholderFilm") else { return }
+            uploadImage(name: film.show?.name ?? "", photo: originalImage)
             
             if isFavorite {
                 //for like
@@ -183,6 +203,19 @@ extension MainCollectionVC: FavoriteDeleteProtocol {
             }
         }
         
+        //MARK: - Saving an Image to Firebase
+        func uploadImage(name: String, photo: UIImage) {
+
+            if let idFilm = idFilm, let film = films.first(where: { $0.show?.id == idFilm }) {
+
+                let reference = Storage.storage().reference().child("moviesPicture").child(name)
+                guard let image = UIImage.getImage(from: film.show?.image?.original ?? "") else { return }
+                guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }
+                let metadata = StorageMetadata()
+                metadata.contentType = "image/jpeg"
+                reference.putData(imageData, metadata: metadata)
+            }
+        }
     }
 }
 
@@ -194,25 +227,21 @@ extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
         
         switch self.chooseSize {
         case .big:
-            let sizeCell = CGSize (width: 400, height: 400)
-            self.defaultSizeCell = sizeCell
+            self.defaultSizeCell = bigSize
         case .medium:
-            let sizeCell = CGSize (width: 200, height: 200)
-            self.defaultSizeCell = sizeCell
+            self.defaultSizeCell = mediumSize
         case .small:
-            let sizeCell = CGSize (width: 100, height: 150)
-            self.defaultSizeCell = sizeCell
+            self.defaultSizeCell = smallSize
         case .noChoose:
             break
         case .none:
-            let sizeCell = CGSize (width: 200, height: 200)
-            self.defaultSizeCell = sizeCell
+            self.defaultSizeCell = nil
         }
-        return defaultSizeCell
+        return defaultSizeCell ?? mediumSize
     }
     
     // setting cell intervals
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+        return self.indents
     }
 }

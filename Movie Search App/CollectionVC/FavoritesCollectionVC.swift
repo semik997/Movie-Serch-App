@@ -27,7 +27,11 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     private var seguesConstant = SeguesConst()
     private var chooseSize: SettingViewController.ChooseSize?
     private var defaultSizeCell: CGSize?
-    var context: NSManagedObjectContext?
+    private let insret = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+    private let bigSize = CGSize (width: 400, height: 400)
+    private let mediumSize = CGSize (width: 200, height: 200)
+    private let smallSize = CGSize (width: 100, height: 150)
+    
     
     
     override func viewDidLoad() {
@@ -41,16 +45,18 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Enter name to search"
         navigationItem.searchController = searchController
+        favoriteCollectionView.keyboardDismissMode = .onDrag
         definesPresentationContext = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         favoriteCollectionView.reloadData()
         filmsFav = CoreDataManager.shared.fetchFilm()
     }
     
-    // MARK: - UICollectionViewDataSource
+    // MARK: - Setting the number of cells and their filling
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -59,16 +65,15 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
         if isFiltering {
+            
             if filtredFilms.count == 0 {
                 findImage.isHidden = false
-                return filtredFilms.count
             }
             findImage.isHidden = true
             return filtredFilms.count
         } else {
             if filmsFav.count == 0 {
                 findImage.isHidden = false
-                return filmsFav.count
             }
             findImage.isHidden = true
             return filmsFav.count
@@ -80,6 +85,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         guard let cell = favoriteCollectionView.dequeueReusableCell(withReuseIdentifier: "mainCell",
                                                                     for: indexPath) as? FilmCollectionViewCell
         else {  return UICollectionViewCell() }
+        
         if isFiltering {
             cell.loadDataFavorite(film: filtredFilms[indexPath.row])
         } else {
@@ -92,15 +98,18 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     // MARK: - Detail setting
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == seguesConstant.showDetail {
             if let cell = sender as? FilmCollectionViewCell,
                let indexPath = favoriteCollectionView.indexPath(for: cell){
                 let film: FavoriteFilm
+                
                 if isFiltering {
                     film = filtredFilms[indexPath.row]
                 } else {
                     film = filmsFav[indexPath.row]
                 }
+                
                 let nav = segue.destination as? UINavigationController
                 let MoreInfoFavoritesTableVC = nav?.topViewController as? MoreInfoViewController
                 MoreInfoFavoritesTableVC?.detailedInformation = film
@@ -110,9 +119,12 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         //MARK: - Info button
         
         if segue.identifier == seguesConstant.infoButton {
+            
             if let tvc = segue.destination as? InfoTableViewController {
+                
                 tvc.delegateFav = self
                 tvc.delegateSetting = self
+                
                 if let ppc = tvc.popoverPresentationController {
                     ppc.delegate = self
                 }
@@ -129,20 +141,20 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
                                         style: UIAlertController.Style, idFilm: Double) {
         let alertController = UIAlertController(title: title, message: message,
                                                 preferredStyle: style)
-        let yes = UIAlertAction(title: "Yes, I'am sure", style: .default) { action in
-            guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
-            else { return }
-            CoreDataManager.shared.deleteFromData(idFilm: idFilm)
-            self.filmsFav.remove(at: index)
+        alertController.addAction(
+            UIAlertAction(title: "Yes, I'am sure",
+                          style: .default,
+                          handler: { action in
+                              guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
+                              else { return }
+                              CoreDataManager.shared.deleteFromData(idFilm: idFilm)
+                              self.filmsFav.remove(at: index)
+                              self.favoriteCollectionView.reloadData()
+                          })
+        )
+        alertController.addAction(UIAlertAction(title: "No thanks", style: .default, handler: { action in
             self.favoriteCollectionView.reloadData()
-        }
-        
-        let no = UIAlertAction(title: "No thanks", style: .cancel){ action in
-            self.favoriteCollectionView.reloadData()
-        }
-        alertController.addAction(yes)
-        alertController.addAction(no)
-        
+        }))
         present(alertController, animated: true)
     }
 }
@@ -180,7 +192,7 @@ extension FavoritesCollectionVC: UISearchResultsUpdating {
     }
 }
 
-// MARK: - Save and delete to favorites
+// MARK: - Show alert to delete movie
 
 extension FavoritesCollectionVC: FavoriteDeleteProtocol {
     func actionForFavoriteFilm(isFavorite: Bool, idFilm: Double?) {
@@ -196,23 +208,23 @@ extension FavoritesCollectionVC: FavoriteDeleteProtocol {
 // MARK: - Setting size cell
 
 extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         switch self.chooseSize {
         case .big:
-            let sizeCell = CGSize (width: 400, height: 400)
+            let sizeCell = bigSize
             self.defaultSizeCell = sizeCell
         case .medium:
-            let sizeCell = CGSize (width: 200, height: 200)
+            let sizeCell = mediumSize
             self.defaultSizeCell = sizeCell
         case .small:
-            let sizeCell = CGSize (width: 100, height: 150)
+            let sizeCell = smallSize
             self.defaultSizeCell = sizeCell
         case .noChoose:
             break
         case .none:
-            let sizeCell = CGSize (width: 200, height: 200)
+            let sizeCell = defaultSizeCell
             self.defaultSizeCell = sizeCell
         }
         return defaultSizeCell ?? CGSize (width: 200, height: 200)
@@ -220,6 +232,6 @@ extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
     
     // setting cell intervals
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
+        return self.insret
     }
 }

@@ -13,7 +13,7 @@ class Films {
     private let defaults = UserDefaults.standard
     static let shared = Films()
     
-    // data request structure via API from https://www.tvmaze.com/api
+    // MARK: - Data request structure via API from https://www.tvmaze.com/api
     struct Film: Codable {
         var show: Show?
     }
@@ -37,7 +37,7 @@ class Films {
         let original: String?
     }
     
-    // request from https://rapidapi.com/apidojo/api/imdb8/
+    // MARK: -  request from https://rapidapi.com/apidojo/api/imdb8/
     struct FilmIMDb: Codable {
         let rating: Double?
     }
