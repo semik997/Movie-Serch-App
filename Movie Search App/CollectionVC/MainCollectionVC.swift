@@ -55,6 +55,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         definesPresentationContext = true
         collectionViewSpace?.delegate = self
         collectionViewSpace?.dataSource = self
+        collectionViewSpace.keyboardDismissMode = .onDrag
         
     }
     

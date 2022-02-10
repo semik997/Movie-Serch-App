@@ -45,6 +45,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Enter name to search"
         navigationItem.searchController = searchController
+        favoriteCollectionView.keyboardDismissMode = .onDrag
         definesPresentationContext = true
     }
     
