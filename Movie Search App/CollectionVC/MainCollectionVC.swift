@@ -191,6 +191,9 @@ extension MainCollectionVC: FavoriteDeleteProtocol {
         
         if let idFilm = idFilm, let film = films.first(where: { $0.show?.id == idFilm }) {
             
+            guard let originalImage = UIImage.getImage(from: film.show?.image?.original ?? "placeholderFilm") else { return }
+            uploadImage(name: film.show?.name ?? "", photo: originalImage)
+            
             if isFavorite {
                 //for like
                 CoreDataManager.shared.saveInData(film: film, idFilm: idFilm)
