@@ -208,7 +208,7 @@ extension FavoritesCollectionVC: FavoriteDeleteProtocol {
 // MARK: - Setting size cell
 
 extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         switch self.chooseSize {

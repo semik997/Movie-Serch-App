@@ -13,7 +13,7 @@ protocol SettingViewControllerDelegate: AnyObject {
 
 class SettingViewController: UIViewController, UIColorPickerViewControllerDelegate {
     
-    enum ChooseSize {
+    enum ChooseSize: Codable {
         case big
         case medium
         case small

@@ -44,6 +44,9 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         }
     }
     
+    private var userColor: String?
+    private var defaultColor: UIColor?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,6 +59,9 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         collectionViewSpace?.delegate = self
         collectionViewSpace?.dataSource = self
         collectionViewSpace.keyboardDismissMode = .onDrag
+        receiveFromUserDefault()
+        collectionViewSpace.backgroundColor = defaultColor
+        navigationController?.navigationBar.backgroundColor = defaultColor
         
     }
     
@@ -138,13 +144,38 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
 extension MainCollectionVC: SettingViewControllerDelegate {
     
     func updateInterface(color: UIColor?, size: SettingViewController.ChooseSize?) {
+        var helpColor: UIColor?
         if color == UIColor.white {
+            guard let chooseColor = UserDefaultManager.shared.settings[0].color else { return }
+            helpColor = UIColor.hexStringToUIColor(hex: chooseColor)
         } else {
             collectionViewSpace.backgroundColor = color
             navigationController?.navigationBar.backgroundColor = color
+            helpColor = color
         }
         self.chooseSize = size
+        
+        saveToUserDefault(color: helpColor, size: size)
     }
+    
+    func saveToUserDefault(color: UIColor?, size: SettingViewController.ChooseSize?) {
+        
+        let userColor = UIColor.toHexString(color ?? UIColor.white)
+        self.userColor = userColor()
+        
+        UserDefaultManager.shared.saveDefaultSetting(color: self.userColor, sizeCell: size)
+    }
+    
+    func receiveFromUserDefault() {
+        
+        guard let chooseColor = UserDefaultManager.shared.settings[0].color else { return }
+        let defaultColor = UIColor.hexStringToUIColor(hex: chooseColor)
+        self.defaultColor = defaultColor
+        
+        self.chooseSize = UserDefaultManager.shared.settings[0].sizeCell
+        
+    }
+    
 }
 
 // MARK: - Setting search bar
@@ -205,9 +236,9 @@ extension MainCollectionVC: FavoriteDeleteProtocol {
         
         //MARK: - Saving an Image to Firebase
         func uploadImage(name: String, photo: UIImage) {
-
+            
             if let idFilm = idFilm, let film = films.first(where: { $0.show?.id == idFilm }) {
-
+                
                 let reference = Storage.storage().reference().child("moviesPicture").child(name)
                 guard let image = UIImage.getImage(from: film.show?.image?.original ?? "") else { return }
                 guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }

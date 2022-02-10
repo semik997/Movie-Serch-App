@@ -1,5 +1,5 @@
 //
-//  SecondaryFunctions.swift
+//  ExtensionUIImage.swift
 //  Movie Search App
 //
 //  Created by Sem Koliesnikov on 08.02.2022.
