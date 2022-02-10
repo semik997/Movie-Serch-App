@@ -223,21 +223,17 @@ extension MainCollectionVC: UICollectionViewDelegateFlowLayout {
         
         switch self.chooseSize {
         case .big:
-            let sizeCell = bigSize
-            self.defaultSizeCell = sizeCell
+            self.defaultSizeCell = bigSize
         case .medium:
-            let sizeCell = mediumSize
-            self.defaultSizeCell = sizeCell
+            self.defaultSizeCell = mediumSize
         case .small:
-            let sizeCell = smallSize
-            self.defaultSizeCell = sizeCell
+            self.defaultSizeCell = smallSize
         case .noChoose:
             break
         case .none:
-            let sizeCell = defaultSizeCell
-            self.defaultSizeCell = sizeCell
+            self.defaultSizeCell = nil
         }
-        return defaultSizeCell ?? CGSize (width: 200, height: 200)
+        return defaultSizeCell ?? mediumSize
     }
     
     // setting cell intervals
