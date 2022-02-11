@@ -128,7 +128,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         if segue.identifier == seguesConstant.favoriteSettings {
             if let tvc = segue.destination as? SettingViewController {
                 tvc.delegate = self
-                tvc.viewCum = favoriteMark
+                tvc.sourceScreen = favoriteMark
             }
         }
     }

@@ -113,7 +113,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         if segue.identifier == seguesConstant.mainSettings {
             if let tvc = segue.destination as? SettingViewController {
                 tvc.delegate = self
-                tvc.viewCum = mainMark
+                tvc.sourceScreen = mainMark
             }
         }
     }

@@ -38,8 +38,7 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
     var size = ChooseSize.noChoose
     private var defaultMainSize = UserDefaultManager.shared.mainViewSettings.sizeCell
     private var defaultFavoriteSize = UserDefaultManager.shared.favoriteViewSettings.sizeCell
-    // Special for you Pasha :)
-    var viewCum: ViewWhitchCame?
+    var sourceScreen: ViewWhitchCame?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +51,7 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
         smallSizeCellButton.setImage(UIImage(named: "small"), for: .normal)
         smallSizeCellButton.setImage(UIImage(named: "complete"), for: .selected)
         
-        switch viewCum {
+        switch sourceScreen {
         case .main:
             if defaultMainSize == ChooseSize.big {
                 bigSizeCellButton.isSelected = true
@@ -91,7 +90,7 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
         smallSizeCellButton.isSelected = size == .small
         
         delegate?.updateInterface(color: color,
-                                  size: size, view: viewCum)
+                                  size: size, view: sourceScreen)
     }
     
     // MARK: - Select and apply color after selection
@@ -106,10 +105,10 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
         
         if viewController.selectedColor == color {
-            self.delegate?.updateInterface(color: color, size: size, view: viewCum)
+            self.delegate?.updateInterface(color: color, size: size, view: sourceScreen)
         } else {
             self.color = viewController.selectedColor
-            self.delegate?.updateInterface(color: color, size: size, view: viewCum)
+            self.delegate?.updateInterface(color: color, size: size, view: sourceScreen)
         }
     }
 }
