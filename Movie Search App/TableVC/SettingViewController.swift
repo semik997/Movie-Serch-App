@@ -53,20 +53,30 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
         
         switch sourceScreen {
         case .main:
-            if defaultMainSize == ChooseSize.big {
+            switch defaultMainSize {
+            case .big:
                 bigSizeCellButton.isSelected = true
-            } else if defaultMainSize == ChooseSize.medium {
+            case .medium:
                 mediumSizeCellButton.isSelected = true
-            } else {
+            case .small:
                 smallSizeCellButton.isSelected = true
+            case .none:
+                break
+            case .some(.noChoose):
+                break
             }
         case .favorite:
-            if defaultFavoriteSize == ChooseSize.big {
+            switch defaultMainSize {
+            case .big:
                 bigSizeCellButton.isSelected = true
-            } else if defaultFavoriteSize == ChooseSize.medium {
+            case .medium:
                 mediumSizeCellButton.isSelected = true
-            } else {
+            case .small:
                 smallSizeCellButton.isSelected = true
+            case .none:
+                break
+            case .some(.noChoose):
+                break
             }
         case .none:
             break

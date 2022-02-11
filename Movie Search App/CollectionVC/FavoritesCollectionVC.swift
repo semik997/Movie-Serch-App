@@ -144,8 +144,8 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         let alertController = UIAlertController(title: title, message: message,
                                                 preferredStyle: style)
         alertController.addAction(
-            UIAlertAction(title: "Yes, I'am sure",
-                          style: .default,
+            UIAlertAction(title: "Yes",
+                          style: .destructive,
                           handler: { action in
                               guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
                               else { return }
@@ -154,7 +154,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
                               self.favoriteCollectionView.reloadData()
                           })
         )
-        alertController.addAction(UIAlertAction(title: "No thanks", style: .default, handler: { action in
+        alertController.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
             self.favoriteCollectionView.reloadData()
         }))
         present(alertController, animated: true)
@@ -170,8 +170,7 @@ extension FavoritesCollectionVC: SettingViewControllerDelegate {
         
         if view == .favorite {
             var helpingColor: UIColor?
-            if color == UIColor.white {
-                guard let chooseColor = UserDefaultManager.shared.favoriteViewSettings.color else { return }
+            if color == UIColor.white, let chooseColor = UserDefaultManager.shared.favoriteViewSettings.color  {
                 helpingColor = UIColor.hexStringToUIColor(hex: chooseColor)
             } else {
                 favoriteCollectionView.backgroundColor = color
@@ -227,7 +226,7 @@ extension FavoritesCollectionVC: FavoriteDeleteProtocol {
         
         if isFavorite == false {
             //for not like
-            presentAlertController(withTitle: "Are you sure??", message: nil, style: .alert,
+            presentAlertController(withTitle: "Remove from favorites??", message: nil, style: .alert,
                                    idFilm: idFilm ?? 0)
         }
     }

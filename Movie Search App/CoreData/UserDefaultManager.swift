@@ -23,7 +23,7 @@ class UserDefaultManager {
         
         get {
             if let data = defaults.value(forKey: userDefaultConst.mainSettingsKey) as? Data {
-                guard let defaultsData = try? PropertyListDecoder().decode(UserSettings.self, from: data) else { return favoriteViewSettings }
+                guard let defaultsData = try? PropertyListDecoder().decode(UserSettings.self, from: data) else { return UserSettings() }
                 return defaultsData
             } else {
                 return UserSettings()
@@ -40,7 +40,7 @@ class UserDefaultManager {
         
         get {
             if let data = defaults.value(forKey: userDefaultConst.favoriteSettingKey) as? Data {
-                guard let defaultsData = try? PropertyListDecoder().decode (UserSettings.self, from: data) else { return mainViewSettings }
+                guard let defaultsData = try? PropertyListDecoder().decode (UserSettings.self, from: data) else { return UserSettings() }
                 return defaultsData
             } else {
                 return UserSettings()
@@ -52,6 +52,20 @@ class UserDefaultManager {
             }
         }
     }
+    
+    func saveDefaultSetting() {
+        
+        
+        
+    }
+    
+    
+    func getDefaultSettings() {
+        
+        
+        
+    }
+    
     
     
     func saveDefaultSettingMainView(color: String?, sizeCell: SettingViewController.ChooseSize?) {

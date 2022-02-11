@@ -142,8 +142,7 @@ extension MainCollectionVC: SettingViewControllerDelegate {
         
         if view == .main {
             var helpingColor: UIColor?
-            if color == UIColor.white {
-                guard let chooseColor = UserDefaultManager.shared.mainViewSettings.color else { return }
+            if color == UIColor.white, let chooseColor = UserDefaultManager.shared.mainViewSettings.color {
                 helpingColor = UIColor.hexStringToUIColor(hex: chooseColor)
             } else {
                 collectionViewSpace.backgroundColor = color
