@@ -248,9 +248,7 @@
                     <navigationItem key="navigationItem" title="Main" id="R1O-jm-c8n">
                         <barButtonItem key="rightBarButtonItem" image="ellipsis" catalog="system" id="GHf-RT-H7p">
                             <connections>
-                                <segue destination="0lT-y3-5Em" kind="popoverPresentation" identifier="popVC" popoverAnchorBarButtonItem="GHf-RT-H7p" id="Riq-qh-Xj8">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
+                                <segue destination="CaP-hN-BRP" kind="presentation" identifier="mainSettings" id="Tvd-QA-mGV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -262,83 +260,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RCo-SC-gRr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3484.057971014493" y="1247.5446428571429"/>
-        </scene>
-        <!--Info Table View Controller-->
-        <scene sceneID="5cK-aO-djL">
-            <objects>
-                <tableViewController interfaceStyle="light" id="0lT-y3-5Em" customClass="InfoTableViewController" customModule="Movie_Search_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="eSS-PW-U76">
-                        <rect key="frame" x="0.0" y="0.0" width="250" height="250"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <sections>
-                            <tableViewSection id="gbz-rv-laq">
-                                <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="R0H-ex-Ag0">
-                                        <rect key="frame" x="0.0" y="44.5" width="250" height="31.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R0H-ex-Ag0" id="BQM-qU-ChT">
-                                            <rect key="frame" x="0.0" y="0.0" width="250" height="31.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qju-lV-cjk">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="31.5"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="Settings"/>
-                                                    <connections>
-                                                        <segue destination="CaP-hN-BRP" kind="show" identifier="settingView" id="0s6-ES-OYu"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="qju-lV-cjk" secondAttribute="trailing" id="T0B-HR-8L9"/>
-                                                <constraint firstAttribute="bottom" secondItem="qju-lV-cjk" secondAttribute="bottom" id="d6Q-qR-bMg"/>
-                                                <constraint firstItem="qju-lV-cjk" firstAttribute="leading" secondItem="BQM-qU-ChT" secondAttribute="leading" id="j9l-n5-UDS"/>
-                                                <constraint firstItem="qju-lV-cjk" firstAttribute="top" secondItem="BQM-qU-ChT" secondAttribute="top" id="lNW-xq-xTg"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="gQx-wA-7k2">
-                                        <rect key="frame" x="0.0" y="76" width="250" height="31.5"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gQx-wA-7k2" id="uYi-Uw-hl1">
-                                            <rect key="frame" x="0.0" y="0.0" width="250" height="31.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8EH-OO-hrG">
-                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="31.5"/>
-                                                    <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" title="Cancel"/>
-                                                    <connections>
-                                                        <action selector="exit:" destination="0lT-y3-5Em" eventType="touchUpInside" id="FIL-mW-cVe"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="8EH-OO-hrG" secondAttribute="bottom" id="GZW-ub-gSv"/>
-                                                <constraint firstItem="8EH-OO-hrG" firstAttribute="leading" secondItem="uYi-Uw-hl1" secondAttribute="leading" id="NHe-od-LBv"/>
-                                                <constraint firstAttribute="trailing" secondItem="8EH-OO-hrG" secondAttribute="trailing" id="Uxz-6s-e1U"/>
-                                                <constraint firstItem="8EH-OO-hrG" firstAttribute="top" secondItem="uYi-Uw-hl1" secondAttribute="top" id="kOG-xk-AAO"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="0lT-y3-5Em" id="siW-cR-CCS"/>
-                            <outlet property="delegate" destination="0lT-y3-5Em" id="osD-to-fad"/>
-                        </connections>
-                    </tableView>
-                    <size key="freeformSize" width="250" height="250"/>
-                    <connections>
-                        <outlet property="cancelButton" destination="8EH-OO-hrG" id="1pm-E4-CRK"/>
-                        <outlet property="settingViewButton" destination="qju-lV-cjk" id="o2D-lZ-zuh"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="96o-rx-u9B" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5900.0000000000009" y="1603.7946428571429"/>
         </scene>
         <!--Setting View Controller-->
         <scene sceneID="GWa-4q-2gX">
@@ -487,7 +408,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pR5-qM-9dd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6595.652173913044" y="1603.7946428571429"/>
+            <point key="canvasLocation" x="5938" y="1604"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="xOm-VJ-Tj8">
@@ -598,9 +519,7 @@
                     <navigationItem key="navigationItem" title="Favorites" id="ciF-Vs-iOB">
                         <barButtonItem key="rightBarButtonItem" image="ellipsis" catalog="system" id="xcd-yP-5fp">
                             <connections>
-                                <segue destination="0lT-y3-5Em" kind="popoverPresentation" identifier="popVC" popoverAnchorBarButtonItem="xcd-yP-5fp" id="LBk-bH-Prt">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
+                                <segue destination="CaP-hN-BRP" kind="presentation" identifier="favoriteSettings" id="WZc-Rg-VRq"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -705,7 +624,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Zvb-0v-biD"/>
-        <segue reference="LBk-bH-Prt"/>
+        <segue reference="Tvd-QA-mGV"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="19420" width="2000.5" height="2000.5"/>

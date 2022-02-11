@@ -23,7 +23,15 @@ let placeholderFilm = "https://www.salonlfc.com/wp-content/uploads/2018/01/image
 // MARK: - Constants from Segue
 struct SeguesConst {
     let showDetail = "showDetail"
-    let infoButton = "popVC"
+    let mainSettings = "mainSettings"
+    let favoriteSettings = "favoriteSettings"
+}
+
+// MARK: - Constants from UserDefault
+
+struct UserDefaultConst {
+    let mainSettingsKey = "mainViewSettings"
+    let favoriteSettingKey = "favoriteViewSettings"
 }
 
 //MARK: - Other constants

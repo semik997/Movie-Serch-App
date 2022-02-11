@@ -31,6 +31,9 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     private let bigSize = CGSize (width: 400, height: 400)
     private let mediumSize = CGSize (width: 200, height: 200)
     private let smallSize = CGSize (width: 100, height: 150)
+    private var userColor: String?
+    private var defaultColor: UIColor?
+    private var favoriteMark: SettingViewController.ViewWhitchCame = .favorite
     
     
     
@@ -47,6 +50,10 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         navigationItem.searchController = searchController
         favoriteCollectionView.keyboardDismissMode = .onDrag
         definesPresentationContext = true
+        receiveFromUserDefault()
+        favoriteCollectionView.backgroundColor = defaultColor
+        navigationController?.navigationBar.backgroundColor = defaultColor
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,26 +118,21 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
                 }
                 
                 let nav = segue.destination as? UINavigationController
-                let MoreInfoFavoritesTableVC = nav?.topViewController as? MoreInfoViewController
-                MoreInfoFavoritesTableVC?.detailedInformation = film
+                let moreInfoFavoritesTableVC = nav?.topViewController as? MoreInfoViewController
+                moreInfoFavoritesTableVC?.detailedInformation = film
             }
         }
         
-        //MARK: - Info button
+        //MARK: - Settings button
         
-        if segue.identifier == seguesConstant.infoButton {
-            
-            if let tvc = segue.destination as? InfoTableViewController {
-                
-                tvc.delegateFav = self
-                tvc.delegateSetting = self
-                
-                if let ppc = tvc.popoverPresentationController {
-                    ppc.delegate = self
-                }
+        if segue.identifier == seguesConstant.favoriteSettings {
+            if let tvc = segue.destination as? SettingViewController {
+                tvc.delegate = self
+                tvc.viewCum = favoriteMark
             }
         }
     }
+    
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
     }
@@ -160,19 +162,45 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
 }
 
 
-// MARK: - Setting view color
+// MARK: - Setting view color and size cell
 
 extension FavoritesCollectionVC: SettingViewControllerDelegate {
     
-    func updateInterface(color: UIColor?, size: SettingViewController.ChooseSize?) {
+    func updateInterface(color: UIColor?, size: SettingViewController.ChooseSize?, view: SettingViewController.ViewWhitchCame?) {
         
-        if color == UIColor.white {
-        } else {
-            favoriteCollectionView.backgroundColor = color
-            navigationController?.navigationBar.backgroundColor = color
+        if view == .favorite {
+            var helpingColor: UIColor?
+            if color == UIColor.white {
+                guard let chooseColor = UserDefaultManager.shared.favoriteViewSettings.color else { return }
+                helpingColor = UIColor.hexStringToUIColor(hex: chooseColor)
+            } else {
+                favoriteCollectionView.backgroundColor = color
+                navigationController?.navigationBar.backgroundColor = color
+                helpingColor = color
+            }
+            self.chooseSize = size
+            favoriteCollectionView.reloadData()
+            
+            saveToUserDefault(color: helpingColor, size: size)
         }
-        self.chooseSize = size
-        favoriteCollectionView.reloadData()
+    }
+    
+    func saveToUserDefault(color: UIColor?, size: SettingViewController.ChooseSize?) {
+        
+        let userColor = UIColor.toHexString(color ?? UIColor.white)
+        self.userColor = userColor()
+        
+        UserDefaultManager.shared.saveDefaultSettingFavoriteView(color: self.userColor, sizeCell: size)
+    }
+    
+    func receiveFromUserDefault() {
+        
+        guard let chooseColor = UserDefaultManager.shared.favoriteViewSettings.color else { return }
+        let defaultColor = UIColor.hexStringToUIColor(hex: chooseColor)
+        self.defaultColor = defaultColor
+        
+        self.chooseSize = UserDefaultManager.shared.favoriteViewSettings.sizeCell
+        
     }
 }
 

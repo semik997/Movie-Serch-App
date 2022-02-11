@@ -36,6 +36,9 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     private let smallSize = CGSize (width: 100, height: 150)
     private var chooseSize: SettingViewController.ChooseSize?
     private var defaultSizeCell: CGSize?
+    private var userColor: String?
+    private var defaultColor: UIColor?
+    private var mainMark: SettingViewController.ViewWhitchCame = .main
     private var films: [Films.Film] = [] {
         didSet {
             DispatchQueue.main.async { [self] in
@@ -43,9 +46,6 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
             }
         }
     }
-    
-    private var userColor: String?
-    private var defaultColor: UIColor?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,15 +110,10 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         
         // MARK: - Info button
         
-        if segue.identifier == seguesConstant.infoButton {
-            
-            if let tvc = segue.destination as? InfoTableViewController {
-                
+        if segue.identifier == seguesConstant.mainSettings {
+            if let tvc = segue.destination as? SettingViewController {
                 tvc.delegate = self
-                tvc.delegateSetting = self
-                if let ppc = tvc.popoverPresentationController {
-                    ppc.delegate = self
-                }
+                tvc.viewCum = mainMark
             }
         }
     }
@@ -139,23 +134,26 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
 }
 
 
-// MARK: - Setting view color
+// MARK: - Setting view color and size cell
 
 extension MainCollectionVC: SettingViewControllerDelegate {
     
-    func updateInterface(color: UIColor?, size: SettingViewController.ChooseSize?) {
-        var helpColor: UIColor?
-        if color == UIColor.white {
-            guard let chooseColor = UserDefaultManager.shared.settings[0].color else { return }
-            helpColor = UIColor.hexStringToUIColor(hex: chooseColor)
-        } else {
-            collectionViewSpace.backgroundColor = color
-            navigationController?.navigationBar.backgroundColor = color
-            helpColor = color
-        }
-        self.chooseSize = size
+    func updateInterface(color: UIColor?, size: SettingViewController.ChooseSize?, view: SettingViewController.ViewWhitchCame?) {
         
-        saveToUserDefault(color: helpColor, size: size)
+        if view == .main {
+            var helpingColor: UIColor?
+            if color == UIColor.white {
+                guard let chooseColor = UserDefaultManager.shared.mainViewSettings.color else { return }
+                helpingColor = UIColor.hexStringToUIColor(hex: chooseColor)
+            } else {
+                collectionViewSpace.backgroundColor = color
+                navigationController?.navigationBar.backgroundColor = color
+                helpingColor = color
+            }
+            self.chooseSize = size
+            
+            saveToUserDefault(color: helpingColor, size: size)
+        }
     }
     
     func saveToUserDefault(color: UIColor?, size: SettingViewController.ChooseSize?) {
@@ -163,19 +161,17 @@ extension MainCollectionVC: SettingViewControllerDelegate {
         let userColor = UIColor.toHexString(color ?? UIColor.white)
         self.userColor = userColor()
         
-        UserDefaultManager.shared.saveDefaultSetting(color: self.userColor, sizeCell: size)
+        UserDefaultManager.shared.saveDefaultSettingMainView(color: self.userColor, sizeCell: size)
     }
     
     func receiveFromUserDefault() {
         
-        guard let chooseColor = UserDefaultManager.shared.settings[0].color else { return }
+        guard let chooseColor = UserDefaultManager.shared.mainViewSettings.color else { return }
         let defaultColor = UIColor.hexStringToUIColor(hex: chooseColor)
         self.defaultColor = defaultColor
         
-        self.chooseSize = UserDefaultManager.shared.settings[0].sizeCell
-        
+        self.chooseSize = UserDefaultManager.shared.mainViewSettings.sizeCell
     }
-    
 }
 
 // MARK: - Setting search bar

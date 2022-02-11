@@ -11,7 +11,7 @@ import UIKit
 class UserDefaultManager {
     
     let defaults = UserDefaults.standard
-    
+    private var userDefaultConst = UserDefaultConst()
     static let shared = UserDefaultManager()
     
     struct UserSettings: Codable {
@@ -19,31 +19,52 @@ class UserDefaultManager {
         var sizeCell: SettingViewController.ChooseSize?
     }
     
-    var settings:[UserSettings] {
+    var mainViewSettings: UserSettings {
         
         get {
-            if let data = defaults.value(forKey: "adderesses") as? Data {
-                return try! PropertyListDecoder().decode([UserSettings].self, from: data)
+            if let data = defaults.value(forKey: userDefaultConst.mainSettingsKey) as? Data {
+                guard let defaultsData = try? PropertyListDecoder().decode(UserSettings.self, from: data) else { return favoriteViewSettings }
+                return defaultsData
             } else {
-                return[UserSettings]()
+                return UserSettings()
             }
         }
         set {
             if let data = try? PropertyListEncoder().encode(newValue) {
-                defaults.set(data, forKey: "adderesses")
+                defaults.set(data, forKey: userDefaultConst.mainSettingsKey)
+            }
+        }
+    }
+    
+    var favoriteViewSettings: UserSettings {
+        
+        get {
+            if let data = defaults.value(forKey: userDefaultConst.favoriteSettingKey) as? Data {
+                guard let defaultsData = try? PropertyListDecoder().decode (UserSettings.self, from: data) else { return mainViewSettings }
+                return defaultsData
+            } else {
+                return UserSettings()
+            }
+        }
+        set {
+            if let data = try? PropertyListEncoder().encode(newValue) {
+                defaults.set(data, forKey: userDefaultConst.favoriteSettingKey)
             }
         }
     }
     
     
-    func saveDefaultSetting(color: String?, sizeCell: SettingViewController.ChooseSize?) {
+    func saveDefaultSettingMainView(color: String?, sizeCell: SettingViewController.ChooseSize?) {
         
         let settings = UserSettings(color: color, sizeCell: sizeCell)
-        self.settings.insert(settings, at: 0)
-        
+        self.mainViewSettings = settings
     }
     
-    
+    func saveDefaultSettingFavoriteView(color: String?, sizeCell: SettingViewController.ChooseSize?) {
+        
+        let settings = UserSettings(color: color, sizeCell: sizeCell)
+        self.favoriteViewSettings = settings
+    }
     
     
     

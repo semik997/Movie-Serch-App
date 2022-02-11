@@ -8,10 +8,15 @@
 import UIKit
 
 protocol SettingViewControllerDelegate: AnyObject {
-    func updateInterface(color: UIColor?, size: SettingViewController.ChooseSize?)
+    func updateInterface(color: UIColor?, size: SettingViewController.ChooseSize?, view: SettingViewController.ViewWhitchCame?)
 }
 
 class SettingViewController: UIViewController, UIColorPickerViewControllerDelegate {
+    
+    enum ViewWhitchCame {
+        case main
+        case favorite
+    }
     
     enum ChooseSize: Codable {
         case big
@@ -31,6 +36,10 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
     private var color = UIColor.white
     private var defaultColor: UIColor?
     var size = ChooseSize.noChoose
+    private var defaultMainSize = UserDefaultManager.shared.mainViewSettings.sizeCell
+    private var defaultFavoriteSize = UserDefaultManager.shared.favoriteViewSettings.sizeCell
+    // Special for you Pasha :)
+    var viewCum: ViewWhitchCame?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +52,26 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
         smallSizeCellButton.setImage(UIImage(named: "small"), for: .normal)
         smallSizeCellButton.setImage(UIImage(named: "complete"), for: .selected)
         
-        mediumSizeCellButton.isSelected = true
+        switch viewCum {
+        case .main:
+            if defaultMainSize == ChooseSize.big {
+                bigSizeCellButton.isSelected = true
+            } else if defaultMainSize == ChooseSize.medium {
+                mediumSizeCellButton.isSelected = true
+            } else {
+                smallSizeCellButton.isSelected = true
+            }
+        case .favorite:
+            if defaultFavoriteSize == ChooseSize.big {
+                bigSizeCellButton.isSelected = true
+            } else if defaultFavoriteSize == ChooseSize.medium {
+                mediumSizeCellButton.isSelected = true
+            } else {
+                smallSizeCellButton.isSelected = true
+            }
+        case .none:
+            break
+        }
     }
     
     @IBAction func chooseSizeButton(_ sender: UIButton) {
@@ -63,7 +91,7 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
         smallSizeCellButton.isSelected = size == .small
         
         delegate?.updateInterface(color: color,
-                                  size: size)
+                                  size: size, view: viewCum)
     }
     
     // MARK: - Select and apply color after selection
@@ -78,10 +106,10 @@ class SettingViewController: UIViewController, UIColorPickerViewControllerDelega
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
         
         if viewController.selectedColor == color {
-            self.delegate?.updateInterface(color: color, size: size)
+            self.delegate?.updateInterface(color: color, size: size, view: viewCum)
         } else {
             self.color = viewController.selectedColor
-            self.delegate?.updateInterface(color: color, size: size)
+            self.delegate?.updateInterface(color: color, size: size, view: viewCum)
         }
     }
 }
