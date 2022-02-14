@@ -36,9 +36,8 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     private let smallSize = CGSize (width: 100, height: 150)
     private var chooseSize: SettingViewController.ChooseSize?
     private var defaultSizeCell: CGSize?
-    private var userColor: String?
     private var defaultColor: UIColor?
-    private var mainMark: SettingViewController.ViewWhitchCame = .main
+    private var settingType: UserDefaultManager.SettingType = .mainScreen
     private var films: [Films.Film] = [] {
         didSet {
             DispatchQueue.main.async { [self] in
@@ -113,7 +112,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         if segue.identifier == seguesConstant.mainSettings {
             if let tvc = segue.destination as? SettingViewController {
                 tvc.delegate = self
-                tvc.sourceScreen = mainMark
+                tvc.settingType = .mainScreen
             }
         }
     }
@@ -138,11 +137,13 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
 
 extension MainCollectionVC: SettingViewControllerDelegate {
     
-    func updateInterface(color: UIColor?, size: SettingViewController.ChooseSize?, view: SettingViewController.ViewWhitchCame?) {
+    func updateInterface(color: UIColor?,
+                         size: SettingViewController.ChooseSize?,
+                         type: UserDefaultManager.SettingType) {
         
-        if view == .main {
+        if type == .mainScreen {
             var helpingColor: UIColor?
-            if color == UIColor.white, let chooseColor = UserDefaultManager.shared.mainViewSettings.color {
+            if color == UIColor.white, let chooseColor = UserDefaultManager.shared.getDefaultSettings(type: settingType)?.color {
                 helpingColor = UIColor.hexStringToUIColor(hex: chooseColor)
             } else {
                 collectionViewSpace.backgroundColor = color
@@ -151,25 +152,27 @@ extension MainCollectionVC: SettingViewControllerDelegate {
             }
             self.chooseSize = size
             
-            saveToUserDefault(color: helpingColor, size: size)
+            saveToUserDefault(color: helpingColor, size: size, type: type)
         }
     }
     
-    func saveToUserDefault(color: UIColor?, size: SettingViewController.ChooseSize?) {
+    func saveToUserDefault(color: UIColor?,
+                           size: SettingViewController.ChooseSize?,
+                           type: UserDefaultManager.SettingType) {
         
         let userColor = UIColor.toHexString(color ?? UIColor.white)
-        self.userColor = userColor()
+        let userStringColor = userColor()
         
-        UserDefaultManager.shared.saveDefaultSettingMainView(color: self.userColor, sizeCell: size)
-    }
+        UserDefaultManager.shared.saveDefaultSetting(UserSettings.init(color: userStringColor, sizeCell: size),
+                                                     type: type)    }
     
     func receiveFromUserDefault() {
         
-        guard let chooseColor = UserDefaultManager.shared.mainViewSettings.color else { return }
+        guard let chooseColor = UserDefaultManager.shared.getDefaultSettings(type: settingType)?.color else { return }
         let defaultColor = UIColor.hexStringToUIColor(hex: chooseColor)
         self.defaultColor = defaultColor
         
-        self.chooseSize = UserDefaultManager.shared.mainViewSettings.sizeCell
+        self.chooseSize = UserDefaultManager.shared.getDefaultSettings(type: settingType)?.sizeCell
     }
 }
 

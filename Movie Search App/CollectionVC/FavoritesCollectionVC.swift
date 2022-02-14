@@ -31,9 +31,8 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     private let bigSize = CGSize (width: 400, height: 400)
     private let mediumSize = CGSize (width: 200, height: 200)
     private let smallSize = CGSize (width: 100, height: 150)
-    private var userColor: String?
     private var defaultColor: UIColor?
-    private var favoriteMark: SettingViewController.ViewWhitchCame = .favorite
+    private var settingType: UserDefaultManager.SettingType = .favoriteScreen
     
     
     
@@ -128,7 +127,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         if segue.identifier == seguesConstant.favoriteSettings {
             if let tvc = segue.destination as? SettingViewController {
                 tvc.delegate = self
-                tvc.sourceScreen = favoriteMark
+                tvc.settingType = .favoriteScreen
             }
         }
     }
@@ -165,12 +164,12 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
 // MARK: - Setting view color and size cell
 
 extension FavoritesCollectionVC: SettingViewControllerDelegate {
-    
-    func updateInterface(color: UIColor?, size: SettingViewController.ChooseSize?, view: SettingViewController.ViewWhitchCame?) {
-        
-        if view == .favorite {
+    func updateInterface(color: UIColor?,
+                         size: SettingViewController.ChooseSize?,
+                         type: UserDefaultManager.SettingType) {
+        if type == .favoriteScreen {
             var helpingColor: UIColor?
-            if color == UIColor.white, let chooseColor = UserDefaultManager.shared.favoriteViewSettings.color  {
+            if color == UIColor.white, let chooseColor = UserDefaultManager.shared.getDefaultSettings(type: self.settingType)?.color {
                 helpingColor = UIColor.hexStringToUIColor(hex: chooseColor)
             } else {
                 favoriteCollectionView.backgroundColor = color
@@ -180,25 +179,30 @@ extension FavoritesCollectionVC: SettingViewControllerDelegate {
             self.chooseSize = size
             favoriteCollectionView.reloadData()
             
-            saveToUserDefault(color: helpingColor, size: size)
+            
+            saveToUserDefault(color: helpingColor, size: size, type: type)
         }
     }
     
-    func saveToUserDefault(color: UIColor?, size: SettingViewController.ChooseSize?) {
+    func saveToUserDefault(color: UIColor?,
+                           size: SettingViewController.ChooseSize?,
+                           type: UserDefaultManager.SettingType) {
         
         let userColor = UIColor.toHexString(color ?? UIColor.white)
-        self.userColor = userColor()
+        let userStringColor = userColor()
         
-        UserDefaultManager.shared.saveDefaultSettingFavoriteView(color: self.userColor, sizeCell: size)
+        UserDefaultManager.shared.saveDefaultSetting(UserSettings.init(color: userStringColor, sizeCell: size),
+                                                     type: type)
+//        UserDefaultManager.shared.saveDefaultSetting(color: userStringColor, sizeCell: size, source: view)
     }
     
     func receiveFromUserDefault() {
         
-        guard let chooseColor = UserDefaultManager.shared.favoriteViewSettings.color else { return }
+        guard let chooseColor = UserDefaultManager.shared.getDefaultSettings(type: settingType)?.color else { return }
         let defaultColor = UIColor.hexStringToUIColor(hex: chooseColor)
         self.defaultColor = defaultColor
         
-        self.chooseSize = UserDefaultManager.shared.favoriteViewSettings.sizeCell
+        self.chooseSize = UserDefaultManager.shared.getDefaultSettings(type: settingType)?.sizeCell
         
     }
 }

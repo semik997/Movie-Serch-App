@@ -8,78 +8,84 @@
 import Foundation
 import UIKit
 
+struct UserSettings: Codable {
+    var color: String?
+    var colorButton: String?
+    var sizeCell: SettingViewController.ChooseSize?
+}
+
 class UserDefaultManager {
-    
-    let defaults = UserDefaults.standard
-    private var userDefaultConst = UserDefaultConst()
     static let shared = UserDefaultManager()
     
-    struct UserSettings: Codable {
-        var color: String?
-        var sizeCell: SettingViewController.ChooseSize?
-    }
-    
-    var mainViewSettings: UserSettings {
+    enum SettingType {
+        case mainScreen
+        case favoriteScreen
         
-        get {
-            if let data = defaults.value(forKey: userDefaultConst.mainSettingsKey) as? Data {
-                guard let defaultsData = try? PropertyListDecoder().decode(UserSettings.self, from: data) else { return UserSettings() }
-                return defaultsData
-            } else {
-                return UserSettings()
-            }
-        }
-        set {
-            if let data = try? PropertyListEncoder().encode(newValue) {
-                defaults.set(data, forKey: userDefaultConst.mainSettingsKey)
+        var defaultsKey: String {
+            switch self {
+            case .mainScreen:
+                return UserDefaultConst.mainSettingsKey
+            case .favoriteScreen:
+                return UserDefaultConst.favoriteSettingKey
             }
         }
     }
     
-    var favoriteViewSettings: UserSettings {
-        
-        get {
-            if let data = defaults.value(forKey: userDefaultConst.favoriteSettingKey) as? Data {
-                guard let defaultsData = try? PropertyListDecoder().decode (UserSettings.self, from: data) else { return UserSettings() }
-                return defaultsData
-            } else {
-                return UserSettings()
-            }
+    private let defaults = UserDefaults.standard
+    
+    private init() {}
+    
+//    var mainViewSettings: UserSettings {
+//
+//        get {
+//            if let data = defaults.value(forKey: userDefaultConst.mainSettingsKey) as? Data {
+//                guard let defaultsData = try? PropertyListDecoder().decode(UserSettings.self, from: data) else { return UserSettings() }
+//                return defaultsData
+//            } else {
+//                return UserSettings()
+//            }
+//        }
+//        set {
+//            if let data = try? PropertyListEncoder().encode(newValue) {
+//                defaults.set(data, forKey: userDefaultConst.mainSettingsKey)
+//            }
+//        }
+//    }
+//
+//    var favoriteViewSettings: UserSettings {
+//
+//        get {
+//            if let data = defaults.value(forKey: userDefaultConst.favoriteSettingKey) as? Data {
+//                guard let defaultsData = try? PropertyListDecoder().decode (UserSettings.self, from: data) else { return UserSettings() }
+//                return defaultsData
+//            } else {
+//                return UserSettings()
+//            }
+//        }
+//        set {
+//            if let data = try? PropertyListEncoder().encode(newValue) {
+//                defaults.set(data, forKey: userDefaultConst.favoriteSettingKey)
+//            }
+//        }
+//    }
+    
+    
+    func saveDefaultSetting(_ setting: UserSettings,
+                            type: SettingType) {
+        guard let data = try? PropertyListEncoder().encode(setting) else {
+            print("Data dont save")
+            return
         }
-        set {
-            if let data = try? PropertyListEncoder().encode(newValue) {
-                defaults.set(data, forKey: userDefaultConst.favoriteSettingKey)
-            }
+        defaults.set(data,
+                     forKey: type.defaultsKey)
+    }
+    
+    
+    func getDefaultSettings(type: SettingType) -> UserSettings? {
+        guard let data = defaults.value(forKey: type.defaultsKey) as? Data else {
+            return nil
         }
+        return try? PropertyListDecoder().decode(UserSettings.self,
+                                                 from: data)
     }
-    
-    func saveDefaultSetting() {
-        
-        
-        
-    }
-    
-    
-    func getDefaultSettings() {
-        
-        
-        
-    }
-    
-    
-    
-    func saveDefaultSettingMainView(color: String?, sizeCell: SettingViewController.ChooseSize?) {
-        
-        let settings = UserSettings(color: color, sizeCell: sizeCell)
-        self.mainViewSettings = settings
-    }
-    
-    func saveDefaultSettingFavoriteView(color: String?, sizeCell: SettingViewController.ChooseSize?) {
-        
-        let settings = UserSettings(color: color, sizeCell: sizeCell)
-        self.favoriteViewSettings = settings
-    }
-    
-    
-    
 }

@@ -30,11 +30,12 @@ struct SeguesConst {
 // MARK: - Constants from UserDefault
 
 struct UserDefaultConst {
-    let mainSettingsKey = "mainViewSettings"
-    let favoriteSettingKey = "favoriteViewSettings"
+    static let mainSettingsKey = "mainViewSettings"
+    static let favoriteSettingKey = "favoriteViewSettings"
 }
 
 //MARK: - Other constants
 let checkConection = sockaddr_in(sin_len: 0, sin_family: 0,
                                  sin_port: 0, sin_addr: in_addr(s_addr: 0),
                                  sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+let white = "#FFFFFF"
