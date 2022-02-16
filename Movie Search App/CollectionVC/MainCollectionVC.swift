@@ -26,7 +26,6 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     
     private var tVMazeApiManager = TVMazeApiManager()
     private var rapidApiManager = RapidApiManager()
-    private var seguesConstant = SeguesConst()
     private let defaults = UserDefaults.standard
     private var tap = UITapGestureRecognizer()
     private var searchText = ""
@@ -96,7 +95,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == seguesConstant.showDetail {
+        if segue.identifier == SeguesConst.showDetail {
             if let cell = sender as? FilmCollectionViewCell,
                let indexPath = collectionViewSpace.indexPath(for: cell) {
                 
@@ -109,7 +108,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         
         // MARK: - Info button
         
-        if segue.identifier == seguesConstant.mainSettings {
+        if segue.identifier == SeguesConst.mainSettings {
             if let tvc = segue.destination as? SettingViewController {
                 tvc.delegate = self
                 tvc.settingType = .mainScreen
@@ -152,27 +151,21 @@ extension MainCollectionVC: SettingViewControllerDelegate {
             }
             self.chooseSize = size
             
-            saveToUserDefault(color: helpingColor, size: size, type: type)
+            let userColor = UIColor.toHexString(helpingColor ?? UIColor.white)
+            let userStringColor = userColor()
+            UserDefaultManager.shared.saveDefaultSetting(UserSettings.init(color: userStringColor, sizeCell: size),
+                                                         type: type)
         }
     }
     
-    func saveToUserDefault(color: UIColor?,
-                           size: SettingViewController.ChooseSize?,
-                           type: UserDefaultManager.SettingType) {
-        
-        let userColor = UIColor.toHexString(color ?? UIColor.white)
-        let userStringColor = userColor()
-        
-        UserDefaultManager.shared.saveDefaultSetting(UserSettings.init(color: userStringColor, sizeCell: size),
-                                                     type: type)    }
-    
     func receiveFromUserDefault() {
         
-        guard let chooseColor = UserDefaultManager.shared.getDefaultSettings(type: settingType)?.color else { return }
+        let defaultModel = UserDefaultManager.shared.getDefaultSettings(type: settingType)
+        guard let chooseColor = defaultModel?.color else { return }
         let defaultColor = UIColor.hexStringToUIColor(hex: chooseColor)
         self.defaultColor = defaultColor
         
-        self.chooseSize = UserDefaultManager.shared.getDefaultSettings(type: settingType)?.sizeCell
+        self.chooseSize = defaultModel?.sizeCell
     }
 }
 
@@ -181,7 +174,7 @@ extension MainCollectionVC: SettingViewControllerDelegate {
 extension MainCollectionVC: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        self.searchText = searchController.searchBar.text!
+        self.searchText = searchController.searchBar.text ?? ""
         
         if Reachability.isConnectedToNetwork() {
             

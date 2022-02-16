@@ -2,7 +2,7 @@
 //  UserDefaultManager.swift
 //  Movie Search App
 //
-//  Created by Семен Колесников on 10.02.2022.
+//  Created by Sem Koliesnikov on 10.02.2022.
 //
 
 import Foundation
@@ -34,42 +34,7 @@ class UserDefaultManager {
     private let defaults = UserDefaults.standard
     
     private init() {}
-    
-//    var mainViewSettings: UserSettings {
-//
-//        get {
-//            if let data = defaults.value(forKey: userDefaultConst.mainSettingsKey) as? Data {
-//                guard let defaultsData = try? PropertyListDecoder().decode(UserSettings.self, from: data) else { return UserSettings() }
-//                return defaultsData
-//            } else {
-//                return UserSettings()
-//            }
-//        }
-//        set {
-//            if let data = try? PropertyListEncoder().encode(newValue) {
-//                defaults.set(data, forKey: userDefaultConst.mainSettingsKey)
-//            }
-//        }
-//    }
-//
-//    var favoriteViewSettings: UserSettings {
-//
-//        get {
-//            if let data = defaults.value(forKey: userDefaultConst.favoriteSettingKey) as? Data {
-//                guard let defaultsData = try? PropertyListDecoder().decode (UserSettings.self, from: data) else { return UserSettings() }
-//                return defaultsData
-//            } else {
-//                return UserSettings()
-//            }
-//        }
-//        set {
-//            if let data = try? PropertyListEncoder().encode(newValue) {
-//                defaults.set(data, forKey: userDefaultConst.favoriteSettingKey)
-//            }
-//        }
-//    }
-    
-    
+
     func saveDefaultSetting(_ setting: UserSettings,
                             type: SettingType) {
         guard let data = try? PropertyListEncoder().encode(setting) else {

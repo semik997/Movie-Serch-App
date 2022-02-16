@@ -24,7 +24,6 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     private var filtredFilms: [FavoriteFilm] = []
     private var filmsFav: [FavoriteFilm] = []
     private var settingViewController = SettingViewController()
-    private var seguesConstant = SeguesConst()
     private var chooseSize: SettingViewController.ChooseSize?
     private var defaultSizeCell: CGSize?
     private let insret = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
@@ -105,7 +104,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == seguesConstant.showDetail {
+        if segue.identifier == SeguesConst.showDetail {
             if let cell = sender as? FilmCollectionViewCell,
                let indexPath = favoriteCollectionView.indexPath(for: cell){
                 let film: FavoriteFilm
@@ -124,7 +123,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         
         //MARK: - Settings button
         
-        if segue.identifier == seguesConstant.favoriteSettings {
+        if segue.identifier == SeguesConst.favoriteSettings {
             if let tvc = segue.destination as? SettingViewController {
                 tvc.delegate = self
                 tvc.settingType = .favoriteScreen
@@ -164,6 +163,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
 // MARK: - Setting view color and size cell
 
 extension FavoritesCollectionVC: SettingViewControllerDelegate {
+    // Transferring data and updating from the settings screen
     func updateInterface(color: UIColor?,
                          size: SettingViewController.ChooseSize?,
                          type: UserDefaultManager.SettingType) {
@@ -179,31 +179,21 @@ extension FavoritesCollectionVC: SettingViewControllerDelegate {
             self.chooseSize = size
             favoriteCollectionView.reloadData()
             
-            
-            saveToUserDefault(color: helpingColor, size: size, type: type)
+            let userColor = UIColor.toHexString(helpingColor ?? UIColor.white)
+            let userStringColor = userColor()
+            UserDefaultManager.shared.saveDefaultSetting(UserSettings.init(color: userStringColor, sizeCell: size),
+                                                         type: type)
         }
-    }
-    
-    func saveToUserDefault(color: UIColor?,
-                           size: SettingViewController.ChooseSize?,
-                           type: UserDefaultManager.SettingType) {
-        
-        let userColor = UIColor.toHexString(color ?? UIColor.white)
-        let userStringColor = userColor()
-        
-        UserDefaultManager.shared.saveDefaultSetting(UserSettings.init(color: userStringColor, sizeCell: size),
-                                                     type: type)
-//        UserDefaultManager.shared.saveDefaultSetting(color: userStringColor, sizeCell: size, source: view)
     }
     
     func receiveFromUserDefault() {
         
-        guard let chooseColor = UserDefaultManager.shared.getDefaultSettings(type: settingType)?.color else { return }
+        let defaultModel = UserDefaultManager.shared.getDefaultSettings(type: settingType)
+        guard let chooseColor = defaultModel?.color else { return }
         let defaultColor = UIColor.hexStringToUIColor(hex: chooseColor)
         self.defaultColor = defaultColor
         
-        self.chooseSize = UserDefaultManager.shared.getDefaultSettings(type: settingType)?.sizeCell
-        
+        self.chooseSize = defaultModel?.sizeCell
     }
 }
 
