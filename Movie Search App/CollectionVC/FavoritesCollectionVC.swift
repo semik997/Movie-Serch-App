@@ -24,13 +24,14 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     private var filtredFilms: [FavoriteFilm] = []
     private var filmsFav: [FavoriteFilm] = []
     private var settingViewController = SettingViewController()
-    private var seguesConstant = SeguesConst()
     private var chooseSize: SettingViewController.ChooseSize?
     private var defaultSizeCell: CGSize?
     private let insret = UIEdgeInsets(top: 50, left: 0, bottom: 100, right: 0)
     private let bigSize = CGSize (width: 400, height: 400)
     private let mediumSize = CGSize (width: 200, height: 200)
     private let smallSize = CGSize (width: 100, height: 150)
+    private var defaultColor: UIColor?
+    private var settingType: UserDefaultManager.SettingType = .favoriteScreen
     
     
     
@@ -47,6 +48,10 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         navigationItem.searchController = searchController
         favoriteCollectionView.keyboardDismissMode = .onDrag
         definesPresentationContext = true
+        receiveFromUserDefault()
+        favoriteCollectionView.backgroundColor = defaultColor
+        navigationController?.navigationBar.backgroundColor = defaultColor
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,7 +104,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == seguesConstant.showDetail {
+        if segue.identifier == SeguesConst.showDetail {
             if let cell = sender as? FilmCollectionViewCell,
                let indexPath = favoriteCollectionView.indexPath(for: cell){
                 let film: FavoriteFilm
@@ -111,26 +116,21 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
                 }
                 
                 let nav = segue.destination as? UINavigationController
-                let MoreInfoFavoritesTableVC = nav?.topViewController as? MoreInfoViewController
-                MoreInfoFavoritesTableVC?.detailedInformation = film
+                let moreInfoFavoritesTableVC = nav?.topViewController as? MoreInfoViewController
+                moreInfoFavoritesTableVC?.detailedInformation = film
             }
         }
         
-        //MARK: - Info button
+        //MARK: - Settings button
         
-        if segue.identifier == seguesConstant.infoButton {
-            
-            if let tvc = segue.destination as? InfoTableViewController {
-                
-                tvc.delegateFav = self
-                tvc.delegateSetting = self
-                
-                if let ppc = tvc.popoverPresentationController {
-                    ppc.delegate = self
-                }
+        if segue.identifier == SeguesConst.favoriteSettings {
+            if let tvc = segue.destination as? SettingViewController {
+                tvc.delegate = self
+                tvc.settingType = .favoriteScreen
             }
         }
     }
+    
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return UIModalPresentationStyle.none
     }
@@ -142,8 +142,8 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
         let alertController = UIAlertController(title: title, message: message,
                                                 preferredStyle: style)
         alertController.addAction(
-            UIAlertAction(title: "Yes, I'am sure",
-                          style: .default,
+            UIAlertAction(title: "Yes",
+                          style: .destructive,
                           handler: { action in
                               guard let index = self.filmsFav.firstIndex(where: { $0.idFilm == idFilm})
                               else { return }
@@ -152,7 +152,7 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
                               self.favoriteCollectionView.reloadData()
                           })
         )
-        alertController.addAction(UIAlertAction(title: "No thanks", style: .default, handler: { action in
+        alertController.addAction(UIAlertAction(title: "No", style: .default, handler: { action in
             self.favoriteCollectionView.reloadData()
         }))
         present(alertController, animated: true)
@@ -160,19 +160,40 @@ class FavoritesCollectionVC: UICollectionViewController, UIPopoverPresentationCo
 }
 
 
-// MARK: - Setting view color
+// MARK: - Setting view color and size cell
 
 extension FavoritesCollectionVC: SettingViewControllerDelegate {
-    
-    func updateInterface(color: UIColor?, size: SettingViewController.ChooseSize?) {
-        
-        if color == UIColor.white {
-        } else {
-            favoriteCollectionView.backgroundColor = color
-            navigationController?.navigationBar.backgroundColor = color
+    // Transferring data and updating from the settings screen
+    func updateInterface(color: UIColor?,
+                         size: SettingViewController.ChooseSize?,
+                         type: UserDefaultManager.SettingType) {
+        if type == .favoriteScreen {
+            var helpingColor: UIColor?
+            if color == UIColor.white, let chooseColor = UserDefaultManager.shared.getDefaultSettings(type: self.settingType)?.color {
+                helpingColor = UIColor.hexStringToUIColor(hex: chooseColor)
+            } else {
+                favoriteCollectionView.backgroundColor = color
+                navigationController?.navigationBar.backgroundColor = color
+                helpingColor = color
+            }
+            self.chooseSize = size
+            favoriteCollectionView.reloadData()
+            
+            let userColor = UIColor.toHexString(helpingColor ?? UIColor.white)
+            let userStringColor = userColor()
+            UserDefaultManager.shared.saveDefaultSetting(UserSettings.init(color: userStringColor, sizeCell: size),
+                                                         type: type)
         }
-        self.chooseSize = size
-        favoriteCollectionView.reloadData()
+    }
+    
+    func receiveFromUserDefault() {
+        
+        let defaultModel = UserDefaultManager.shared.getDefaultSettings(type: settingType)
+        guard let chooseColor = defaultModel?.color else { return }
+        let defaultColor = UIColor.hexStringToUIColor(hex: chooseColor)
+        self.defaultColor = defaultColor
+        
+        self.chooseSize = defaultModel?.sizeCell
     }
 }
 
@@ -199,7 +220,7 @@ extension FavoritesCollectionVC: FavoriteDeleteProtocol {
         
         if isFavorite == false {
             //for not like
-            presentAlertController(withTitle: "Are you sure??", message: nil, style: .alert,
+            presentAlertController(withTitle: "Remove from favorites??", message: nil, style: .alert,
                                    idFilm: idFilm ?? 0)
         }
     }
@@ -208,7 +229,7 @@ extension FavoritesCollectionVC: FavoriteDeleteProtocol {
 // MARK: - Setting size cell
 
 extension FavoritesCollectionVC: UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         switch self.chooseSize {

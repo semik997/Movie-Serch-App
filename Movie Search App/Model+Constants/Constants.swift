@@ -22,11 +22,20 @@ let placeholderFilm = "https://www.salonlfc.com/wp-content/uploads/2018/01/image
 
 // MARK: - Constants from Segue
 struct SeguesConst {
-    let showDetail = "showDetail"
-    let infoButton = "popVC"
+    static let showDetail = "showDetail"
+    static let mainSettings = "mainSettings"
+    static let favoriteSettings = "favoriteSettings"
+}
+
+// MARK: - Constants from UserDefault
+
+struct UserDefaultConst {
+    static let mainSettingsKey = "mainViewSettings"
+    static let favoriteSettingKey = "favoriteViewSettings"
 }
 
 //MARK: - Other constants
 let checkConection = sockaddr_in(sin_len: 0, sin_family: 0,
                                  sin_port: 0, sin_addr: in_addr(s_addr: 0),
                                  sin_zero: (0, 0, 0, 0, 0, 0, 0, 0))
+let white = "#FFFFFF"

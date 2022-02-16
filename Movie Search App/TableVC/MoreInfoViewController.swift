@@ -37,7 +37,7 @@ class MoreInfoViewController: UIViewController {
         }
         if let info = detail {
             moreInfoImage.image = UIImage.getImage(from: info.show?.image?.original ??
-                                           placeholderFilm)
+                                                   placeholderFilm)
             let summary = info.show?.summary ?? "No description text"
             moreIntoTextView.text = summary.htmlString
             nameNavigationItem.title = detail?.show?.name

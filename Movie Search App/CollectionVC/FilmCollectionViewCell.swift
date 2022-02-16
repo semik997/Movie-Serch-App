@@ -19,7 +19,7 @@ class FilmCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var fillButton: UIButton!
     @IBOutlet weak var ratingLabel: UILabel!
-
+    
     
     
     //Initialization of UI fields

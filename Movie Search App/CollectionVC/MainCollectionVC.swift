@@ -26,7 +26,6 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     
     private var tVMazeApiManager = TVMazeApiManager()
     private var rapidApiManager = RapidApiManager()
-    private var seguesConstant = SeguesConst()
     private let defaults = UserDefaults.standard
     private var tap = UITapGestureRecognizer()
     private var searchText = ""
@@ -36,6 +35,8 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     private let smallSize = CGSize (width: 100, height: 150)
     private var chooseSize: SettingViewController.ChooseSize?
     private var defaultSizeCell: CGSize?
+    private var defaultColor: UIColor?
+    private var settingType: UserDefaultManager.SettingType = .mainScreen
     private var films: [Films.Film] = [] {
         didSet {
             DispatchQueue.main.async { [self] in
@@ -56,6 +57,9 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         collectionViewSpace?.delegate = self
         collectionViewSpace?.dataSource = self
         collectionViewSpace.keyboardDismissMode = .onDrag
+        receiveFromUserDefault()
+        collectionViewSpace.backgroundColor = defaultColor
+        navigationController?.navigationBar.backgroundColor = defaultColor
         
     }
     
@@ -91,7 +95,7 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == seguesConstant.showDetail {
+        if segue.identifier == SeguesConst.showDetail {
             if let cell = sender as? FilmCollectionViewCell,
                let indexPath = collectionViewSpace.indexPath(for: cell) {
                 
@@ -104,15 +108,10 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
         
         // MARK: - Info button
         
-        if segue.identifier == seguesConstant.infoButton {
-            
-            if let tvc = segue.destination as? InfoTableViewController {
-                
+        if segue.identifier == SeguesConst.mainSettings {
+            if let tvc = segue.destination as? SettingViewController {
                 tvc.delegate = self
-                tvc.delegateSetting = self
-                if let ppc = tvc.popoverPresentationController {
-                    ppc.delegate = self
-                }
+                tvc.settingType = .mainScreen
             }
         }
     }
@@ -133,17 +132,40 @@ class MainCollectionVC: UICollectionViewController, UIPopoverPresentationControl
 }
 
 
-// MARK: - Setting view color
+// MARK: - Setting view color and size cell
 
 extension MainCollectionVC: SettingViewControllerDelegate {
     
-    func updateInterface(color: UIColor?, size: SettingViewController.ChooseSize?) {
-        if color == UIColor.white {
-        } else {
-            collectionViewSpace.backgroundColor = color
-            navigationController?.navigationBar.backgroundColor = color
+    func updateInterface(color: UIColor?,
+                         size: SettingViewController.ChooseSize?,
+                         type: UserDefaultManager.SettingType) {
+        
+        if type == .mainScreen {
+            var helpingColor: UIColor?
+            if color == UIColor.white, let chooseColor = UserDefaultManager.shared.getDefaultSettings(type: settingType)?.color {
+                helpingColor = UIColor.hexStringToUIColor(hex: chooseColor)
+            } else {
+                collectionViewSpace.backgroundColor = color
+                navigationController?.navigationBar.backgroundColor = color
+                helpingColor = color
+            }
+            self.chooseSize = size
+            
+            let userColor = UIColor.toHexString(helpingColor ?? UIColor.white)
+            let userStringColor = userColor()
+            UserDefaultManager.shared.saveDefaultSetting(UserSettings.init(color: userStringColor, sizeCell: size),
+                                                         type: type)
         }
-        self.chooseSize = size
+    }
+    
+    func receiveFromUserDefault() {
+        
+        let defaultModel = UserDefaultManager.shared.getDefaultSettings(type: settingType)
+        guard let chooseColor = defaultModel?.color else { return }
+        let defaultColor = UIColor.hexStringToUIColor(hex: chooseColor)
+        self.defaultColor = defaultColor
+        
+        self.chooseSize = defaultModel?.sizeCell
     }
 }
 
@@ -152,7 +174,7 @@ extension MainCollectionVC: SettingViewControllerDelegate {
 extension MainCollectionVC: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
-        self.searchText = searchController.searchBar.text!
+        self.searchText = searchController.searchBar.text ?? ""
         
         if Reachability.isConnectedToNetwork() {
             
@@ -205,9 +227,9 @@ extension MainCollectionVC: FavoriteDeleteProtocol {
         
         //MARK: - Saving an Image to Firebase
         func uploadImage(name: String, photo: UIImage) {
-
+            
             if let idFilm = idFilm, let film = films.first(where: { $0.show?.id == idFilm }) {
-
+                
                 let reference = Storage.storage().reference().child("moviesPicture").child(name)
                 guard let image = UIImage.getImage(from: film.show?.image?.original ?? "") else { return }
                 guard let imageData = image.jpegData(compressionQuality: 1.0) else { return }
